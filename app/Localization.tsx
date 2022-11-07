@@ -25,12 +25,12 @@ const strings = new LocalizedStrings({
     and: 'and',
     privacyPolicy: 'Privacy Policy',
     ofJusto: 'of Justo.',
-
+    searchTxt: 'Search',
     /**Confirm Model**/
     ConfirmationModalTxt: 'Select the reason for\r\nunsubscribe this property.',
     Confirm: 'Confirm',
-    
-    
+
+
     /*** agency ***/
     addnewAgency: 'Add new Agency',
     pendingconfirm: 'Pending Confirm',
@@ -40,18 +40,30 @@ const strings = new LocalizedStrings({
     userbankinfo: 'User Bank Info',
     createnewagency: 'Create New Agency',
     confirmation: 'Confirmation',
-    active:'Active',
-    searchAgency:'Search Agency',
-    apply:'Apply',
-    no: 'No', 
-    yes: 'Yes', 
-    agent: 'Agent', 
-    createAgent: 'Create Agent', 
+    active: 'Active',
+    searchAgency: 'Search Agency',
+    apply: 'Apply',
+    no: 'No',
+    yes: 'Yes',
+    agent: 'Agent',
+    createAgent: 'Create Agent',
     updatepassword: 'Update Password',
     deactivconfirmation: 'Are You sure you want to Deactive this',
-    
+
     /*** Sourcing Managers ***/
     SourcingManagersHeader: 'Sourcing Managers',
+    addNewSM: 'Add New SM',
+    allocateCp: 'Allocate CP',
+    basicInfoText: 'Basic Information',
+    gender: "Gender :",
+    male: "Male",
+    female: "Female",
+    next: 'next',
+    createSM: 'Create SM',
+    editSM: 'Edit SM',
+    cpAllocation: 'CP Allocation',
+    newAllocateTxt: 'Allocate to New CP',
+    noCpSelected: 'No CP Selected'
   },
 });
 

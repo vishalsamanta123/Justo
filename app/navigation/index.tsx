@@ -20,6 +20,9 @@ import LeadManagementScreen from '../views/LeadManagement/LeadManagementScreen';
 import BulkUpload from '../views/LeadManagement/LeadManagementScreen/Components/BulkUpload';
 import AddNewVisitorScreen from '../views/LeadManagement/AddNewVisitor';
 import LeadDetails from '../views/LeadManagement/LeadDetails';
+import SourcingManager from '../views/SourcingManagers/SourcingManagersView';
+import AddNewSM from '../views/SourcingManagers/AddNewSm';
+import AllocateCP from '../views/SourcingManagers/AllocateCP';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -31,6 +34,7 @@ const DrawerComponent = () => {
       <Drawer.Screen name="PropertyScreenView" component={PropertyScreen} />
       <Drawer.Screen name="AgencyListing" component={AgencyListingScreen} />
       <Drawer.Screen name="LeadManagementScreen" component={LeadManagementScreen} />
+      <Drawer.Screen name="SourcingManager" component={SourcingManager} />
     </Drawer.Navigator>
   );
 };
@@ -57,7 +61,9 @@ const Route = () => {
         <Stack.Screen name="BulkUpload" component={BulkUpload} />
         <Stack.Screen name="AddNewVisitorScreen" component={AddNewVisitorScreen} />
         <Stack.Screen name="LeadDetails" component={LeadDetails} />
-
+        <Stack.Screen name="SourcingManager" component={SourcingManager} />
+        <Stack.Screen name="AddNewSM" component={AddNewSM} />
+        <Stack.Screen name="AllocateCP" component={AllocateCP} />
       </Stack.Navigator>
     </NavigationContainer>
   );
