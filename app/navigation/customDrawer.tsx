@@ -74,7 +74,13 @@ const customDrawer = ({ navigation }: any) => {
             navigation.navigate('FollowUpScreen');
           }}
         />
-        <DrawerTabSection iconSource={images.event} tabTitle={strings.appointmentWithCPHeader} />
+        <DrawerTabSection
+          iconSource={images.event}
+          tabTitle={strings.appointmentWithCPHeader}
+          handleDrawerNavigation={() => {
+            navigation.navigate('AppointmentScreenCPSM');
+          }}
+        />
         <DrawerTabSection iconSource={images.event} tabTitle={strings.appointmentForVisitHeader} />
         <DrawerTabSection iconSource={images.report} tabTitle={strings.reportHeader} />
         <DrawerTabSection iconSource={images.chat} tabTitle={strings.chatHeader} />

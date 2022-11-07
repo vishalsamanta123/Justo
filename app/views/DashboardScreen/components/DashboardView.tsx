@@ -59,15 +59,14 @@ const DashboardView = (props: any) => {
   return (
     <>
       <View style={styles.mainContainerWrap}>
-        <View style={{backgroundColor: PRIMARY_THEME_COLOR_DARK, height: insets.top}}>
-        </View>
-        <StatusBar barStyle={'light-content'} />
         <Header
           leftImageSrc={images.menu}
           rightImageScr={images.notification}
           headerText={strings.dashboardHeader}
           handleOnLeftIconPress={props.handleDrawerPress}
           headerStyle={styles.headerStyle}
+          barStyle={'light-content'}
+          statusBarColor={PRIMARY_THEME_COLOR}
         />
           <ScrollView style={styles.dashboardScroll} bounces={false}>
             <View style={styles.dashboardWrap}>

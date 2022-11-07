@@ -1,7 +1,7 @@
 import { View, Text, StatusBar, TextInput } from 'react-native'
 import React from 'react'
 import styles from './Styles'
-import { PRIMARY_THEME_COLOR_DARK, WHITE_COLOR } from '../../../../components/utilities/constant';
+import { PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK, WHITE_COLOR } from '../../../../components/utilities/constant';
 import Header from '../../../../components/Header';
 import images from '../../../../assets/images';
 import strings from '../../../../components/utilities/Localization';
@@ -13,13 +13,6 @@ const EditFollowUp = ({ navigation }: any) => {
     const insets = useSafeAreaInsets();
     return (
         <View style={styles.mainContainer}>
-            <View
-                style={{
-                    backgroundColor: PRIMARY_THEME_COLOR_DARK,
-                    height: insets.top,
-                }}
-            />
-            <StatusBar barStyle={"light-content"} />
             <Header
                 leftImageSrc={images.backArrow}
                 rightSecondImageScr={images.notification}
@@ -28,6 +21,8 @@ const EditFollowUp = ({ navigation }: any) => {
                 leftImageIconStyle={styles.RightFirstIconStyle}
                 headerStyle={styles.headerStyle}
                 RightFirstIconStyle={styles.RightFirstIconStyle}
+                barStyle={'light-content'}
+                statusBarColor={PRIMARY_THEME_COLOR}
             />
             <View style={styles.editInputView}>
                 <View style={styles.inputWarp}>

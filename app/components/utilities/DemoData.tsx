@@ -68,59 +68,49 @@ export const AllFolloeUpData: any = [
     Description: 'A ticket, in a Support heolpdesk,is any issues It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.'
   },
 ]
-export const AppointMentVisitorData: any = [
+export const MyAppointMentData: any = [
   {
-    SiteVisitDateTime: '15/10/2022 11:00 AM',
-    Customername: 'ABC',
-    Leadno: 'Justo123456',
-    Pickup: 'Yes',
-    Status: 'Pending',
-    VisitingScore: 200
+    date: '15/10/2022',
+    appointmenttype: 'Meetting With SM',
+    time: '11:00 AM',
+    appwith: 'ABC, XYZ, PKR',
   },
   {
-    SiteVisitDateTime: '15/10/2022 11:00 AM',
-    Customername: 'ABC',
-    Leadno: 'Justo123456',
-    Pickup: 'Yes',
-    Status: 'Confirmed',
-    VisitingScore: 200
+    date: '15/10/2022',
+    appointmenttype: 'Meetting With SM',
+    time: '11:00 AM',
+    appwith: 'ABC, XYZ, PKR',
   },
   {
-    SiteVisitDateTime: '15/10/2022 11:00 AM',
-    Customername: 'ABC',
-    Leadno: 'Justo123456',
-    Pickup: 'Yes',
-    Status: 'Visitor not interested',
-    VisitingScore: 200
+    date: '15/10/2022',
+    appointmenttype: 'Meetting With SM',
+    time: '11:00 AM',
+    appwith: 'ABC, XYZ, PKR',
   },
 ]
 export const AppointMentSmData: any = [
   {
     date: '15/10/2022 ',
-    appointmentType: 'Walking with SH',
+    appointmentType: 'Meeting with CP',
     time: '11:00 AM',
-    appointmentWith: 'SM Name',
+    appointmentWith: 'CP Name',
+    smName: 'SM Name',
     Status: 'Pending',
+  },
+  {
+    date: '15/10/2022 ',
+    appointmentType: 'On Call meeting',
+    time: '11:00 AM',
+    appointmentWith: 'CP Name',
+    smName: 'SM Name',
+    Status: 'Confirm',
   },
   {
     date: '15/10/2022 ',
     appointmentType: 'Walking with SH',
     time: '11:00 AM',
-    appointmentWith: 'SM Name',
-    Status: 'Pending',
-  },
-  {
-    date: '15/10/2022 ',
-    appointmentType: 'Walking with SH',
-    time: '11:00 AM',
-    appointmentWith: 'SM Name',
-    Status: 'Pending',
-  },
-  {
-    date: '15/10/2022 ',
-    appointmentType: 'Walking with SH',
-    time: '11:00 AM',
-    appointmentWith: 'SM Name',
-    Status: 'Pending',
+    appointmentWith: 'CP Name',
+    smName: 'SM Name',
+    Status: 'Complete',
   },
 ]

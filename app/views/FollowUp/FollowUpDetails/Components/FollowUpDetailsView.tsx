@@ -1,6 +1,6 @@
 import { View, Text, StatusBar } from 'react-native'
 import React from 'react'
-import { BLACK_COLOR, PRIMARY_THEME_COLOR_DARK, WHITE_COLOR } from '../../../../components/utilities/constant'
+import { BLACK_COLOR, PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK, WHITE_COLOR } from '../../../../components/utilities/constant'
 import Header from '../../../../components/Header'
 import images from '../../../../assets/images'
 import strings from '../../../../components/utilities/Localization'
@@ -18,13 +18,6 @@ const FollowUpDetailsView = (props: any) => {
   }
   return (
     <View style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: PRIMARY_THEME_COLOR_DARK,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={"light-content"} />
       <Header
         leftImageSrc={images.backArrow}
         rightSecondImageScr={images.notification}
@@ -32,6 +25,8 @@ const FollowUpDetailsView = (props: any) => {
         leftImageIconStyle={styles.RightFirstIconStyle}
         handleOnLeftIconPress={props.handleBackPress}
         headerStyle={styles.headerStyle}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.leadDetailsItemView}>
         <FollowUpDetailsItem />
