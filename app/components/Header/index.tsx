@@ -1,10 +1,20 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity, Image, StatusBar} from 'react-native';
 import React from 'react';
 import styles from './styles';
+import { PRIMARY_THEME_COLOR_DARK } from '../utilities/constant';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Header = (props: any) => {
+  const insets = useSafeAreaInsets();
   return (
     <>
+     <View
+        style={{
+          backgroundColor: PRIMARY_THEME_COLOR_DARK,
+          height: insets.top,
+        }}
+      />
+      <StatusBar barStyle={props.barStyle} backgroundColor={props.statusBarColor} />
       <View style={[styles.maincontainer, props.headerStyle]}>
         <TouchableOpacity onPress={props.handleOnLeftIconPress}>
           <Image 

@@ -1,7 +1,7 @@
 import { View, Text, StatusBar, Image,useWindowDimensions } from 'react-native'
 import React,{useState} from 'react'
 import Header from '../../../../components/Header'
-import { PRIMARY_THEME_COLOR_DARK , TABBAR_COLOR, WHITE_COLOR} from '../../../../components/utilities/constant'
+import { PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK , TABBAR_COLOR, WHITE_COLOR} from '../../../../components/utilities/constant'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import images from '../../../../assets/images'
 import strings from '../../../../components/utilities/Localization'
@@ -106,13 +106,6 @@ const PropertyDetailView = (props: any) => {
 
   return (
     <View style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: PRIMARY_THEME_COLOR_DARK,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={'light-content'} />
       <Header
         leftImageSrc={images.backArrow}
         rightSecondImageScr={images.notification}
@@ -121,6 +114,8 @@ const PropertyDetailView = (props: any) => {
         RightFirstIconStyle={styles.leftImageIconStyle}
         leftImageIconStyle={styles.leftImageIconStyle}
         handleOnLeftIconPress={props.handleBackPress}
+        statusBarColor={PRIMARY_THEME_COLOR}
+        barStyle={'light-content'}
       />
       <View style={styles.propertyListView}>
 
