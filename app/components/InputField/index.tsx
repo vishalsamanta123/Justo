@@ -14,7 +14,6 @@ const InputField = (props: any) => {
   } = props
   const onSubmit = (e: any) => {
     const {text} = e;
-    console.log('e on submit', text);
   };
   return (
     <View>

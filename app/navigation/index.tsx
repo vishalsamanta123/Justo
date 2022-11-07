@@ -18,6 +18,9 @@ import AgencyDetails from '../views/AgencyManagement/AgencyDetailView';
 import PendingAgencyListScreen from '../views/AgencyManagement/PendingAgencyListing';
 import LeadManagementScreen from '../views/LeadManagement/LeadManagementScreen';
 import LeadDetails from '../views/LeadManagement/LeadDetails';
+import SourcingManager from '../views/SourcingManagers/SourcingManagersView';
+import AddNewSM from '../views/SourcingManagers/AddNewSm';
+import AllocateCP from '../views/SourcingManagers/AllocateCP';
 import FollowUpDetails from '../views/FollowUp/FollowUpDetails';
 import EditFollowUp from '../views/FollowUp/FollowUpScreen/Components/EditFollowUp';
 import AllFollowUpScreen from '../views/FollowUp/AllFollowUp';
@@ -36,6 +39,7 @@ const DrawerComponent = () => {
       <Drawer.Screen name="PropertyScreenView" component={PropertyScreen} />
       <Drawer.Screen name="AgencyListing" component={AgencyListingScreen} />
       <Drawer.Screen name="LeadManagementScreen" component={LeadManagementScreen} />
+      <Drawer.Screen name="SourcingManager" component={SourcingManager} />
       <Drawer.Screen name="FollowUpScreen" component={FollowUpScreen}  />
       <Drawer.Screen name="AppointmentScreenCPSM" component={AppointmentScreenCPSM}  />
     </Drawer.Navigator>
@@ -62,6 +66,9 @@ const Route = () => {
 
         {/* Lead Management Screens */}
         <Stack.Screen name="LeadDetails" component={LeadDetails} />
+        <Stack.Screen name="SourcingManager" component={SourcingManager} />
+        <Stack.Screen name="AddNewSM" component={AddNewSM} />
+        <Stack.Screen name="AllocateCP" component={AllocateCP} />
 
         {/* Follow up Screens */}
         <Stack.Screen name="FollowUpDetails" component={FollowUpDetails} />
