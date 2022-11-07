@@ -2,7 +2,7 @@ import { View, Text, Image, TouchableOpacity, StatusBar, Platform } from 'react-
 import React from 'react'
 import styles from './styles';
 import images from '../assets/images';
-import strings from '../Localization';
+import strings from '../components/utilities/Localization';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { DrawerContentScrollView, useDrawerStatus } from '@react-navigation/drawer';
@@ -67,6 +67,13 @@ const customDrawer = ({ navigation }: any) => {
         <DrawerTabSection iconSource={images.agency} tabTitle={strings.agencyHeader} handleDrawerNavigation={() => { navigation.navigate('AgencyListing') }} />
 
         <DrawerTabSection iconSource={images.lead} tabTitle={strings.leadManagementHeader} handleDrawerNavigation={() => { navigation.navigate('LeadManagementScreen') }} />
+        <DrawerTabSection
+          iconSource={images.event}
+          tabTitle={strings.followupHeader}
+          handleDrawerNavigation={() => {
+            navigation.navigate('FollowUpScreen');
+          }}
+        />
         <DrawerTabSection iconSource={images.event} tabTitle={strings.appointmentWithCPHeader} />
         <DrawerTabSection iconSource={images.event} tabTitle={strings.appointmentForVisitHeader} />
         <DrawerTabSection iconSource={images.report} tabTitle={strings.reportHeader} />

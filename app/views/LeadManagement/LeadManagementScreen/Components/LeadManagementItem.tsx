@@ -82,12 +82,6 @@ const LeadManagementItem = (props: any) => {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => props.onPressEdit()}
-        >
-          <Text style={styles.buttonTxt}>Edit</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
           style={styles.button} >
           <Text style={styles.buttonTxt}>Call</Text>
         </TouchableOpacity>

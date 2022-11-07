@@ -17,12 +17,14 @@ import AgencyBankInfo from '../views/AgencyManagement/AddAgency/components/Agenc
 import AgencyDetails from '../views/AgencyManagement/AgencyDetailView';
 import PendingAgencyListScreen from '../views/AgencyManagement/PendingAgencyListing';
 import LeadManagementScreen from '../views/LeadManagement/LeadManagementScreen';
-import BulkUpload from '../views/LeadManagement/LeadManagementScreen/Components/BulkUpload';
-import AddNewVisitorScreen from '../views/LeadManagement/AddNewVisitor';
 import LeadDetails from '../views/LeadManagement/LeadDetails';
 import SourcingManager from '../views/SourcingManagers/SourcingManagersView';
 import AddNewSM from '../views/SourcingManagers/AddNewSm';
 import AllocateCP from '../views/SourcingManagers/AllocateCP';
+import FollowUpDetails from '../views/FollowUp/FollowUpDetails';
+import EditFollowUp from '../views/FollowUp/FollowUpScreen/Components/EditFollowUp';
+import AllFollowUpScreen from '../views/FollowUp/AllFollowUp';
+import FollowUpScreen from '../views/FollowUp/FollowUpScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -35,6 +37,7 @@ const DrawerComponent = () => {
       <Drawer.Screen name="AgencyListing" component={AgencyListingScreen} />
       <Drawer.Screen name="LeadManagementScreen" component={LeadManagementScreen} />
       <Drawer.Screen name="SourcingManager" component={SourcingManager} />
+      <Drawer.Screen name="FollowUpScreen" component={FollowUpScreen}  />
     </Drawer.Navigator>
   );
 };
@@ -58,12 +61,15 @@ const Route = () => {
         <Stack.Screen name="AgencyBankInfo" component={AgencyBankInfo} />
 
         {/* Lead Management Screens */}
-        <Stack.Screen name="BulkUpload" component={BulkUpload} />
-        <Stack.Screen name="AddNewVisitorScreen" component={AddNewVisitorScreen} />
         <Stack.Screen name="LeadDetails" component={LeadDetails} />
         <Stack.Screen name="SourcingManager" component={SourcingManager} />
         <Stack.Screen name="AddNewSM" component={AddNewSM} />
         <Stack.Screen name="AllocateCP" component={AllocateCP} />
+
+        {/* Follow up Screens */}
+        <Stack.Screen name="FollowUpDetails" component={FollowUpDetails} />
+        <Stack.Screen name="EditFollowUp" component={EditFollowUp} />
+        <Stack.Screen name="AllFollowUpScreen" component={AllFollowUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
