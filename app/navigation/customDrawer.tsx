@@ -52,16 +52,17 @@ const customDrawer = ({ navigation }: any) => {
   }
   return (
     <View style={styles.drawerMain}>
-      <View style={{ backgroundColor: PRIMARY_THEME_COLOR, height: insets.top }} />
-      <StatusBar barStyle={'light-content'} />
-      <ProfileSection />
-      <DrawerContentScrollView
-        contentContainerStyle={{
-          paddingTop: 0,
-        }}
-      >
-        <DrawerTabSection iconSource={images.dashboard} tabTitle={strings.dashboardHeader} handleDrawerNavigation={() => { navigation.navigate('DashboardScreen') }} />
-        <DrawerTabSection iconSource={images.property} tabTitle={strings.propertyManagementHeader} handleDrawerNavigation={() => { navigation.navigate('PropertyScreenView') }} />
+        <View style={{backgroundColor: PRIMARY_THEME_COLOR, height: insets.top}} />
+        <StatusBar barStyle={'light-content'} />
+        <ProfileSection />
+        <DrawerContentScrollView
+          contentContainerStyle={{
+            paddingTop: 0,
+          }}
+        >
+        <DrawerTabSection iconSource={images.dashboard} tabTitle={strings.dashboardHeader} handleDrawerNavigation={()=> {navigation.navigate('DashboardScreen')}}/>
+        <DrawerTabSection iconSource={images.property} tabTitle={strings.propertyManagementHeader} handleDrawerNavigation={()=> {navigation.navigate('PropertyScreenView')}}/>
+        <DrawerTabSection iconSource={images.property} tabTitle={strings.SourcingManagersHeader} handleDrawerNavigation={()=> {navigation.navigate('SourcingManager')}}/>
 
         <DrawerTabSection iconSource={images.agency} tabTitle={strings.agencyHeader} handleDrawerNavigation={() => { navigation.navigate('AgencyListing') }} />
 
