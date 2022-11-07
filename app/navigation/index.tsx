@@ -1,7 +1,7 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import SplashScreen from '../views/Authentication/SplashScreen';
 import OnboardingScreen from '../views/Authentication/OnboardingScreen';
 import LoginScreen from '../views/Authentication/LoginScreen';
@@ -16,16 +16,21 @@ import AddnewAgency from '../views/AgencyManagement/AddAgency';
 import AgencyBankInfo from '../views/AgencyManagement/AddAgency/components/AgencyBankInfo';
 import AgencyDetails from '../views/AgencyManagement/AgencyDetailView';
 import PendingAgencyListScreen from '../views/AgencyManagement/PendingAgencyListing';
+import LeadManagementScreen from '../views/LeadManagement/LeadManagementScreen';
+import BulkUpload from '../views/LeadManagement/LeadManagementScreen/Components/BulkUpload';
+import AddNewVisitorScreen from '../views/LeadManagement/AddNewVisitor';
+import LeadDetails from '../views/LeadManagement/LeadDetails';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
-const screenOptions = {headerShown: false, gestureEnabled: true};
+const screenOptions = { headerShown: false, gestureEnabled: true };
 const DrawerComponent = () => {
   return (
-    <Drawer.Navigator initialRouteName="Home" screenOptions={{headerShown: false, drawerType: 'front' }} drawerContent={(props) => customDrawer(props)}>
-        <Drawer.Screen name="DashboardScreen" component={DashboardScreen} />
-        <Drawer.Screen  name="PropertyScreenView" component={PropertyScreen} />
-        <Drawer.Screen name="AgencyListing" component={AgencyListingScreen}  />
+    <Drawer.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, drawerType: 'front' }} drawerContent={(props) => customDrawer(props)}>
+      <Drawer.Screen name="DashboardScreen" component={DashboardScreen} />
+      <Drawer.Screen name="PropertyScreenView" component={PropertyScreen} />
+      <Drawer.Screen name="AgencyListing" component={AgencyListingScreen} />
+      <Drawer.Screen name="LeadManagementScreen" component={LeadManagementScreen} />
     </Drawer.Navigator>
   );
 };
@@ -43,13 +48,16 @@ const Route = () => {
         <Stack.Screen component={PropertyDetails} name="PropertyDetails" />
 
         {/* Agent Management Screen */}
-        <Stack.Screen name="PendingAgencyList" component={PendingAgencyListScreen}  />
-        <Stack.Screen name="AgencyDetails" component={AgencyDetails}  />
-        <Stack.Screen name="AddnewAgency" component={AddnewAgency}  />
-        <Stack.Screen name="AgencyBankInfo" component={AgencyBankInfo}  />
+        <Stack.Screen name="PendingAgencyList" component={PendingAgencyListScreen} />
+        <Stack.Screen name="AgencyDetails" component={AgencyDetails} />
+        <Stack.Screen name="AddnewAgency" component={AddnewAgency} />
+        <Stack.Screen name="AgencyBankInfo" component={AgencyBankInfo} />
 
+        {/* Lead Management Screens */}
+        <Stack.Screen name="BulkUpload" component={BulkUpload} />
+        <Stack.Screen name="AddNewVisitorScreen" component={AddNewVisitorScreen} />
+        <Stack.Screen name="LeadDetails" component={LeadDetails} />
 
-       
       </Stack.Navigator>
     </NavigationContainer>
   );

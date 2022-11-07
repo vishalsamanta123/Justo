@@ -43,7 +43,6 @@ const DashboardView = (props: any) => {
     }
   ];
   const renderItem = ({item}: any) => {
-    console.log('item', item);
     return(
         <TouchableOpacity style={styles.headingView}>
           <Text style={styles.itemText}>{item.cpName}</Text>
