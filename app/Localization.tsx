@@ -50,6 +50,8 @@ const strings = new LocalizedStrings({
     updatepassword: 'Update Password',
     deactivconfirmation: 'Are You sure you want to Deactive this',
     
+    /*** Sourcing Managers ***/
+    SourcingManagersHeader: 'Sourcing Managers',
   },
 });
 
