@@ -52,6 +52,10 @@ const strings = new LocalizedStrings({
     logInText: 'LOG IN',
     dontHaveAnAcc: `Don't Have an account?`,
     registerNow: 'Register Now',
+    // common strings
+    search: 'Search',
+    update: 'Update',
+    searchbytype: 'Search By Tpe',
 
     /**Confirm Model**/
     ConfirmationModalTxt: 'Select the reason for\r\nunsubscribe this property.',
@@ -90,6 +94,19 @@ const strings = new LocalizedStrings({
     createVisitor: 'Create Visitor',
     Statusupdate: 'Status Update',
     ScheduleSitevisite: 'Schedule Site Visite',
+    createandschedule: 'Create & schedule',
+    propertyrequired: 'Property Required',
+    Customerdetails: 'Customer Details',
+    companydetails: 'Company Details',
+    configuration: 'Configuration',
+    byvisitorscore: 'By Visitor Score',
+
+    // Follow-Up
+    followupHeader: 'Follow-up',
+    followupDetails: 'Follow-Up Detail',
+    searchfollowup: 'Search Follow-Up',
+    allfollowup: 'All Followup',
+    editfollowup: 'Edit Follow-Up',
   },
 });
 

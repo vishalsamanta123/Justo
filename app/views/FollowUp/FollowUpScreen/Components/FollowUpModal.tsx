@@ -6,14 +6,17 @@ import images from "../../../../assets/images";
 import strings from "../../../../components/utilities/Localization";
 import Button from "../../../../components/Button";
 import InputField from "../../../../components/InputField";
+import { Dropdown } from "react-native-element-dropdown";
+import { dropdownData } from "../../../../components/utilities/DemoData";
 import DropdownInput from "../../../../components/DropDown";
 const FilterModal = (props: any) => {
+  const [value, setValue] = useState(null);
   return (
     <View>
       <Modal isVisible={props.Visible}>
         <View style={styles.mainContainer}>
           <View style={styles.topContainer}>
-            <Text style={styles.topTxt}>{strings.searchvisitor}</Text>
+            <Text style={styles.topTxt}>{strings.searchfollowup}</Text>
             <View>
               <TouchableOpacity onPress={() => props.setIsVisible(false)}>
                 <Image source={images.close} style={styles.closeIcon} />
@@ -37,29 +40,15 @@ const FilterModal = (props: any) => {
               />
             </View>
             <View style={styles.inputWrap}>
-              <InputField
-                placeholderText={"Search by Visitor Name"}
-                handleInputBtnPress={() => { }}
-                onChangeText={() => { }}
-              />
-            </View>
-            <View style={styles.inputWrap}>
-              <DropdownInput
-                placeholder={strings.configuration}
-                value={props.value}
-                setValue={props.setValue}
-              />
-            </View>
-            <View style={styles.inputWrap}>
-              <DropdownInput
-                placeholder={strings.byvisitorscore}
-                value={props.value}
-                setValue={props.setValue}
+            <DropdownInput
+                placeholder={strings.searchbytype}
+                value={value}
+                setValue={setValue}
               />
             </View>
           </View>
           <View style={{ marginVertical: 20 }}>
-            <Button handleBtnPress={() => props.setIsVisible(false)} buttonText={strings.search} />
+            <Button handleBtnPress={() => props.setIsVisible(false)} buttonText={strings.apply} />
           </View>
         </View>
       </Modal>
