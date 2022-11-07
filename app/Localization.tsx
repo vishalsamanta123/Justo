@@ -25,6 +25,31 @@ const strings = new LocalizedStrings({
     and: 'and',
     privacyPolicy: 'Privacy Policy',
     ofJusto: 'of Justo.',
+
+    /**Confirm Model**/
+    ConfirmationModalTxt: 'Select the reason for\r\nunsubscribe this property.',
+    Confirm: 'Confirm',
+    
+    
+    /*** agency ***/
+    addnewAgency: 'Add new Agency',
+    pendingconfirm: 'Pending Confirm',
+    edit: 'Edit',
+    deactive: 'Deactive',
+    Agencydetail: 'Agency Detail',
+    userbankinfo: 'User Bank Info',
+    createnewagency: 'Create New Agency',
+    confirmation: 'Confirmation',
+    active:'Active',
+    searchAgency:'Search Agency',
+    apply:'Apply',
+    no: 'No', 
+    yes: 'Yes', 
+    agent: 'Agent', 
+    createAgent: 'Create Agent', 
+    updatepassword: 'Update Password',
+    deactivconfirmation: 'Are You sure you want to Deactive this',
+    
   },
 });
 

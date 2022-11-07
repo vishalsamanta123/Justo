@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Modal from "react-native-modal";
 import styles from "./styles";
 import images from "../../assets/images";
-import strings from "../utilities/Localization";
+import strings from "../../Localization";
 import { Dropdown } from "react-native-element-dropdown";
 import Button from "../Button";
 const data = [
@@ -32,13 +32,44 @@ const ConfirmModal = (props: any) => {
         <View style={styles.mainContainer}>
           <View style={styles.topContainer}>
             <View />
-            <Text style={styles.topTxt}>{strings.confirmation}</Text>
+              <Text style={styles.topTxt}>{(props.stringshow) ? props.stringshow : strings.confirmation}</Text>
             <View>
               <TouchableOpacity onPress={() => props.setIsVisible(false)}>
                 <Image source={images.close} style={styles.closeIcon} />
               </TouchableOpacity>
             </View>
           </View>
+
+         {(props.confirmtype === 'CONFIRMATION')? 
+          <>
+
+         <View style={styles.borderView} />
+
+         <View style={styles.conteconfirm}>
+
+          <View style={styles.MiddleContainer}>
+            <Text style={styles.bottomTxt}>{props.textshow}</Text>
+          </View>
+         
+          <View style={{marginVertical: 10,flexDirection:'row'}}> 
+            
+            <View style={styles.btnview}>
+              <Button buttonText={strings.no} width={120} height={40} handleBtnPress={() => props.setIsVisible(false)}/>
+            </View>
+
+            <View style={styles.btnview}>
+               <Button buttonText={strings.yes} width={120} height={40}  handleBtnPress={() => props.setIsVisible(false)} />
+            </View>
+
+          </View>
+
+          </View>
+
+          
+          </>
+
+         :
+         <>
           <View style={styles.borderView} />
           <View style={styles.MiddleContainer}>
             <Text style={styles.bottomTxt}>{strings.ConfirmationModalTxt}</Text>
@@ -64,6 +95,12 @@ const ConfirmModal = (props: any) => {
           <View style={{marginVertical: 10}}> 
             <Button buttonText={strings.Confirm} />
           </View>
+          </>
+
+         }
+
+
+
         </View>
       </Modal>
     </View>

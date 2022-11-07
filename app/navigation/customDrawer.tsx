@@ -62,7 +62,9 @@ const customDrawer = ({navigation}: any) => {
         >
         <DrawerTabSection iconSource={images.dashboard} tabTitle={strings.dashboardHeader} handleDrawerNavigation={()=> {navigation.navigate('DashboardScreen')}}/>
         <DrawerTabSection iconSource={images.property} tabTitle={strings.propertyManagementHeader} handleDrawerNavigation={()=> {navigation.navigate('PropertyScreenView')}}/>
-        <DrawerTabSection iconSource={images.agency} tabTitle={strings.agencyHeader}/>
+
+        <DrawerTabSection iconSource={images.agency} tabTitle={strings.agencyHeader} handleDrawerNavigation={()=> {navigation.navigate('AgencyListing')}}/>
+
         <DrawerTabSection iconSource={images.lead} tabTitle={strings.leadManagementHeader}/>
         <DrawerTabSection iconSource={images.event} tabTitle={strings.appointmentWithCPHeader}/>
         <DrawerTabSection iconSource={images.event} tabTitle={strings.appointmentForVisitHeader}/>
