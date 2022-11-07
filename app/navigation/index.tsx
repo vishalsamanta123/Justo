@@ -16,6 +16,10 @@ import AddnewAgency from '../views/AgencyManagement/AddAgency';
 import AgencyBankInfo from '../views/AgencyManagement/AddAgency/components/AgencyBankInfo';
 import AgencyDetails from '../views/AgencyManagement/AgencyDetailView';
 import PendingAgencyListScreen from '../views/AgencyManagement/PendingAgencyListing';
+import LeadManagementScreen from '../views/LeadManagement/LeadManagementScreen';
+import BulkUpload from '../views/LeadManagement/LeadManagementScreen/Components/BulkUpload';
+import AddNewVisitorScreen from '../views/LeadManagement/AddNewVisitor';
+import LeadDetails from '../views/LeadManagement/LeadDetails';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -26,6 +30,7 @@ const DrawerComponent = () => {
       <Drawer.Screen name="DashboardScreen" component={DashboardScreen} />
       <Drawer.Screen name="PropertyScreenView" component={PropertyScreen} />
       <Drawer.Screen name="AgencyListing" component={AgencyListingScreen} />
+      <Drawer.Screen name="LeadManagementScreen" component={LeadManagementScreen} />
     </Drawer.Navigator>
   );
 };
@@ -48,7 +53,10 @@ const Route = () => {
         <Stack.Screen name="AddnewAgency" component={AddnewAgency} />
         <Stack.Screen name="AgencyBankInfo" component={AgencyBankInfo} />
 
-
+        {/* Lead Management Screens */}
+        <Stack.Screen name="BulkUpload" component={BulkUpload} />
+        <Stack.Screen name="AddNewVisitorScreen" component={AddNewVisitorScreen} />
+        <Stack.Screen name="LeadDetails" component={LeadDetails} />
 
       </Stack.Navigator>
     </NavigationContainer>
