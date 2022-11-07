@@ -89,6 +89,15 @@ const styles = StyleSheet.create({
   inputWrap: {
     marginTop: normalizeSpacing(30),
   },
+
+  btnview: {
+    width: '50%',
+    height: normalizeHeight(50),
+  },
+  conteconfirm: {
+    flexDirection: "column",
+    
+  },
 });
 
 export default styles;
