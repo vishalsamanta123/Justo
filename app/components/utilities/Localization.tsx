@@ -52,10 +52,15 @@ const strings = new LocalizedStrings({
     logInText: 'LOG IN',
     dontHaveAnAcc: `Don't Have an account?`,
     registerNow: 'Register Now',
+
+    
     // common strings
     search: 'Search',
     update: 'Update',
     searchbytype: 'Search By Tpe',
+    call: 'Call',
+    unsubscribe: 'Unsubscribe',
+    subscribe: 'Subscribe',
 
     /**Confirm Model**/
     ConfirmationModalTxt: 'Select the reason for\r\nunsubscribe this property.',
@@ -107,6 +112,24 @@ const strings = new LocalizedStrings({
     searchfollowup: 'Search Follow-Up',
     allfollowup: 'All Followup',
     editfollowup: 'Edit Follow-Up',
+
+
+    // Appointment
+    appointmnet: 'Appointmnet',
+    appointmnetdetail: 'Appointmnet Detail',
+    updatestatus: 'Update Status',
+    searchappointment: 'Search Appointment',
+    addNewappointment: 'Add New Appointment',
+    selectLead: 'Select Lead',
+    selectproperty: 'Select Property',
+    appointmentDate: 'Appointment Date',
+    appointmentTime: 'Appointment Time',
+    location: 'Location',
+    noofguest: 'No. of Guest',
+    pickupAppointment: 'PickUp(if add property time set yes)',
+    appointmentType: 'Appointment Type',
+    appointmentWith: 'Appointment With',
+    doneappointment: 'Done Appointment'
   },
 });
 

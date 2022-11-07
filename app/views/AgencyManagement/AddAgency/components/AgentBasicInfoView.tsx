@@ -27,19 +27,14 @@ const AgentBasicInfoView = (props: any) => {
 
   return (
     <ScrollView style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: WHITE_COLOR,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={"light-content"} />
       <Header
         headerText={strings.basicInfoText}
         headerStyle={styles.headerStyle}
         headerTextStyle={styles.headerTextStyle}
         leftImageSrc={images.backArrow}
         handleOnLeftIconPress={props.onPressBack}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.wrap}>
        {/*  <Text style={styles.headingText}>{strings.basicInfoText}</Text> */}

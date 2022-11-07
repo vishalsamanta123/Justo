@@ -41,13 +41,6 @@ const PropertyDetailView = (props: any) => {
   };
   return (
     <View style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: PRIMARY_THEME_COLOR_DARK,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={"light-content"} />
       <Header
         leftImageSrc={images.backArrow}
         rightSecondImageScr={images.notification}
@@ -56,6 +49,8 @@ const PropertyDetailView = (props: any) => {
         RightFirstIconStyle={styles.leftImageIconStyle}
         leftImageIconStyle={styles.leftImageIconStyle}
         handleOnLeftIconPress={props.handleBackPress}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.propertyListView}>
         <PropertyDetailItem items={DATA} onpresContent={onpresContent} />

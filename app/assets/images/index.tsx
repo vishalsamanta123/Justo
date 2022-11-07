@@ -28,6 +28,7 @@ const images = {
   close: require('./close.png'),
   downErrow: require('./downErrow.png'),
   buildings: require('./buildings.jpeg'),
+  timer: require('./timer.png'),
 };
 
 export default images;

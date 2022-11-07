@@ -8,7 +8,7 @@ import {
 import React from "react";
 import images from "../../../../assets/images";
 import InputField from "../../../../components/InputField";
-import { WHITE_COLOR } from "../../../../components/utilities/constant";
+import { PRIMARY_THEME_COLOR, WHITE_COLOR } from "../../../../components/utilities/constant";
 import strings from "../../../../components/utilities/Localization";
 import styles from "./styles";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -25,19 +25,14 @@ const AgentBankInfo = ({navigation}: any) => {
   }
   return (
     <ScrollView style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: WHITE_COLOR,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={"light-content"} />
       <Header
         headerText={strings.userbankinfo}
         headerStyle={styles.headerStyle}
         headerTextStyle={styles.headerTextStyle}
         leftImageSrc={images.backArrow}
         handleOnLeftIconPress={onPressBack}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.wrap}>
        

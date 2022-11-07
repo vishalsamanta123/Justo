@@ -74,13 +74,6 @@ const PendingAgencyView = (props: any) => {
 
   return (
     <View style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: PRIMARY_THEME_COLOR_DARK,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={'light-content'} />
       <Header
         leftImageSrc={images.backArrow}
         rightFirstImageScr={images.filter}
@@ -90,6 +83,8 @@ const PendingAgencyView = (props: any) => {
         headerStyle={styles.headerStyle}
         RightFirstIconStyle={styles.RightFirstIconStyle}
         leftImageIconStyle={styles.leftImageIconStyle}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
 
       />
       <View style={styles.propertyListView}>

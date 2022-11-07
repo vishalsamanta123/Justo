@@ -1,7 +1,7 @@
 import { View, Text, StatusBar, FlatList } from 'react-native'
 import React, { useState } from 'react'
 import styles from './Styles'
-import { PRIMARY_THEME_COLOR_DARK } from '../../../../components/utilities/constant'
+import { PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK } from '../../../../components/utilities/constant'
 import Header from '../../../../components/Header'
 import images from '../../../../assets/images'
 import strings from '../../../../components/utilities/Localization'
@@ -12,40 +12,36 @@ import FilterModal from './FollowUpModal'
 
 const DATA: any = [
   {
-    Projectname: 'ABC',
-    Location: 'Indore',
     visitor: 123,
-    siteVisit: 234,
-    closeVisit: 600,
-    status: 'confirmatin Pending',
-    createddate: '11/10/2022'
+    date: '11/10/2022',
+    visitorname: 'Anil Kumar',
+    config: 'Indore',
+    budget: '90L',
+    type: 600,
   },
   {
-    Projectname: 'ABC',
-    Location: 'Indore',
     visitor: 123,
-    siteVisit: 234,
-    closeVisit: 600,
-    status: 'Subscribe',
-    createddate: '11/10/2022'
+    date: '11/10/2022',
+    visitorname: 'Anil Kumar',
+    config: 'Indore',
+    budget: '90L',
+    type: 600,
   },
   {
-    Projectname: 'ABC',
-    Location: 'Indore',
     visitor: 123,
-    siteVisit: 234,
-    closeVisit: 600,
-    status: 'Unsubscribe',
-    createddate: '11/10/2022'
+    date: '11/10/2022',
+    visitorname: 'Anil Kumar',
+    config: 'Indore',
+    budget: '90L',
+    type: 600,
   },
   {
-    Projectname: 'ABC',
-    Location: 'Indore',
     visitor: 123,
-    siteVisit: 234,
-    closeVisit: 600,
-    status: 'confirmatin Pending',
-    createddate: '11/10/2022'
+    date: '11/10/2022',
+    visitorname: 'Anil Kumar',
+    config: 'Indore',
+    budget: '90L',
+    type: 600,
   },
 ];
 
@@ -64,13 +60,6 @@ const FollowUpView = (props: any) => {
   }
   return (
     <View style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: PRIMARY_THEME_COLOR_DARK,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={"light-content"} />
       <Header
         leftImageSrc={images.menu}
         rightFirstImageScr={images.filter}
@@ -80,6 +69,8 @@ const FollowUpView = (props: any) => {
         headerStyle={styles.headerStyle}
         RightFirstIconStyle={styles.RightFirstIconStyle}
         handleOnRightFirstIconPress={() => setFilterisVisible(true)}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.followupItemView}>
         <FlatList

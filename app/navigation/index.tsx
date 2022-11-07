@@ -22,6 +22,9 @@ import FollowUpDetails from '../views/FollowUp/FollowUpDetails';
 import EditFollowUp from '../views/FollowUp/FollowUpScreen/Components/EditFollowUp';
 import AllFollowUpScreen from '../views/FollowUp/AllFollowUp';
 import FollowUpScreen from '../views/FollowUp/FollowUpScreen';
+import AppointmentScreenCPSM from '../views/AppointmentWithCPSm/AppointmentScreen';
+import AppointmentDetails from '../views/AppointmentWithCPSm/AppointmentDetails';
+import AddAppointmentScreen from '../views/AppointmentWithCPSm/AddAppointment';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -34,6 +37,7 @@ const DrawerComponent = () => {
       <Drawer.Screen name="AgencyListing" component={AgencyListingScreen} />
       <Drawer.Screen name="LeadManagementScreen" component={LeadManagementScreen} />
       <Drawer.Screen name="FollowUpScreen" component={FollowUpScreen}  />
+      <Drawer.Screen name="AppointmentScreenCPSM" component={AppointmentScreenCPSM}  />
     </Drawer.Navigator>
   );
 };
@@ -63,6 +67,10 @@ const Route = () => {
         <Stack.Screen name="FollowUpDetails" component={FollowUpDetails} />
         <Stack.Screen name="EditFollowUp" component={EditFollowUp} />
         <Stack.Screen name="AllFollowUpScreen" component={AllFollowUpScreen} />
+
+        {/* Appointment */}
+        <Stack.Screen name="AppointmentDetails" component={AppointmentDetails}  />
+        <Stack.Screen name="AddAppointmentScreen" component={AddAppointmentScreen}  />
       </Stack.Navigator>
     </NavigationContainer>
   );
