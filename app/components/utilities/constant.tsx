@@ -17,6 +17,7 @@ export const BLUE_COLOR = '#0493d6';
 export const PURPLE_COLOR = '#8e38ff';
 export const GRAY_COLOR = '#bdbbbb';
 export const TABBAR_COLOR = '#F5CB44';
+export const GRAY_LIGHT_COLOR = '#757070';
 
 export const validateEmail =
   /^(([^<>()[\]\\.,;:\s@\']+(\.[^<>()[\]\\.,;:\s@\']+)*)|(\'.+\'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

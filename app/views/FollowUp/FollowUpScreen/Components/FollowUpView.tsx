@@ -1,17 +1,15 @@
-import { View, Text, FlatList, StatusBar } from "react-native";
-import React, { useState } from "react";
-import styles from "./Styles";
-import images from "../../../../assets/images";
-import ConfirmModal from "../../../../components/Modals/ConfirmModal";
-import { PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK } from "../../../../components/utilities/constant";
-import strings from "../../../../components/utilities/Localization";
-import PropertyListItem from "../../../PropertyMangement/PropertyScreen/components/PropertyListItem";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Header from "../../../../components/Header";
-import Button from "../../../../components/Button";
-import LeadManagementItem from "./LeadManagementItem";
-import { useNavigation } from "@react-navigation/native";
-import FilterModal from "./LeadManagementModal";
+import { View, Text, StatusBar, FlatList } from 'react-native'
+import React, { useState } from 'react'
+import styles from './Styles'
+import { PRIMARY_THEME_COLOR_DARK } from '../../../../components/utilities/constant'
+import Header from '../../../../components/Header'
+import images from '../../../../assets/images'
+import strings from '../../../../components/utilities/Localization'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import FollowUpItem from './FollowUpItem'
+import { useNavigation } from '@react-navigation/native'
+import FilterModal from './FollowUpModal'
+
 const DATA: any = [
   {
     Projectname: 'ABC',
@@ -51,38 +49,48 @@ const DATA: any = [
   },
 ];
 
-const LeadManagementView = (props: any) => {
+const FollowUpView = (props: any) => {
   const insets = useSafeAreaInsets();
   const navigation: any = useNavigation()
   const [FilterisVisible, setFilterisVisible] = useState(false)
   const onPressView = () => {
-    navigation.navigate('LeadDetails')
+    navigation.navigate('FollowUpDetails')
+  }
+  const onPressEdit = () => {
+    navigation.navigate('EditFollowUp')
+  }
+  const onPressAllFollowUp = () => {
+    navigation.navigate('AllFollowUpScreen')
   }
   return (
     <View style={styles.mainContainer}>
+      <View
+        style={{
+          backgroundColor: PRIMARY_THEME_COLOR_DARK,
+          height: insets.top,
+        }}
+      />
+      <StatusBar barStyle={"light-content"} />
       <Header
         leftImageSrc={images.menu}
         rightFirstImageScr={images.filter}
         rightSecondImageScr={images.notification}
-        headerText={strings.visitor}
+        headerText={strings.followupHeader}
         handleOnLeftIconPress={props.handleDrawerPress}
         headerStyle={styles.headerStyle}
         RightFirstIconStyle={styles.RightFirstIconStyle}
         handleOnRightFirstIconPress={() => setFilterisVisible(true)}
-        statusBarColor={PRIMARY_THEME_COLOR}
-        barStyle={'light-content'}
       />
-      <View style={styles.propertyListView}>
+      <View style={styles.followupItemView}>
         <FlatList
           data={DATA}
           showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => <LeadManagementItem items={item} onPressView={onPressView} />}
+          renderItem={({ item }) => <FollowUpItem items={item} onPressView={onPressView} onPressEdit={onPressEdit} onPressAllFollowUp={onPressAllFollowUp} />}
         />
       </View>
-      {/* <ConfirmModal Visible={isVisible} setIsVisible={setIsVisible} /> */}
       <FilterModal Visible={FilterisVisible} setIsVisible={setFilterisVisible} />
     </View>
-  );
-};
+  )
+}
 
-export default LeadManagementView;
+export default FollowUpView
