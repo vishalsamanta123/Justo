@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Header from "../../../components/Header";
 import images from "../../../assets/images";
 import styles from "./styles";
-import strings from "../../../Localization";
+import strings from "../../../components/utilities/Localization";
 import {PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK, WHITE_COLOR} from "../../../components/utilities/constant";
 
 const DashboardView = (props: any) => {

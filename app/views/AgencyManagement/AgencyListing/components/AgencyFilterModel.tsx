@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Modal from "react-native-modal";
 import styles from "../../../../components/Modals/styles";
 import images from "../../../../assets/images";
-import strings from "../../../../Localization";
+import strings from "../../../../components/utilities/Localization";
 import Button from "../../../../components/Button";
 import InputField from "../../../../components/InputField";
 import DropdownInput from "../../../../components/DropDown";

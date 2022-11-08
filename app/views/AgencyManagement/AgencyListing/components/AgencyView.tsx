@@ -1,12 +1,12 @@
-import {View, Text, StatusBar, FlatList, Alert} from 'react-native';
+import { View, Text, StatusBar, FlatList, Alert } from 'react-native';
 import React, { useState } from 'react';
 import styles from './styles';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AgencyListItem from './AgencyListItem';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../../../../components/Header';
 import images from '../../../../assets/images';
-import strings from '../../../../Localization';
+import strings from '../../../../components/utilities/Localization';
 import ConfirmModal from '../../../../components/Modals/ConfirmModal';
 import FilterModal from './AgencyFilterModel';
 import { PRIMARY_THEME_COLOR_DARK } from '../../../../components/utilities/constant';
@@ -27,44 +27,44 @@ const AgencyView = (props: any) => {
   const [FilterisVisible, setFilterisVisible] = useState(false)
   const insets = useSafeAreaInsets();
   const navigation: any = useNavigation()
-    const DATA: any = [
-      {
-        Projectname: 'ABC',
-        Location: 'Indore',
-        rerano: '123566648',
-        visitor: 123,
-        siteVisit: 234,
-        closeVisit: 600,
-        status: 'Active'
-      },
-      {
-        Projectname: 'ABC',
-        Location: 'Indore',
-        rerano: '123566648',
-        visitor: 123,
-        siteVisit: 234,
-        closeVisit: 600,
-        status: 'Deactive'
-      },
-      {
-        Projectname: 'ABC',
-        Location: 'Indore',
-        rerano: '123566648',
-        visitor: 123,
-        siteVisit: 234,
-        closeVisit: 600,
-        status: 'Active'
-      },
-      {
-        Projectname: 'ABC',
-        Location: 'Indore',
-        rerano: '123566648',
-        visitor: 123,
-        siteVisit: 234,
-        closeVisit: 600,
-        status: 'Deactive'
-      },
-    ];
+  const DATA: any = [
+    {
+      Projectname: 'ABC',
+      Location: 'Indore',
+      rerano: '123566648',
+      visitor: 123,
+      siteVisit: 234,
+      closeVisit: 600,
+      status: 'Active'
+    },
+    {
+      Projectname: 'ABC',
+      Location: 'Indore',
+      rerano: '123566648',
+      visitor: 123,
+      siteVisit: 234,
+      closeVisit: 600,
+      status: 'Deactive'
+    },
+    {
+      Projectname: 'ABC',
+      Location: 'Indore',
+      rerano: '123566648',
+      visitor: 123,
+      siteVisit: 234,
+      closeVisit: 600,
+      status: 'Active'
+    },
+    {
+      Projectname: 'ABC',
+      Location: 'Indore',
+      rerano: '123566648',
+      visitor: 123,
+      siteVisit: 234,
+      closeVisit: 600,
+      status: 'Deactive'
+    },
+  ];
 
   const onPressView = () => {
     navigation.navigate('AgencyDetails')
@@ -92,43 +92,45 @@ const AgencyView = (props: any) => {
       />
       <View style={styles.propertyListView}>
 
-      <View style={styles.btnView}>
+        <View style={styles.btnView}>
 
-      <TouchableOpacity
-        onPress={() => onPressAddnewAgency()}
-         style={[styles.button, { borderColor:  BLACK_COLOR,backgroundColor:PRIMARY_THEME_COLOR}]} >
-          <Text style={[styles.buttonTxt,{
-          color:WHITE_COLOR  }]}>{strings.addnewAgency}</Text>
+          <TouchableOpacity
+            onPress={() => onPressAddnewAgency()}
+            style={[styles.button, { borderColor: BLACK_COLOR, backgroundColor: PRIMARY_THEME_COLOR }]} >
+            <Text style={[styles.buttonTxt, {
+              color: WHITE_COLOR
+            }]}>{strings.addnewAgency}</Text>
 
-        </TouchableOpacity>
+          </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() => ShowPendinglist()}
-         style={[styles.button, { borderColor:  BLACK_COLOR,backgroundColor:PRIMARY_THEME_COLOR}]} >
-          <Text style={[styles.buttonTxt,{
-          color:WHITE_COLOR  }]}>{strings.pendingconfirm}</Text>
+          <TouchableOpacity
+            onPress={() => ShowPendinglist()}
+            style={[styles.button, { borderColor: BLACK_COLOR, backgroundColor: PRIMARY_THEME_COLOR }]} >
+            <Text style={[styles.buttonTxt, {
+              color: WHITE_COLOR
+            }]}>{strings.pendingconfirm}</Text>
 
-        </TouchableOpacity>
+          </TouchableOpacity>
 
 
 
+        </View>
+        <View style={styles.propertyListViewsec}>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={DATA}
+            renderItem={({ item }) => <AgencyListItem items={item} setIsVisible={setIsVisible} onPressView={onPressView}
+              onPressAddnewAgency={onPressAddnewAgency}
+            />}
+          />
+        </View>
       </View>
-      <View style={styles.propertyListViewsec}>
-        <FlatList 
-          showsVerticalScrollIndicator={false}
-          data={DATA}
-          renderItem={({item}) => <AgencyListItem items={item} setIsVisible={setIsVisible} onPressView={onPressView} 
-          onPressAddnewAgency={onPressAddnewAgency} 
-          />}
-        />
-        </View> 
-      </View>
-      <ConfirmModal 
-        Visible={isVisible} 
+      <ConfirmModal
+        Visible={isVisible}
         setIsVisible={setIsVisible}
-        stringshow = {strings.confirmation}
-        textshow = {strings.deactivconfirmation+' '+strings.agencyHeader+'?'}
-        confirmtype = {'CONFIRMATION'}
+        stringshow={strings.confirmation}
+        textshow={strings.deactivconfirmation + ' ' + strings.agencyHeader + '?'}
+        confirmtype={'CONFIRMATION'}
       />
       <FilterModal Visible={FilterisVisible} setIsVisible={setFilterisVisible} />
     </View>

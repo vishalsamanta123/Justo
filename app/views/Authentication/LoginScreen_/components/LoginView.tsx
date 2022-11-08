@@ -4,7 +4,7 @@ import styles from './styles';
 import images from '../../../../assets/images';
 import InputField from '../../../../components/InputField';
 import Button from '../../../../components/Button';
-import strings from '../../../../Localization';
+import strings from '../../../../components/utilities/Localization';
 
 const LoginView = (props: any) => {
   const [isVisiblePassword, setIsVisiblePassword] = useState(true);

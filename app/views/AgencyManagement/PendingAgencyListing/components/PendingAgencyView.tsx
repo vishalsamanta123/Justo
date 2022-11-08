@@ -6,7 +6,7 @@ import PendingAgencyList from './PendingAgencyListItem';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../../../../components/Header';
 import images from '../../../../assets/images';
-import strings from '../../../../Localization';
+import strings from '../../../../components/utilities/Localization'
 import ConfirmModal from '../../../../components/Modals/ConfirmModal';
 import { PRIMARY_THEME_COLOR_DARK } from '../../../../components/utilities/constant';
 
@@ -88,7 +88,7 @@ const PendingAgencyView = (props: any) => {
 
       />
       <View style={styles.propertyListView}>
-         {/* <View style={styles.btnView}>
+        {/* <View style={styles.btnView}>
             <TouchableOpacity
             onPress={() => null}
             style={[styles.button, { borderColor: BLACK_COLOR, backgroundColor: PRIMARY_THEME_COLOR }]} >

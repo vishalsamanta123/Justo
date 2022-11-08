@@ -45,11 +45,9 @@ const AllocateCPScreen = ({ navigation, }: any) => {
         navigation.goBack()
     }
     const handleSelects = (items: any) => {
-        const selects = [...selectedCp]
-        selects.push(items)
-        setSelected(selects)
+        setSelected([...selectedCp].push(items));
     }
-    
+
     const handleSearch = (searchKey: any) => {
         if (searchKey === "") {
             setCpList(cpList);
