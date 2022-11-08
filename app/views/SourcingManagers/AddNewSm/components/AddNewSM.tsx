@@ -3,11 +3,11 @@ import { View, Text, ScrollView } from 'react-native';
 import images from '../../../../assets/images';
 import Header from '../../../../components/Header';
 import InputField from '../../../../components/InputField';
-import strings from '../../../../Localization';
 import styles from './styles';
 import { RadioButton } from "react-native-paper";
 import { BLACK_COLOR, PRIMARY_THEME_COLOR, WHITE_COLOR } from '../../../../components/utilities/constant';
 import Button from '../../../../components/Button';
+import strings from '../../../../components/utilities/Localization';
 
 const AddNewSMView = (props: any) => {
     const [gender, setGender] = useState("Male");

@@ -3,9 +3,9 @@ import images from '../../../../assets/images';
 import Header from '../../../../components/Header';
 import { Checkbox } from 'react-native-paper';
 import { PRIMARY_THEME_COLOR, WHITE_COLOR } from '../../../../components/utilities/constant';
-import strings from '../../../../Localization';
 import styles from './styles';
 import Button from '../../../../components/Button';
+import strings from '../../../../components/utilities/Localization';
 
 const AllocateCPView = (props: any) => {
     const getValues = () => {
@@ -45,7 +45,7 @@ const AllocateCPView = (props: any) => {
                     }
                 </View>
                 <TextInput
-                    placeholder={strings.searchTxt}
+                    placeholder={strings.search}
                     style={styles.searchInputVw}
                     onFocus={() => props.setAllList(true)}
                     onChange={(text: any) => props.handleSearch(text)}

@@ -65,7 +65,16 @@ const strings = new LocalizedStrings({
     /**Confirm Model**/
     ConfirmationModalTxt: 'Select the reason for\r\nunsubscribe this property.',
     Confirm: 'Confirm',
-    
+
+    /*** Sourcing Managers ***/
+    SourcingManagersHeader: 'Sourcing Managers',
+    addNewSM: 'Add New SM',
+    allocateCp: 'Allocate CP',
+    createSM: 'Create SM',
+    editSM: 'Edit SM',
+    cpAllocation: 'CP Allocation',
+    newAllocateTxt: 'Allocate to New CP',
+    noCpSelected: 'No CP Selected',
     
     /*** agency ***/
     addnewAgency: 'Add new Agency',

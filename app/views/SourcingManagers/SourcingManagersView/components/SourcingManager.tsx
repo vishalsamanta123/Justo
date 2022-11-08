@@ -3,9 +3,9 @@ import images from '../../../../assets/images';
 import Button from '../../../../components/Button';
 import Header from '../../../../components/Header';
 import { PRIMARY_THEME_COLOR } from '../../../../components/utilities/constant';
-import strings from '../../../../Localization';
 import styles from './styles';
 import SourceManager from './SourceManager'
+import strings from '../../../../components/utilities/Localization';
 
 const SourcingDetailsView = (props: any) => {
     const DATA: any = [

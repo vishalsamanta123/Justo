@@ -1,9 +1,9 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import styles from './styles';
-import strings from '../../../../Localization';
 import { BLACK_COLOR, YELLOW_COLOR } from '../../../../components/utilities/constant';
 import images from '../../../../assets/images';
+import strings from '../../../../components/utilities/Localization';
 
 const AgencyListItem = (props: any) => {
     return (
