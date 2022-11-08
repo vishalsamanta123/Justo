@@ -52,6 +52,13 @@ const strings = new LocalizedStrings({
     logInText: 'LOG IN',
     dontHaveAnAcc: `Don't Have an account?`,
     registerNow: 'Register Now',
+    setting: "Setting",
+    userRole: "USER ROLE",
+    channelPartner: 'CHANNEL PARTNER',
+    updateProfile: 'UPDATE PROFILE',
+    editProfile: 'Edit Profile',
+    changePassword: 'Change Password',
+    copyLink: 'Copy Link',
 
     
     // common strings
