@@ -21,6 +21,7 @@ import LeadDetails from '../views/LeadManagement/LeadDetails';
 import SourcingManager from '../views/SourcingManagers/SourcingManagersView';
 import AddNewSM from '../views/SourcingManagers/AddNewSm';
 import AllocateCP from '../views/SourcingManagers/AllocateCP';
+import SMDetails from '../views/SourcingManagers/SMDetails';
 import FollowUpDetails from '../views/FollowUp/FollowUpDetails';
 import EditFollowUp from '../views/FollowUp/FollowUpScreen/Components/EditFollowUp';
 import AllFollowUpScreen from '../views/FollowUp/AllFollowUp';
@@ -83,6 +84,7 @@ const Route = () => {
         <Stack.Screen name="SourcingManager" component={SourcingManager} />
         <Stack.Screen name="AddNewSM" component={AddNewSM} />
         <Stack.Screen name="AllocateCP" component={AllocateCP} />
+        <Stack.Screen name="SMDetails" component={SMDetails} />
 
         {/* Follow up Screens */}
         <Stack.Screen name="FollowUpDetails" component={FollowUpDetails} />

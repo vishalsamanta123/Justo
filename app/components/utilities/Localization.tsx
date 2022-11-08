@@ -53,7 +53,7 @@ const strings = new LocalizedStrings({
     dontHaveAnAcc: `Don't Have an account?`,
     registerNow: 'Register Now',
 
-    
+
     // common strings
     search: 'Search',
     update: 'Update',
@@ -72,10 +72,21 @@ const strings = new LocalizedStrings({
     allocateCp: 'Allocate CP',
     createSM: 'Create SM',
     editSM: 'Edit SM',
+    updateSM: 'Update SM',
     cpAllocation: 'CP Allocation',
     newAllocateTxt: 'Allocate to New CP',
     noCpSelected: 'No CP Selected',
-    
+    selectMonth: 'Select Month',
+    startDate: "Start Date",
+    endDate: "End Date",
+    visitTarget: "Visit target",
+    siteVisitTarget: "Site visit target",
+    closeTarget: "Close target",
+    addTarget: "Add target",
+    SMDetails: "SM Detail",
+    selectSM: "Select SM",
+    transferToAllVisitor:'for transfer to all visitors of',
+
     /*** agency ***/
     addnewAgency: 'Add new Agency',
     pendingconfirm: 'Pending Confirm',
@@ -85,13 +96,13 @@ const strings = new LocalizedStrings({
     userbankinfo: 'User Bank Info',
     createnewagency: 'Create New Agency',
     confirmation: 'Confirmation',
-    active:'Active',
-    searchAgency:'Search Agency',
-    apply:'Apply',
-    no: 'No', 
-    yes: 'Yes', 
-    agent: 'Agent', 
-    createAgent: 'Create Agent', 
+    active: 'Active',
+    searchAgency: 'Search Agency',
+    apply: 'Apply',
+    no: 'No',
+    yes: 'Yes',
+    agent: 'Agent',
+    createAgent: 'Create Agent',
     updatepassword: 'Update Password',
     deactivconfirmation: 'Are You sure you want to Deactive this',
 

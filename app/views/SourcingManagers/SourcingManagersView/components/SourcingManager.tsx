@@ -6,6 +6,7 @@ import { PRIMARY_THEME_COLOR } from '../../../../components/utilities/constant';
 import styles from './styles';
 import SourceManager from './SourceManager'
 import strings from '../../../../components/utilities/Localization';
+import ConfirmModal from '../../../../components/Modals/ConfirmModal';
 
 const SourcingDetailsView = (props: any) => {
     const DATA: any = [
@@ -77,9 +78,18 @@ const SourcingDetailsView = (props: any) => {
                         // setIsVisible={setIsVisible} onPressView={onPressView}
                         onPressEditSM={() => props.handleAddNewSM('edit')}
                         onPressAllocate={() => props.onPressAllocateCp()}
+                        onPressView={() => props.onPressViews()}
+                        onPressStatus={() => props.setStatus(true)}
                     />}
                 />
             </View>
+            <ConfirmModal
+                Visible={props.status}
+                setIsVisible={props.setStatus}
+                stringshow={strings.selectSM}
+                middleTxt={strings.selectSM + ' ' + strings.transferToAllVisitor + ' SM Name ?'}
+                confirmtype={''}
+            />
         </View>
     )
 }

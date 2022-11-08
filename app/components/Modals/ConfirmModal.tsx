@@ -42,7 +42,6 @@ const ConfirmModal = (props: any) => {
 
           {(props.confirmtype === 'CONFIRMATION') ?
             <>
-
               <View style={styles.borderView} />
 
               <View style={styles.conteconfirm}>
@@ -72,7 +71,7 @@ const ConfirmModal = (props: any) => {
             <>
               <View style={styles.borderView} />
               <View style={styles.MiddleContainer}>
-                <Text style={styles.bottomTxt}>{strings.ConfirmationModalTxt}</Text>
+                <Text style={styles.bottomTxt}>{props.middleTxt ? props.middleTxt : strings.ConfirmationModalTxt}</Text>
               </View>
               <View>
                 <Dropdown
@@ -93,7 +92,9 @@ const ConfirmModal = (props: any) => {
                 />
               </View>
               <View style={{ marginVertical: 10 }}>
-                <Button buttonText={strings.Confirm} />
+                <Button
+                  handleBtnPress={() => props.setIsVisible(false)}
+                  buttonText={strings.Confirm} />
               </View>
             </>
 

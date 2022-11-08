@@ -2,15 +2,13 @@ import { View, Text, Image, TextInput, FlatList, TouchableOpacity } from 'react-
 import images from '../../../../assets/images';
 import Header from '../../../../components/Header';
 import { Checkbox } from 'react-native-paper';
-import { PRIMARY_THEME_COLOR, WHITE_COLOR } from '../../../../components/utilities/constant';
+import { BLACK_COLOR, GRAY_COLOR, PRIMARY_THEME_COLOR, WHITE_COLOR } from '../../../../components/utilities/constant';
 import styles from './styles';
 import Button from '../../../../components/Button';
 import strings from '../../../../components/utilities/Localization';
+import AllocateCPDetails from '../components/AllocateDetails'
 
 const AllocateCPView = (props: any) => {
-    const getValues = () => {
-
-    }
     return (
         <View style={styles.mainContainer}>
             <Header
@@ -32,12 +30,14 @@ const AllocateCPView = (props: any) => {
                         <>
                             {props?.selectedCp?.map((item: any, index: any) => {
                                 return (
-                                    <View style={styles.innerBoxVw}>
+                                    <View style={[styles.innerBoxVw, { justifyContent: 'center' }]}>
                                         <Text>{item.cpName}</Text>
-                                        <Image
-                                            source={images.close}
-                                            style={styles.crossVw}
-                                        />
+                                        <TouchableOpacity onPress={() => props.handleDelete(item, index)}>
+                                            <Image
+                                                source={images.close}
+                                                style={styles.crossVw}
+                                            />
+                                        </TouchableOpacity>
                                     </View>
                                 )
                             })}
@@ -46,26 +46,35 @@ const AllocateCPView = (props: any) => {
                 </View>
                 <TextInput
                     placeholder={strings.search}
+                    placeholderTextColor={BLACK_COLOR}
                     style={styles.searchInputVw}
                     onFocus={() => props.setAllList(true)}
-                    onChange={(text: any) => props.handleSearch(text)}
+                    onChangeText={(text: any) => props.handleSearch(text)}
                 />
                 {props.allList ?
                     <FlatList
                         data={props.cpList}
                         renderItem={({ item, index }: any) => {
+                            const getSelected =
+                                props?.selectedCp?.length === 0
+                                    ? ""
+                                    : props?.selectedCp?.map(({ cpName }: any) => cpName);
                             return (
-                                <TouchableOpacity
-                                    onPress={() => props.handleSelects(item)}
+                                <View
                                     style={styles.innerBoxVw}>
                                     <Text>{item.cpName}</Text>
-                                       {/* <Checkbox
-                                        value={getValues(item)}
-                                        // status={item.cpName === "first" ? "checked" : "unchecked"}
-                                        onPress={() => props.handleSelects(item)}
-                                        color={PRIMARY_THEME_COLOR}
-                                    /> */}
-                                </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => props.handleSelects(item)}
+                                        style={styles.checkBoxVw}>
+                                        <Image
+                                            style={styles.checksVw}
+                                            source={getSelected?.toString()
+                                                ?.includes(item.cpName)
+                                                ? images.check
+                                                : null
+                                            }
+                                        />
+                                    </TouchableOpacity>
+                                </View>
                             )
                         }}
                     /> : null
@@ -77,9 +86,15 @@ const AllocateCPView = (props: any) => {
                         height={40}
                         btnTxtsize={16}
                         buttonText={strings.cpAllocation}
+                        handleBtnPress={() => props.setCPDetails(true)}
                     />
                 </View>
             </View>
+            <AllocateCPDetails
+                Visible={props.CPDetails}
+                setIsVisible={props.setCPDetails}
+                handleAddTarget={() => props.handleAddTarget()}
+            />
         </View>
     )
 }
