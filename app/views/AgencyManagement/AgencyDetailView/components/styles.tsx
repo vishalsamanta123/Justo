@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {normalize, normalizeHeight, normalizeSpacing, normalizeWidth} from '../../../../components/scaleFontSize';
+import { StyleSheet } from 'react-native';
+import { normalize, normalizeHeight, normalizeSpacing, normalizeWidth } from '../../../../components/scaleFontSize';
 import {
   BLACK_COLOR,
   FONT_FAMILY_EXTRABOLD,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: normalizeSpacing(10),
   },
-  Txtview : {
+  Txtview: {
     flexDirection: 'row',
     // justifyContent: 'center',
     alignItems: 'center',
@@ -38,32 +38,32 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingVertical: normalizeSpacing(10),
   },
-  projectContainer : {
+  projectContainer: {
     flex: 3,
     alignItems: 'flex-end',
   },
-  projectTxt : {
+  projectTxt: {
     fontSize: normalize(15),
     fontFamily: FONT_FAMILY_SEMIBOLD,
     color: GRAY_LIGHT_COLOR
   },
-  nameContainer : {
+  nameContainer: {
     flex: 3,
     alignItems: 'flex-start',
   },
-  nameTxt : {
+  nameTxt: {
     fontSize: normalize(15),
     fontFamily: FONT_FAMILY_EXTRABOLD,
     color: BLACK_COLOR,
     marginHorizontal: normalizeSpacing(10)
   },
-  buttonContainer : {
+  buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: normalizeSpacing(10),
     marginHorizontal: normalizeSpacing(10),
   },
-  button : {
+  button: {
     backgroundColor: WHITE_COLOR,
     width: normalizeWidth(90),
     height: normalizeHeight(25),
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 0.5
   },
-  buttonTxt : {
+  buttonTxt: {
     // color: WHITE_COLOR,
     textAlign: 'center'
   }

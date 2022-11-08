@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     height: 20,
   },
   inputWrap: {
-    marginTop: normalizeSpacing(30),
+    marginTop: normalizeSpacing(20),
   },
 
   btnview: {

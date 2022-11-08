@@ -78,7 +78,7 @@ const AgencyListItem = (props: any) => {
                     }]}>{strings.edit}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    // onPress={() => props.setIsVisible(true)}
+                    onPress={() => props.onPressStatus()}
                     style={[styles.buttonbox, {
                         borderColor: BLACK_COLOR
                     }]} >
@@ -96,7 +96,7 @@ const AgencyListItem = (props: any) => {
                     }]}>{strings.allocateCp}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Viewbutton}
-                // onPress={() => props.onPressView()} 
+                    onPress={() => props.onPressView()}
                 >
                     <Image
                         source={images.forwardArrow}
