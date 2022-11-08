@@ -11,7 +11,7 @@ const strings = new LocalizedStrings({
     registernow: 'register now',
     propertyHeader: 'Property',
     propertyManagementHeader: 'Property Management',
-    agencyHeader: 'Agent',
+    agencyHeader: 'Agency(CP)',
     leadManagementHeader: 'Lead Management',
     appointmentWithCPHeader: 'Appointment With CP',
     appointmentForVisitHeader: 'Appointment For Site Visit',
@@ -138,7 +138,10 @@ const strings = new LocalizedStrings({
     pickupAppointment: 'PickUp(if add property time set yes)',
     appointmentType: 'Appointment Type',
     appointmentWith: 'Appointment With',
-    doneappointment: 'Done Appointment'
+    doneappointment: 'Done Appointment',
+
+    // Pickup request
+    PickuprequestHeader: 'Pickup Request'
   },
 });
 

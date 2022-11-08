@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -28,6 +28,7 @@ import FollowUpScreen from '../views/FollowUp/FollowUpScreen';
 import AppointmentScreenCPSM from '../views/AppointmentWithCPSm/AppointmentScreen';
 import AppointmentDetails from '../views/AppointmentWithCPSm/AppointmentDetails';
 import AddAppointmentScreen from '../views/AppointmentWithCPSm/AddAppointment';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -40,21 +41,34 @@ const DrawerComponent = () => {
       <Drawer.Screen name="AgencyListing" component={AgencyListingScreen} />
       <Drawer.Screen name="LeadManagementScreen" component={LeadManagementScreen} />
       <Drawer.Screen name="SourcingManager" component={SourcingManager} />
-      <Drawer.Screen name="FollowUpScreen" component={FollowUpScreen}  />
-      <Drawer.Screen name="AppointmentScreenCPSM" component={AppointmentScreenCPSM}  />
+      <Drawer.Screen name="FollowUpScreen" component={FollowUpScreen} />
+      <Drawer.Screen name="AppointmentScreenCPSM" component={AppointmentScreenCPSM} />
     </Drawer.Navigator>
   );
 };
+
 const Route = () => {
+  const [userData, setUserData] = useState<any>([])
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
+    const data: any = await AsyncStorage.getItem('userData')
+    setUserData(JSON.parse(data))
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={screenOptions}>
-        {/* <Stack.Screen component={SplashScreen} name="SplashScreenView" />
+        <Stack.Screen component={SplashScreen} name="SplashScreenView" />
         <Stack.Screen
           component={OnboardingScreen}
           name="OnboardingScreenView"
         />
-        <Stack.Screen component={LoginScreen} name="LoginScreenView" /> */}
+        {userData?.email !== "" &&
+          <Stack.Screen component={LoginScreen} name="LoginScreenView" />
+        }
         <Stack.Screen component={DrawerComponent} name="DashboardScreenView" />
         <Stack.Screen component={PropertyDetails} name="PropertyDetails" />
 
@@ -76,8 +90,8 @@ const Route = () => {
         <Stack.Screen name="AllFollowUpScreen" component={AllFollowUpScreen} />
 
         {/* Appointment */}
-        <Stack.Screen name="AppointmentDetails" component={AppointmentDetails}  />
-        <Stack.Screen name="AddAppointmentScreen" component={AddAppointmentScreen}  />
+        <Stack.Screen name="AppointmentDetails" component={AppointmentDetails} />
+        <Stack.Screen name="AddAppointmentScreen" component={AddAppointmentScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

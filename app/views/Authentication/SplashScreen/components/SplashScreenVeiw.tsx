@@ -1,12 +1,17 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import strings from '../../../../components/utilities/Localization';
+import {View, Text, Image, StatusBar} from 'react-native';
+import images from '../../../../assets/images';
+import { WHITE_COLOR } from '../../../../components/utilities/constant';
 import styles from './styles';
 
 const SplashScreenVeiw = () => {
   return (
     <View style={styles.splashContainer}>
-      <Text style={styles.justoText}>{strings.justo}</Text>
+      <StatusBar barStyle={'dark-content'} backgroundColor={WHITE_COLOR} />
+      <Image
+      source={images.logoWhiteBG}
+      style={styles.justoImage}
+       />
     </View>
   );
 };
