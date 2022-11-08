@@ -114,3 +114,43 @@ export const AppointMentSmData: any = [
     Status: 'Complete',
   },
 ]
+
+
+export const users: any = [
+  {
+    email: 'sourcinghead@gmail.com',
+    password: 123456,
+    type: 'sourcinghead',
+    name: 'Sourcing Head'
+  },
+  {
+    email: 'closingmanager@gmail.com',
+    password: 123456,
+    type: 'closingmanager',
+    name: 'Closing Manager'
+  },
+  {
+    email: 'closinghead@gmail.com',
+    password: 123456,
+    type: 'closinghead',
+    name: 'Closing Head'
+  },
+  {
+    email: 'postsales@gmail.com',
+    password: 123456,
+    type: 'postsales',
+    name: 'Post Sales'
+  },
+  {
+    email: 'sitehead@gmail.com',
+    password: 123456,
+    type: 'closinghead',
+    name: 'Closing Head'
+  },
+  {
+    email: 'sourcingmanager@gmail.com',
+    password: 123456,
+    type: 'sourcingmanager',
+    name: 'Sourcing Manager'
+  },
+]
