@@ -75,19 +75,6 @@ const PickupRequestsList = (props: any) => {
           }]}>{props.items.status}</Text>
         </View>
       </View>
-      {/* <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => { }}
-          style={styles.button} >
-          <Text style={styles.buttonTxt}>{strings.allocate}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Viewbutton} onPress={() => props.onPressView(props.items)} >
-          <Image
-            source={images.forwardArrow}
-            style={styles.arrow}
-          />
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 };

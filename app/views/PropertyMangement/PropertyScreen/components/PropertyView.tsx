@@ -62,6 +62,7 @@ const PropertyView = (props: any) => {
       <Header
         leftImageSrc={images.menu}
         rightSecondImageScr={images.notification}
+        rightFirstImageScr={images.filter}
         headerText={strings.propertyHeader}
         handleOnLeftIconPress={props.handleDrawerPress}
         headerStyle={styles.headerStyle}

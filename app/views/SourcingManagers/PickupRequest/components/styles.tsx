@@ -5,7 +5,6 @@ import { BLACK_COLOR, FONT_FAMILY_EXTRABOLD, FONT_FAMILY_SEMIBOLD, GRAY_COLOR, P
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: WHITE_COLOR,
     },
     headerStyle: {
         backgroundColor: PRIMARY_THEME_COLOR,
@@ -15,22 +14,20 @@ const styles = StyleSheet.create({
     },
     propertyListView: {
         flex: 1,
-        margin: normalizeSpacing(8),
+        margin: normalizeSpacing(10),
     },
     IteamView: {
         backgroundColor: WHITE_COLOR,
         marginHorizontal: normalizeSpacing(10),
         borderRadius: 10,
-        marginVertical: normalizeSpacing(8),
-        borderWidth: 0.5,
+        marginVertical: normalizeSpacing(10),
     },
     Txtview: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         borderBottomColor: GRAY_COLOR,
-        borderBottomWidth: 0.5,
-        paddingHorizontal: normalizeSpacing(4),
+        borderBottomWidth: 1,
+        padding: normalizeSpacing(4),
         marginTop: normalizeSpacing(2),
     },
     projectContainer: {

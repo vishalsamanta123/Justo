@@ -18,13 +18,16 @@ const styles = StyleSheet.create({
   },
   leadDetailsItemView: {
     flex: 1,
-    marginVertical: normalizeSpacing(10),
+    backgroundColor:WHITE_COLOR
+    //marginVertical: normalizeSpacing(10),
   },
   topDetailsView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: normalizeSpacing(10),
-    marginBottom: normalizeSpacing(10)
+    marginBottom: normalizeSpacing(10),
+    marginTop: normalizeSpacing(10),
+    
   },
   topTxtView: {
     flexDirection: 'row',
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
     marginHorizontal: normalizeSpacing(10)
   },
   headdingView: {
-    marginVertical: normalizeSpacing(10),
+    marginVertical: normalizeSpacing(15),
     alignItems: 'center'
   },
   headdingTxt: {
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: normalizeSpacing(10),
-    marginVertical: normalizeSpacing(5)
+    marginVertical: normalizeSpacing(10)
   }
 })
 
