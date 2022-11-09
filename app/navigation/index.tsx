@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 import SplashScreen from '../views/Authentication/SplashScreen';
 import OnboardingScreen from '../views/Authentication/OnboardingScreen';
 import LoginScreen from '../views/Authentication/LoginScreen';
@@ -29,7 +32,7 @@ import FollowUpScreen from '../views/FollowUp/FollowUpScreen';
 import AppointmentScreenCPSM from '../views/AppointmentWithCPSm/AppointmentScreen';
 import AppointmentDetails from '../views/AppointmentWithCPSm/AppointmentDetails';
 import AddAppointmentScreen from '../views/AppointmentWithCPSm/AddAppointment';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import PickupRequestScreen from '../views/SourcingManagers/PickupRequest';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -44,6 +47,7 @@ const DrawerComponent = () => {
       <Drawer.Screen name="SourcingManager" component={SourcingManager} />
       <Drawer.Screen name="FollowUpScreen" component={FollowUpScreen} />
       <Drawer.Screen name="AppointmentScreenCPSM" component={AppointmentScreenCPSM} />
+      <Drawer.Screen name="PickupRequest" component={PickupRequestScreen} />
     </Drawer.Navigator>
   );
 };
