@@ -29,6 +29,11 @@ import FollowUpScreen from '../views/FollowUp/FollowUpScreen';
 import AppointmentScreenCPSM from '../views/AppointmentWithCPSm/AppointmentScreen';
 import AppointmentDetails from '../views/AppointmentWithCPSm/AppointmentDetails';
 import AddAppointmentScreen from '../views/AppointmentWithCPSm/AddAppointment';
+import SettingScreen from '../views/Setting/SettingScreen';
+import ProfileScreen from '../views/Setting/ProfileScreen';
+import EditProfileScreen from '../views/Setting/EditProfileScreen';
+import ChangePasswordScreen from '../views/Setting/ChangePassword';
+import SeparateLinkScreen from '../views/Setting/SeparateLink';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
@@ -42,8 +47,10 @@ const DrawerComponent = () => {
       <Drawer.Screen name="AgencyListing" component={AgencyListingScreen} />
       <Drawer.Screen name="LeadManagementScreen" component={LeadManagementScreen} />
       <Drawer.Screen name="SourcingManager" component={SourcingManager} />
-      <Drawer.Screen name="FollowUpScreen" component={FollowUpScreen} />
-      <Drawer.Screen name="AppointmentScreenCPSM" component={AppointmentScreenCPSM} />
+      <Drawer.Screen name="FollowUpScreen" component={FollowUpScreen}  />
+      <Drawer.Screen name="AppointmentScreenCPSM" component={AppointmentScreenCPSM}  />
+      <Drawer.Screen name="SettingScreen" component={SettingScreen}  />
+      {/* <Drawer.Screen name="profile" component={ProfileScreen}  /> */}
     </Drawer.Navigator>
   );
 };
@@ -73,6 +80,7 @@ const Route = () => {
         <Stack.Screen component={DrawerComponent} name="DashboardScreenView" />
         <Stack.Screen component={PropertyDetails} name="PropertyDetails" />
 
+
         {/* Agent Management Screen */}
         <Stack.Screen name="PendingAgencyList" component={PendingAgencyListScreen} />
         <Stack.Screen name="AgencyDetails" component={AgencyDetails} />
@@ -92,8 +100,15 @@ const Route = () => {
         <Stack.Screen name="AllFollowUpScreen" component={AllFollowUpScreen} />
 
         {/* Appointment */}
-        <Stack.Screen name="AppointmentDetails" component={AppointmentDetails} />
-        <Stack.Screen name="AddAppointmentScreen" component={AddAppointmentScreen} />
+        <Stack.Screen name="AppointmentDetails" component={AppointmentDetails}  />
+        <Stack.Screen name="AddAppointmentScreen" component={AddAppointmentScreen}  />
+
+        {/* Profile Management */}
+        <Stack.Screen name="profile" component={ProfileScreen}  />
+        <Stack.Screen name="EditProfileScreen" component={EditProfileScreen}  />
+        <Stack.Screen name="changePassword" component={ChangePasswordScreen}  />
+        <Stack.Screen name="separateLink" component={SeparateLinkScreen}  />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -22,7 +22,7 @@ const Header = (props: any) => {
               source={props.leftImageSrc}
               style={[styles.imageStyle, props.leftImageIconStyle]}
             />
-          </TouchableOpacity> : null
+          </TouchableOpacity> : <View style={styles.imageStyle} />
         }
         <View style={styles.headerTextView}>
           <Text style={[styles.headerText, props.headerTextStyle]}>
@@ -44,7 +44,7 @@ const Header = (props: any) => {
                 source={props.rightSecondImageScr}
                 style={[styles.imageStyle, props.RightSecondIconStyle]}
               />
-            </TouchableOpacity> : null
+            </TouchableOpacity> : <View style={styles.imageStyle} />
           }
         </View>
       </View>

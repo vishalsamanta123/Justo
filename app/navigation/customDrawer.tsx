@@ -117,7 +117,9 @@ const customDrawer = ({ navigation }: any) => {
         <DrawerTabSection iconSource={images.report} tabTitle={strings.reportHeader} />
         <DrawerTabSection iconSource={images.chat} tabTitle={strings.chatHeader} />
         <DrawerTabSection iconSource={images.support} tabTitle={strings.supportHeader} />
-        <DrawerTabSection iconSource={images.setting} tabTitle={strings.settingHeader} />
+        <DrawerTabSection iconSource={images.setting} tabTitle={strings.settingHeader} handleDrawerNavigation={() => {
+            navigation.navigate('SettingScreen');
+          }}/>
         <DrawerTabSection
           type={'all'}
           iconSource={images.logout}
