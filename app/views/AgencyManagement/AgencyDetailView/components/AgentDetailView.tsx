@@ -19,8 +19,8 @@ const PropertyDetailView = (props: any) => {
 
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    { key: 'first', title: 'Agent Info' },
-    { key: 'second', title: 'Agent Stats' },
+    { key: 'first', title: 'Agency Info' },
+    { key: 'second', title: 'Agency Stats' },
   ]);
 
 
@@ -104,7 +104,7 @@ const PropertyDetailView = (props: any) => {
       <Header
         leftImageSrc={images.backArrow}
         rightSecondImageScr={images.notification}
-        headerText={strings.agentdetail}
+        headerText={strings.Agencydetail}
         headerStyle={styles.headerStyle}
         RightFirstIconStyle={styles.leftImageIconStyle}
         leftImageIconStyle={styles.leftImageIconStyle}
@@ -120,7 +120,7 @@ const PropertyDetailView = (props: any) => {
           renderScene={renderScene}
           onIndexChange={setIndex}
           initialLayout={{ width: layout.width }}
-
+          //pagerStyle={{backgroundColor:'red'}}
 
         />
 

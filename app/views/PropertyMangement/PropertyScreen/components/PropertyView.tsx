@@ -1,7 +1,7 @@
-import {View, Text, StatusBar, FlatList} from 'react-native';
+import { View, Text, StatusBar, FlatList } from 'react-native';
 import React, { useState } from 'react';
 import styles from './styles';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PropertyListItem from './PropertyListItem';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../../../../components/Header';
@@ -13,7 +13,7 @@ import FilterModal from '../../../../components/Modals/FilterModal';
 
 const PropertyView = (props: any) => {
   const insets = useSafeAreaInsets();
-const navigation: any = useNavigation()
+  const navigation: any = useNavigation()
   const DATA: any = [
     {
       Projectname: 'ABC',
@@ -62,6 +62,7 @@ const navigation: any = useNavigation()
       <Header
         leftImageSrc={images.menu}
         rightSecondImageScr={images.notification}
+        rightFirstImageScr={images.filter}
         headerText={strings.propertyHeader}
         handleOnLeftIconPress={props.handleDrawerPress}
         headerStyle={styles.headerStyle}
@@ -70,13 +71,13 @@ const navigation: any = useNavigation()
         statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.propertyListView}>
-        <FlatList 
+        <FlatList
           data={DATA}
           showsVerticalScrollIndicator={false}
-          renderItem={({item}) => <PropertyListItem items={item} onPressView={onPressView} />}
+          renderItem={({ item }) => <PropertyListItem items={item} onPressView={onPressView} />}
         />
       </View>
-    </View> 
+    </View>
   );
 };
 

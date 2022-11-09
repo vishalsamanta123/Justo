@@ -18,13 +18,15 @@ const styles = StyleSheet.create({
   },
   leadDetailsItemView: {
     flex: 1,
-    marginVertical: normalizeSpacing(10),
+    //marginVertical: normalizeSpacing(10),
+    backgroundColor:WHITE_COLOR
   },
   topDetailsView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: normalizeSpacing(10),
-    marginBottom: normalizeSpacing(10)
+    marginBottom: normalizeSpacing(10),
+    marginTop: normalizeSpacing(10)
   },
   topTxtView: {
     flexDirection: 'row',

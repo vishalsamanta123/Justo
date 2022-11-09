@@ -66,7 +66,7 @@ const PendingAgencyView = (props: any) => {
   ];
 
   const onPressView = () => {
-    navigation.navigate('PropertyDetails')
+    navigation.navigate('AgencyDetails')
   }
   const showpendinglist = () => {
     navigation.navigate('PendingAgencyList')

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropertyView from './components/PropertyView';
 
-const PropertyScreen = ({navigation}: any) => {
+const PropertyScreen = ({ navigation }: any) => {
   const handleDrawerPress = () => {
     navigation.toggleDrawer();
   };
