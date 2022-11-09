@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -21,6 +21,7 @@ import LeadDetails from '../views/LeadManagement/LeadDetails';
 import SourcingManager from '../views/SourcingManagers/SourcingManagersView';
 import AddNewSM from '../views/SourcingManagers/AddNewSm';
 import AllocateCP from '../views/SourcingManagers/AllocateCP';
+import SMDetails from '../views/SourcingManagers/SMDetails';
 import FollowUpDetails from '../views/FollowUp/FollowUpDetails';
 import EditFollowUp from '../views/FollowUp/FollowUpScreen/Components/EditFollowUp';
 import AllFollowUpScreen from '../views/FollowUp/AllFollowUp';
@@ -33,6 +34,7 @@ import ProfileScreen from '../views/Setting/ProfileScreen';
 import EditProfileScreen from '../views/Setting/EditProfileScreen';
 import ChangePasswordScreen from '../views/Setting/ChangePassword';
 import SeparateLinkScreen from '../views/Setting/SeparateLink';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -52,16 +54,29 @@ const DrawerComponent = () => {
     </Drawer.Navigator>
   );
 };
+
 const Route = () => {
+  const [userData, setUserData] = useState<any>([])
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
+    const data: any = await AsyncStorage.getItem('userData')
+    setUserData(JSON.parse(data))
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={screenOptions}>
-        {/* <Stack.Screen component={SplashScreen} name="SplashScreenView" />
+        <Stack.Screen component={SplashScreen} name="SplashScreenView" />
         <Stack.Screen
           component={OnboardingScreen}
           name="OnboardingScreenView"
         />
-        <Stack.Screen component={LoginScreen} name="LoginScreenView" /> */}
+        {userData?.email !== "" &&
+          <Stack.Screen component={LoginScreen} name="LoginScreenView" />
+        }
         <Stack.Screen component={DrawerComponent} name="DashboardScreenView" />
         <Stack.Screen component={PropertyDetails} name="PropertyDetails" />
 
@@ -77,6 +92,7 @@ const Route = () => {
         <Stack.Screen name="SourcingManager" component={SourcingManager} />
         <Stack.Screen name="AddNewSM" component={AddNewSM} />
         <Stack.Screen name="AllocateCP" component={AllocateCP} />
+        <Stack.Screen name="SMDetails" component={SMDetails} />
 
         {/* Follow up Screens */}
         <Stack.Screen name="FollowUpDetails" component={FollowUpDetails} />

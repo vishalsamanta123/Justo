@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, KeyboardAvoidingView, ScrollView } from "react-native";
 import React, { useState } from "react";
 import styles from "./styles";
 import images from "../../../../assets/images";
@@ -12,7 +12,7 @@ const LoginView = (props: any) => {
     setIsVisiblePassword(!isVisiblePassword);
   };
   return (
-    <View style={styles.mainContainer}>
+    <ScrollView  contentContainerStyle={styles.mainContainer}>
         <View style={styles.logoView}>
           <Image style={styles.logoImage} source={images.logoWhiteBG} />
       </View>
@@ -22,7 +22,11 @@ const LoginView = (props: any) => {
             placeholderText={"Email Address"}
             rightImgSrc={props.validEmail ? images.check : images.emailIcon}
             isSecureText={false}
-            onChangeText={props.handleEmailChange}
+            onChangeText={(val: any) => {
+              props.setLoginData({
+                ...props.loginData, email: val
+              })
+            }}
           />
         </View>
         <View style={styles.inputWrap}>
@@ -33,7 +37,11 @@ const LoginView = (props: any) => {
             }
             handleInputBtnPress={handlePasswordBtnPress}
             isSecureText={isVisiblePassword}
-            onChangeText={props.handlePasswordChange}
+            onChangeText={(val: any) => {
+              props.setLoginData({
+                ...props.loginData, pass: val
+              })
+            }}
           />
         </View>
         <TouchableOpacity style={styles.forgotTouch}>
@@ -56,7 +64,7 @@ const LoginView = (props: any) => {
           <Text style={styles.spanText}> {strings.privacyPolicy} </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

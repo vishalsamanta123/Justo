@@ -23,7 +23,7 @@ const InputField = (props: any) => {
       <View style={styles.mainContainer}>
         <TextInput
           style={[styles.input, { textAlignVertical: 'top',width: inputWidth, height: normalizeHeight(inputheight)}]}
-          onChangeText={val => props.onChangeText(val)}
+          onChangeText={(val) => props.onChangeText(val)}
           onSubmitEditing={onSubmit}
           placeholder={props.placeholderText}
           placeholderTextColor={BLACK_COLOR}

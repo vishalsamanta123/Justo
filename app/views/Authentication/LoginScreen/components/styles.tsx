@@ -7,13 +7,14 @@ import {
 } from '../../../../components/scaleFontSize';
 import {
   FONT_FAMILY_SEMIBOLD,
+  GRAY_LIGHT_COLOR,
   PRIMARY_THEME_COLOR,
 } from '../../../../components/utilities/constant';
 const {width, height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    flexGrow: 1,
   },
   logoView: {
     alignItems: 'center',
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(14),
     lineHeight: normalizeHeight(25),
     fontFamily: FONT_FAMILY_SEMIBOLD,
+    color: GRAY_LIGHT_COLOR
   },
   spanTouch: {
     // backgroundColor: 'red',
