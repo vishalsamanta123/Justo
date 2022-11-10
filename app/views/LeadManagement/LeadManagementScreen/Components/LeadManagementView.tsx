@@ -55,6 +55,7 @@ const LeadManagementView = (props: any) => {
   const insets = useSafeAreaInsets();
   const navigation: any = useNavigation()
   const [FilterisVisible, setFilterisVisible] = useState(false)
+  
   const onPressView = () => {
     navigation.navigate('LeadDetails')
   }

@@ -129,6 +129,7 @@ const AddNewSMView = (props: any) => {
                 <View style={{ marginVertical: 10, marginBottom: 20 }}>
                     <Button
                         handleBtnPress={props.onPressCreate}
+                        textTransform={null}
                         buttonText={props?.type === 'edit' ? strings.updateSM : strings.createSM} />
                 </View>
             </ScrollView>

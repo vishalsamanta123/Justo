@@ -3,9 +3,13 @@ import React from "react";
 import styles from "./Styles";
 import {
   BLACK_COLOR,
+  CALL_COLOR,
+  WHITE_COLOR,
   YELLOW_COLOR,
 } from "../../../../components/utilities/constant";
 import images from "../../../../assets/images";
+import Button from "../../../../components/Button";
+import strings from "../../../../components/utilities/Localization";
 
 const LeadManagementItem = (props: any) => {
   return (
@@ -81,10 +85,19 @@ const LeadManagementItem = (props: any) => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button} >
-          <Text style={styles.buttonTxt}>Call</Text>
-        </TouchableOpacity>
+        <Button
+          width={85}
+          height={30}
+          bgcolor={null}
+          bordercolor={CALL_COLOR}
+          borderWidth={1}
+          btnTxtcolor={CALL_COLOR}
+          buttonText={strings.call}
+          btnTxtsize={14}
+          textTransform={null}
+          border={10}
+        // handleBtnPress={() => ()}
+        />
         <TouchableOpacity style={styles.Viewbutton} onPress={() => props.onPressView(props.items)}>
           <Image
             source={images.forwardArrow}

@@ -31,14 +31,15 @@ const styles = StyleSheet.create({
   },
   Txtview: {
     flexDirection: 'row',
-    alignItems: 'center',
     borderColor: GRAY_COLOR,
     borderBottomWidth: 1,
     paddingVertical: normalizeSpacing(10),
   },
   projectContainer: {
-    flex: 3,
-    alignItems: 'flex-end',
+    flex: 2.5,
+    alignItems: 'flex-start',
+    height: '100%',
+    marginLeft: normalizeSpacing(15),
   },
   projectTxt: {
     fontSize: normalize(15),
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     color: GRAY_LIGHT_COLOR
   },
   nameContainer: {
-    flex: 3,
+    flex: 3.5,
     alignItems: 'flex-start',
   },
   nameTxt: {
@@ -57,7 +58,6 @@ const styles = StyleSheet.create({
   },
   allocatsVw: {
     marginLeft: 15,
-    marginVertical: 5,
     borderBottomWidth: 0,
   },
   allocatsBox: {

@@ -1,4 +1,5 @@
 import {
+  Image,
   ScrollView,
   StatusBar,
   Text,
@@ -19,6 +20,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import InputField from "../../../../components/InputField";
 import images from "../../../../assets/images";
 import Button from "../../../../components/Button";
+import PicturePickerModal from "../../../../components/Modals/PicturePicker";
 
 const AgentBasicInfoView = (props: any) => {
   const insets = useSafeAreaInsets();
@@ -26,7 +28,7 @@ const AgentBasicInfoView = (props: any) => {
   const [checked, setChecked] = React.useState("first");
 
   return (
-    <ScrollView style={styles.mainContainer}>
+    <ScrollView contentContainerStyle={styles.mainContainer}>
       <Header
         headerText={strings.basicInfoText}
         headerStyle={styles.headerStyle}
@@ -37,32 +39,38 @@ const AgentBasicInfoView = (props: any) => {
         statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.wrap}>
-       {/*  <Text style={styles.headingText}>{strings.basicInfoText}</Text> */}
-        {/* <View style={styles.underlineStyle} /> */}
-        <View style={styles.imageCircle}>
-          <Text>Image</Text>
-        </View>
+        <TouchableOpacity onPress={() => props.setImagePicker(true)}
+          style={styles.imageCircle}>
+          {props.agencyData.image === '' ?
+            <Text>Image</Text>
+            :
+            <Image
+              source={{ uri: props?.agencyData?.image?.path }}
+              style={styles.pickerImageVw}
+            />
+          }
+        </TouchableOpacity>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Name"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Agent Name"}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Adhar No."}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Adhar No."}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Pancard No."}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Pancard No."}
           />
         </View>
@@ -110,8 +118,8 @@ const AgentBasicInfoView = (props: any) => {
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Date of Birth"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Date of Birth"}
             rightImgSrc={images.event}
           />
@@ -119,28 +127,28 @@ const AgentBasicInfoView = (props: any) => {
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Mobile No."}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Mobile No."}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"WhatsApp No."}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"WhatsApp No."}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Email Address"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Email Address"}
           />
         </View>
-       {/*  <View style={styles.inputWrap}>
+        {/*  <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Sourcing Manager"}
             handleInputBtnPress={() => {}}

@@ -46,6 +46,8 @@ const strings = new LocalizedStrings({
     email: 'email address',
     otpVerification: 'OTP VERIFICATION',
     imagecontentHeader: 'Images',
+    cameraHeader: 'Camera',
+    galleryHeader: 'Gallery',
     videocontentHeader: 'Videos',
     cataloguecontentHeader: 'Catalogue',
     createVisit: 'CREATE VISIT',

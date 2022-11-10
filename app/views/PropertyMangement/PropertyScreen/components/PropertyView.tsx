@@ -69,6 +69,7 @@ const PropertyView = (props: any) => {
         RightFirstIconStyle={styles.RightFirstIconStyle}
         barStyle={'light-content'}
         statusBarColor={PRIMARY_THEME_COLOR}
+        handleOnRightFirstIconPress={() => props.setFilterisVisible(true)}
       />
       <View style={styles.propertyListView}>
         <FlatList
@@ -77,6 +78,7 @@ const PropertyView = (props: any) => {
           renderItem={({ item }) => <PropertyListItem items={item} onPressView={onPressView} />}
         />
       </View>
+      <FilterModal Visible={props.filterisVisible} setIsVisible={props.setFilterisVisible} />
     </View>
   );
 };

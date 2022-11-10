@@ -63,9 +63,10 @@ const styles = StyleSheet.create({
     paddingVertical: normalizeSpacing(10),
   },
   projectContainer: {
-    flex: 2,
-    alignItems: 'flex-end',
-    height: '100%'
+    flex: 2.5,
+    alignItems: 'flex-start',
+    height: '100%',
+    marginLeft: normalizeSpacing(15),
   },
   projectTxt: {
     fontSize: normalize(15),
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     color: GRAY_LIGHT_COLOR
   },
   nameContainer: {
-    flex: 4,
+    flex: 3.5,
     alignItems: 'flex-start',
   },
   nameTxt: {

@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropertyView from './components/PropertyView';
 
 const PropertyScreen = ({ navigation }: any) => {
+  const [filterisVisible, setFilterisVisible] = useState(false)
+
   const handleDrawerPress = () => {
     navigation.toggleDrawer();
   };
-  return <PropertyView handleDrawerPress={handleDrawerPress} />;
+  return <PropertyView
+    filterisVisible={filterisVisible}
+    setFilterisVisible={setFilterisVisible}
+    handleDrawerPress={handleDrawerPress}
+  />;
 };
 
 export default PropertyScreen;

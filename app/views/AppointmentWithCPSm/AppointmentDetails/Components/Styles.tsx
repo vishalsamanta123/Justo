@@ -42,15 +42,16 @@ const styles = StyleSheet.create({
   Txtview: {
     flexDirection: 'row',
     // justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     borderBottomColor: GRAY_COLOR,
     borderBottomWidth: 1,
     paddingVertical: normalizeSpacing(10),
   },
   projectContainer: {
     flex: 2.5,
-    alignItems: 'flex-end',
-    height: '100%'
+    alignItems: 'flex-start',
+    height: '100%',
+    marginLeft: normalizeSpacing(15),
   },
   projectTxt: {
     fontSize: normalize(15),

@@ -91,16 +91,13 @@ const AgencyView = (props: any) => {
         statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.propertyListView}>
-
         <View style={styles.btnView}>
-
           <TouchableOpacity
             onPress={() => onPressAddnewAgency()}
             style={[styles.button, { borderColor: BLACK_COLOR, backgroundColor: PRIMARY_THEME_COLOR }]} >
             <Text style={[styles.buttonTxt, {
               color: WHITE_COLOR
             }]}>{strings.addnewAgency}</Text>
-
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -109,10 +106,7 @@ const AgencyView = (props: any) => {
             <Text style={[styles.buttonTxt, {
               color: WHITE_COLOR
             }]}>{strings.pendingconfirm}</Text>
-
           </TouchableOpacity>
-
-
 
         </View>
         <View style={styles.propertyListViewsec}>

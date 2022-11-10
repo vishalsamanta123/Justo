@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: normalizeSpacing(10),
+    alignItems: 'flex-end',
   },
   buttonbox: {
     top: 12,
@@ -61,20 +62,7 @@ const styles = StyleSheet.create({
     height: normalizeHeight(30),
     marginLeft: normalizeSpacing(8),
     justifyContent: 'center',
-    borderWidth: 0.5,
     borderRadius: 7,
-  },
-  button: {
-    top: 5,
-    backgroundColor: WHITE_COLOR,
-    width: normalizeWidth(150),
-    height: normalizeHeight(35),
-    marginLeft: normalizeSpacing(5),
-    justifyContent: 'center',
-    //borderWidth: 0.5,
-    borderRadius: 7,
-
-
   },
   Viewbutton: {
     top: 10,

@@ -4,46 +4,43 @@ import Button from '../../../../components/Button';
 import Header from '../../../../components/Header';
 import { PRIMARY_THEME_COLOR } from '../../../../components/utilities/constant';
 import styles from './styles';
-import SourceManager from './SourceManager'
+import SourcingManagersItem from './SourcingManagersItem'
 import strings from '../../../../components/utilities/Localization';
 import ConfirmModal from '../../../../components/Modals/ConfirmModal';
+import FilterModal from '../../../../components/Modals/FilterModal';
 
 const SourcingDetailsView = (props: any) => {
     const DATA: any = [
         {
             Projectname: 'ABC',
-            Location: 'Indore',
-            rerano: '123566648',
             visitor: 123,
             siteVisit: 234,
             closeVisit: 600,
+            closingPercentage: '90%',
+            status: 'Deactive',
+        },
+        {
+            Projectname: 'ABC',
+            visitor: 123,
+            siteVisit: 234,
+            closeVisit: 600,
+            closingPercentage: '36%',
             status: 'Active'
         },
         {
             Projectname: 'ABC',
-            Location: 'Indore',
-            rerano: '123566648',
             visitor: 123,
             siteVisit: 234,
             closeVisit: 600,
+            closingPercentage: '70%',
             status: 'Deactive'
         },
         {
             Projectname: 'ABC',
-            Location: 'Indore',
-            rerano: '123566648',
             visitor: 123,
             siteVisit: 234,
             closeVisit: 600,
-            status: 'Active'
-        },
-        {
-            Projectname: 'ABC',
-            Location: 'Indore',
-            rerano: '123566648',
-            visitor: 123,
-            siteVisit: 234,
-            closeVisit: 600,
+            closingPercentage: '50%',
             status: 'Deactive'
         },
     ];
@@ -57,7 +54,7 @@ const SourcingDetailsView = (props: any) => {
                 handleOnLeftIconPress={props.handleDrawerPress}
                 headerStyle={styles.headerStyle}
                 RightFirstIconStyle={styles.RightFirstIconStyle}
-                // handleOnRightFirstIconPress={() => setFilterisVisible(true)}
+                handleOnRightFirstIconPress={() => props.setFilterisVisible(true)}
                 statusBarColor={PRIMARY_THEME_COLOR}
                 barStyle={'light-content'}
             />
@@ -66,6 +63,7 @@ const SourcingDetailsView = (props: any) => {
                     height={30}
                     width={150}
                     buttonText={strings.addNewSM}
+                    textTransform={null}
                     btnTxtsize={15}
                     handleBtnPress={() => props.handleAddNewSM()}
                 />
@@ -74,7 +72,7 @@ const SourcingDetailsView = (props: any) => {
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={DATA}
-                    renderItem={({ item }) => <SourceManager items={item}
+                    renderItem={({ item }) => <SourcingManagersItem items={item}
                         // setIsVisible={setIsVisible} onPressView={onPressView}
                         onPressEditSM={() => props.handleAddNewSM('edit')}
                         onPressAllocate={() => props.onPressAllocateCp()}
@@ -90,6 +88,9 @@ const SourcingDetailsView = (props: any) => {
                 middleTxt={strings.selectSM + ' ' + strings.transferToAllVisitor + ' SM Name ?'}
                 confirmtype={''}
             />
+            <FilterModal
+                Visible={props.filterisVisible}
+                setIsVisible={props.setFilterisVisible} />
         </View>
     )
 }

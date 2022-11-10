@@ -3,6 +3,8 @@ import React from 'react'
 import styles from './Styles'
 import strings from '../../../../components/utilities/Localization'
 import images from '../../../../assets/images'
+import Button from '../../../../components/Button'
+import { CALL_COLOR, PURPLE_COLOR } from '../../../../components/utilities/constant'
 
 const MyAppointment = (props: any) => {
   return (
@@ -40,21 +42,35 @@ const MyAppointment = (props: any) => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        { props.items.Status !== 'Confirmed' && props.items.Status !== 'Visitor not interested' ?
-        (<TouchableOpacity
-          style={styles.button}
-        // onPress={() => props.onPressEdit()}
-        >
-          <Text style={styles.buttonTxt}>Edit</Text>
-        </TouchableOpacity>)
-        : null
+        {props.items.Status !== 'Confirmed' && props.items.Status !== 'Visitor not interested' ?
+          (
+            <Button
+              width={80}
+              height={30}
+              bgcolor={null}
+              bordercolor={PURPLE_COLOR}
+              borderWidth={1}
+              btnTxtcolor={PURPLE_COLOR}
+              buttonText={strings.edit}
+              btnTxtsize={14}
+              border={10}
+            // handleBtnPress={() => props.onPressEdit()}
+            />
+          )
+          : null
         }
-        <TouchableOpacity
-          style={styles.button}
-        // onPress={() => props.onPressAllFollowUp()}
-        >
-          <Text style={styles.buttonTxt}>{strings.call}</Text>
-        </TouchableOpacity>
+        <Button
+          width={80}
+          height={30}
+          bgcolor={null}
+          bordercolor={CALL_COLOR}
+          borderWidth={1}
+          btnTxtcolor={CALL_COLOR}
+          buttonText={strings.call}
+          btnTxtsize={14}
+          border={10}
+        // handleBtnPress={() => props.onPressAllFollowUp()}
+        />
         <TouchableOpacity style={styles.Viewbutton} onPress={() => props.onPressView(props.items)}>
           <Image
             source={images.forwardArrow}
