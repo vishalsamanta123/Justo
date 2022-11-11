@@ -11,8 +11,10 @@ const strings = new LocalizedStrings({
     registernow: 'register now',
     propertyHeader: 'Property',
     propertyManagementHeader: 'Property Management',
+    closingManagerHeader: 'Closing Manager',
     appointmentHeader: 'Appointment',
     readytoBookHeader: 'Ready to Book',
+    bookingRequestHead: 'Booking Request',
     recoveryHeader: 'Recovery',
     saleToolHeader: 'Sales tools',
     agencyHeader: 'Agency(CP)',
@@ -24,6 +26,7 @@ const strings = new LocalizedStrings({
     supportHeader: 'Support',
     supportForumHeader: 'Support Forum',
     leaderBoardHeader: 'LeaderBoard',
+    bookingListHeader: 'Booking List',
     settingHeader: 'Setting',
     logout: 'LogOut',
     versionText: 'version',
@@ -33,6 +36,8 @@ const strings = new LocalizedStrings({
     byCreating: 'By Signing up you agree to our',
     termsAndCondition: 'Terms & Conditions',
     and: 'and',
+    view: 'View',
+    status: 'Status',
     privacyPolicy: 'Privacy Policy',
     ofJusto: 'of Justo.',
     basicInfoText: 'Basic Information',
@@ -55,6 +60,7 @@ const strings = new LocalizedStrings({
     male: "Male",
     female: "Female",
     next: 'next',
+    listOfall: 'List of all',
     addnewagent: 'Add new Agent',
     agentdetail: 'Agent Detail',
     logInText: 'LOG IN',
@@ -66,7 +72,10 @@ const strings = new LocalizedStrings({
     updateProfile: 'UPDATE PROFILE',
     editProfile: 'Edit Profile',
     changePassword: 'Change Password',
+    changeLink: 'Change Link',
     copyLink: 'Copy Link',
+    dropLocation: 'Drop Location',
+    selectNewCloseManager: 'Select New Closing Manager',
 
 
     // common strings
@@ -100,7 +109,7 @@ const strings = new LocalizedStrings({
     addTarget: "Add target",
     SMDetails: "SM Detail",
     selectSM: "Select SM",
-    transferToAllVisitor:'for transfer to all visitors of',
+    transferToAllVisitor: 'for transfer to all visitors of',
 
     /*** agency ***/
     addnewAgency: 'Add new Agency',
@@ -129,6 +138,7 @@ const strings = new LocalizedStrings({
     addnewvisitor: 'Add New Visitor',
     editVisitor: 'Update Visitor',
     visitordetails: 'Visitor Details',
+    visitorAppointmentdetails: 'Visitor Appointment Details',
     searchvisitor: 'Search Visitor',
     propertyrequire: 'Property Require',
     createVisitor: 'Create Visitor',

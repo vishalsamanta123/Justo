@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     color: GRAY_LIGHT_COLOR
   },
   placeholderStyle: {
-    fontSize: normalize(18),
     color: GRAY_LIGHT_COLOR,
     fontFamily: FONT_FAMILY_SEMIBOLD,
   },
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
     padding: normalizeSpacing(Isios ? 15 : 5),
     borderColor: GRAY_COLOR,
   },

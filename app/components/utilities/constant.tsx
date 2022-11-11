@@ -16,6 +16,7 @@ export const BLUE_COLOR = '#0493d6';
 export const GRAY_COLOR = '#bdbbbb';
 export const TABBAR_COLOR = '#F5CB44';
 export const GRAY_LIGHT_COLOR = '#757070';
+export const BG_MAIN_COLOUR = '#eeeef1';
 export const PURPLE_COLOR = '#b93cff'; // for Edit button
 export const GOLDEN_COLOR = '#E4D00A'; // for subscribe
 export const GREEN_COLOR = '#008000'; // For Active button
