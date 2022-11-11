@@ -4,6 +4,7 @@ import SourcingDetailsView from './components/SourcingManager'
 
 const SourcingDetailScreen = ({ navigation }: any) => {
     const [status, setStatus] = useState(false)
+    const [filterisVisible, setFilterisVisible] = useState(false)
     const handleDrawerPress = () => {
         navigation.toggleDrawer();
     };
@@ -23,6 +24,8 @@ const SourcingDetailScreen = ({ navigation }: any) => {
     return (
         <SourcingDetailsView
             handleDrawerPress={handleDrawerPress}
+            filterisVisible={filterisVisible}
+            setFilterisVisible={setFilterisVisible}
             handleAddNewSM={handleAddNewSM}
             onPressAllocateCp={onPressAllocateCp}
             onPressViews={onPressViews}

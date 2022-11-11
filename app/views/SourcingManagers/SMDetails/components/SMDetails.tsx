@@ -9,6 +9,7 @@ import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SmInfoView from './SMInfo';
 import StatsView from './StatsViews';
+import Button from '../../../../components/Button';
 
 const SMDetailsView = (props: any) => {
     const DATAINFO: any =
@@ -119,6 +120,16 @@ const SMDetailsView = (props: any) => {
                     renderScene={renderScene}
                     onIndexChange={setIndex}
                     initialLayout={{ width: layout.width }}
+                />
+            </View>
+            <View style={{ marginVertical: 12, alignItems: 'flex-end', }}>
+                <Button
+                    width={150}
+                    height={40}
+                    btnTxtsize={16}
+                    textTransform={null}
+                    buttonText={strings.cpAllocation}
+                    handleBtnPress={() => props.handleCpAllocation()}
                 />
             </View>
         </View>

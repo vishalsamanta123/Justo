@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {normalize, normalizeHeight, normalizeSpacing, normalizeWidth} from '../../../../components/scaleFontSize';
+import { StyleSheet } from 'react-native';
+import { normalize, normalizeHeight, normalizeSpacing, normalizeWidth } from '../../../../components/scaleFontSize';
 import {
   BLACK_COLOR,
   FONT_FAMILY_EXTRABOLD,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     color: BLACK_COLOR,
   },
   mainContainer: {
-    flex: 1,
+    flexGrow: 1,
   },
   wrap: {
     flex: 1,
@@ -46,6 +46,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  pickerImageVw: {
+    width: normalizeWidth(100),
+    height: normalizeHeight(100),
+    borderRadius: 50,
+  },
   inputWrap: {
     marginTop: normalizeSpacing(30),
   },
@@ -66,10 +71,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: normalizeSpacing(10)
   },
-  radioTxt : {
+  radioTxt: {
     fontSize: normalize(18),
   },
-  workingView : {
+  workingView: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -86,14 +86,15 @@ const AllocateCPView = (props: any) => {
                         height={40}
                         btnTxtsize={16}
                         buttonText={strings.cpAllocation}
-                        handleBtnPress={() => props.setCPDetails(true)}
+                        textTransform={null}
+                        handleBtnPress={() => props.handleAddTarget()}
                     />
                 </View>
             </View>
             <AllocateCPDetails
                 Visible={props.CPDetails}
                 setIsVisible={props.setCPDetails}
-                handleAddTarget={() => props.handleAddTarget()}
+                handleAddTarget={() => props.setCPDetails(false)}
             />
         </View>
     )
