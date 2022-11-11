@@ -32,7 +32,7 @@ const ConfirmModal = (props: any) => {
         <View style={styles.mainContainer}>
           <View style={styles.topContainer}>
             <View />
-            <Text style={styles.topTxt}>{(props.stringshow) ? props.stringshow : strings.confirmation}</Text>
+            <Text style={styles.topTxt}>{props.stringshow ? props.stringshow : strings.confirmation}</Text>
             <View>
               <TouchableOpacity onPress={() => props.setIsVisible(false)}>
                 <Image source={images.close} style={styles.closeIcon} />
@@ -43,30 +43,20 @@ const ConfirmModal = (props: any) => {
           {(props.confirmtype === 'CONFIRMATION') ?
             <>
               <View style={styles.borderView} />
-
               <View style={styles.conteconfirm}>
-
                 <View style={styles.MiddleContainer}>
                   <Text style={styles.bottomTxt}>{props.textshow}</Text>
                 </View>
-
                 <View style={{ marginVertical: 10, flexDirection: 'row' }}>
-
                   <View style={styles.btnview}>
                     <Button buttonText={strings.no} width={120} height={40} handleBtnPress={() => props.setIsVisible(false)} />
                   </View>
-
                   <View style={styles.btnview}>
                     <Button buttonText={strings.yes} width={120} height={40} handleBtnPress={() => props.setIsVisible(false)} />
                   </View>
-
                 </View>
-
               </View>
-
-
             </>
-
             :
             <>
               <View style={styles.borderView} />
@@ -83,7 +73,7 @@ const ConfirmModal = (props: any) => {
                   maxHeight={300}
                   labelField="label"
                   valueField="value"
-                  placeholder="Select Reasone"
+                  placeholder={props.placeholder ? props.placeholder : "Select Reasone"}
                   value={value}
                   onChange={(item) => {
                     setValue(item.value);
@@ -94,7 +84,7 @@ const ConfirmModal = (props: any) => {
               <View style={{ marginVertical: 10 }}>
                 <Button
                   handleBtnPress={() => props.setIsVisible(false)}
-                  buttonText={strings.Confirm} />
+                  buttonText={props.doneBttnTxt ? props.doneBttnTxt : strings.Confirm} />
               </View>
             </>
 

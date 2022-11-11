@@ -19,6 +19,7 @@ const Button = (props: any) => {
     btnTxtcolor = WHITE_COLOR,
     btnTxtsize = 20,
     textTransform = "capitalize",
+    marginTop = 0,
     rightImage,
   } = props;
   return (
@@ -36,6 +37,7 @@ const Button = (props: any) => {
             // flexDirection: "row",
             // alignItems: "center",
             marginHorizontal: 10,
+            marginTop: normalize(marginTop)
           },
         ]}
         onPress={props.handleBtnPress}

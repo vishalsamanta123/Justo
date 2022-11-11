@@ -165,7 +165,12 @@ const AgentBasicInfoView = (props: any) => {
           </TouchableOpacity>
         </View>
         <View>
-          <Button handleBtnPress={props.onPressNext} rightImage={images.forwardArrow} buttonText={strings.next} textTransform={"uppercase"} />
+          <Button
+            handleBtnPress={(type: any) => props.onPressNext(1)}
+            rightImage={images.forwardArrow}
+            buttonText={strings.next}
+            textTransform={"uppercase"}
+          />
         </View>
       </View>
     </ScrollView>

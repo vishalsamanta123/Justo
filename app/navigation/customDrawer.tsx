@@ -12,6 +12,7 @@ const customDrawer = ({ navigation }: any) => {
   const isDrawerOpen = useDrawerStatus() === 'open';
   const insets = useSafeAreaInsets()
   const [userData, setUserData] = useState<any>([])
+  console.log('userData: ', userData);
   useEffect(() => {
     fetchData()
   }, [])
@@ -83,20 +84,34 @@ const customDrawer = ({ navigation }: any) => {
           handleDrawerNavigation={() => { navigation.navigate('DashboardScreen') }}
         />
         <DrawerTabSection
-          type={'sourcinghead,sourcingmanager'}
+          type={'closinghead'}
+          iconSource={images.property}
+          tabTitle={strings.closingManagerHeader}
+        />
+        <DrawerTabSection
+          type={'sourcinghead,sourcingmanager,closinghead'}
           iconSource={images.property}
           tabTitle={strings.propertyManagementHeader}
           handleDrawerNavigation={() => { navigation.navigate('PropertyScreenView') }}
         />
         <DrawerTabSection
-          type={'closingmanager'}
+          type={'closingmanager,closinghead'}
           iconSource={images.property}
           tabTitle={strings.appointmentHeader}
+          handleDrawerNavigation={() => { navigation.navigate('Appointments') }}
         />
         <DrawerTabSection
-          type={'closingmanager'}
-          iconSource={images.property}
-          tabTitle={strings.readytoBookHeader}
+          type={'postsales,closinghead,closingmanager'}
+          iconSource={images.lead}
+          tabTitle={userData?.type === 'closinghead' || 'closingmanager' ?
+            strings.readytoBookHeader : strings.bookingRequestHead}
+          handleDrawerNavigation={() => { navigation.navigate('BookingList') }}
+        />
+        <DrawerTabSection
+          type={'postsales'}
+          iconSource={images.lead}
+          tabTitle={strings.bookingRequestHead}
+          handleDrawerNavigation={() => { navigation.navigate('BookingList') }}
         />
         <DrawerTabSection
           type={'sourcinghead'}
@@ -117,13 +132,13 @@ const customDrawer = ({ navigation }: any) => {
           handleDrawerNavigation={() => { navigation.navigate('LeadManagementScreen') }}
         />
         <DrawerTabSection
-          type={'sourcinghead,sourcingmanager,closingmanager'}
+          type={'sourcinghead,sourcingmanager,closingmanager,closinghead'}
           iconSource={images.event}
           tabTitle={strings.followupHeader}
           handleDrawerNavigation={() => { navigation.navigate('FollowUpScreen'); }}
         />
         <DrawerTabSection
-          type={'closingmanager'}
+          type={'closingmanager,closinghead'}
           iconSource={images.property}
           tabTitle={strings.recoveryHeader}
         />
@@ -145,17 +160,17 @@ const customDrawer = ({ navigation }: any) => {
           handleDrawerNavigation={() => { navigation.navigate('PickupRequest'); }}
         />
         {/* <DrawerTabSection
-          type={'sourcingmanager,closingmanager'}
+          type={'sourcingmanager,closingmanager,closinghead'}
           iconSource={images.report}
           tabTitle={strings.reportHeader}
         /> */}
         <DrawerTabSection
-          type={'sourcingmanager,closingmanager'}
+          type={'sourcingmanager,closingmanager,closinghead'}
           iconSource={images.chat}
           tabTitle={strings.chatHeader}
         />
         <DrawerTabSection
-          type={'sourcingmanager,closingmanager'}
+          type={'sourcingmanager,closingmanager,closinghead'}
           iconSource={images.support}
           tabTitle={strings.supportForumHeader}
         />
@@ -170,7 +185,7 @@ const customDrawer = ({ navigation }: any) => {
           tabTitle={strings.supportHeader}
         /> */}
         <DrawerTabSection
-          type={'closingmanager'}
+          type={'closingmanager,closinghead'}
           iconSource={images.setting}
           tabTitle={strings.saleToolHeader}
         />
@@ -181,10 +196,14 @@ const customDrawer = ({ navigation }: any) => {
         />
         <DrawerTabSection iconSource={images.report} tabTitle={strings.reportHeader} />
         <DrawerTabSection iconSource={images.chat} tabTitle={strings.chatHeader} />
-        <DrawerTabSection iconSource={images.support} tabTitle={strings.supportHeader} />
-        <DrawerTabSection iconSource={images.setting} tabTitle={strings.settingHeader} handleDrawerNavigation={() => {
+        {/* <DrawerTabSection
+          type={'closinghead'}
+          iconSource={images.support} tabTitle={strings.supportHeader} /> */}
+        <DrawerTabSection
+          type={'all'}
+          iconSource={images.setting} tabTitle={strings.settingHeader} handleDrawerNavigation={() => {
             navigation.navigate('SettingScreen');
-          }}/>
+          }} />
         <DrawerTabSection
           type={'all'}
           iconSource={images.logout}

@@ -15,14 +15,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Button from "../../../../components/Button";
 import Header from "../../../../components/Header";
 
-const AgentBankInfo = ({ navigation }: any) => {
+const AgentBankInfo = (props: any) => {
   const insets = useSafeAreaInsets();
-  const onPressBack = () => {
-    navigation.goBack()
-  }
-  const onPressCreateAgent = () => {
-    navigation.navigate('AgentListing')
-  }
   return (
     <ScrollView style={styles.mainContainer}>
       <Header
@@ -30,7 +24,7 @@ const AgentBankInfo = ({ navigation }: any) => {
         headerStyle={styles.headerStyle}
         headerTextStyle={styles.headerTextStyle}
         leftImageSrc={images.backArrow}
-        handleOnLeftIconPress={onPressBack}
+        handleOnLeftIconPress={() => props.onPressNext(0)}
         barStyle={'light-content'}
         statusBarColor={PRIMARY_THEME_COLOR}
       />
@@ -147,7 +141,7 @@ const AgentBankInfo = ({ navigation }: any) => {
         </View>
         <View style={{ marginTop: 20 }}>
           <Button
-            handleBtnPress={() => onPressCreateAgent()}
+            handleBtnPress={(type: any) => props.onPressNext(2)}
             buttonText={strings.createAgent}
             textTransform={"uppercase"}
           />
