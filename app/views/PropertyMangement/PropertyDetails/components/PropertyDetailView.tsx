@@ -3,9 +3,13 @@ import React from "react";
 import Header from "../../../../components/Header";
 import {
   BLACK_COLOR,
+  GOLDEN_COLOR,
   GRAY_COLOR,
+  GREEN_COLOR,
   PRIMARY_THEME_COLOR,
   PRIMARY_THEME_COLOR_DARK,
+  RED_COLOR,
+  WHITE_COLOR,
   YELLOW_COLOR,
 } from "../../../../components/utilities/constant";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -20,13 +24,13 @@ const PropertyDetailView = (props: any) => {
   const insets = useSafeAreaInsets();
   const navigation: any = useNavigation();
   const DATA: any = {
-    Projectname: props.data.Projectname,
-    Location: props.data.Location,
-    visitor: props.data.visitor,
-    siteVisit: props.data.siteVisit,
-    closeVisit: props.data.closeVisit,
-    status: props.data.status,
-    createddate: props.data.createddate,
+    Projectname: props?.data?.Projectname,
+    Location: props?.data?.Location,
+    visitor: props?.data?.visitor,
+    siteVisit: props?.data?.siteVisit,
+    closeVisit: props?.data?.closeVisit,
+    status: props?.data?.status,
+    createddate: props?.data?.createddate,
     propertyType: "Flat",
     startDate: "11/10/2022",
     EndDate: "11/10/2022",
@@ -37,17 +41,11 @@ const PropertyDetailView = (props: any) => {
   };
 
   const onpresContent = (name: any) => {
+    console.log('name: ', name);
     navigation.navigate(name);
   };
   return (
     <View style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: PRIMARY_THEME_COLOR_DARK,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={"light-content"} />
       <Header
         leftImageSrc={images.backArrow}
         rightSecondImageScr={images.notification}
@@ -56,6 +54,8 @@ const PropertyDetailView = (props: any) => {
         RightFirstIconStyle={styles.leftImageIconStyle}
         leftImageIconStyle={styles.leftImageIconStyle}
         handleOnLeftIconPress={props.handleBackPress}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.propertyListView}>
         <PropertyDetailItem items={DATA} onpresContent={onpresContent} />
@@ -65,33 +65,31 @@ const PropertyDetailView = (props: any) => {
           buttonText={
             DATA.status == "confirmatin Pending"
               ? strings.active
-              : DATA.status == "Subscribe"
-              ? strings.unsubscribe
-              : strings.subscribe
+              : DATA.status === "Subscribe"
+                ? strings.unsubscribe
+                : strings.subscribe
           }
           width={150}
           height={45}
-          bgcolor={""}
+          bgcolor={null}
           bordercolor={
-            DATA.status == "confirmatin Pending"
-              ? BLACK_COLOR
-              : DATA.status == "Subscribe"
-              ? "red"
-              : YELLOW_COLOR
+            DATA.status === "confirmatin Pending"
+              ? GREEN_COLOR
+              : DATA.status === "Subscribe"
+                ? RED_COLOR
+                : GOLDEN_COLOR
           }
           borderWidth={1.5}
-          btnTxtcolor={
-            DATA.status == "confirmatin Pending"
-              ? BLACK_COLOR
-              : DATA.status == "Subscribe"
-              ? "red"
-              : YELLOW_COLOR
-          }
+          btnTxtcolor={DATA.status == "confirmatin Pending"
+            ? GREEN_COLOR
+            : DATA.status == "Subscribe"
+              ? RED_COLOR
+              : GOLDEN_COLOR}
           btnTxtsize={15}
           textTransform={"uppercase"}
         />
         {DATA.status !== "confirmatin Pending" &&
-        DATA.status !== "Unsubscribe" ? (
+          DATA.status !== "Unsubscribe" ? (
           <Button
             buttonText={strings.createVisit}
             width={150}

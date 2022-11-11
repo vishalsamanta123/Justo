@@ -8,44 +8,33 @@ import {
 import React from "react";
 import images from "../../../../assets/images";
 import InputField from "../../../../components/InputField";
-import { WHITE_COLOR } from "../../../../components/utilities/constant";
+import { PRIMARY_THEME_COLOR, WHITE_COLOR } from "../../../../components/utilities/constant";
 import strings from "../../../../components/utilities/Localization";
 import styles from "./styles";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Button from "../../../../components/Button";
 import Header from "../../../../components/Header";
 
-const AgentBankInfo = ({navigation}: any) => {
+const AgentBankInfo = (props: any) => {
   const insets = useSafeAreaInsets();
-  const onPressBack = () => {
-    navigation.goBack()
-  }
-  const onPressCreateAgent = () => {
-    navigation.navigate('AgentListing')
-  }
   return (
     <ScrollView style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: WHITE_COLOR,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={"light-content"} />
       <Header
         headerText={strings.userbankinfo}
         headerStyle={styles.headerStyle}
         headerTextStyle={styles.headerTextStyle}
         leftImageSrc={images.backArrow}
-        handleOnLeftIconPress={onPressBack}
+        handleOnLeftIconPress={() => props.onPressNext(0)}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.wrap}>
-       
+
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"RERA Certificat No."}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"RERA Certificat No."}
           />
         </View>
@@ -54,8 +43,8 @@ const AgentBankInfo = ({navigation}: any) => {
             inputWidth={"60%"}
             btnWidth={"30%"}
             browse={"browse"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"RERA Certificat"}
           />
           <TouchableOpacity
@@ -76,8 +65,8 @@ const AgentBankInfo = ({navigation}: any) => {
             inputWidth={"60%"}
             btnWidth={"30%"}
             browse={"browse"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Propidership Declaration Letter"}
           />
           <TouchableOpacity
@@ -99,32 +88,32 @@ const AgentBankInfo = ({navigation}: any) => {
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Bank Name"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Bank Name"}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Branch Name"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Branch Name"}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Account No."}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Account No."}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"IFSC Code"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"IFSC Code"}
           />
         </View>
@@ -133,8 +122,8 @@ const AgentBankInfo = ({navigation}: any) => {
             inputWidth={"60%"}
             btnWidth={"30%"}
             browse={"browse"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Cancel Cheaque"}
           />
           <TouchableOpacity
@@ -150,9 +139,9 @@ const AgentBankInfo = ({navigation}: any) => {
             <Text>browse</Text>
           </TouchableOpacity>
         </View>
-        <View style={{marginTop: 20}}>
+        <View style={{ marginTop: 20 }}>
           <Button
-            handleBtnPress={()=>onPressCreateAgent()}
+            handleBtnPress={(type: any) => props.onPressNext(2)}
             buttonText={strings.createAgent}
             textTransform={"uppercase"}
           />

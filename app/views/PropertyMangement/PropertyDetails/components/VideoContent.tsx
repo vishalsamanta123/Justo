@@ -2,7 +2,7 @@ import { View, Text, StatusBar, FlatList, Image } from 'react-native'
 import React from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './styles';
-import { PRIMARY_THEME_COLOR_DARK } from '../../../../components/utilities/constant';
+import { PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK } from '../../../../components/utilities/constant';
 import Header from '../../../../components/Header';
 import images from '../../../../assets/images';
 import strings from '../../../../components/utilities/Localization';
@@ -16,13 +16,6 @@ const VideoContent = ({navigation}: any) => {
   };
   return (
     <View style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: PRIMARY_THEME_COLOR_DARK,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={"light-content"} />
       <Header
         leftImageSrc={images.backArrow}
         rightSecondImageScr={images.notification}
@@ -31,6 +24,8 @@ const VideoContent = ({navigation}: any) => {
         RightFirstIconStyle={styles.leftImageIconStyle}
         leftImageIconStyle={styles.leftImageIconStyle}
         handleOnLeftIconPress={handleBackPress}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View>
         <FlatList data={DATA}

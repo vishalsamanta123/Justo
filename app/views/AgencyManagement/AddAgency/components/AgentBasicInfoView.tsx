@@ -1,4 +1,5 @@
 import {
+  Image,
   ScrollView,
   StatusBar,
   Text,
@@ -19,6 +20,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import InputField from "../../../../components/InputField";
 import images from "../../../../assets/images";
 import Button from "../../../../components/Button";
+import PicturePickerModal from "../../../../components/Modals/PicturePicker";
 
 const AgentBasicInfoView = (props: any) => {
   const insets = useSafeAreaInsets();
@@ -26,48 +28,49 @@ const AgentBasicInfoView = (props: any) => {
   const [checked, setChecked] = React.useState("first");
 
   return (
-    <ScrollView style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: WHITE_COLOR,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={"light-content"} />
+    <ScrollView contentContainerStyle={styles.mainContainer}>
       <Header
         headerText={strings.basicInfoText}
         headerStyle={styles.headerStyle}
         headerTextStyle={styles.headerTextStyle}
         leftImageSrc={images.backArrow}
         handleOnLeftIconPress={props.onPressBack}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
       />
       <View style={styles.wrap}>
-       {/*  <Text style={styles.headingText}>{strings.basicInfoText}</Text> */}
-        {/* <View style={styles.underlineStyle} /> */}
-        <View style={styles.imageCircle}>
-          <Text>Image</Text>
-        </View>
+        <TouchableOpacity onPress={() => props.setImagePicker(true)}
+          style={styles.imageCircle}>
+          {props.agencyData.image === '' ?
+            <Text>Image</Text>
+            :
+            <Image
+              source={{ uri: props?.agencyData?.image?.path }}
+              style={styles.pickerImageVw}
+            />
+          }
+        </TouchableOpacity>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Name"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Agent Name"}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Adhar No."}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Adhar No."}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Pancard No."}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Pancard No."}
           />
         </View>
@@ -115,8 +118,8 @@ const AgentBasicInfoView = (props: any) => {
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Date of Birth"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Date of Birth"}
             rightImgSrc={images.event}
           />
@@ -124,28 +127,28 @@ const AgentBasicInfoView = (props: any) => {
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Mobile No."}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Mobile No."}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"WhatsApp No."}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"WhatsApp No."}
           />
         </View>
         <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Email Address"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
+            handleInputBtnPress={() => { }}
+            onChangeText={() => { }}
             headingText={"Email Address"}
           />
         </View>
-       {/*  <View style={styles.inputWrap}>
+        {/*  <View style={styles.inputWrap}>
           <InputField
             placeholderText={"Sourcing Manager"}
             handleInputBtnPress={() => {}}
@@ -162,7 +165,12 @@ const AgentBasicInfoView = (props: any) => {
           </TouchableOpacity>
         </View>
         <View>
-          <Button handleBtnPress={props.onPressNext} rightImage={images.forwardArrow} buttonText={strings.next} textTransform={"uppercase"} />
+          <Button
+            handleBtnPress={(type: any) => props.onPressNext(1)}
+            rightImage={images.forwardArrow}
+            buttonText={strings.next}
+            textTransform={"uppercase"}
+          />
         </View>
       </View>
     </ScrollView>

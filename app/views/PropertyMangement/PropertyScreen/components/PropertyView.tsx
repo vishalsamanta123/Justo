@@ -1,19 +1,19 @@
-import {View, Text, StatusBar, FlatList} from 'react-native';
+import { View, Text, StatusBar, FlatList } from 'react-native';
 import React, { useState } from 'react';
 import styles from './styles';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PropertyListItem from './PropertyListItem';
 import { useNavigation } from '@react-navigation/native';
 import Header from '../../../../components/Header';
 import images from '../../../../assets/images';
 import strings from '../../../../components/utilities/Localization';
 // import ConfirmModal from '../../../../components/Modals/ConfirmModal';
-import { PRIMARY_THEME_COLOR_DARK } from '../../../../components/utilities/constant';
+import { PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK } from '../../../../components/utilities/constant';
 import FilterModal from '../../../../components/Modals/FilterModal';
 
 const PropertyView = (props: any) => {
   const insets = useSafeAreaInsets();
-const navigation: any = useNavigation()
+  const navigation: any = useNavigation()
   const DATA: any = [
     {
       Projectname: 'ABC',
@@ -54,35 +54,32 @@ const navigation: any = useNavigation()
   ];
 
   const onPressView = (items: any) => {
-    console.log("🚀 ~ items", items)
     navigation.navigate('PropertyDetails', items)
   }
 
   return (
     <View style={styles.mainContainer}>
-      <View
-        style={{
-          backgroundColor: PRIMARY_THEME_COLOR_DARK,
-          height: insets.top,
-        }}
-      />
-      <StatusBar barStyle={'light-content'} />
       <Header
         leftImageSrc={images.menu}
         rightSecondImageScr={images.notification}
+        rightFirstImageScr={images.filter}
         headerText={strings.propertyHeader}
         handleOnLeftIconPress={props.handleDrawerPress}
         headerStyle={styles.headerStyle}
         RightFirstIconStyle={styles.RightFirstIconStyle}
+        barStyle={'light-content'}
+        statusBarColor={PRIMARY_THEME_COLOR}
+        handleOnRightFirstIconPress={() => props.setFilterisVisible(true)}
       />
       <View style={styles.propertyListView}>
-        <FlatList 
+        <FlatList
           data={DATA}
           showsVerticalScrollIndicator={false}
-          renderItem={({item}) => <PropertyListItem items={item} onPressView={onPressView} />}
+          renderItem={({ item }) => <PropertyListItem items={item} onPressView={onPressView} />}
         />
       </View>
-    </View> 
+      <FilterModal Visible={props.filterisVisible} setIsVisible={props.setFilterisVisible} />
+    </View>
   );
 };
 

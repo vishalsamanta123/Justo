@@ -8,12 +8,19 @@ import {
 import {
   BLACK_COLOR,
   FONT_FAMILY_EXTRABOLD,
+  FONT_FAMILY_REGULAR,
   FONT_FAMILY_SEMIBOLD,
   GRAY_COLOR,
+  PRIMARY_THEME_COLOR,
   WHITE_COLOR,
 } from "../utilities/constant";
 
 const styles = StyleSheet.create({
+  fullContainer: {
+    marginLeft: 0,
+    width: '100%',
+    marginBottom: 0,
+  },
   mainContainer: {
     backgroundColor: WHITE_COLOR,
     borderRadius: 5,
@@ -87,7 +94,7 @@ const styles = StyleSheet.create({
     height: 20,
   },
   inputWrap: {
-    marginTop: normalizeSpacing(30),
+    marginTop: normalizeSpacing(20),
   },
 
   btnview: {
@@ -96,8 +103,52 @@ const styles = StyleSheet.create({
   },
   conteconfirm: {
     flexDirection: "column",
-    
   },
+  cancelModalVw: {
+    position: 'absolute',
+    alignSelf: 'center',
+    top: -30,
+    backgroundColor: PRIMARY_THEME_COLOR,
+    borderTopRightRadius: 50,
+    borderTopLeftRadius: 50,
+    paddingHorizontal: normalize(14),
+    paddingVertical: normalize(5)
+  },
+  pickerModal: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  pickerModalCon: {
+    backgroundColor: PRIMARY_THEME_COLOR,
+    paddingHorizontal: 10,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    paddingVertical: normalize(20)
+  },
+  straightVw: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  componentsVw: {
+    paddingVertical: normalize(5),
+    borderWidth: 1,
+    borderColor: WHITE_COLOR,
+    alignItems: 'center',
+    marginHorizontal: normalize(10),
+    borderRadius: 10,
+    width: normalizeWidth(70)
+  },
+  componentsImg: {
+    width: normalizeWidth(24),
+    height: normalizeHeight(24),
+    tintColor: WHITE_COLOR,
+  },
+  componentsTxt: {
+    fontSize: normalize(14),
+    color: WHITE_COLOR,
+    fontFamily: FONT_FAMILY_REGULAR
+  }
 });
 
 export default styles;

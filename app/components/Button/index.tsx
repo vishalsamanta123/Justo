@@ -19,7 +19,8 @@ const Button = (props: any) => {
     btnTxtcolor = WHITE_COLOR,
     btnTxtsize = 20,
     textTransform = "capitalize",
-    rightImage
+    marginTop = 0,
+    rightImage,
   } = props;
   return (
     <View style={styles.mainContainer}>
@@ -33,9 +34,10 @@ const Button = (props: any) => {
             borderRadius: border,
             borderColor: bordercolor,
             borderWidth: borderWidth,
-            flexDirection: "row",
-            alignItems: "center",
+            // flexDirection: "row",
+            // alignItems: "center",
             marginHorizontal: 10,
+            marginTop: normalize(marginTop)
           },
         ]}
         onPress={props.handleBtnPress}
@@ -49,12 +51,14 @@ const Button = (props: any) => {
               textTransform: textTransform,
             }}
           >
-            {props.buttonText}
+            {props.buttonText ? props.buttonText : "Button"}
           </Text>
         </View>
-        <View style={styles.rightImageView}>
-          <Image style={{ tintColor: "#fff", width: 40, height: 40 }} source={rightImage} />
-        </View>
+        {rightImage ?
+          <View style={styles.rightImageView}>
+            <Image style={{ tintColor: "#fff", width: 40, height: 40 }} source={rightImage} />
+          </View> : null
+        }
       </TouchableOpacity>
     </View>
   );

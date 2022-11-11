@@ -28,6 +28,9 @@ const images = {
   close: require('./close.png'),
   downErrow: require('./downErrow.png'),
   buildings: require('./buildings.jpeg'),
+  timer: require('./timer.png'),
+  dummyUser: require('./dummyUser.jpeg'),
+  editIcon: require('./editIcon.png'),
 };
 
 export default images;
