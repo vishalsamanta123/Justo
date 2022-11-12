@@ -39,9 +39,14 @@ import EditProfileScreen from '../views/Setting/EditProfileScreen';
 import ChangePasswordScreen from '../views/Setting/ChangePassword';
 import SeparateLinkScreen from '../views/Setting/SeparateLink';
 import BookingListScreen from '../views/BookingManagement/BookingList';
+import BookingDetailsScreen from '../views/BookingManagement/BookingDetails';
 import AppointmentsScreen from '../views/AppointMent/AppintMents';
 import AppointmentDetailsScreen from '../views/AppointMent/AppointMentDetails';
-import FollUpAddScreen from '../views/AppointMent/FollowUpAdd';
+import FollUpAddScreen from '../views/FollowUp/FollowUpAdd';
+import VisitorUpdateScreen from '../views/LeadManagement/VisitorUpdate';
+import ScanQrScreen from '../views/ScanQr';
+import BookingScreen from '../views/BookingManagement/Booking';
+
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -112,11 +117,18 @@ const Route = () => {
         <Stack.Screen name="AppointmentDetails" component={AppointmentDetails} />
         <Stack.Screen name="AddAppointmentScreen" component={AddAppointmentScreen} />
 
+
+        {/* BookingDetails */}
+        <Stack.Screen name="BookingDetails" component={BookingDetailsScreen} />
+
         {/* Appointment  */}
         <Stack.Screen name="AppointmentDetailMain" component={AppointmentDetailsScreen} />
         <Stack.Screen name="FollUpAdd" component={FollUpAddScreen} />
+        <Stack.Screen name="VisitorUpdate" component={VisitorUpdateScreen} />
+        <Stack.Screen name="Booking" component={BookingScreen} />
 
         {/* Profile Management */}
+        <Stack.Screen name="ScanQr" component={ScanQrScreen} />
         <Stack.Screen name="profile" component={ProfileScreen} />
         <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
         <Stack.Screen name="changePassword" component={ChangePasswordScreen} />

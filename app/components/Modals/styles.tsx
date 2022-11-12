@@ -8,6 +8,7 @@ import {
 import {
   BLACK_COLOR,
   FONT_FAMILY_EXTRABOLD,
+  FONT_FAMILY_MEDIUM,
   FONT_FAMILY_REGULAR,
   FONT_FAMILY_SEMIBOLD,
   GRAY_COLOR,
@@ -93,10 +94,16 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
-  inputWrap: {
-    marginTop: normalizeSpacing(20),
+  titleTxt: {
+    fontSize: normalize(16),
+    color: BLACK_COLOR,
+    fontFamily: FONT_FAMILY_MEDIUM,
+    marginLeft: 5,
+    marginVertical: normalize(8)
   },
-
+  inputWrap: {
+    marginTop: normalizeSpacing(12),
+  },
   btnview: {
     width: '50%',
     height: normalizeHeight(50),

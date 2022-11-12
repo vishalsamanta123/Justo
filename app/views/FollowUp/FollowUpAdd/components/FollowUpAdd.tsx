@@ -16,7 +16,6 @@ const FollowUpAddView = (props: any) => {
             <Header
                 leftImageSrc={images.backArrow}
                 rightSecondImageScr={images.notification}
-                headerTextStyle={{ textTransform: 'uppercase' }}
                 headerText={strings.followupHeader}
                 headerStyle={styles.headerStyle}
                 RightFirstIconStyle={styles.leftImageIconStyle}
@@ -55,7 +54,6 @@ const FollowUpAddView = (props: any) => {
                     <Button
                         width={320}
                         btnTxtsize={18}
-                        textTransform={'uppercase'}
                         buttonText={strings.update + " " + strings.followupHeader}
                     />
                 </View>

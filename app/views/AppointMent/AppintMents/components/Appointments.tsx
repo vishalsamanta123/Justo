@@ -6,6 +6,7 @@ import strings from "../../../../components/utilities/Localization";
 import styles from "./styles";
 import AppointmentsItem from './AppointmentsItem'
 import FilterModal from "../../../../components/Modals/FilterModal";
+import Button from "../../../../components/Button";
 
 const AppointmentListView = (props: any) => {
     return (
@@ -20,12 +21,23 @@ const AppointmentListView = (props: any) => {
                 headerStyle={styles.headerStyle}
                 handleOnRightFirstIconPress={() => props.setFilterisVisible(true)}
             />
+            <View style={{ alignItems: 'flex-end', paddingVertical: 6 }}>
+                <Button
+                    height={30}
+                    width={120}
+                    buttonText={strings.scanQrCode}
+                    textTransform={null}
+                    btnTxtsize={15}
+                    handleBtnPress={() => props.handleScanQr()}
+                />
+            </View>
             <View style={styles.listView}>
                 <FlatList
                     data={props.DATA}
                     showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => <AppointmentsItem items={item}
                         onPressView={props.onPressView}
+                        handleLinkPress={() => props.setChangeLink(true)}
                     />}
                 />
             </View>
