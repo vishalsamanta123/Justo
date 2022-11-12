@@ -6,11 +6,18 @@ const AppointmentDetailsScreen = ({ navigation, route }: any) => {
     const data = route?.params || {}
     const [value, setValue] = useState(null);
     const [changeLink, setChangeLink] = useState(false);
+    const [readyToBooK, setReadyToBooK] = useState(false);
     const handleBackPress = () => {
         navigation.goBack(null)
     }
     const handleUpdateStatus = () => {
         navigation.navigate('FollUpAdd')
+    }
+    const handleVisitorUpdate = () => {
+        navigation.navigate('VisitorUpdate')
+    }
+    const handleViewFollowup = () => {
+        navigation.navigate('AllFollowUpScreen')
     }
     return (
         <>
@@ -22,6 +29,10 @@ const AppointmentDetailsScreen = ({ navigation, route }: any) => {
                 setChangeLink={setChangeLink}
                 handleBackPress={handleBackPress}
                 handleUpdateStatus={handleUpdateStatus}
+                handleVisitorUpdate={handleVisitorUpdate}
+                handleViewFollowup={handleViewFollowup}
+                readyToBooK={readyToBooK}
+                setReadyToBooK={setReadyToBooK}
             />
         </>
     )
