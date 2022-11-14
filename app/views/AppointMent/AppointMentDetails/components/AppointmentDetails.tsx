@@ -117,6 +117,18 @@ const AppointmentDetailsView = (props: any) => {
                     handleBtnPress={() => props.setReadyToBooK(true)}
                 />
             </View>
+            {props?.userData?.type === 'closingmanager' ?
+                <View style={[styles.buttonContainer, { justifyContent: 'center' }]}>
+                    <Button
+                        width={130}
+                        height={45}
+                        buttonText={strings.bookNow}
+                        btnTxtsize={14}
+                        textTransform={'uppercase'}
+                        handleBtnPress={() => props.handleBookNow()}
+                    />
+                </View> : null
+            }
             <ConfirmModal
                 Visible={props.changeLink}
                 setIsVisible={props.setChangeLink}
