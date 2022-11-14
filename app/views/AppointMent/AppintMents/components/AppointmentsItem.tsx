@@ -99,6 +99,8 @@ const AppointmentItem = (props: any) => {
                     buttonText={strings.allocate}
                     btnTxtsize={14}
                     textTransform={'uppercase'}
+                    handleLinkPress={() => props.handleLinkPress}
+
                 />
                 <Button
                     width={130}

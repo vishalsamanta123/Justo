@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
     listView: {
         flex: 1,
-        margin: normalizeSpacing(10),
+        marginHorizontal: normalizeSpacing(10),
     },
     IteamView: {
         backgroundColor: WHITE_COLOR,

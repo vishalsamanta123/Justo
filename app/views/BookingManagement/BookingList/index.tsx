@@ -1,54 +1,71 @@
 import React from "react";
+import { Alert } from "react-native";
 import BookingListView from './components/BookingList'
 
 const BookingListScreen = ({ navigation }: any) => {
     const DATA: any = [
         {
-            Projectname: 'ABC',
+            customerName: 'ABC',
             Location: 'Indore',
-            visitor: 123,
+            configure: "12 BHK",
+            booking_status: 'Pending',
             siteVisit: 234,
             closeVisit: 600,
             status: 'confirmatin Pending',
-            createddate: '11/10/2022'
+            createddate: '11/10/2022',
+            budget: '20 L',
+            booking_amt: '30 L'
         },
         {
-            Projectname: 'ABC',
+            customerName: 'ABC',
             Location: 'Indore',
-            visitor: 123,
+            configure: "12 BHK",
+            booking_status: 'Pending',
             siteVisit: 234,
             closeVisit: 600,
-            status: 'Subscribe',
-            createddate: '11/10/2022'
+            status: 'Pending',
+            createddate: '11/10/2022',
+            budget: '30 L',
+            booking_amt: '80 L'
         },
         {
-            Projectname: 'ABC',
+            customerName: 'ABC',
             Location: 'Indore',
-            visitor: 123,
+            configure: "12 BHK",
+            booking_status: 'Pending',
             siteVisit: 234,
             closeVisit: 600,
-            status: 'Unsubscribe',
-            createddate: '11/10/2022'
+            status: 'Pending',
+            createddate: '11/10/2022',
+            budget: '20 L',
+            booking_amt: '20 L'
         },
         {
-            Projectname: 'ABC',
+            customerName: 'ABC',
             Location: 'Indore',
-            visitor: 123,
+            configure: "12 BHK",
+            booking_status: 'Pending',
             siteVisit: 234,
             closeVisit: 600,
             status: 'confirmatin Pending',
-            createddate: '11/10/2022'
+            createddate: '11/10/2022',
+            budget: '50 L',
+            booking_amt: '10 L'
         },
     ];
     const handleDrawerPress = () => {
         navigation.toggleDrawer()
     };
 
+    const handleView = () => {
+        navigation.navigate('BookingDetails')
+    }
     return (
         <>
             <BookingListView
                 handleDrawerPress={handleDrawerPress}
                 DATA={DATA}
+                handleView={handleView}
             />
         </>
     )

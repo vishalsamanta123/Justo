@@ -8,6 +8,7 @@ import styles from './styles';
 import AppointMentDetailsItem from './AppointMentDetailsItem'
 import Button from '../../../../components/Button';
 import ConfirmModal from '../../../../components/Modals/ConfirmModal';
+import ReadyToBookModal from './ReadyToBookModal'
 
 const AppointmentDetailsView = (props: any) => {
     console.log('props:AppointmentDetailsView ', props);
@@ -76,6 +77,7 @@ const AppointmentDetailsView = (props: any) => {
                     buttonText={strings.visitor + " " + strings.update}
                     btnTxtsize={14}
                     textTransform={'uppercase'}
+                    handleBtnPress={() => props.handleVisitorUpdate()}
                 />
                 <Button
                     width={140}
@@ -87,6 +89,7 @@ const AppointmentDetailsView = (props: any) => {
                     buttonText={strings.view + " " + strings.followupHeader}
                     btnTxtsize={14}
                     textTransform={'uppercase'}
+                    handleBtnPress={() => props.handleViewFollowup()}
                 />
             </View>
             <View style={[styles.buttonContainer, { justifyContent: 'center' }]}>
@@ -111,6 +114,7 @@ const AppointmentDetailsView = (props: any) => {
                     buttonText={strings.readytoBookHeader}
                     btnTxtsize={14}
                     textTransform={'uppercase'}
+                    handleBtnPress={() => props.setReadyToBooK(true)}
                 />
             </View>
             <ConfirmModal
@@ -120,6 +124,10 @@ const AppointmentDetailsView = (props: any) => {
                 middleTxt={strings.selectSM}
                 placeholder={strings.selectNewCloseManager}
                 doneBttnTxt={strings.allocate}
+            />
+            <ReadyToBookModal
+                Visible={props.readyToBooK}
+                setIsVisible={() => props.setReadyToBooK(false)}
             />
         </View>
     )
