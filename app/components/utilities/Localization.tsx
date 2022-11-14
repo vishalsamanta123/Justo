@@ -79,6 +79,8 @@ const strings = new LocalizedStrings({
     copyLink: 'Copy Link',
     dropLocation: 'Drop Location',
     selectNewCloseManager: 'Select New Closing Manager',
+    bookNow: 'Book Now',
+    browse: 'Browse',
 
 
     // common strings

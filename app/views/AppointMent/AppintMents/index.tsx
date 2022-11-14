@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, } from "react";
 import AppointmentView from './components/Appointments'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AppointmentsScreen = ({ navigation }: any) => {
     const [dropLocisVisible, setDropLocisVisible] = useState(false)
