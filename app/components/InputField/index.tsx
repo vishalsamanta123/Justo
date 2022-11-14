@@ -1,28 +1,31 @@
-import {View, TextInput, Image, TouchableOpacity, Text} from 'react-native';
+import { View, TextInput, Image, TouchableOpacity, Text } from 'react-native';
 import React from 'react';
 import styles from './styles';
-import {BLACK_COLOR} from '../utilities/constant';
+import { BLACK_COLOR, Isios } from '../utilities/constant';
 import images from '../../assets/images';
-import { normalizeHeight } from '../scaleFontSize';
+import { normalize, normalizeHeight } from '../scaleFontSize';
 
 const InputField = (props: any) => {
-  const  {
-    inputWidth =  '90%',
+  const {
+    inputWidth = '90%',
     editable = true,
     multiline = false,
-    inputheight = 50
+    inputheight = 50,
+    headTxtSize = Isios ? 14 : 16
   } = props
   const onSubmit = (e: any) => {
-    const {text} = e;
+    const { text } = e;
   };
   return (
     <View>
       <View style={styles.inputHeadinView}>
-        <Text style={styles.inputHeadingText}>{props.headingText}</Text>
+        <Text style={[styles.inputHeadingText, {
+          fontSize: normalize(headTxtSize),
+        }]}>{props.headingText}</Text>
       </View>
       <View style={styles.mainContainer}>
         <TextInput
-          style={[styles.input, { textAlignVertical: 'top',width: inputWidth, height: normalizeHeight(inputheight)}]}
+          style={[styles.input, { textAlignVertical: 'top', width: inputWidth, height: normalizeHeight(inputheight) }]}
           onChangeText={(val) => props.onChangeText(val)}
           onSubmitEditing={onSubmit}
           placeholder={props.placeholderText}
