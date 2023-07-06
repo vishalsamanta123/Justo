@@ -1,5 +1,6 @@
 const images = {
   logoWhiteBG: require('./justoLogoWhiteBG.png'),
+  justoSplash: require('./justoSplash.png'),
   emailIcon: require('./email.png'),
   hiddenPassword: require('./hiddenPassword.png'),
   showPassword: require('./showPassword.png'),
@@ -31,6 +32,24 @@ const images = {
   timer: require('./timer.png'),
   dummyUser: require('./dummyUser.jpeg'),
   editIcon: require('./editIcon.png'),
+  edit: require('./edit.png'),
+  pdfIcone: require('./pdfIcone.png'),
+  search: require('./search.png'),
+  send: require('./send.png'),
+  attach: require('./attach.png'),
+  camera: require('./camera.png'),
+  gallery: require('./gallery.png'),
+  addCircle: require('./addCircle.png'),
+  lock: require('./lock.png'),
+  bell: require('./notification.png'),
+  download: require('./download.png'),
+  star: require('./star.png'),
+  shareIcon: require('./share.png'),
+  locationIcon: require('./location.png'),
+  playbuttonIcon: require('./playbutton.png'),
+  pause: require('./pause.png'),
+  deleteIcon: require('./deleteIcon.png'),
+  media: require('./media.png'),
 };
 
 export default images;

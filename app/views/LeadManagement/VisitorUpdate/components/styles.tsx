@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { normalize, normalizeHeight, normalizeSpacing, normalizeWidth } from '../../../../components/scaleFontSize';
-import { BG_MAIN_COLOUR, BLACK_COLOR, FONT_FAMILY_EXTRABOLD, FONT_FAMILY_MEDIUM, FONT_FAMILY_SEMIBOLD, GRAY_COLOR, PRIMARY_THEME_COLOR, WHITE_COLOR } from '../../../../components/utilities/constant';
+import { BG_MAIN_COLOUR, BLACK_COLOR, FONT_FAMILY_EXTRABOLD, FONT_FAMILY_MEDIUM, FONT_FAMILY_SEMIBOLD, GRAY_COLOR, PRIMARY_THEME_COLOR, WHITE_COLOR, WHITE_COLOR_LIGHT } from '../../../../components/utilities/constant';
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -64,24 +64,76 @@ const styles = StyleSheet.create({
     inputWrap: {
         marginTop: normalizeSpacing(30),
     },
+    inputContVw: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flex: 1
+    },
+    smallContVw: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    smallBox: {
+        backgroundColor: WHITE_COLOR,
+        width: '15%',
+        borderRadius: 10,
+        elevation: 5,
+        shadowColor: '#171717',
+        shadowOffset: { width: 0, height: 1 },
+        marginHorizontal: normalize(5),
+        height: 45,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    budgetInput: {
+        backgroundColor: WHITE_COLOR,
+        height: normalizeHeight(50),
+        width: '55%',
+        borderRadius: 10,
+        elevation: 5,
+        shadowColor: '#171717',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+        borderColor: GRAY_COLOR,
+        color: BLACK_COLOR,
+        paddingLeft: normalizeSpacing(8),
+        fontSize: 15
+    },
+    smallCont: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: normalizeSpacing(6),
+        marginTop: normalize(14),
+    },
+    headingsTxt: {
+        fontSize: normalize(16),
+        color: PRIMARY_THEME_COLOR,
+        marginBottom: normalize(8),
+        fontFamily: FONT_FAMILY_SEMIBOLD
+    },
     selectsView: {
-        marginTop: normalize(10)
+        marginTop: normalize(14),
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     selectsTxt: {
         fontSize: normalize(18),
-        fontWeight: 'bold',
         color: BLACK_COLOR,
+        fontFamily: FONT_FAMILY_SEMIBOLD
     },
     straightVw: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         marginVertical: normalize(8),
+        marginRight: normalize(10)
     },
     radioView: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginHorizontal: normalizeSpacing(10)
     },
     radioTxt: {
         fontSize: normalize(18),
@@ -118,19 +170,24 @@ const styles = StyleSheet.create({
     },
     checkBoxVw: {
         backgroundColor: WHITE_COLOR,
-        paddingVertical: 2,
-        borderWidth: 0.5
+        padding: normalizeSpacing(3),
+        borderWidth: 0.5,
+        borderRadius: normalize(5)
     },
     checkTxt: {
-        fontSize: normalize(13),
+        fontSize: normalize(13.5),
         color: BLACK_COLOR,
         fontFamily: FONT_FAMILY_MEDIUM,
-        marginLeft: normalize(10)
     },
     checksVw: {
         width: normalizeWidth(5),
         height: normalizeHeight(10),
         marginHorizontal: 5,
+    },
+    radioBtnView: {
+        width: '100%',
+        marginVertical: normalizeSpacing(20),
+        marginLeft: normalizeSpacing(10)
     },
 })
 export default styles

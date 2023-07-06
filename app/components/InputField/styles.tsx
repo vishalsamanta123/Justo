@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     borderColor: GRAY_COLOR,
   },
   input: {
-    fontSize: normalize(18),
+    fontSize: normalize(16),
     paddingRight: normalizeSpacing(30),
     paddingLeft: normalizeSpacing(Isios ? 5 : 15),
     fontFamily: FONT_FAMILY_SEMIBOLD,
@@ -42,10 +42,11 @@ const styles = StyleSheet.create({
   },
   inputHeadinView: {
     position: 'absolute',
-    top: normalizeSpacing(-15),
+    top: normalizeSpacing(-13),
     left: normalizeSpacing(20),
     zIndex: 1,
-    // backgroundColor: 'transparent',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   inputHeadingText: {
     fontSize: normalize(Isios ? 14 : 16),

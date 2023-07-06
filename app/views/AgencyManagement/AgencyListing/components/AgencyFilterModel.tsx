@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
 import Modal from "react-native-modal";
 import styles from "../../../../components/Modals/styles";
@@ -7,10 +7,31 @@ import strings from "../../../../components/utilities/Localization";
 import Button from "../../../../components/Button";
 import InputField from "../../../../components/InputField";
 import DropdownInput from "../../../../components/DropDown";
+import InputCalender from "app/components/InputCalender";
+import moment from "moment";
+import { DATE_FORMAT, Isios } from "app/components/utilities/constant";
+import { normalizeSpacing } from "app/components/scaleFontSize";
 const FilterModal = (props: any) => {
+  const data = [
+    { label: strings.active, value: 2 },
+    { label: strings.inActive, value: 1 },
+  ];
+  const renderItem = (item: any) => {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.textItem}>{item.label}</Text>
+      </View>
+    );
+  };
+  const handleFilter = () => {
+    props.setIsVisible(false)
+    props.getAgencyList(0, props.filterData)
+  }
   return (
-    <View>
-      <Modal isVisible={props.Visible}>
+    <Modal isVisible={props.Visible}>
+      <ScrollView keyboardShouldPersistTaps={'handled'}
+        automaticallyAdjustKeyboardInsets={Isios ? true : false}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
         <View style={styles.mainContainer}>
           <View style={styles.topContainer}>
             <Text style={styles.topTxt}>{strings.searchAgency}</Text>
@@ -23,42 +44,117 @@ const FilterModal = (props: any) => {
           <View style={styles.borderView} />
           <View style={{ marginHorizontal: 10 }}>
             <View style={styles.inputWrap}>
+              <InputCalender
+                mode={"date"}
+                leftIcon={images.event}
+                placeholderText={strings.startDate}
+                editable={false}
+                dateData={(data: any) => {
+                  props.setFilterData({
+                    ...props.filterData,
+                    startdate: moment(data).format(DATE_FORMAT),
+                  });
+                }}
+                setDateshow={(data: any) => {
+                  props.setFilterData({
+                    ...props.filterData,
+                    startdate: moment(data).format(DATE_FORMAT),
+                  });
+                }}
+                value={props?.filterData?.startdate}
+              />
+            </View>
+            <View style={styles.inputWrap}>
+              <InputCalender
+                mode={"date"}
+                leftIcon={images.event}
+                placeholderText={strings.endDate}
+                editable={false}
+                // minimumDate={new Date()}
+                dateData={(data: any) => {
+                  props.setFilterData({
+                    ...props.filterData,
+                    enddate: moment(data).format(DATE_FORMAT),
+                  });
+                }}
+                setDateshow={(data: any) => {
+                  props.setFilterData({
+                    ...props.filterData,
+                    enddate: moment(data).format(DATE_FORMAT),
+                  });
+                }}
+                value={props?.filterData?.enddate}
+              />
+            </View>
+            <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
               <InputField
-                placeholderText={"Start Date"}
+                disableSpecialCharacters={true}
+                headingText={strings.searchBy + " " + strings.name}
+                onChangeText={(data: any) => {
+                  props.setFilterData({
+                    ...props.filterData,
+                    search_by_name: data,
+                  });
+                }}
+                valueshow={props?.filterData?.search_by_name}
                 handleInputBtnPress={() => { }}
-                onChangeText={() => { }}
-                rightImgSrc={images.event}
               />
             </View>
             <View style={styles.inputWrap}>
               <InputField
-                placeholderText={"End Date"}
-                handleInputBtnPress={() => { }}
-                onChangeText={() => { }}
-                rightImgSrc={images.event}
-              />
-            </View>
-            <View style={styles.inputWrap}>
-              <InputField
-                placeholderText={"Search by Name"}
-                handleInputBtnPress={() => { }}
-                onChangeText={() => { }}
+                valueshow={props?.filterData?.search_by_location}
+                inputType={'location'}
+                onPressSelect={(data: any, detail: any) => {
+                  props.setFilterData({
+                    ...props.filterData,
+                    search_by_location: data?.description,
+                  })
+                }}
+                onChangeText={(data: any) => {
+                  props.setFilterData({
+                    ...props.filterData,
+                    search_by_location: data,
+                  })
+                }}
               />
             </View>
             <View style={styles.inputWrap}>
               <DropdownInput
-                placeholder={'Search by Status'}
-                value={props.value}
-                setValue={props.setValue}
+                style={styles.dropdown}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                iconStyle={styles.iconStyle}
+                data={data}
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={strings.selectStatus}
+                value={props?.filterData?.status}
+                onChange={(item: any) => {
+                  props.setFilterData({
+                    ...props.filterData,
+                    status: item.value,
+                  });
+                }}
+                renderItem={renderItem}
               />
             </View>
           </View>
           <View style={{ marginVertical: 20 }}>
-            <Button handleBtnPress={() => props.setIsVisible(false)} buttonText={strings.apply} />
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+              <Button
+                width={135}
+                buttonText={strings.reset}
+                handleBtnPress={() => props.onReset()} />
+              <Button
+                width={135}
+                handleBtnPress={() => handleFilter()}
+                buttonText={strings.apply} />
+            </View>
           </View>
         </View>
-      </Modal>
-    </View>
+      </ScrollView>
+    </Modal>
   );
 };
 

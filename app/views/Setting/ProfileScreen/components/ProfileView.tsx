@@ -1,14 +1,29 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import images from '../../../../assets/images'
-import { PRIMARY_THEME_COLOR } from '../../../../components/utilities/constant'
-import strings from '../../../../components/utilities/Localization'
-import styles from './styles'
-import Header from '../../../../components/Header'
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import images from "../../../../assets/images";
+import { getAge, PRIMARY_THEME_COLOR } from "../../../../components/utilities/constant";
+import strings from "../../../../components/utilities/Localization";
+import styles from "./styles";
+import Header from "../../../../components/Header";
+import moment from "moment";
+import { useSelector } from "react-redux";
 
 const ProfileView = (props: any) => {
-  const {data, HandleBackPress, handleEditProfilePress} = props;
-  console.log('data', data)
+  const { data, HandleBackPress, handleEditProfilePress } = props;
+  const allDetailsall = useSelector((state: any) => state.agentData);
+  const [allDetails, setAllDetails] = useState<any>({});
+  console.log('allDetails: ', allDetails);
+
+  useEffect(() => {
+    checkprofile();
+  }, [allDetailsall]);
+
+  const checkprofile = () => {
+    if (allDetailsall?.response?.status === 200) {
+      setAllDetails(allDetailsall?.response?.data);
+    }
+  };
+
   return (
     <View style={styles.mainContainer}>
       <Header
@@ -18,20 +33,36 @@ const ProfileView = (props: any) => {
         RightFirstIconStyle={styles.leftImageIconStyle}
         leftImageIconStyle={styles.leftImageIconStyle}
         handleOnLeftIconPress={HandleBackPress}
-        barStyle={'light-content'}
+        barStyle={"light-content"}
         statusBarColor={PRIMARY_THEME_COLOR}
       />
-      <View style={styles.ProfileView}>
+      <ScrollView style={styles.ProfileView}>
         <View style={styles.roleView}>
-          <Text style={styles.CPtext}>{strings.userRole} : {strings.channelPartner}</Text>
+          <Text style={styles.CPtext}>
+            {strings.userRole} : {allDetails?.role_title}
+          </Text>
         </View>
         <View style={styles.userCardView}>
           <View style={styles.usernameWrap}>
-            <Image style={styles.userImage} source={images.dummyUser}  />
-            <Text style={styles.userNameText}>ROBERT DOWNEY</Text>
+            <Image
+              style={styles.userImage}
+              source={
+                allDetails?.profile_picture
+                  ? { uri: allDetails?.base_url + allDetails?.profile_picture }
+                  : images.user
+              }
+            />
+            <Text style={styles.userNameText}>
+              {allDetails?.firstname?.toUpperCase() +
+                " " +
+                allDetails?.lastname?.toUpperCase()}
+            </Text>
           </View>
-          <TouchableOpacity style={styles.editImageWrap} onPress={handleEditProfilePress}>
-            <Image style={styles.editIconImage} source={images.editIcon}/>
+          <TouchableOpacity
+            style={styles.editImageWrap}
+            onPress={handleEditProfilePress}
+          >
+            <Image style={styles.editIconImage} source={images.editIcon} />
           </TouchableOpacity>
         </View>
         <View style={styles.InformationView}>
@@ -41,16 +72,22 @@ const ProfileView = (props: any) => {
             </View>
             <Text style={styles.colon}>:</Text>
             <View style={styles.valueView}>
-              <Text style={styles.valueText}>ANIL SINGH</Text>
+              <Text style={styles.valueText}>
+                {allDetails?.firstname?.toUpperCase() +
+                  " " +
+                  allDetails?.lastname?.toUpperCase()}
+              </Text>
             </View>
           </View>
           <View style={styles.fieldView}>
             <View style={styles.keyView}>
-              <Text style={styles.keyText}>Aadhar No.</Text>
+              <Text style={styles.keyText}>Aadhaar No.</Text>
             </View>
             <Text style={styles.colon}>:</Text>
             <View style={styles.valueView}>
-              <Text style={styles.valueText}>12345*****</Text>
+              <Text style={styles.valueText}>
+                {allDetails?.adhar_no && allDetails?.adhar_no != 'null' ? allDetails?.adhar_no : strings.notfount}
+              </Text>
             </View>
           </View>
           <View style={styles.fieldView}>
@@ -59,7 +96,24 @@ const ProfileView = (props: any) => {
             </View>
             <Text style={styles.colon}>:</Text>
             <View style={styles.valueView}>
-              <Text style={styles.valueText}>ASD***</Text>
+              <Text style={styles.valueText}>
+                {allDetails?.pancard_no && allDetails?.pancard_no != 'null'
+                  ? allDetails?.pancard_no
+                  : strings.notfount}{" "}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.fieldView}>
+            <View style={styles.keyView}>
+              <Text style={styles.keyText}>Created Date</Text>
+            </View>
+            <Text style={styles.colon}>:</Text>
+            <View style={styles.valueView}>
+              <Text style={styles.valueText}>
+                {allDetails?.created_date
+                  ? moment(allDetails?.created_date).format("DD/MM/YYYY")
+                  : strings.notfount}
+              </Text>
             </View>
           </View>
           <View style={styles.fieldView}>
@@ -68,7 +122,9 @@ const ProfileView = (props: any) => {
             </View>
             <Text style={styles.colon}>:</Text>
             <View style={styles.valueView}>
-              <Text style={styles.valueText}>MALE</Text>
+              <Text style={styles.valueText}>
+                {allDetails?.gender === 1 ? strings.male : strings.female}
+              </Text>
             </View>
           </View>
           <View style={styles.fieldView}>
@@ -77,7 +133,29 @@ const ProfileView = (props: any) => {
             </View>
             <Text style={styles.colon}>:</Text>
             <View style={styles.valueView}>
-              <Text style={styles.valueText}>21/09/2022</Text>
+              <Text style={styles.valueText}>
+                {allDetails?.dateofbirth
+                  ? moment(allDetails?.dateofbirth).format("DD/MM/YYYY")
+                  : strings.notfount}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.fieldView}>
+            <View style={styles.keyView}>
+              <Text style={styles.keyText}>Age</Text>
+            </View>
+            <Text style={styles.colon}>:</Text>
+            <View style={styles.valueView}>
+              <Text style={styles.valueText}>{allDetails?.dateofbirth ? getAge(allDetails?.dateofbirth) + ' Y' : strings.notfount}</Text>
+            </View>
+          </View>
+          <View style={styles.fieldView}>
+            <View style={styles.keyView}>
+              <Text style={styles.keyText}>Parent Name</Text>
+            </View>
+            <Text style={styles.colon}>:</Text>
+            <View style={styles.valueView}>
+              <Text style={styles.valueText}>{allDetails?.parent_name ? allDetails?.parent_name : strings.notfount}</Text>
             </View>
           </View>
           <View style={styles.fieldView}>
@@ -86,7 +164,7 @@ const ProfileView = (props: any) => {
             </View>
             <Text style={styles.colon}>:</Text>
             <View style={styles.valueView}>
-              <Text style={styles.valueText}>123456789</Text>
+              <Text style={styles.valueText}>{allDetails?.mobile ? allDetails?.mobile : strings.notfount}</Text>
             </View>
           </View>
           <View style={styles.fieldView}>
@@ -95,7 +173,7 @@ const ProfileView = (props: any) => {
             </View>
             <Text style={styles.colon}>:</Text>
             <View style={styles.valueView}>
-              <Text style={styles.valueText}>123456789</Text>
+              <Text style={styles.valueText}>{allDetails?.whatsapp_no && allDetails?.whatsapp_no != 'null' ? allDetails?.whatsapp_no : strings.notfount}</Text>
             </View>
           </View>
           <View style={styles.fieldView}>
@@ -104,13 +182,40 @@ const ProfileView = (props: any) => {
             </View>
             <Text style={styles.colon}>:</Text>
             <View style={styles.valueView}>
-              <Text style={styles.valueText}>abc@gmail.com</Text>
+              <Text style={styles.valueText}>{allDetails?.email ? allDetails?.email : strings.notfount}</Text>
+            </View>
+          </View>
+          <View style={styles.fieldView}>
+            <View style={styles.keyView}>
+              <Text style={styles.keyText}>City</Text>
+            </View>
+            <Text style={styles.colon}>:</Text>
+            <View style={styles.valueView}>
+              <Text style={styles.valueText}>{allDetails?.city ? allDetails?.city : strings.notfount}</Text>
+            </View>
+          </View>
+          <View style={styles.fieldView}>
+            <View style={styles.keyView}>
+              <Text style={styles.keyText}>Address</Text>
+            </View>
+            <Text style={styles.colon}>:</Text>
+            <View style={styles.valueView}>
+              <Text style={styles.valueText}>{allDetails?.address ? allDetails?.address : strings.notfount}</Text>
+            </View>
+          </View>
+          <View style={styles.fieldView}>
+            <View style={styles.keyView}>
+              <Text style={styles.keyText}>Area</Text>
+            </View>
+            <Text style={styles.colon}>:</Text>
+            <View style={styles.valueView}>
+              <Text style={styles.valueText}>{allDetails?.area ? allDetails?.area : strings.notfount}</Text>
             </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
-  )
-}
+  );
+};
 
-export default ProfileView
+export default ProfileView;

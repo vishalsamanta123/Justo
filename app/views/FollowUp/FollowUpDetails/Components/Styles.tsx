@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
   },
   leadDetailsItemView: {
     flex: 1,
+    marginVertical: normalizeSpacing(0),
     backgroundColor:WHITE_COLOR
-    //marginVertical: normalizeSpacing(10),
   },
   topDetailsView: {
     flexDirection: 'row',
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     marginHorizontal: normalizeSpacing(10),
     marginBottom: normalizeSpacing(10),
     marginTop: normalizeSpacing(10),
-    
   },
   topTxtView: {
     flexDirection: 'row',
@@ -35,7 +34,8 @@ const styles = StyleSheet.create({
   },
   topTxt: {
     color: BLACK_COLOR,
-    fontFamily: FONT_FAMILY_EXTRABOLD
+    fontFamily: FONT_FAMILY_EXTRABOLD,
+    fontSize:normalize(18),
   },
   Txtview: {
     flexDirection: 'row',
@@ -47,8 +47,9 @@ const styles = StyleSheet.create({
   },
   projectContainer: {
     flex: 2.5,
-    alignItems: 'flex-end',
-    height: '100%'
+    alignItems: 'flex-start',
+    height: '100%',
+    marginLeft:normalizeSpacing(15)
   },
   projectTxt: {
     fontSize: normalize(15),
@@ -66,8 +67,9 @@ const styles = StyleSheet.create({
     marginHorizontal: normalizeSpacing(10)
   },
   headdingView: {
-    marginVertical: normalizeSpacing(15),
-    alignItems: 'center'
+    marginVertical: normalizeSpacing(25),
+    alignItems: 'center',
+    
   },
   headdingTxt: {
     fontSize: normalize(18),
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     marginHorizontal: normalizeSpacing(10),
     marginVertical: normalizeSpacing(10)
   }

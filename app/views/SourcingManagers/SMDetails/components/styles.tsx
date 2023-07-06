@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
   },
   topItemVw: {
     alignItems: 'center',
-    paddingVertical: 5,
+    marginVertical: normalizeSpacing(10),
+    marginRight: normalizeSpacing(10),
     justifyContent: 'flex-end',
     flexDirection: 'row'
   },
@@ -84,7 +85,8 @@ const styles = StyleSheet.create({
     minWidth: 90,
     elevation: 1.5,
     backgroundColor: WHITE_COLOR,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    padding: normalizeSpacing(3),
   },
   crossVw: {
     width: normalizeWidth(22),
@@ -97,6 +99,20 @@ const styles = StyleSheet.create({
     fontSize: normalize(18),
     alignSelf: 'center',
     marginVertical: 5,
+  },
+  button: {
+    backgroundColor: WHITE_COLOR,
+    width: normalizeWidth(50),
+    height: normalizeHeight(25),
+    marginLeft: normalizeSpacing(20),
+    justifyContent: 'center',
+    borderWidth: 0.5,
+    borderRadius: 10
+  },
+  buttonTxt: {
+    color: BLACK_COLOR,
+    textAlign: 'center',
+    fontFamily: FONT_FAMILY_SEMIBOLD
   },
 })
 export default styles

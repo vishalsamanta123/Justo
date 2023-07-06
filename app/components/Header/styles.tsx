@@ -27,6 +27,10 @@ const styles = StyleSheet.create({
   },
   rightIconsWrap: {
     flexDirection: 'row',
+  },
+  badget: {
+    borderWidth: 0,
+    alignItems: 'center',
   }
 });
 

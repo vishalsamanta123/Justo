@@ -6,6 +6,7 @@ import images from "../../assets/images";
 import strings from "../utilities/Localization";
 import Button from "../Button";
 import InputField from "../InputField";
+
 const FilterModal = (props: any) => {
   return (
     <View>
@@ -20,45 +21,45 @@ const FilterModal = (props: any) => {
             </View>
           </View>
           <View style={styles.borderView} />
-          <View style={{marginHorizontal: 10}}>
+          <View style={{ marginHorizontal: 10 }}>
             <View style={styles.inputWrap}>
               <InputField
-                placeholderText={"Start Date"}
-                handleInputBtnPress={() => {}}
-                onChangeText={() => {}}
+                placeholderText={strings.startDate}
+                handleInputBtnPress={() => { }}
+                onChangeText={() => { }}
               />
             </View>
             <View style={styles.inputWrap}>
               <InputField
-                placeholderText={"End Date"}
-                handleInputBtnPress={() => {}}
-                onChangeText={() => {}}
+                placeholderText={strings.endDate}
+                handleInputBtnPress={() => { }}
+                onChangeText={() => { }}
               />
             </View>
             <View style={styles.inputWrap}>
               <InputField
-                placeholderText={"Search by Name"}
-                handleInputBtnPress={() => {}}
-                onChangeText={() => {}}
+                placeholderText={strings.searchBy + " " + strings.name}
+                handleInputBtnPress={() => { }}
+                onChangeText={() => { }}
               />
             </View>
             <View style={styles.inputWrap}>
               <InputField
-                placeholderText={"Search by Location"}
-                handleInputBtnPress={() => {}}
-                onChangeText={() => {}}
+                placeholderText={strings.searchBy + " " + strings.location}
+                handleInputBtnPress={() => { }}
+                onChangeText={() => { }}
               />
             </View>
             <View style={styles.inputWrap}>
               <InputField
-                placeholderText={"Start Type"}
-                handleInputBtnPress={() => {}}
-                onChangeText={() => {}}
+                placeholderText={strings.startType}
+                handleInputBtnPress={() => { }}
+                onChangeText={() => { }}
               />
             </View>
           </View>
-          <View style={{marginVertical: 20}}>
-          <Button buttonText={strings.apply} />
+          <View style={{ marginVertical: 20 }}>
+            <Button buttonText={strings.apply} />
           </View>
         </View>
       </Modal>

@@ -1,6 +1,19 @@
 import { StyleSheet } from "react-native";
-import { normalize, normalizeHeight, normalizeSpacing, normalizeWidth } from "../../../../components/scaleFontSize";
-import { BLACK_COLOR, FONT_FAMILY_EXTRABOLD, FONT_FAMILY_SEMIBOLD, GRAY_COLOR, GRAY_LIGHT_COLOR, PRIMARY_THEME_COLOR, WHITE_COLOR } from "../../../../components/utilities/constant";
+import {
+  normalize,
+  normalizeHeight,
+  normalizeSpacing,
+  normalizeWidth,
+} from "../../../../components/scaleFontSize";
+import {
+  BLACK_COLOR,
+  FONT_FAMILY_EXTRABOLD,
+  FONT_FAMILY_SEMIBOLD,
+  GRAY_COLOR,
+  GRAY_LIGHT_COLOR,
+  PRIMARY_THEME_COLOR,
+  WHITE_COLOR,
+} from "../../../../components/utilities/constant";
 
 const styles = StyleSheet.create({
   headerStyle: {
@@ -16,31 +29,31 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topDetailsView: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginHorizontal: normalizeSpacing(10),
     marginBottom: normalizeSpacing(10),
-    alignItems: 'center'
+    alignItems: "center",
   },
   topTxtView: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: "row",
+    alignItems: "center",
   },
   topTxt: {
     color: BLACK_COLOR,
     fontFamily: FONT_FAMILY_EXTRABOLD,
-    fontSize: normalize(18)
+    fontSize: normalize(18),
   },
   qrView: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   qrImg: {
     width: normalizeWidth(80),
-    height: normalizeHeight(80)
+    height: normalizeHeight(80),
   },
   Txtview: {
-    flexDirection: 'row',
+    flexDirection: "row",
     // justifyContent: 'center',
     // alignItems: 'center',
     borderBottomColor: GRAY_COLOR,
@@ -49,32 +62,42 @@ const styles = StyleSheet.create({
   },
   projectContainer: {
     flex: 2.5,
-    alignItems: 'flex-start',
-    height: '100%',
+    alignItems: "flex-start",
+    height: "100%",
     marginLeft: normalizeSpacing(15),
   },
   projectTxt: {
     fontSize: normalize(15),
     fontFamily: FONT_FAMILY_SEMIBOLD,
-    color: GRAY_LIGHT_COLOR
+    color: GRAY_LIGHT_COLOR,
   },
   nameContainer: {
     flex: 3.5,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   nameTxt: {
     fontSize: normalize(15),
     fontFamily: FONT_FAMILY_EXTRABOLD,
     color: BLACK_COLOR,
-    marginHorizontal: normalizeSpacing(10)
+    marginHorizontal: normalizeSpacing(10),
   },
   bntView: {
-    marginVertical: normalizeSpacing(10)
+    marginVertical: normalizeSpacing(10),
   },
   bottomView: {
+    alignItems: "center",
+    marginVertical: normalizeSpacing(20),
+  },
+  updateView: {
     alignItems: 'center',
-    marginVertical: normalizeSpacing(20)
-  }
-})
+    padding: normalizeSpacing(20)
+  },
+  updatetext: {
+    fontSize: normalize(15),
+    fontFamily: FONT_FAMILY_EXTRABOLD,
+    color: BLACK_COLOR,
+    marginHorizontal: normalizeSpacing(10),
+  },
+});
 
-export default styles
+export default styles;

@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     marginBottom: normalizeSpacing(40),
-    marginHorizontal: normalizeSpacing(30),
+    marginHorizontal: normalizeSpacing(10),
   },
   dontHaveView: {
     flexDirection: 'row',

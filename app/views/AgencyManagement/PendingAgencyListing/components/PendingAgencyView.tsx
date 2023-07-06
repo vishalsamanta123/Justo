@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, FlatList } from 'react-native';
+import { View, FlatList, } from 'react-native';
 import React, { useState } from 'react';
 import styles from './styles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -8,77 +8,31 @@ import Header from '../../../../components/Header';
 import images from '../../../../assets/images';
 import strings from '../../../../components/utilities/Localization'
 import ConfirmModal from '../../../../components/Modals/ConfirmModal';
-import { PRIMARY_THEME_COLOR_DARK } from '../../../../components/utilities/constant';
-
-import {
-  BLACK_COLOR,
-  FONT_FAMILY_EXTRABOLD,
-  FONT_FAMILY_SEMIBOLD,
-  GRAY_COLOR,
-  PRIMARY_THEME_COLOR,
-  WHITE_COLOR,
-} from '../../../../components/utilities/constant';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { PRIMARY_THEME_COLOR } from '../../../../components/utilities/constant';
+import EmptyListScreen from 'app/components/CommonScreen/EmptyListScreen';
 
 
 
 const PendingAgencyView = (props: any) => {
+  const loadingref = false
   const [isVisible, setIsVisible] = useState(false)
   const insets = useSafeAreaInsets();
   const navigation: any = useNavigation()
-  const DATA: any = [
-    {
-      Projectname: 'ABC',
-      Location: 'Indore',
-      rerano: '123566648',
-      visitor: 123,
-      siteVisit: 234,
-      closeVisit: 600,
-      status: 'Active'
-    },
-    {
-      Projectname: 'ABC',
-      Location: 'Indore',
-      rerano: '123566648',
-      visitor: 123,
-      siteVisit: 234,
-      closeVisit: 600,
-      status: 'Deactive'
-    },
-    {
-      Projectname: 'ABC',
-      Location: 'Indore',
-      rerano: '123566648',
-      visitor: 123,
-      siteVisit: 234,
-      closeVisit: 600,
-      status: 'Active'
-    },
-    {
-      Projectname: 'ABC',
-      Location: 'Indore',
-      rerano: '123566648',
-      visitor: 123,
-      siteVisit: 234,
-      closeVisit: 600,
-      status: 'Deactive'
-    },
-  ];
 
-  const onPressView = () => {
-    navigation.navigate('AgencyDetails')
+  const onPressView = (data: any) => {
+    navigation.navigate('AgencyDetails', { data })
   }
-  const showpendinglist = () => {
-    navigation.navigate('PendingAgencyList')
+  const onRefresh = () => {
+    props.getPendingList()
   }
 
   return (
     <View style={styles.mainContainer}>
       <Header
         leftImageSrc={images.backArrow}
-        rightFirstImageScr={images.filter}
+        // rightFirstImageScr={images.filter}
         rightSecondImageScr={images.notification}
-        headerText={strings.agencyHeader}
+        headerText={strings.pendingconfirm}
         handleOnLeftIconPress={props.handleBackPress}
         headerStyle={styles.headerStyle}
         RightFirstIconStyle={styles.RightFirstIconStyle}
@@ -89,7 +43,7 @@ const PendingAgencyView = (props: any) => {
       />
       <View style={styles.propertyListView}>
         {/* <View style={styles.btnView}>
-            <TouchableOpacity
+            <TouchableOpacity 
             onPress={() => null}
             style={[styles.button, { borderColor: BLACK_COLOR, backgroundColor: PRIMARY_THEME_COLOR }]} >
             <Text style={[styles.buttonTxt, {
@@ -101,13 +55,29 @@ const PendingAgencyView = (props: any) => {
         <View style={styles.propertyListViewsec}>
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={DATA}
-            renderItem={({ item }) => <PendingAgencyList items={item} setIsVisible={setIsVisible} onPressView={onPressView} />}
+            data={Array.isArray(props?.pendingAgency) ? props?.pendingAgency : []}
+            ListEmptyComponent={<EmptyListScreen message={strings.pendingconfirm} />}
+            renderItem={({ item }) => <PendingAgencyList
+              items={item} setIsVisible={setIsVisible}
+              onPressView={onPressView}
+              setStatusChange={props.setStatusChange}
+            />}
+            refreshing={loadingref}
+            onRefresh={() => onRefresh()}
           />
         </View>
       </View>
-      <ConfirmModal Visible={isVisible} setIsVisible={setIsVisible} />
-      {/* <FilterModal /> */}
+      <ConfirmModal
+        Visible={isVisible}
+        setIsVisible={setIsVisible}
+        stringshow={strings.confirmation}
+        textshow={
+          `${strings.activeconfirmation} ${strings.cpCapital}?`
+        }
+        confirmtype={'CONFIRMATION'}
+        setStatusChange={props.setStatusChange}
+        handleYesResponse={() => props.handleUpdateAssignCP(props.statusChange)}
+      />
     </View>
   );
 };

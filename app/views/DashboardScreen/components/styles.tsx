@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {normalize, normalizeHeight, normalizeSpacing, normalizeWidth} from '../../../components/scaleFontSize';
-import {BLACK_COLOR, BLUE_COLOR, FONT_FAMILY_EXTRABOLD, FONT_FAMILY_SEMIBOLD, PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK, PURPLE_COLOR, WHITE_COLOR, WHITE_COLOR_LIGHT, YELLOW_COLOR} from '../../../components/utilities/constant';
+import { StyleSheet } from 'react-native';
+import { normalize, normalizeHeight, normalizeSpacing, normalizeWidth } from '../../../components/scaleFontSize';
+import { BLACK_COLOR, BLUE_COLOR, FONT_FAMILY_EXTRABOLD, FONT_FAMILY_SEMIBOLD, Isios, PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK, PURPLE_COLOR, WHITE_COLOR, WHITE_COLOR_LIGHT, YELLOW_COLOR } from '../../../components/utilities/constant';
 
 const styles = StyleSheet.create({
   wrap: {
@@ -17,14 +17,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   dashboardScroll: {
-    flex: 1,
-    // backgroundColor: 'red',
+    flexGrow: 1,
   },
   dashboardWrap: {
-    flex: 1,
     padding: normalizeSpacing(15),
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: normalizeSpacing(30)
   },
   secondPortion: {
     flex: 1,
@@ -43,13 +42,12 @@ const styles = StyleSheet.create({
     fontSize: normalize(20),
     fontFamily: FONT_FAMILY_SEMIBOLD,
     color: WHITE_COLOR,
-
   },
   switchView: {
     marginLeft: normalizeSpacing(10),
   },
   switchStyle: {
-    transform: [{ scaleX: .8 }, { scaleY: .8 }] 
+    transform: [{ scaleX: .8 }, { scaleY: .8 }]
   },
   welcomeView: {
     paddingVertical: normalizeSpacing(10),
@@ -70,10 +68,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
+    width: normalizeWidth(100),
+    height: normalizeWidth(100),
   },
   qrCodeImage: {
-    height: normalizeHeight(70),
-    width: normalizeWidth(70),
+    height: normalizeHeight(100),
+    width: normalizeWidth(100),
   },
   linkImageView: {
     position: 'absolute',
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   thirdPortion: {
     backgroundColor: WHITE_COLOR,
-    padding: normalizeSpacing(20),
+    paddingHorizontal: normalizeSpacing(20),
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   },
   thirdPortioncardView: {
     shadowColor: '#171717',
-    shadowOffset: {width: 0, height: 5},
+    shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.2,
     shadowRadius: 10,
     elevation: 10,
@@ -153,17 +153,18 @@ const styles = StyleSheet.create({
     color: BLACK_COLOR,
     fontSize: normalize(16),
     fontFamily: FONT_FAMILY_SEMIBOLD,
+    fontWeight: '600',
     textAlign: 'center'
   },
   thirdPortionCardTextView: {
     margin: normalizeSpacing(10),
-    width: '70%',
+    width: Isios ? '75%' : '70%',
   },
   thirdPortionNumberText: {
     color: PRIMARY_THEME_COLOR,
     fontSize: normalize(16),
     fontFamily: FONT_FAMILY_EXTRABOLD,
-    padding: normalizeSpacing(10),
+    paddingBottom: normalizeSpacing(10),
   },
   bottomSection: {
     flex: 1,
@@ -175,19 +176,19 @@ const styles = StyleSheet.create({
     marginVertical: normalizeSpacing(2),
     borderBottomColor: WHITE_COLOR,
     borderBottomWidth: 3,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   headingText: {
     flex: 1,
     padding: normalizeSpacing(5),
-    color: PRIMARY_THEME_COLOR,
     fontSize: normalize(11),
     fontFamily: FONT_FAMILY_EXTRABOLD,
     textAlign: 'center',
+    color: WHITE_COLOR,
   },
   itemText: {
     flex: 1,
-    padding: normalizeSpacing(5),
+    paddingVertical: normalizeSpacing(5),
     color: PRIMARY_THEME_COLOR,
     fontSize: normalize(11),
     fontFamily: FONT_FAMILY_EXTRABOLD,
@@ -199,6 +200,19 @@ const styles = StyleSheet.create({
   },
   knowMoreText: {
     fontSize: normalize(14),
+    color: PRIMARY_THEME_COLOR,
+  },
+  subTitleVw: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: normalizeSpacing(28)
+  },
+  subTitleTxt: {
+    textAlign: "center",
+    fontFamily: FONT_FAMILY_EXTRABOLD,
+    fontSize: normalize(20),
+    color: WHITE_COLOR,
   }
 });
 

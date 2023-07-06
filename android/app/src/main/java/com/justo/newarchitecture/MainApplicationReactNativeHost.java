@@ -1,4 +1,4 @@
-package com.justo.newarchitecture;
+package com.Justo.kreate.co.in.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.justo.BuildConfig;
-import com.justo.newarchitecture.components.MainComponentsRegistry;
-import com.justo.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.Justo.kreate.co.in.BuildConfig;
+import com.Justo.kreate.co.in.newarchitecture.components.MainComponentsRegistry;
+import com.Justo.kreate.co.in.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

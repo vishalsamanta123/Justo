@@ -1,76 +1,49 @@
-import React, { useState } from 'react';
-import { View, Text, useWindowDimensions, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, useWindowDimensions, Image, TouchableOpacity, Linking } from 'react-native';
 import images from '../../../../assets/images';
 import Header from '../../../../components/Header';
 import { PRIMARY_THEME_COLOR, PRIMARY_THEME_COLOR_DARK, TABBAR_COLOR } from '../../../../components/utilities/constant';
 import strings from '../../../../components/utilities/Localization';
 import styles from './styles';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SmInfoView from './SMInfo';
 import StatsView from './StatsViews';
 import Button from '../../../../components/Button';
+import { useSelector } from 'react-redux';
+import usePermission from 'app/components/utilities/UserPermissions';
 
 const SMDetailsView = (props: any) => {
-    const DATAINFO: any =
-    {
-        AgentName: 'ABC',
-        Mobileno: '12586663',
-        Email: 'Abc@gmail.com',
-        whatsappno: '8890898779',
-        rerano: '12345699',
-        aadharno: '12345699',
-        pancardno: 'AAAAA2225A',
-        gst: 'ABC123',
-        workingfrom: '22/10/2021',
-        workinglocation: ['indoe', 'Dewash'],
-        allocatedCp: [
-            {
-                id: 1,
-                cpName: 'CP 1'
-            },
-            {
-                id: 2,
-                cpName: 'CP 2'
-            },
-            {
-                id: 3,
-                cpName: 'CP 3'
-            },
-            {
-                id: 4,
-                cpName: 'CP 4'
-            },
-        ]
-    };
-    const DATASTATS: any =
-    {
-        closingper: 10,
-        visitor: 123,
-        siteVisit: 234,
-        closeVisit: 600,
-        lastlogin: '2 min ago',
-        lastvisit: '2 min ago',
-        lastsitevisit: '2 min ago',
-        lastclosevisit: '2 min ago',
-        month: 'March',
-        startDate: '01/02/2022',
-        endDate: '10/02/2022',
-        visitTarget: '10/02',
-        siteVisitTarget: '15/02',
-        closeTarget: '12/02',
-    };
+    const [SMdetail, setSMdetail] = useState<any>([])
+    const { response = {}, detail = '' } = useSelector((state: any) => state.SourcingManager)
+    const [indexData, setIndexData] = useState({
+        index: 0,
+        routes: [
+            { key: 'first', title: 'Stats' },
+            { key: 'second', title: 'SM Info' },
+        ],
+    });
+    useEffect(() => {
+        if (response && response?.status === 200) {
+            if (response?.data?.length > 0) {
+                setSMdetail(response?.data[0] ? response?.data[0] : []);
+            }
 
-    const insets = useSafeAreaInsets();
+        } else {
+            setSMdetail([]);
+            //errorToast(response.message);
+        }
+    }, [response])
 
     const layout = useWindowDimensions();
 
-    const [index, setIndex] = useState(0);
-    const [routes] = useState([
-        { key: 'first', title: 'Stats' },
-        { key: 'second', title: 'SM Info' },
-    ]);
-
+    const handleIndexChange = (index: any) => {
+        setIndexData({
+            index: index, routes: [
+                { key: 'first', title: 'Stats' },
+                { key: 'second', title: 'SM Info' },
+            ],
+        })
+    }
     const renderTabBar = (props: any) => (
         <TabBar
             activeColor={TABBAR_COLOR}
@@ -80,16 +53,23 @@ const SMDetailsView = (props: any) => {
             style={{ backgroundColor: PRIMARY_THEME_COLOR_DARK }} />
     );
     const FirstRoute = () => (
-        <StatsView items={DATASTATS} handleCpAllocation={props.handleCpAllocationPress} />
+        <StatsView items={SMdetail} handleCpAllocation={props.handleCpAllocationPress} />
     );
 
     const SecondRoute = () => (
-        <SmInfoView items={DATAINFO} handleCpAllocation={props.handleCpAllocationPress} />
+        <SmInfoView items={SMdetail} handleCpAllocation={props.handleCpAllocationPress} />
     );
-    const renderScene = SceneMap({
-        first: FirstRoute,
-        second: SecondRoute,
-    });
+    const renderScene = ({ index, route, }: any) => {
+        switch (route.key) {
+            case 'first':
+                return <FirstRoute />;
+            case 'second':
+                return <SecondRoute />;
+        }
+    };
+    const { allocate } = usePermission({
+        allocate: 'allocate_cp'
+    })
     return (
         <View style={styles.mainContainer}>
             <Header
@@ -104,34 +84,47 @@ const SMDetailsView = (props: any) => {
                 barStyle={'light-content'}
             />
             <View style={styles.topItemVw}>
-                <Image
-                    source={images.chat}
-                    style={styles.topItemSty}
-                />
-                <Image
-                    source={images.chat}
-                    style={styles.topItemSty}
-                />
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => {
+                        Linking?.openURL(
+                            `tel:${SMdetail?.mobile}`
+                        )
+                    }}
+                >
+                    <Text style={styles.buttonTxt}>Call</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => {
+                        Linking?.openURL(
+                            `sms:${SMdetail?.mobile}`
+                        )
+                    }}
+                >
+                    <Text style={styles.buttonTxt}>SMS</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.propertyListView}>
                 <TabView
                     renderTabBar={renderTabBar}
-                    navigationState={{ index, routes }}
-                    renderScene={renderScene}
-                    onIndexChange={setIndex}
                     initialLayout={{ width: layout.width }}
+                    navigationState={indexData}
+                    renderScene={({ index, route }: any) => renderScene({ index, route })}
+                    onIndexChange={handleIndexChange}
                 />
             </View>
-            <View style={{ marginVertical: 12, alignItems: 'flex-end', }}>
-                <Button
-                    width={150}
-                    height={40}
-                    btnTxtsize={16}
-                    textTransform={null}
-                    buttonText={strings.cpAllocation}
-                    handleBtnPress={() => props.handleCpAllocation()}
-                />
-            </View>
+            {allocate &&
+                (<View style={{ marginVertical: 12, alignItems: 'center', }}>
+                    <Button
+                        width={150}
+                        height={40}
+                        btnTxtsize={16}
+                        textTransform={null}
+                        buttonText={strings.cpAllocation}
+                        handleBtnPress={() => props.handleCpAllocationPress(SMdetail)}
+                    />
+                </View>)}
         </View>
     )
 }

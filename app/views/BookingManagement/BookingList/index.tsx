@@ -1,73 +1,124 @@
-import React from "react";
-import { Alert } from "react-native";
-import BookingListView from './components/BookingList'
+import { useFocusEffect } from "@react-navigation/native";
+import {
+  getBookingList,
+  getRegisteredList,
+} from "app/Redux/Actions/BookingActions";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import BookingListView from "./components/BookingList";
+import { todayDate } from "app/components/utilities/constant";
 
-const BookingListScreen = ({ navigation }: any) => {
-    const DATA: any = [
-        {
-            customerName: 'ABC',
-            Location: 'Indore',
-            configure: "12 BHK",
-            booking_status: 'Pending',
-            siteVisit: 234,
-            closeVisit: 600,
-            status: 'confirmatin Pending',
-            createddate: '11/10/2022',
-            budget: '20 L',
-            booking_amt: '30 L'
-        },
-        {
-            customerName: 'ABC',
-            Location: 'Indore',
-            configure: "12 BHK",
-            booking_status: 'Pending',
-            siteVisit: 234,
-            closeVisit: 600,
-            status: 'Pending',
-            createddate: '11/10/2022',
-            budget: '30 L',
-            booking_amt: '80 L'
-        },
-        {
-            customerName: 'ABC',
-            Location: 'Indore',
-            configure: "12 BHK",
-            booking_status: 'Pending',
-            siteVisit: 234,
-            closeVisit: 600,
-            status: 'Pending',
-            createddate: '11/10/2022',
-            budget: '20 L',
-            booking_amt: '20 L'
-        },
-        {
-            customerName: 'ABC',
-            Location: 'Indore',
-            configure: "12 BHK",
-            booking_status: 'Pending',
-            siteVisit: 234,
-            closeVisit: 600,
-            status: 'confirmatin Pending',
-            createddate: '11/10/2022',
-            budget: '50 L',
-            booking_amt: '10 L'
-        },
-    ];
-    const handleDrawerPress = () => {
-        navigation.toggleDrawer()
-    };
+const BookingListScreen = ({ navigation, route }: any) => {
+  const { type = '', onpressType = '' } = route?.params || {}
+  const [BookingList, setBookingList] = useState<any>([]);
+  const [offSET, setOffset] = useState(0);
+  const [datatype, setDatatype] = useState("");
+  const dispatch: any = useDispatch();
+  const { response = {}, list = "" } = useSelector(
+    (state: any) => state.booking
+    );
+  const moreData = response?.total_data;
 
-    const handleView = () => {
-        navigation.navigate('BookingDetails')
+  const [filterData, setFilterData] = useState({
+    start_date: "",
+    end_date: "",
+    status: "",
+    customer_name: ""
+  });
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     setDatatype(onpressType);
+  //     return () => {};
+  //   }, [onpressType])
+  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      // getBookingLits(0, []);
+      setBookingList([]);
+      handleonpressType();
+      return () => {};
+    }, [navigation, list, type, onpressType])
+  );
+  useEffect(() => {
+    if (response?.status === 200) {
+      if (response?.data?.length > 0) {
+        if (offSET === 0) {
+          setBookingList(response?.data);
+        } else {
+          setBookingList([...BookingList, ...response?.data]);
+        }
+      }else {
+        setBookingList([]);
+      }
+    } else {
+      setBookingList([]);
     }
-    return (
-        <>
-            <BookingListView
-                handleDrawerPress={handleDrawerPress}
-                DATA={DATA}
-                handleView={handleView}
-            />
-        </>
-    )
-}
-export default BookingListScreen
+  }, [response]);
+
+  const handleonpressType = () => {
+    if (onpressType === "today") {
+      getBookingLits(0, todayDate);
+    } else {
+      getBookingLits(0, []);
+    }
+  };
+
+  const getBookingLits = (offset: any, array: any) => {
+    console.log("array: ", array);
+    setOffset(offset);
+    if (type === "register") {
+      dispatch(
+        getRegisteredList({
+          offset: offset,
+          limit: 10,
+          start_date: array?.start_date ? array?.start_date : "",
+          end_date: array?.end_date ? array?.end_date : "",
+          customer_name: array?.customer_name ? array?.customer_name : "",
+        })
+      );
+    } else {
+      dispatch(
+        getBookingList({
+          offset: offset,
+          limit: 10,
+          booking_status: array?.status
+            ? array?.status
+            : type === "readyToBook"
+              ? 1
+              : 5,
+          start_date: array?.start_date ? array?.start_date : "",
+          end_date: array?.end_date ? array?.end_date : "",
+          customer_name: array?.customer_name ? array?.customer_name : "",
+        })
+      );
+    }
+  };
+  const handleDrawerPress = () => {
+    navigation.toggleDrawer();
+  };
+
+  const handleView = (data: any) => {
+    navigation.navigate("BookingDetails", { data: data, type: type });
+  };
+  return (
+    <>
+      <BookingListView
+        handleDrawerPress={handleDrawerPress}
+        DATA={BookingList}
+        handleView={handleView}
+        getBookingLits={getBookingLits}
+        moreData={moreData}
+        offSET={offSET}
+        setBookingList={setBookingList}
+        type={type}
+        onpressType={onpressType}
+        navigation={navigation}
+        setDatatype={setDatatype}
+        filterData={filterData}
+        setFilterData={setFilterData}
+      />
+    </>
+  );
+};
+export default BookingListScreen;

@@ -12,8 +12,9 @@ const styles = StyleSheet.create({
     leftImageIconStyle: {
         tintColor: WHITE_COLOR,
     },
-    ProfileView:{
-        flex: 1,
+    ProfileView: {
+        flexGrow: 1,
+        marginTop: normalizeSpacing(10)
     },
     roleView: {
         flex: 0.5,
@@ -67,17 +68,19 @@ const styles = StyleSheet.create({
     keyText: {
         fontSize: normalize(15),
         fontFamily: FONT_FAMILY_EXTRABOLD,
+        color: GRAY_LIGHT_COLOR
     },
     valueView: {
         flex: 3,
         alignItems: 'flex-end',
+        paddingLeft: normalizeSpacing(5)
     },
     valueText: {
         fontSize: normalize(15),
         fontFamily: FONT_FAMILY_SEMIBOLD,
-        color: GRAY_LIGHT_COLOR
+        color: GRAY_LIGHT_COLOR,
     },
-    colon:{
+    colon: {
         fontSize: normalize(15),
         fontFamily: FONT_FAMILY_EXTRABOLD,
     }

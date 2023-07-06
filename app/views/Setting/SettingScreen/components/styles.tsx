@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { normalize, normalizeHeight, normalizeSpacing, normalizeWidth } from "../../../../components/scaleFontSize";
-import { FONT_FAMILY_SEMIBOLD, PRIMARY_THEME_COLOR, WHITE_COLOR } from "../../../../components/utilities/constant";
+import { FONT_FAMILY_SEMIBOLD, PRIMARY_THEME_COLOR, WHITE_COLOR, GRAY_LIGHT_COLOR } from "../../../../components/utilities/constant";
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -14,13 +14,15 @@ const styles = StyleSheet.create({
     },
     listView: {
         flex: 1,
-        margin: normalizeSpacing(10)
+        //margin: normalizeSpacing(10)
     },
     listItemView: {
         flex: 1,
         flexDirection: 'row',
         alignItems :'center',
-        padding: normalizeSpacing(15)
+        padding: normalizeSpacing(15),
+        borderBottomColor:GRAY_LIGHT_COLOR,
+        borderBottomWidth:0.5,
     },
     iconView:{
         flex: 1,
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
     headingTxt: {
         fontSize: normalize(16),
         fontFamily: FONT_FAMILY_SEMIBOLD,
+        color: GRAY_LIGHT_COLOR
     },
     rightArrowView: {
         flex: 1,
