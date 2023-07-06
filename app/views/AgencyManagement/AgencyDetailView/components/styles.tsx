@@ -49,6 +49,14 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY_SEMIBOLD,
     color: GRAY_LIGHT_COLOR
   },
+  headingTxt: {
+    fontSize: normalize(20),
+    fontFamily: FONT_FAMILY_SEMIBOLD,
+  },
+  headingView: {
+    padding: normalizeSpacing(10),
+    alignItems: 'center'
+  },
   nameContainer: {
     flex: 3.5,
     alignItems: 'flex-start',
@@ -76,7 +84,15 @@ const styles = StyleSheet.create({
   buttonTxt: {
     // color: WHITE_COLOR,
     textAlign: 'center'
-  }
+  },
+  closeIconTouch:{
+    position: 'relative'
+  },
+  closeIcon: {
+    tintColor: "red",
+    width: normalizeWidth(30),
+    height: normalizeHeight(30),
+  },
 });
 
 export default styles;

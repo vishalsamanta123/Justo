@@ -1,54 +1,65 @@
-import React from "react";
-import { DrawerActions } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import PickupRequestView from "./components/PickupRequest";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllPickupList,
+  updatePickupStatusAction,
+} from "app/Redux/Actions/PickUpActions";
 
 const PickupRequestScreen = ({ navigation }: any) => {
-  const DATA: any = [
-    {
-      dateTime: '11/10/2022 11:30 AM',
-      visitorName: 'ABC',
-      pickupLocation: 'Indore,madhya pradesh',
-      mobile: 1238900999,
-      noOfGuest: 2,
-      visitScore: 600,
-      status: 'confirmatin Pending',
-    },
-    {
-      dateTime: '11/10/2022 12:00 AM',
-      visitorName: 'ABCDEF',
-      pickupLocation: 'Indore,bangali',
-      mobile: 1238977688,
-      noOfGuest: 23,
-      visitScore: 600,
-      status: 'Subscribe',
-    },
-    {
-      dateTime: '11/10/2022 3:00 PM',
-      visitorName: 'DEDD',
-      pickupLocation: 'Indore',
-      mobile: 12894894353,
-      noOfGuest: 1,
-      visitScore: 600,
-      status: 'Unsubscribe',
-    },
-    {
-      dateTime: '11/10/2022 02:00 PM',
-      visitorName: 'ABSFC',
-      pickupLocation: 'Indore',
-      mobile: 124358943853,
-      noOfGuest: 20,
-      visitScore: 600,
-      status: 'confirmatin Pending',
-    },
-  ];
+  const [filterisVisible, setFilterisVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [pickupList, setPickupList] = useState([]);
+  const [appointId, setAppointId] = useState<any>({});
+  const dispatch: any = useDispatch();
+  const { response = {}, list = false } =
+    useSelector((state: any) => state.Pickup) || [];
+  const updatePickUpStatusData =
+    useSelector((state: any) => state.updatePickUpStatusData) || [];
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(getAllPickupList({}));
+      return () => {};
+    }, [navigation, list, updatePickUpStatusData])
+  );
+  useEffect(() => {
+    if (response?.status === 200) {
+      setPickupList(response?.data);
+    }
+  }, [response]);
+
+  const onRefresh = () => {
+    dispatch(getAllPickupList({}));
+  };
+
+  const updatePickupStatus = () => {
+    dispatch(
+      updatePickupStatusAction({
+        appointment_id: appointId.appointment_id,
+        status_type: 1,
+        status: 1,
+      })
+    );
+  };
+
   const handleDrawerPress = () => {
     navigation.toggleDrawer();
   };
   return (
     <PickupRequestView
       handleDrawerPress={handleDrawerPress}
-      DATA={DATA}
+      DATA={pickupList}
+      filterisVisible={filterisVisible}
+      setFilterisVisible={setFilterisVisible}
+      onRefresh={onRefresh}
+      updatePickupStatus={updatePickupStatus}
+      isVisible={isVisible}
+      setIsVisible={setIsVisible}
+      appointId={appointId}
+      setAppointId={setAppointId}
     />
-  )
-}
+  );
+};
 export default PickupRequestScreen;

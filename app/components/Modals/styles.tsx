@@ -13,18 +13,43 @@ import {
   FONT_FAMILY_SEMIBOLD,
   GRAY_COLOR,
   PRIMARY_THEME_COLOR,
+  RED_COLOR,
   WHITE_COLOR,
 } from "../utilities/constant";
 
 const styles = StyleSheet.create({
   fullContainer: {
     marginLeft: 0,
-    width: '100%',
+    width: "100%",
     marginBottom: 0,
   },
   mainContainer: {
     backgroundColor: WHITE_COLOR,
     borderRadius: 5,
+  },
+  propMainContainer: {
+    backgroundColor: WHITE_COLOR,
+    borderRadius: 5,
+    flex: 1,
+    paddingHorizontal: 10,
+  },
+  tickImgVw: {
+    backgroundColor: PRIMARY_THEME_COLOR,
+    borderRadius: normalize(50),
+    marginRight: normalize(15),
+    padding: normalize(2),
+  },
+  tickImg: {
+    height: normalizeHeight(18),
+    width: normalizeWidth(18),
+    tintColor: WHITE_COLOR,
+  },
+  descTxt: {
+    color: BLACK_COLOR,
+    fontSize: normalize(18),
+    fontFamily: FONT_FAMILY_SEMIBOLD,
+    textAlign: "center",
+    marginTop: normalizeSpacing(10),
   },
   borderView: {
     borderBottomColor: GRAY_COLOR,
@@ -40,6 +65,7 @@ const styles = StyleSheet.create({
     color: BLACK_COLOR,
     fontSize: normalize(18),
     fontFamily: FONT_FAMILY_EXTRABOLD,
+    width: "92%",
   },
   bottomTxt: {
     color: BLACK_COLOR,
@@ -84,6 +110,15 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
   },
+  propertyVw: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+  },
+  addNewBttn: {
+    alignSelf: "flex-end",
+    marginBottom: normalizeSpacing(6),
+  },
   placeholderStyle: {
     fontSize: 16,
   },
@@ -99,52 +134,57 @@ const styles = StyleSheet.create({
     color: BLACK_COLOR,
     fontFamily: FONT_FAMILY_MEDIUM,
     marginLeft: 5,
-    marginVertical: normalize(8)
+    marginVertical: normalize(8),
+  },
+  errorTxt: {
+    color: RED_COLOR,
+    marginLeft: normalizeSpacing(10),
+    marginVertical: normalize(6),
   },
   inputWrap: {
-    marginTop: normalizeSpacing(12),
+    marginTop: normalizeSpacing(16),
   },
   btnview: {
-    width: '50%',
+    width: "50%",
     height: normalizeHeight(50),
   },
   conteconfirm: {
     flexDirection: "column",
   },
   cancelModalVw: {
-    position: 'absolute',
-    alignSelf: 'center',
+    position: "absolute",
+    alignSelf: "center",
     top: -30,
     backgroundColor: PRIMARY_THEME_COLOR,
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
     paddingHorizontal: normalize(14),
-    paddingVertical: normalize(5)
+    paddingVertical: normalize(5),
   },
   pickerModal: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   pickerModalCon: {
     backgroundColor: PRIMARY_THEME_COLOR,
     paddingHorizontal: 10,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    paddingVertical: normalize(20)
+    paddingVertical: normalize(20),
   },
   straightVw: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   componentsVw: {
     paddingVertical: normalize(5),
     borderWidth: 1,
     borderColor: WHITE_COLOR,
-    alignItems: 'center',
+    alignItems: "center",
     marginHorizontal: normalize(10),
     borderRadius: 10,
-    width: normalizeWidth(70)
+    width: normalizeWidth(70),
   },
   componentsImg: {
     width: normalizeWidth(24),
@@ -154,8 +194,153 @@ const styles = StyleSheet.create({
   componentsTxt: {
     fontSize: normalize(14),
     color: WHITE_COLOR,
-    fontFamily: FONT_FAMILY_REGULAR
-  }
+    fontFamily: FONT_FAMILY_REGULAR,
+  },
+  selecttxtmodel: {
+    marginVertical: normalizeSpacing(10),
+    fontFamily: FONT_FAMILY_EXTRABOLD,
+    fontSize: 18,
+  },
+  citySearchView: {
+    backgroundColor: WHITE_COLOR,
+    marginHorizontal: normalizeSpacing(10),
+    borderRadius: 5,
+    marginVertical: normalizeSpacing(10),
+    borderColor: PRIMARY_THEME_COLOR,
+    borderWidth: 1,
+  },
+  cityListView: {
+    height: normalizeHeight(250),
+    backgroundColor: WHITE_COLOR,
+    marginHorizontal: normalizeSpacing(10),
+    marginVertical: normalizeSpacing(20),
+    shadowColor: "#000",
+    elevation: 10,
+  },
+  genderView: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: normalizeSpacing(10),
+    marginTop: 30,
+    width: "100%",
+  },
+  genderTxt: {
+    fontSize: normalize(18),
+    color: PRIMARY_THEME_COLOR,
+  },
+  radioView: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: normalizeSpacing(10),
+  },
+  radioTxt: {
+    fontSize: normalize(18),
+  },
+  headerStyle: {
+    backgroundColor: PRIMARY_THEME_COLOR,
+  },
+  headerTextStyle: {
+    color: WHITE_COLOR,
+  },
+  containerVw: {
+    paddingHorizontal: normalize(20),
+    paddingVertical: normalize(12),
+    backgroundColor: WHITE_COLOR,
+  },
+  headerTxt: {
+    fontSize: normalize(16),
+    color: BLACK_COLOR,
+    fontFamily: FONT_FAMILY_MEDIUM,
+  },
+  selectedBox: {
+    paddingVertical: normalize(10),
+    borderWidth: 1,
+    borderColor: PRIMARY_THEME_COLOR,
+    marginVertical: normalize(8),
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+    borderRadius: normalize(10),
+  },
+  innerBoxVw: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    padding: 5,
+    //paddingHorizontal: 15,
+    marginVertical: 5,
+    minWidth: 50,
+    justifyContent: "space-between",
+    //backgroundColor:'red',
+    //borderRadius:3,
+    borderWidth: 1,
+    borderColor: GRAY_COLOR,
+  },
+  userNameTxt: {
+    fontFamily: FONT_FAMILY_SEMIBOLD,
+  },
+  crossVw: {
+    width: normalizeWidth(15),
+    height: normalizeHeight(15),
+    marginHorizontal: 5,
+  },
+  noSelectedTxt: {
+    fontSize: normalize(14),
+    color: GRAY_COLOR,
+    fontFamily: FONT_FAMILY_REGULAR,
+    paddingHorizontal: 8,
+  },
+  searchInputVw: {
+    marginVertical: 2,
+    height: 40,
+    fontFamily: FONT_FAMILY_MEDIUM,
+    fontSize: 14,
+    color: BLACK_COLOR,
+    backgroundColor: WHITE_COLOR,
+    elevation: 1,
+    paddingLeft: 20,
+    borderRadius: 10,
+  },
+  innerBoxVwlist: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    paddingHorizontal: normalize(12),
+    marginVertical: normalize(10),
+    minWidth: normalizeWidth(70),
+    justifyContent: "space-between",
+  },
+  innerBoxVwlistfont: {
+    fontSize: 15,
+    fontFamily: FONT_FAMILY_SEMIBOLD,
+  },
+  checkBoxVw: {
+    backgroundColor: WHITE_COLOR,
+    paddingVertical: 2,
+    borderWidth: 1,
+    borderRadius: 2,
+  },
+  checksVw: {
+    width: normalizeWidth(5),
+    height: normalizeHeight(10),
+    marginHorizontal: 5,
+  },
+  btncontener: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginHorizontal: normalizeSpacing(10),
+    marginVertical: normalizeSpacing(8),
+  },
+  inventoryWrap: {
+    margin: 10,
+    marginLeft: 20
+  },
+  inventoryView: {
+    padding: 5
+  },
+  inventoryTxt: {
+    fontSize: normalize(14),
+    fontFamily: FONT_FAMILY_REGULAR,
+  },
 });
 
 export default styles;

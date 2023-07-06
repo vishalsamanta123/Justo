@@ -1,4 +1,4 @@
-package com.justo;
+package com.Justo.kreate.co.in;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

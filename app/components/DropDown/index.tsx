@@ -1,18 +1,19 @@
 import { View, Text } from 'react-native'
-import React from 'react'
-import { Dropdown } from 'react-native-element-dropdown';
+import React, { useRef } from 'react'
+import { Dropdown, IDropdownRef } from 'react-native-element-dropdown';
 import styles from './styles';
 import { dropdownData } from '../utilities/DemoData';
 import { normalize, normalizeHeight } from '../scaleFontSize';
+import { RequiredStart } from '../utilities/GlobalFuncations';
+import { Isios } from '../utilities/constant';
 
 const DropdownInput = (props: any) => {
+    const ref = useRef<IDropdownRef>(null);
     const {
-        inputWidth = '90%',
-        inputheight = 50,
-        fontSize = 18,
-        borderRadius = 10,
-        borderWidth = 0,
-        borderColor = null,
+        inputWidth = '100%',
+        inputheight = Isios ? 35 : 50,
+        paddingLeft = 0,
+        require = false
     } = props
     const renderItem = (item: any) => {
         return (
@@ -24,33 +25,37 @@ const DropdownInput = (props: any) => {
     return (
         <View>
             <View style={styles.inputHeadinView}>
-                <Text style={styles.inputHeadingText}>{props.headingText}</Text>
+                <Text numberOfLines={1} style={styles.inputHeadingText}>{props.headingText}</Text>
+                {require ? (<RequiredStart />) : null}
             </View>
-            <View style={[styles.mainContainer, {
-                borderRadius: borderRadius,
-                borderWidth: borderWidth,
-                borderColor: borderColor
-            }]}>
+            <View style={styles.mainContainer}>
                 <Dropdown
+                    ref={ref}
                     style={[styles.dropdown, {
                         width: inputWidth,
                         height: normalizeHeight(inputheight),
+                        paddingLeft: normalize(paddingLeft),
                     }]}
-                    placeholderStyle={[styles.placeholderStyle, {
-                        fontSize: normalize(fontSize),
-                    },]}
-                    selectedTextStyle={styles.selectedTextStyle}
+                    search={props.search}
+                    searchPlaceholder={props.searchPlaceholder}
+                    inputSearchStyle={styles.searchInput}
+                    itemTextStyle={{ fontSize: 10 }}
+                    itemContainerStyle={props.itemContainerStyle}
+                    placeholderStyle={styles.placeholderStyle}
+                    selectedTextStyle={props.selectedTextStyle ? props.selectedTextStyle : styles.selectedTextStyle}
                     iconStyle={styles.iconStyle}
-                    data={dropdownData}
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
+                    data={props.data ? props.data : dropdownData}
+                    maxHeight={props.maxHeight ? props.maxHeight : 300}
+                    labelField={props.labelField ? props.labelField : "label"}
+                    valueField={props.valueField ? props.valueField : "value"}
                     placeholder={props.placeholder}
+                    disable={props.disable}
                     value={props.value}
                     onChange={(item) => {
-                        props.setValue(item.value);
+                        props.onChange(item);
                     }}
-                    renderItem={renderItem}
+                    onFocus={props.onFocus}
+                    renderItem={props.newRenderItem ? props.newRenderItem : renderItem}
                 />
             </View>
         </View>

@@ -1,12 +1,20 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './styles';
 import strings from '../../../../components/utilities/Localization';
-import { BLACK_COLOR, GREEN_COLOR, WHITE_COLOR, YELLOW_COLOR } from '../../../../components/utilities/constant';
+import { BLACK_COLOR, YELLOW_COLOR, GOLDEN_COLOR, GREEN_COLOR, RED_COLOR, ROLE_IDS, DATE_TIME_FORMAT } from '../../../../components/utilities/constant';
 import images from '../../../../assets/images';
-import Button from '../../../../components/Button';
+import moment from 'moment';
+import { useSelector } from 'react-redux';
+import usePermission from 'app/components/utilities/UserPermissions';
 
 const PropertyListItem = (props: any) => {
+  const getLoginType = useSelector((state: any) => state.login);
+  const roleType = getLoginType?.response?.data?.role_id || null;
+  const { view, allocate } = usePermission({
+    view: "view_property",
+    allocate: 'property_allocate'
+  });
   return (
     <View style={styles.IteamView}>
       <View style={styles.Txtview} >
@@ -14,7 +22,15 @@ const PropertyListItem = (props: any) => {
           <Text style={styles.projectTxt}>Project Name :</Text>
         </View>
         <View style={styles.nameContainer}>
-          <Text style={styles.nameTxt}>{props.items.Projectname}</Text>
+          <Text style={styles.nameTxt}>{props.items.property_title}</Text>
+        </View>
+      </View>
+      <View style={styles.Txtview} >
+        <View style={styles.projectContainer}>
+          <Text style={styles.projectTxt}>Locality :</Text>
+        </View>
+        <View style={styles.nameContainer}>
+          <Text style={styles.nameTxt}>{props.items.location}</Text>
         </View>
       </View>
       <View style={styles.Txtview} >
@@ -22,15 +38,15 @@ const PropertyListItem = (props: any) => {
           <Text style={styles.projectTxt}>Location :</Text>
         </View>
         <View style={styles.nameContainer}>
-          <Text style={styles.nameTxt}>{props.items.Location}</Text>
+          <Text style={styles.nameTxt}>{props.items.area}</Text>
         </View>
       </View>
       <View style={styles.Txtview} >
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>Visitor :</Text>
+          <Text style={styles.projectTxt}>Leads :</Text>
         </View>
         <View style={styles.nameContainer}>
-          <Text style={styles.nameTxt}>{props.items.visitor}</Text>
+          <Text style={styles.nameTxt}>{props.items.total_visitor}</Text>
         </View>
       </View>
       <View style={styles.Txtview}>
@@ -38,15 +54,23 @@ const PropertyListItem = (props: any) => {
           <Text style={styles.projectTxt}>Site Visit :</Text>
         </View>
         <View style={styles.nameContainer}>
-          <Text style={styles.nameTxt}>{props.items.siteVisit}</Text>
+          <Text style={styles.nameTxt}>{props.items.site_visit}</Text>
         </View>
       </View>
       <View style={styles.Txtview} >
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>Colse Visit :</Text>
+          <Text style={styles.projectTxt}>Registration :</Text>
         </View>
         <View style={styles.nameContainer}>
-          <Text style={styles.nameTxt}>{props.items.closeVisit}</Text>
+          <Text style={styles.nameTxt}>{props.items.close_visit}</Text>
+        </View>
+      </View>
+      <View style={styles.Txtview} >
+        <View style={styles.projectContainer}>
+          <Text style={styles.projectTxt}>Booking :</Text>
+        </View>
+        <View style={styles.nameContainer}>
+          <Text style={styles.nameTxt}>{props.items.booking_visit}</Text>
         </View>
       </View>
       <View style={styles.Txtview} >
@@ -55,9 +79,8 @@ const PropertyListItem = (props: any) => {
         </View>
         <View style={styles.nameContainer}>
           <Text style={[styles.nameTxt, {
-            color: props.items.status == 'confirmatin Pending' ? BLACK_COLOR :
-              props.items.status == 'Subscribe' ? YELLOW_COLOR : 'red'
-          }]}>{props.items.status}</Text>
+            color: props.items.status ? GREEN_COLOR : RED_COLOR
+          }]}>{(props.items.status) ? 'Active' : 'Inactive'}</Text>
         </View>
       </View>
       <View style={[styles.Txtview, { borderBottomWidth: 0 }]} >
@@ -65,27 +88,33 @@ const PropertyListItem = (props: any) => {
           <Text style={styles.projectTxt}>Create Date :</Text>
         </View>
         <View style={styles.nameContainer}>
-          <Text style={styles.nameTxt}>{props.items.createddate}</Text>
+          <Text style={styles.nameTxt}>{moment(props.items.createdDate).format(DATE_TIME_FORMAT)}</Text>
         </View>
       </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          width={90}
-          height={30}
-          bgcolor={WHITE_COLOR}
-          bordercolor={GREEN_COLOR}
-          borderWidth={1}
-          btnTxtcolor={GREEN_COLOR}
-          buttonText={strings.allocate}
-          btnTxtsize={14}
-          border={10}
-        />
-        <TouchableOpacity style={styles.Viewbutton} onPress={() => props.onPressView(props.items)} >
-          <Image
-            source={images.forwardArrow}
-            style={styles.arrow}
-          />
-        </TouchableOpacity>
+      <View style={[styles.buttonContainer, roleType === ROLE_IDS.sitehead_id || !allocate ? {
+        justifyContent: 'flex-end'
+      } : {}]}>
+        {allocate &&
+        ( roleType === ROLE_IDS.sitehead_id ?
+          <></> :
+          <TouchableOpacity
+            onPress={() => props.handleAllocatePress(props.items)}
+            style={[styles.button, {
+              borderColor: GREEN_COLOR
+            }]} >
+            <Text style={[styles.buttonTxt, {
+              color: GREEN_COLOR
+            }]}>{
+                strings.allocate
+              }</Text>
+          </TouchableOpacity>)}
+        {view &&
+          (<TouchableOpacity style={styles.Viewbutton} onPress={() => props.onPressView(props.items)} >
+            <Image
+              source={images.forwardArrow}
+              style={styles.arrow}
+            />
+          </TouchableOpacity>)}
       </View>
     </View>
   );

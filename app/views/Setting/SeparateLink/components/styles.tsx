@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import { normalizeHeight, normalizeSpacing, normalizeWidth } from "../../../../components/scaleFontSize";
-import { PRIMARY_THEME_COLOR, WHITE_COLOR } from "../../../../components/utilities/constant";
+import { normalize, normalizeHeight, normalizeSpacing, normalizeWidth } from "../../../../components/scaleFontSize";
+import { FONT_FAMILY_SEMIBOLD, GRAY_LIGHT_COLOR, PRIMARY_THEME_COLOR, WHITE_COLOR } from "../../../../components/utilities/constant";
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -37,6 +37,11 @@ const styles = StyleSheet.create({
       btnCopyLinkView: {
         flex: 1,
       },
+      notFoundText :{
+        fontSize: normalize(15),
+        fontFamily: FONT_FAMILY_SEMIBOLD,
+        color: GRAY_LIGHT_COLOR
+      }
 });
 
 export default styles;

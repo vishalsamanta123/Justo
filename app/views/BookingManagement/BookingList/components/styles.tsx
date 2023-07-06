@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         // backgroundColor: RED_COLOR
     },
     headerStyle: {
-        backgroundColor: PRIMARY_THEME_COLOR_DARK,
+        backgroundColor: PRIMARY_THEME_COLOR,
     },
     listView: {
         flex: 1,

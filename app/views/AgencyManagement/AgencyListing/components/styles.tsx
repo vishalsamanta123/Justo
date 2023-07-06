@@ -25,12 +25,17 @@ const styles = StyleSheet.create({
     margin: normalizeSpacing(2),
   },
   btnView: {
-    flex: 0.6,
-    top: 5,
-    //margin: normalizeSpacing(3),
-    flexDirection: 'row-reverse',
-    marginLeft: normalizeSpacing(22),
-    //backgroundColor:'red'
+    // flex: 0.6,
+    // top: 5,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // marginLeft: normalizeSpacing(22),
+    marginBottom: normalizeSpacing(10),
+  },
+  btnView1: {
+    alignItems: 'center',
+    marginBottom: normalizeSpacing(15),
   },
   propertyListViewsec: {
     flex: 5.4,

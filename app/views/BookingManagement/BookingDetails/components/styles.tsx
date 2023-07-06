@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { normalize, normalizeHeight, normalizeSpacing, normalizeWidth } from '../../../../components/scaleFontSize';
-import { BLACK_COLOR, FONT_FAMILY_EXTRABOLD, FONT_FAMILY_SEMIBOLD, GRAY_COLOR, GRAY_LIGHT_COLOR, PRIMARY_THEME_COLOR, WHITE_COLOR } from '../../../../components/utilities/constant';
+import { BLACK_COLOR, FONT_FAMILY_EXTRABOLD, FONT_FAMILY_SEMIBOLD, GRAY_COLOR, GRAY_LIGHT_COLOR, Isios, PRIMARY_THEME_COLOR, WHITE_COLOR } from '../../../../components/utilities/constant';
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -19,9 +19,29 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginHorizontal: normalizeSpacing(10),
-        marginVertical: normalizeSpacing(5)
+        justifyContent: 'space-around',
+        // marginHorizontal: normalizeSpacing(10),
+        // marginVertical: normalizeSpacing(5),
+        // flexWrap: 'wrap',
+    },
+    buttonVw: {
+        marginVertical: normalize(8)
+    },
+    documentVw: {
+        margin: normalizeSpacing(5),
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: normalizeSpacing(16),
+    },
+    documentTxt: {
+        fontSize: normalize(14),
+        color: PRIMARY_THEME_COLOR,
+        fontFamily: FONT_FAMILY_SEMIBOLD,
+    },
+    documentIcon: {
+        width: normalizeWidth(18),
+        height: normalizeHeight(18),
+        marginLeft: normalizeSpacing(10),
     },
     topDetailsView: {
         flexDirection: 'row',
@@ -94,5 +114,50 @@ const styles = StyleSheet.create({
         color: BLACK_COLOR,
         fontFamily: FONT_FAMILY_SEMIBOLD
     },
+    item: {
+        padding: 17,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    textItem: {
+        flex: 1,
+        fontSize: 16,
+        color: GRAY_LIGHT_COLOR
+    },
+    bookingModelVw: {
+        backgroundColor: WHITE_COLOR,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        marginTop: normalizeSpacing(24)
+    },
+    inputHeadingText: {
+        fontSize: normalize(Isios ? 14 : 16),
+        fontFamily: FONT_FAMILY_SEMIBOLD,
+        color: PRIMARY_THEME_COLOR,
+        marginLeft: normalizeSpacing(14)
+    },
+    straightVw: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: normalize(24)
+    },
+    imageVw: {
+        width: normalizeWidth(60),
+        height: normalizeHeight(60),
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: normalize(10),
+    },
+    docsVwSty: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: normalizeSpacing(16),
+        bottom: normalizeSpacing(6),
+    },
+    docsVw: {
+        marginHorizontal: normalizeSpacing(6)
+    }
 })
 export default styles;

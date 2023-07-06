@@ -10,48 +10,67 @@ import styles from './styles'
 import AgentDetailInfo from './AgentDetailInfo'
 import AgentDetailStats from './AgentDetailStats'
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import moment from 'moment'
 
 
 const PropertyDetailView = (props: any) => {
-  const insets = useSafeAreaInsets();
+  const data = props?.allDetails || {};
+  console.log('data: ', data);
 
   const layout = useWindowDimensions();
-
-  const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    { key: 'first', title: 'Agency Info' },
-    { key: 'second', title: 'Agency Stats' },
-  ]);
-
-
+  const [indexData, setIndexData] = useState({
+    index: 0,
+    routes: [
+      { key: 'first', title: strings.info },
+      { key: 'second', title: strings.stats },
+    ],
+  });
   const DATAINFO: any =
   {
-    status: 'Active',
-    AgentName: 'ABC',
-    Mobileno: '12586663',
-    Email: 'Abc@gmail.com',
-    whatsappno: 'Abc@gmail.com',
-    rerano: '12345699',
-    aadharno: '12345699',
-    pancardno: 'AAAAA2225A',
-    location: 'Indore',
-    workingfrom: '22/10/2021',
-    workinglocation: ['indoe', 'Dewash'],
-
+    active_status: data?.active_status ? data?.active_status : '',
+    AgentName: data?.agent_name ? data?.agent_name : '',
+    agency_name: data?.agency_name ? data?.agency_name : '',
+    Mobileno: data?.primary_mobile ? data?.primary_mobile : '',
+    Email: data?.email ? data?.email : '',
+    whatsappno: data?.whatsapp_number ? data?.whatsapp_number : '',
+    rerano: data?.rera_certificate_no ? data?.rera_certificate_no : '',
+    aadharno: data?.adhar_no ? data?.adhar_no : '',
+    pancardno: data?.pancard_no ? data?.pancard_no : '',
+    location: data?.location ? data?.location : '',
+    workingfrom: data?.createdDate ? moment(data?.createdDate).format('MMM Do YYYY') : '',
+    workinglocation: data?.working_location ? data?.working_location : '',
+    account_no: data?.cp_bank_detail?.account_no ? data?.cp_bank_detail?.account_no : '',
+    bank_name: data?.cp_bank_detail?.bank_name ? data?.cp_bank_detail?.bank_name : '',
+    branch_name: data?.cp_bank_detail?.branch_name ? data?.cp_bank_detail?.branch_name : '',
+    ifsc_code: data?.cp_bank_detail?.ifsc_code ? data?.cp_bank_detail?.ifsc_code : '',
+    base_url: data?.base_url ? data?.base_url : '',
+    rera_certificate: data?.rera_certificate ? data?.rera_certificate : '',
+    propidership_declaration_letter: data?.propidership_declaration_letter ? data?.propidership_declaration_letter : '',
+    cancel_cheaque: data?.cp_bank_detail?.cancel_cheaque ? data?.cp_bank_detail?.cancel_cheaque : '',
+    comp_account_no: data?.agencies?.agency_bank_detail?.account_no ? data?.agencies?.agency_bank_detail?.account_no : '',
+    comp_bank_name: data?.agencies?.agency_bank_detail?.bank_name ? data?.agencies?.agency_bank_detail?.bank_name : '',
+    comp_branch_name: data?.agencies?.agency_bank_detail?.branch_name ? data?.agencies?.agency_bank_detail?.branch_name : '',
+    comp_ifsc_code: data?.agencies?.agency_bank_detail?.ifsc_code ? data?.agencies?.agency_bank_detail?.ifsc_code : '',
+    declaration_letter_of_company: data?.agencies?.declaration_letter_of_company ? data?.agencies?.declaration_letter_of_company : '',
+    pancard: data?.agencies?.pancard ? data?.agencies?.pancard : '',
+    cp_type: data?.cp_type ? data?.cp_type : 1,
+    property_tag: data?.property_tag ? data?.property_tag : [],
   };
   const DATASTATS: any =
   {
-
-    closingper: 10,
-    visitor: 123,
-    siteVisit: 234,
-    closeVisit: 600,
-    lastlogin: '2 min ago',
-    lastvisit: '2 min ago',
-    lastsitevisit: '2 min ago',
-    lastclosevisit: '2 min ago',
+    closingper: data?.agent_stats?.total_closing_percentage,
+    visitor: data?.agent_stats?.total_visit,
+    siteVisit: data?.agent_stats?.total_site_visit,
+    closeVisit: data?.agent_stats?.total_closing_lead,
+    lastlogin: data?.agent_stats?.last_login ?
+      moment(data?.agent_stats?.last_login).format('llll') : '',
+    lastvisit: data?.agent_stats?.last_lead_crate ?
+      moment(data?.agent_stats?.last_lead_crate).format('llll') : '',
+    lastsitevisit: data?.agent_stats?.last_site_visit ?
+      moment(data?.agent_stats?.last_site_visit).format('llll') : '',
+    lastclosevisit: data?.agent_stats?.last_closing_lead ?
+      moment(data?.agent_stats?.last_closing_lead).format('llll') : '',
   };
-
   const FirstRoute = () => (
     <AgentDetailInfo items={DATAINFO} />
   );
@@ -60,31 +79,22 @@ const PropertyDetailView = (props: any) => {
     <AgentDetailStats items={DATASTATS} />
   );
 
-  const renderScene = SceneMap({
-    first: FirstRoute,
-    second: SecondRoute,
-  });
-
-
-  /*   const renderTabBar = props => {
-      return (
-        <TabBar
-          {...props}
-          renderLabel={({ focused, route }) => {
-            return (
-              <TextView
-                size={20}
-                category="Medium"
-                color={focused ? 'BLACK' : 'GRAY3'}>
-                {route.title}
-              </TextView>
-            );
-          }}
-          indicatorStyle={styles.indicatorStyle}
-          style={styles.tabBar}
-        />
-      );
-    }; */
+  const renderScene = ({ index, route, }: any) => {
+    switch (route.key) {
+      case 'first':
+        return <FirstRoute />;
+      case 'second':
+        return <SecondRoute />;
+    }
+  };
+  const handleIndexChange = (index: any) => {
+    setIndexData({
+      index: index, routes: [
+        { key: 'first', title: strings.info },
+        { key: 'second', title: strings.stats },
+      ],
+    })
+  }
 
   const renderTabBar = (props: any) => (
 
@@ -116,15 +126,11 @@ const PropertyDetailView = (props: any) => {
 
         <TabView
           renderTabBar={renderTabBar}
-          navigationState={{ index, routes }}
-          renderScene={renderScene}
-          onIndexChange={setIndex}
           initialLayout={{ width: layout.width }}
-          //pagerStyle={{backgroundColor:'red'}}
-
+          navigationState={indexData}
+          renderScene={({ index, route }: any) => renderScene({ index, route })}
+          onIndexChange={handleIndexChange}
         />
-
-        {/* <AgentDetailInfo items={DATAINFO} /> */}
       </View>
     </View>
   )

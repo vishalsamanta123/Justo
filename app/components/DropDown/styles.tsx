@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
     color: GRAY_LIGHT_COLOR
   },
   placeholderStyle: {
-    color: GRAY_LIGHT_COLOR,
-    fontFamily: FONT_FAMILY_SEMIBOLD,
+    fontSize: 16,
+    color: GRAY_LIGHT_COLOR
   },
   selectedTextStyle: {
-    fontSize: normalize(18),
+    fontSize: 16,
     color: GRAY_LIGHT_COLOR,
-    fontFamily: FONT_FAMILY_SEMIBOLD,
+    // marginLeft: normalize(10)
   },
   iconStyle: {
     width: 20,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     shadowColor: '#171717',
-    shadowOffset: {width: 0, height: 1},
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.2,
     shadowRadius: 1,
     elevation: 3,
@@ -59,21 +59,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 10,
     padding: normalizeSpacing(Isios ? 15 : 5),
-    borderColor: GRAY_COLOR,
+    borderColor: GRAY_COLOR
   },
   inputHeadinView: {
     position: 'absolute',
-    top: normalizeSpacing(-10),
+    top: normalizeSpacing(-13),
     left: normalizeSpacing(20),
     zIndex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
     // backgroundColor: 'transparent',
   },
   inputHeadingText: {
-    fontSize: normalize(Isios ? 14 : 16),
     fontFamily: FONT_FAMILY_SEMIBOLD,
     color: PRIMARY_THEME_COLOR,
+    fontSize: normalize(Isios ? 14 : 16),
   },
+  searchInput: {
+    backgroundColor: WHITE_COLOR,
+    elevation: 5,
+    borderRadius: normalize(5),
+    paddingHorizontal: 0,
+    paddingLeft: normalizeSpacing(5)
+  }
 })
 
 export default styles

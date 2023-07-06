@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { normalize, normalizeHeight, normalizeSpacing, normalizeWidth } from "../../../../components/scaleFontSize";
-import { BLACK_COLOR, FONT_FAMILY_EXTRABOLD, FONT_FAMILY_SEMIBOLD, GRAY_COLOR, GRAY_LIGHT_COLOR, PRIMARY_THEME_COLOR, WHITE_COLOR } from "../../../../components/utilities/constant";
+import { BLACK_COLOR, FONT_FAMILY_EXTRABOLD, FONT_FAMILY_SEMIBOLD, GRAY_COLOR, GRAY_LIGHT_COLOR, Isios, PRIMARY_THEME_COLOR, WHITE_COLOR } from "../../../../components/utilities/constant";
 
 const styles = StyleSheet.create({
   headerStyle: {
@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
     marginTop: normalizeSpacing(10)
   },
   topTxtView: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   topBtnView: {
     flexDirection: 'row',
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: normalizeSpacing(10),
-    marginVertical: normalizeSpacing(5)
+    marginVertical: normalizeSpacing(Isios ? 10 : 5)
   }
 })
 

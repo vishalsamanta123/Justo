@@ -17,10 +17,12 @@ const Button = (props: any) => {
     bordercolor = null,
     borderWidth = 0,
     btnTxtcolor = WHITE_COLOR,
-    btnTxtsize = 20,
+    btnTxtsize = 15,
     textTransform = "capitalize",
     marginTop = 0,
+    marginHorizontal = 10,
     rightImage,
+    disabled=false
   } = props;
   return (
     <View style={styles.mainContainer}>
@@ -36,11 +38,12 @@ const Button = (props: any) => {
             borderWidth: borderWidth,
             // flexDirection: "row",
             // alignItems: "center",
-            marginHorizontal: 10,
+            marginHorizontal: marginHorizontal,
             marginTop: normalize(marginTop)
           },
         ]}
         onPress={props.handleBtnPress}
+        disabled={disabled}
       >
         <View>
           <Text
@@ -48,7 +51,7 @@ const Button = (props: any) => {
               fontSize: normalize(btnTxtsize),
               color: btnTxtcolor,
               fontFamily: FONT_FAMILY_SEMIBOLD,
-              textTransform: textTransform,
+              textTransform: props.capitalize ? 'none' : 'capitalize',
             }}
           >
             {props.buttonText ? props.buttonText : "Button"}

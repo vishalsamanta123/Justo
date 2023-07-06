@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         paddingVertical: normalize(16)
     },
     inputWrap: {
-        marginVertical: normalizeSpacing(8),
+        marginVertical: normalizeSpacing(10),
     },
     listView: {
         flex: 1,

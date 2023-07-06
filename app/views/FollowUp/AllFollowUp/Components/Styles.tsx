@@ -23,10 +23,17 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         paddingVertical: normalizeSpacing(10),
     },
+    Txtviewlast: {
+        flexDirection: 'row',
+        // justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: normalizeSpacing(10),
+    },
     projectContainer: {
         flex: 2,
-        alignItems: 'flex-end',
-        height: '100%'
+        alignItems: 'flex-start',
+        height: '100%',
+        marginLeft:normalizeSpacing(15)
     },
     projectTxt: {
         fontSize: normalize(15),

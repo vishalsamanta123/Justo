@@ -1,4 +1,4 @@
-package com.justo.newarchitecture.components;
+package com.Justo.kreate.co.in.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
