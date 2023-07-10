@@ -43,6 +43,7 @@ const images = {
   lock: require('./lock.png'),
   bell: require('./notification.png'),
   download: require('./download.png'),
+  whiteDownload: require('./whiteDownload.png'),
   star: require('./star.png'),
   shareIcon: require('./share.png'),
   locationIcon: require('./location.png'),

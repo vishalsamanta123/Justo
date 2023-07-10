@@ -1,17 +1,17 @@
-import { GET_CM_REPORT_DETAILS, GET_CM_REPORT_ERROR} from "../types";
+import { GET_REPORT_DETAILS, GET_REPORT_ERROR} from "../types";
 const initialStateForm = {
   response: null,
 };
 
 
-export function CMReportReducer(state = initialStateForm, action: any) {
+export function ReportReducer(state = initialStateForm, action: any) {
     switch (action.type) {
-      case GET_CM_REPORT_DETAILS:
+      case GET_REPORT_DETAILS:
         return {
           ...state,
           response: action.payload,
         };
-      case GET_CM_REPORT_ERROR:
+      case GET_REPORT_ERROR:
         return {
           ...state,
           response: action.payload,

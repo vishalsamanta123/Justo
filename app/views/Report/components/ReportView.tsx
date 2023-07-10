@@ -30,13 +30,13 @@ const ReportView = (props: any) => {
         barStyle={"light-content"}
       />
       {roleId === ROLE_IDS.sourcingmanager_id ? (
-        <SMReportTable />
+        <SMReportTable data={reportData}  />
       ) : roleId === ROLE_IDS.closingmanager_id ? (
         <CMReportTable data={reportData} userData={userData} />
       ) : roleId === ROLE_IDS.sourcingtl_id ? (
-        <STReportTable />
+        <STReportTable data={reportData} />
       ) : roleId === ROLE_IDS.closingtl_id ? (
-        <CTReportTable />
+        <CTReportTable data={reportData} />
       ) : (
         <ComingSoonScreen />
       )}

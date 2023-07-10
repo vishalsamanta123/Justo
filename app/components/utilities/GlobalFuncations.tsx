@@ -264,6 +264,7 @@ export const OpenDoc = async (url: any) => {
     });
 };
 
+
 export function handleDetailResponse(result: any) {
   let data;
   if (Array.isArray(result)) {
