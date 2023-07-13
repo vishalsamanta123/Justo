@@ -13,6 +13,7 @@ import SMReportTable from "./SMReportTable";
 import CMReportTable from "./CMReportTable";
 import STReportTable from "./STReportTable";
 import CTReportTable from "./CTReportTable";
+import ClusterHeadReportTable from "./ClusterHeadReportTable";
 
 const ReportView = (props: any) => {
   const { roleId, handleDrawerPress, reportData, userData } = props;
@@ -30,13 +31,15 @@ const ReportView = (props: any) => {
         barStyle={"light-content"}
       />
       {roleId === ROLE_IDS.sourcingmanager_id ? (
-        <SMReportTable data={reportData}  />
+        <SMReportTable data={reportData} />
       ) : roleId === ROLE_IDS.closingmanager_id ? (
         <CMReportTable data={reportData} userData={userData} />
       ) : roleId === ROLE_IDS.sourcingtl_id ? (
         <STReportTable data={reportData} />
       ) : roleId === ROLE_IDS.closingtl_id ? (
         <CTReportTable data={reportData} />
+      ) : roleId === ROLE_IDS.clusterhead_id ? (
+        <ClusterHeadReportTable />
       ) : (
         <ComingSoonScreen />
       )}
