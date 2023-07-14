@@ -107,6 +107,7 @@ import EscalateScreen from "app/views/SupportScreen/Escalate";
 import { navigate, navigationRef } from "app/components/utilities/GlobalFuncations";
 import PropertyInventory from "app/views/PropertyMangement/PropertyInventory";
 import CloseAppointment from "app/views/AppointMent/CloseAppointment";
+import EmployeeListing from "app/views/AgencyManagement/EmployeeListing";
 
 const Stack = createNativeStackNavigator();
 const AppStack = createNativeStackNavigator();
@@ -171,6 +172,7 @@ const AppComponent = () => {
       />
       <AppStack.Screen component={ImageContent} name="ImageContent" />
       <AppStack.Screen component={PropertyInventory} name="PropertyInventory" />
+      <AppStack.Screen component={EmployeeListing} name="EmployeeListing" />
       <AppStack.Screen component={VideoContent} name="VideoContent" />
       <AppStack.Screen component={CatalogueContent} name="CatalogueContent" />
       <AppStack.Screen component={CloseAppointment} name="CloseAppointment" />

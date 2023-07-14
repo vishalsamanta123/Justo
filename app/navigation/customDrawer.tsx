@@ -32,7 +32,6 @@ const customDrawer = ({ navigation }: any) => {
   const dispatch: any = useDispatch();
   const { response = {} } = useSelector((state: any) => state.userDetail);
   const notification = useSelector((state: any) => state.notificationCount)
-  console.log('notification: ', notification?.response?.chat_message);
 
   const permissionResponse = useSelector((state: any) => state.permissions);
   const isDrawerOpen = useDrawerStatus() === "open";
@@ -171,6 +170,7 @@ const customDrawer = ({ navigation }: any) => {
           }}
         />
         {permissionResponse?.response?.data?.map((item: any, index: any) => {
+          
           return item.permission && item.path && (
             <DrawerTabSection
               key={index}

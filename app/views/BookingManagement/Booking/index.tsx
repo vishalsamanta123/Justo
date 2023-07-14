@@ -107,10 +107,8 @@ const BookingScreen = ({ navigation, route }: any) => {
         type: bookingData.flat_type ? bookingData.flat_type : "",
       },
     };
-    console.log(
-      "🚀 ~ file: index.tsx:166 ~ handleGetInventoryList ~ params.params.getBookingData?.jw_project_id:",
-      getBookingData?.jw_project_id
-    );
+    console.log("🚀 ~ file: index.tsx:120 ~ params:", params)
+
     dispatch({ type: START_LOADING });
     try {
       const res = await apiCallJW(
@@ -118,6 +116,7 @@ const BookingScreen = ({ navigation, route }: any) => {
         apiEndPoints.GET_INVENTORY_JW,
         params
       );
+      console.log("🚀 ~ file: index.tsx:122 ~ res?.data?.result:", res?.data?.result)
       if (res?.data?.result?.data.length > 0) {
         const temp = res?.data?.result?.data;
         const arr = temp;
@@ -226,13 +225,15 @@ const BookingScreen = ({ navigation, route }: any) => {
     ) {
       isError = false;
       errorMessage = "Payment Type is require. Please select payment type";
-    } else if (
-      typeof bookingData.cheque_image != "object" ||
-      bookingData.cheque_image == ""
-    ) {
-      isError = false;
-      errorMessage = "Image is require. Please select image";
-    } else if (
+    } 
+    // else if (
+    //   typeof bookingData.cheque_image != "object" ||
+    //   bookingData.cheque_image == ""
+    // ) {
+    //   isError = false;
+    //   errorMessage = "Image is require. Please select image";
+    // } 
+    else if (
       bookingData.flat_type == undefined ||
       bookingData.flat_type == ""
     ) {

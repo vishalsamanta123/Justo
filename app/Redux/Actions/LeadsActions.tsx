@@ -83,9 +83,11 @@ export const addVisitor = (params: any) => async (dispatch: any) => {
     }
 };
 export const checkVisitAvailble = (params: any) => async (dispatch: any) => {
+    console.log("🚀 ~ file: LeadsActions.tsx:86 ~ params:", params)
     dispatch({ type: START_LOADING })
     try {
         const res = await apiCall("post", apiEndPoints.CHECK_VISIT_AVAILABLE, params);
+        console.log("🚀 ~ file: LeadsActions.tsx:91 ~ res?.data:", res?.data)
         if (res?.data?.status === 200 || res?.data?.status === 201 ||
             res?.data?.status === 202) {
             dispatch({

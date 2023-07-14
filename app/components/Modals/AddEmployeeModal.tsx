@@ -17,12 +17,6 @@ import { RadioButton } from "react-native-paper";
 import { RequiredStart } from "../utilities/GlobalFuncations";
 
 const AddEmployeeModal = (props: any) => {
-  {
-    console.log(
-      "props?.emailMobvalidation?.primary_mobile: ",
-      props?.emailMobvalidation?.primary_mobile
-    );
-  }
 
   return (
     <Modal isVisible={props.Visible}>

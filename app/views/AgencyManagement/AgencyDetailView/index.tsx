@@ -8,8 +8,8 @@ const AgentDetail = ({ navigation, route }: any) => {
   const { response = {}, detail } = useSelector((state: any) => state.agency);
   const [allDetails, setAllDetails] = useState({});
 
+  const { data = {} } = route?.params || {};
   useLayoutEffect(() => {
-    const { data = {} } = route?.params || {};
     if (data?.cp_id) {
       dispatch(getAgencyDetail({
         cp_id: data.cp_id,
@@ -35,6 +35,7 @@ const AgentDetail = ({ navigation, route }: any) => {
       allDetails={allDetails}
       setAllDetails={setAllDetails}
       handleBackPress={handleBackPress}
+      _id={data._id}
     />
   );
 };

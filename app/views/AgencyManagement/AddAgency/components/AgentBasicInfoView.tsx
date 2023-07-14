@@ -41,6 +41,8 @@ const AgentBasicInfoView = (props: any) => {
       working_location: array,
     });
   };
+  console.log("🚀 ~ file: AgentBasicInfoView.tsx:360 ~ props?.emailMobvalidation?.email:", props?.emailMobvalidation?.email)
+
   const renderEmployee = (item: any, index: any) => {
     return (
       <View style={styles.IteamView}>
@@ -152,6 +154,7 @@ const AgentBasicInfoView = (props: any) => {
                   ...props.agencyData,
                   cp_type: 1,
                 });
+                props.handleClearData(1);
               }}
               color={PRIMARY_THEME_COLOR}
             />
@@ -178,6 +181,7 @@ const AgentBasicInfoView = (props: any) => {
                   ...props.agencyData,
                   cp_type: 2,
                 });
+                props.handleClearData(2);
               }}
               color={PRIMARY_THEME_COLOR}
             />
@@ -347,7 +351,6 @@ const AgentBasicInfoView = (props: any) => {
             }}
             onFocus={() => {
               if (props.agencyData?.email !== props.agencyData?.email) {
-               
                 props.setEmailMobValidation({
                   ...props.emailMobvalidation,
                   email: null,
@@ -586,14 +589,7 @@ const AgentBasicInfoView = (props: any) => {
                 }}
               />
             </View>
-            {/*  <View style={styles.inputWrap}>
-          <InputField
-            placeholderText={"Sourcing Manager"}
-            handleInputBtnPress={() => {}}
-            onChangeText={() => {}}
-            headingText={"Sourcing Manager"}
-          />
-        </View> */}
+
             <View style={styles.workingView}>
               <View
                 style={{
@@ -647,51 +643,55 @@ const AgentBasicInfoView = (props: any) => {
           </>
         ) : (
           <>
-            <View
-              style={[
-                styles.inputWrap,
-                { flexDirection: "row", alignItems: "center" },
-              ]}
-            >
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Text style={styles.headingText}>{strings.employee}</Text>
-                <RequiredStart />
-              </View>
-              <View style={{ flex: 1 }}>
-                <TouchableOpacity
+            {props.type !== "edit" ? (
+              <>
+                <View
                   style={[
-                    styles.browseVw,
-                    {
-                      top: 0,
-                    },
+                    styles.inputWrap,
+                    { flexDirection: "row", alignItems: "center" },
                   ]}
-                  onPress={() => {
-                    props.setIsVisibleAddEmployee(true);
-                  }}
                 >
-                  <Text
+                  <View
                     style={{
-                      color: BLACK_COLOR,
-                      fontSize: normalize(15),
+                      flex: 1,
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
-                    {strings.addNewEmpoyee}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={styles.employeeView}>
-              {props?.employees?.map((emp: any, index: any) =>
-                renderEmployee(emp, index)
-              )}
-            </View>
+                    <Text style={styles.headingText}>{strings.employee}</Text>
+                    <RequiredStart />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <TouchableOpacity
+                      style={[
+                        styles.browseVw,
+                        {
+                          top: 0,
+                        },
+                      ]}
+                      onPress={() => {
+                        props.setIsVisibleAddEmployee(true);
+                      }}
+                    >
+                      <Text
+                        style={{
+                          color: BLACK_COLOR,
+                          fontSize: normalize(15),
+                        }}
+                      >
+                        {strings.addNewEmpoyee}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.employeeView}>
+                  {props?.employees?.map((emp: any, index: any) =>
+                    renderEmployee(emp, index)
+                  )}
+                </View>
+              </>
+            ) : null}
           </>
         )}
 
@@ -722,21 +722,23 @@ const AgentBasicInfoView = (props: any) => {
         />
       </ScrollView>
       <AddEmployeeModal
-          Visible={props.isVisibleAddEmployee}
-          setIsVisible={props.setIsVisibleAddEmployee}
-          handleAddEmployee={props.handleAddEmployee}
-          employeeFormData={props.employeeFormData}
-          setEmployeeFormData={props.setEmployeeFormData}
-          handleCheckEmailMobile={props.handleCheckEmailMobile}
-          setEmailMobValidation={props.setEmailMobValidation}
-          emailMobvalidation={props.emailMobvalidation}
-          emailMobileChng={props.emailMobileChng}
-          setEmailMobileChng={props.setEmailMobileChng}
-          handleCheckEmailMobileforEmployee={props.handleCheckEmailMobileforEmployee}
-          handleOnBackEmployeeModal={props.handleOnBackEmployeeModal}
-          employeeMobileNoSet = {props.employeeMobileNoSet}
-          employeeEmailAddSet = {props.employeeEmailAddSet}
-        />
+        Visible={props.isVisibleAddEmployee}
+        setIsVisible={props.setIsVisibleAddEmployee}
+        handleAddEmployee={props.handleAddEmployee}
+        employeeFormData={props.employeeFormData}
+        setEmployeeFormData={props.setEmployeeFormData}
+        handleCheckEmailMobile={props.handleCheckEmailMobile}
+        setEmailMobValidation={props.setEmailMobValidation}
+        emailMobvalidation={props.emailMobvalidation}
+        emailMobileChng={props.emailMobileChng}
+        setEmailMobileChng={props.setEmailMobileChng}
+        handleCheckEmailMobileforEmployee={
+          props.handleCheckEmailMobileforEmployee
+        }
+        handleOnBackEmployeeModal={props.handleOnBackEmployeeModal}
+        employeeMobileNoSet={props.employeeMobileNoSet}
+        employeeEmailAddSet={props.employeeEmailAddSet}
+      />
     </View>
   );
 };

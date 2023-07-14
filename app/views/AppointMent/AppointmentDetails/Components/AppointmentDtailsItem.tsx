@@ -19,7 +19,6 @@ import { normalizeSpacing } from "app/components/scaleFontSize";
 
 const AppointmentDtailsItem = (props: any) => {
   const item = props?.item || {};
-  console.log("🚀 ~ file: AppointmentDtailsItem.tsx:22 ~ item:", item)
   const bookingStatus =
     item?.booking_status?.length > 0 ? item?.booking_status[0] : "";
   const currentDate = `${moment(new Date()).format(
@@ -200,28 +199,24 @@ const AppointmentDtailsItem = (props: any) => {
             <Text style={[styles.nameTxt, { color: item?.checkin_status ? GREEN_COLOR : BLACK_COLOR }]}>{item?.checkin_status ? 'Visited' : strings.notfount}</Text>
           </View>
         </View>)} */}
-      {item?.checkin_status && (
-        <View style={styles.Txtview}>
-          <View style={styles.projectContainer}>
-            <Text style={styles.projectTxt}>Appiontment Complete</Text>
-          </View>
-          <View>
-            <Text>:</Text>
-          </View>
-          <View style={styles.nameContainer}>
-            <Text style={styles.nameTxt}>
-              {" "}
-              {item?.checkin_date === "" ||
-              item?.checkin_date === undefined ||
-              item?.checkin_date === null
-                ? strings.notfount
-                : moment
-                    .utc(item?.checkin_date)
-                    .format(DATE_BY_DAY)}
-            </Text>
-          </View>
+      <View style={styles.Txtview}>
+        <View style={styles.projectContainer}>
+          <Text style={styles.projectTxt}>Appiontment Complete :</Text>
         </View>
-      )}
+        {/* <View>
+            <Text>:</Text>
+          </View> */}
+        <View style={styles.nameContainer}>
+          <Text style={styles.nameTxt}>
+            {" "}
+            {item?.checkin_date === "" ||
+            item?.checkin_date === undefined ||
+            item?.checkin_date === null
+              ? strings.notfount
+              : moment.utc(item?.checkin_date).format(DATE_BY_DAY)}
+          </Text>
+        </View>
+      </View>
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>Created By</Text>
@@ -258,14 +253,14 @@ const AppointmentDtailsItem = (props: any) => {
             {item?.assign_appointment?.length > 0
               ? item?.assign_appointment[0]?.user_name
               : strings.notfount}
-              (
-            {item?.assign_appointment?.length === 0 ||
-            item?.assign_appointment[0]?.assign_by_role === undefined ||
-            item?.assign_appointment[0]?.assign_by_role === null
-              ? strings.notfount
-              : item?.assign_appointment[0]?.assign_by_role}
+            (
+            {item?.assign_appointment?.length > 0
+              ? item?.assign_appointment[0]?.assign_by_role === undefined ||
+                item?.assign_appointment[0]?.assign_by_role === null
+                ? strings.notfount
+                : item?.assign_appointment[0]?.assign_by_role
+              : null}
             )
-              
           </Text>
         </View>
       </View>
@@ -278,7 +273,7 @@ const AppointmentDtailsItem = (props: any) => {
         </View>
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
-            {item?.lead_source ? item?.lead_source : strings.notfount} 
+            {item?.lead_source ? item?.lead_source : strings.notfount}
           </Text>
         </View>
       </View>
@@ -300,10 +295,11 @@ const AppointmentDtailsItem = (props: any) => {
           </View>
           <View style={styles.nameContainer}>
             <Text style={styles.nameTxt}>
-              {item?.cp_name ? `${item?.cp_name} ${item?.cp_type === 2
-                ? "(Company)"
-                : "(Individual)"
-              }`  : strings.notfount}
+              {item?.cp_name
+                ? `${item?.cp_name} ${
+                    item?.cp_type === 2 ? "(Company)" : "(Individual)"
+                  }`
+                : strings.notfount}
             </Text>
           </View>
         </View>
@@ -318,12 +314,14 @@ const AppointmentDtailsItem = (props: any) => {
           </View>
           <View style={styles.nameContainer}>
             <Text style={styles.nameTxt}>
-              {item.cp_emp_name && item.cp_emp_name?.length !== 0 ? item.cp_emp_name : strings.notfount}
+              {item.cp_emp_name && item.cp_emp_name?.length !== 0
+                ? item.cp_emp_name
+                : strings.notfount}
             </Text>
           </View>
         </View>
       ) : null}
-      
+
       {/* <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>Created By Role </Text>
@@ -429,9 +427,9 @@ const AppointmentDtailsItem = (props: any) => {
           marginVertical: normalizeSpacing(20),
         }}
       >
-        {item.status === 1 || item.status === 2 || item.status === 3 ? (
+        {item.status === 1 ? (
           <Button
-            width={Isios ? 200 : 150}
+            width={Isios ? 200 : 160}
             height={30}
             bgcolor={WHITE_COLOR}
             bordercolor={PRIMARY_THEME_COLOR}
@@ -444,7 +442,7 @@ const AppointmentDtailsItem = (props: any) => {
           />
         ) : null}
         <Button
-          width={Isios ? 200 :150}
+          width={Isios ? 200 : 160}
           height={30}
           bgcolor={WHITE_COLOR}
           bordercolor={PRIMARY_THEME_COLOR}

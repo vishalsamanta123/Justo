@@ -80,7 +80,7 @@ const CloseAppointmentView = (props: any) => {
       comment: '',
       property_name: '',
       remark: '',
-      appointment_status: ''
+      appointment_status: 6
     })
     if (masterData?.response?.status === 200) {
       if (masterData?.response?.data?.length > 0) {
@@ -163,14 +163,15 @@ const CloseAppointmentView = (props: any) => {
               </View>
               <DropdownInput
                 placeholder={strings.selectType}
+                disable={true}
                 data={
-                  item?.checkin_status ?
+                  // item?.checkin_status ?
+                  //   [
+                  //     { label: strings.STSNotFitForSale, value: 6 },
+                  //   ]
+                  //   :
                     [
-                      { label: strings.STSNotFitForSale, value: 6 },
-                    ]
-                    :
-                    [
-                      { label: strings.STSVisitCancel, value: 4 },
+                      // { label: strings.STSVisitCancel, value: 4 },
                       { label: strings.STSNotFitForSale, value: 6 },
                     ]
                 }
@@ -199,7 +200,10 @@ const CloseAppointmentView = (props: any) => {
             </View>
             {props?.cancelValue?.appointment_status === 6 ?
               (<View style={styles.inputWrap}>
-                <Text style={styles.titleTxt}>{strings.selectReason}</Text>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text style={styles.titleTxt}>{strings.selectReason}</Text>
+                  <RequiredStart />
+                </View>
                 <DropdownInput
                   placeholder={strings.selectReason}
                   data={masterDatas}

@@ -35,11 +35,11 @@ const ClosingDashboardView = (props: any) => {
                     style={styles.thirdPortioncardView}>
                     <View style={styles.thirdPortionCardTextView}>
                         <Text style={styles.thirdPortionCardText}>
-                            Today Site Visit
+                            Site Visit
                         </Text>
                     </View>
                     <View style={styles.numberView}>
-                        <Text style={styles.thirdPortionNumberText}>{props?.dashboardData?.today_site_visit}</Text>
+                        <Text style={styles.thirdPortionNumberText}>{props?.dashboardData?.total_appointment}</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -51,7 +51,7 @@ const ClosingDashboardView = (props: any) => {
                         </Text>
                     </View>
                     <View style={styles.numberView}>
-                        <Text style={styles.thirdPortionNumberText}>{props?.dashboardData?.today_close_visit}</Text>
+                        <Text style={styles.thirdPortionNumberText}>{props?.dashboardData?.today_site_visit}</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -59,7 +59,7 @@ const ClosingDashboardView = (props: any) => {
                     style={styles.thirdPortioncardView}>
                     <View style={styles.thirdPortionCardTextView}>
                         <Text style={styles.thirdPortionCardText}>
-                            Today Booking
+                            Booking
                         </Text>
                     </View>
                     <View style={styles.numberView}>
@@ -70,7 +70,7 @@ const ClosingDashboardView = (props: any) => {
                     onPress={() => props.onpressBooking('', 'today')}
                     style={styles.thirdPortioncardView}>
                     <View style={styles.thirdPortionCardTextView}>
-                        <Text style={styles.thirdPortionCardText}>Today Ready to Book</Text>
+                        <Text style={styles.thirdPortionCardText}>Ready to Book</Text>
                     </View>
                     <View style={styles.numberView}>
                         <Text style={styles.thirdPortionNumberText}>

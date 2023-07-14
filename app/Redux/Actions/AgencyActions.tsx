@@ -189,6 +189,7 @@ console.log('params: ', params);
       params,
       header
     );
+    console.log("🚀 ~ file: AgencyActions.tsx:193 ~ res.data:", res.data)
     if (res.data.status == 200) {
       dispatch({
         type: EDIT_AGENCY,

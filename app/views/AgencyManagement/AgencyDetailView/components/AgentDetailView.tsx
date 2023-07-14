@@ -15,7 +15,6 @@ import moment from 'moment'
 
 const PropertyDetailView = (props: any) => {
   const data = props?.allDetails || {};
-  console.log('data: ', data);
 
   const layout = useWindowDimensions();
   const [indexData, setIndexData] = useState({
@@ -52,9 +51,11 @@ const PropertyDetailView = (props: any) => {
     comp_branch_name: data?.agencies?.agency_bank_detail?.branch_name ? data?.agencies?.agency_bank_detail?.branch_name : '',
     comp_ifsc_code: data?.agencies?.agency_bank_detail?.ifsc_code ? data?.agencies?.agency_bank_detail?.ifsc_code : '',
     declaration_letter_of_company: data?.agencies?.declaration_letter_of_company ? data?.agencies?.declaration_letter_of_company : '',
-    pancard: data?.agencies?.pancard ? data?.agencies?.pancard : '',
+    // pancard: data?.agencies?.pancard ? data?.agencies?.pancard : '',
+    pancard: data?.pancard ? data?.pancard : '',
     cp_type: data?.cp_type ? data?.cp_type : 1,
     property_tag: data?.property_tag ? data?.property_tag : [],
+    cp_id: props?._id ? props?._id : ""
   };
   const DATASTATS: any =
   {

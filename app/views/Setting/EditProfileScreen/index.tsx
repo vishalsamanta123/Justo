@@ -69,6 +69,7 @@ const EditProfileScreen = ({ navigation, route }: any) => {
   };
 
   const [editData, setEditData] = useState(allDetails?.allDetails);
+  console.log("🚀 ~ file: index.tsx:72 ~ allDetails?.allDetails:", allDetails?.allDetails)
 
   // const handleNextPress = () => {
   //   dispatch(addAgentForm(editData))
@@ -172,6 +173,7 @@ const EditProfileScreen = ({ navigation, route }: any) => {
       formData.append("email", editData?.email);
       formData.append("city_id", editData?.city_id);
       formData.append("city", editData?.city);
+      formData.append("justo_employee_code", editData?.justo_employee_code);
 
       // formData.append("location", editData?.location);
       // formData.append("latitude", editData?.latitude);

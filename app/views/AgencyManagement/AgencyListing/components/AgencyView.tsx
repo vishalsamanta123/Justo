@@ -202,7 +202,7 @@ const AgencyView = (props: any) => {
             onEndReached={() => {
               if (props?.agentList?.length < props?.moreData) {
                 props.getAgencyList(
-                  props?.agentList?.length > 2 ? props.offSET + 1 : 0,
+                  props?.agentList?.length > 6 ? props.offSET + 1 : 0,
                   props.filterData
                 );
               }

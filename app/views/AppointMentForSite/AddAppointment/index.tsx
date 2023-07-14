@@ -49,7 +49,8 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
           first_name: item?.customer_first_name ? item?.customer_first_name : item?.customer_detail?.first_name,
           property_id: item?.property_id,
           property_title: item?.property_title,
-          pickup: item?.pickup,
+          // pickup: item?.pickup,
+          pickup: "No",
           update_type: 3
         })
         if (item?.property_id === "" || item?.property_id === null) {
@@ -64,7 +65,8 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
           first_name: item?.customer_first_name ? item?.customer_first_name : item?.customer_detail?.first_name,
           property_id: item?.property_id,
           property_title: item?.property_title,
-          pickup: item?.pickup,
+          // pickup: item?.pickup,
+          pickup: "No",
           update_type: 3
         })
       }
@@ -150,13 +152,14 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
     let isError = true;
     let errorMessage: any = ''
     // if (type !== 'edit') {
+      console.log("🚀 ~ file: index.tsx:156 ~ type:", type)
       if (type === 'reSheduled') {
         if (appointMentForm.update_type == undefined || appointMentForm.update_type == '') {
           isError = false;
           errorMessage = "Update Type is require. Please Select the Update Type"
         }
       }
-      else if (appointMentForm.lead_id == undefined || appointMentForm.lead_id == '') {
+      if (appointMentForm.lead_id == undefined || appointMentForm.lead_id == '') {
         isError = false;
         errorMessage = "Lead is require. Please Select the Lead"
       }
@@ -205,7 +208,8 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
         property_title: response?.data[0]?.property_title,
         appointment_date: response?.data[0]?.appointment_date,
         appointment_time: response?.data[0]?.appointment_time,
-        pickup: response?.data[0]?.property_pickup,
+        // pickup: response?.data[0]?.property_pickup,
+        pickup: "No",
         type: response?.data[0]?.type,
         pickup_address: response?.data[0]?.pickup_address,
         pickup_location: response?.data[0]?.pickup_location,
@@ -224,9 +228,11 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
         first_name: response?.data[0]?.customer_first_name,
         property_id: response?.data[0]?.property_id,
         property_title: response?.data[0]?.property_title,
-        pickup: response?.data[0]?.property_pickup,
+        // pickup: response?.data[0]?.property_pickup,
+        pickup: "No",
         type: response?.data[0]?.type,
         checkin_status: response?.data[0]?.checkin_status,
+        update_type: 1
       })
       if (response?.data[0]?.property_id === "") {
         setPropertyStatus(false)

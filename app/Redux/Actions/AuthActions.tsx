@@ -15,6 +15,7 @@ export const userLogin = (loginDetail: any) => async (dispatch: any) => {
     dispatch({ type: START_LOADING })
     try {
         const res = await apiCall("post", apiEndPoints.LOGIN, loginDetail);
+        console.log("🚀 ~ file: AuthActions.tsx:18 ~ res:", res)
         if (res.data.status === 200) {
             await AsyncStorage.setItem("AuthToken", res?.data?.token);
             await AsyncStorage.setItem("userData", JSON.stringify(res?.data?.data));

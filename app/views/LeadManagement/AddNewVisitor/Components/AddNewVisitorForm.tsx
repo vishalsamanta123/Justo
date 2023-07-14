@@ -156,7 +156,7 @@ const AddNewVisitorForm = (props: any) => {
                 if (Regexs.mobilenumRegex.test(data)) {
                   props.setEmailMobValidation({
                     ...props.emailMobvalidation,
-                    mobile: "start",
+                    mobile: null,
                   });
                 } else {
                   props.setEmailMobValidation({
@@ -185,9 +185,9 @@ const AddNewVisitorForm = (props: any) => {
                 }
               }}
               onBlur={(val: any) => {
-                if (Regexs.mobilenumRegex.test(props?.formData?.mobile)) {
-                  props.handleCheckEmailMobile(1);
-                }
+                // if (Regexs.mobilenumRegex.test(props?.formData?.mobile)) {
+                //   props.handleCheckEmailMobile();
+                // }
               }}
             />
           </View>

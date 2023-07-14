@@ -22,7 +22,10 @@ const PropertyDetailView = (props: any) => {
   const [isVisible, setIsVisible] = useState(false);
   const [okIsVisible, setOkIsVisible] = useState(false);
   const [propertydetail, setPropertydetail] = useState<any>([]);
-  console.log("🚀 ~ file: PropertyDetailView.tsx:23 ~ PropertyDetailView ~ propertydetail:", propertydetail)
+  console.log(
+    "🚀 ~ file: PropertyDetailView.tsx:23 ~ PropertyDetailView ~ propertydetail:",
+    propertydetail
+  );
   const [configurations, setConfigurations] = useState([]);
   const [propertydocument, setPropertydocument] = useState([]);
   const [amenity, setAmenity] = useState([]);
@@ -66,16 +69,21 @@ const PropertyDetailView = (props: any) => {
   };
 
   const handleInventoryPress = () => {
-    if(propertydetail?.jw_project_id) {
-      navigation.navigate('PropertyInventory', {propName: propertydetail?.jw_project_id })
+    if (propertydetail?.jw_project_id) {
+      navigation.navigate("PropertyInventory", {
+        propName: propertydetail?.jw_project_id,
+      });
     } else {
-      setOkIsVisible(true)
+      setOkIsVisible(true);
     }
   };
   const { create, allocate } = usePermission({
     create: "add_visitor",
     allocate: "property_allocate",
   });
+  const onPressRightButton = () => {
+    setOkIsVisible(false);
+  };
   return (
     <View style={styles.mainContainer}>
       <Header
@@ -140,7 +148,14 @@ const PropertyDetailView = (props: any) => {
       </View>
 
       <ConfirmModal Visible={isVisible} setIsVisible={setIsVisible} />
-      <JustForOkModal Visible={okIsVisible} setIsVisible={setOkIsVisible} />
+      <JustForOkModal
+        message={
+          "JW Property Id not map with this Property. Contact with JV admin for map this."
+        }
+        onPressRightButton={onPressRightButton}
+        Visible={okIsVisible}
+        setIsVisible={setOkIsVisible}
+      />
     </View>
   );
 };
