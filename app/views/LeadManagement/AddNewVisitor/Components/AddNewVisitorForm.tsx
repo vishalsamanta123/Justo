@@ -37,6 +37,7 @@ import VisitConfirmModal from "./VisitConfirmModal";
 import { CpType } from "app/components/utilities/DemoData";
 import { normalizeSpacing } from "app/components/scaleFontSize";
 import { RequiredStart } from "app/components/utilities/GlobalFuncations";
+import JustForOkModal from "app/components/Modals/JustForOkModal";
 
 const AddNewVisitorForm = (props: any) => {
   const { masterDatas } = props;
@@ -326,7 +327,6 @@ const AddNewVisitorForm = (props: any) => {
                     onFocus={() => props.handleCpNameDropdownPress()}
                     value={props?.formData?.cp_id}
                     onChange={(item: any) => {
-                      console.log("item: ", item);
                       props.setFormData({
                         ...props.formData,
                         cp_id: item._id,
@@ -1483,6 +1483,15 @@ const AddNewVisitorForm = (props: any) => {
           />
         </View>
       </ScrollView>
+
+       <JustForOkModal
+            headertitle="Message"
+            message={props.mobileerror}
+            onPressRightButton={props.onPressRightButton}
+            Visible={props.okIsVisible}
+            
+            setIsVisible={props.setOkIsVisible}
+          />
     </View>
   );
 };

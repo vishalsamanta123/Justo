@@ -102,7 +102,6 @@ const InventoryModal = (props: any) => {
               // valueField={"type"}
               value={props.formData?.floor}
               onChange={(item: any) => {
-              console.log('item: ', typeof item);
                 props.setFormData({
                   ...props.formData,
                   floor: item,

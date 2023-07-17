@@ -16,7 +16,7 @@ const JustForOkModal = (props: any) => {
             <View style={[styles.conteconfirm, {backgroundColor: WHITE_COLOR, borderRadius: 10}]}>
                 <View style={styles.topContainer}>
                     <View />
-                    <Text style={styles.topTxt}>Not Found</Text>
+                    <Text style={styles.topTxt}>{props?.headertitle ? props?.headertitle : "Not Found" }</Text>
                     <View>
                         <TouchableOpacity onPress={() => {
                             props.setIsVisible(false)

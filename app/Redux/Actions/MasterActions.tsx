@@ -136,7 +136,6 @@ export const getAllSourcingManager = (params: any) => async (dispatch: any) => {
 export const cpAppointmentCheckIn = (params: any) => async (dispatch: any) => {
     try {
         const res = await apiCall("post", apiEndPoints.CHECKIN_APPOINTMENT, params);
-        console.log('res cpAppointmentCheckIn: ', res);
         if (res.data.status == 200) {
             dispatch({
                 type: GET_APPOINTMENT_CHECKIN,

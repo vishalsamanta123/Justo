@@ -55,7 +55,6 @@ const ShowReply = () => {
           <FlatList
             data={Array.isArray(replyData?.reply_support_ticket) ? replyData?.reply_support_ticket : []}
             renderItem={({ item }: any) => {
-              console.log('item: ', item);
               return (
                 <View style={styles.replyView}>
                   <View style={styles.Txtview}>

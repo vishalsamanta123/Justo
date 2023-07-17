@@ -30,6 +30,8 @@ import apiEndPoints from "app/components/utilities/apiEndPoints";
 import { apiCall } from "app/components/utilities/httpClient";
 import moment from "moment";
 import { DATE_FORMAT } from "react-native-gifted-chat";
+import JustForOkModal from "app/components/Modals/JustForOkModal";
+import { START_LOADING, STOP_LOADING } from "app/Redux/types";
 
 const AddNewVisitorScreen = ({ navigation, route }: any) => {
   const { type, data } = route?.params || {};
@@ -105,6 +107,8 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   const [dropdownAgentList, setDropdownAgentList] = useState<any>([]);
   const [companyList, setCompanyList] = useState<any>([]);
   const [employeeList, setEmployeeList] = useState<any>([]);
+  const [mobileerror, setMobileError] = useState<any>('');
+  const [okIsVisible, setOkIsVisible] = useState(false);
   useEffect(() => {
     if (type === "edit") {
       if (data?._id) {
@@ -136,7 +140,6 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   // }, [companyData])
   useEffect(() => {
     if (employeeData?.response?.status === 200) {
-      console.log("employeeData?.response: ", employeeData?.response);
       setEmployeeList(employeeData?.response?.data);
     } else {
       setEmployeeList([]);
@@ -358,19 +361,19 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         formData?.min_budget_type === "K"
           ? (tempMinVal = formData?.min_budget * 1000)
           : formData?.min_budget_type === "L"
-          ? (tempMinVal = formData?.min_budget * 100000)
-          : formData?.min_budget_type === "Cr"
-          ? (tempMinVal = formData?.min_budget * 10000000)
-          : null;
+            ? (tempMinVal = formData?.min_budget * 100000)
+            : formData?.min_budget_type === "Cr"
+              ? (tempMinVal = formData?.min_budget * 10000000)
+              : null;
 
         let tempMaxVal: any;
         formData?.max_budget_type === "K"
           ? (tempMaxVal = formData?.max_budget * 1000)
           : formData?.max_budget_type === "L"
-          ? (tempMaxVal = formData?.max_budget * 100000)
-          : formData?.max_budget_type === "Cr"
-          ? (tempMaxVal = formData?.max_budget * 10000000)
-          : null;
+            ? (tempMaxVal = formData?.max_budget * 100000)
+            : formData?.max_budget_type === "Cr"
+              ? (tempMaxVal = formData?.max_budget * 10000000)
+              : null;
 
         if (tempMinVal >= tempMaxVal) {
           isError = false;
@@ -387,19 +390,19 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         formData?.min_emi_budget_type === "K"
           ? (tempMinVal = formData?.min_emi_budget * 1000)
           : formData?.min_emi_budget_type === "L"
-          ? (tempMinVal = formData?.min_emi_budget * 100000)
-          : formData?.min_emi_budget_type === "Cr"
-          ? (tempMinVal = formData?.min_emi_budget * 10000000)
-          : null;
+            ? (tempMinVal = formData?.min_emi_budget * 100000)
+            : formData?.min_emi_budget_type === "Cr"
+              ? (tempMinVal = formData?.min_emi_budget * 10000000)
+              : null;
 
         let tempMaxVal: any;
         formData?.max_emi_budget_type === "K"
           ? (tempMaxVal = formData?.max_emi_budget * 1000)
           : formData?.max_emi_budget_type === "L"
-          ? (tempMaxVal = formData?.max_emi_budget * 100000)
-          : formData?.max_emi_budget_type === "Cr"
-          ? (tempMaxVal = formData?.max_emi_budget * 10000000)
-          : null;
+            ? (tempMaxVal = formData?.max_emi_budget * 100000)
+            : formData?.max_emi_budget_type === "Cr"
+              ? (tempMaxVal = formData?.max_emi_budget * 10000000)
+              : null;
         if (tempMinVal >= tempMaxVal) {
           isError = false;
           errorMessage = "Maximum Emi should more than Minimum Emi";
@@ -420,8 +423,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       dispatch(addVisitorRemove());
       if (NavigationType === 1) {
         setNavigationType(0);
-        console.log("111111");
-        console.log("addData?.response: ", addData?.response);
+
         if (
           userData?.data?.role_id === ROLE_IDS.closingmanager_id ||
           userData?.data?.role_id === ROLE_IDS.closingtl_id
@@ -434,7 +436,6 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
           navigation.navigate("LeadManagementScreen");
         }
       } else if (NavigationType === 2) {
-        console.log("22222222");
         setNavigationType(0);
         navigation.navigate("AddAppointmentForSite", {
           type: "Add",
@@ -457,8 +458,8 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         msg: editData?.update
           ? editData?.response?.message
           : addData?.create
-          ? addData?.response?.message
-          : "no message",
+            ? addData?.response?.message
+            : "no message",
         backgroundColor: GREEN_COLOR,
       });
     }
@@ -493,6 +494,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       }
     }
   }, [visitAVailableData]);
+
   const handleCheckEmailMobile = async () => {
     let params: any = {
       mobile: formData?.mobile,
@@ -500,48 +502,63 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       visitor_name: formData?.first_name,
       cp_id: formData?.cp_id,
     };
-    // dispatch(checkVisitAvailble(params));
-    const res = await apiCall(
-      "post",
-      apiEndPoints.CHECK_VISIT_AVAILABLE,
-      params
-    );
-    console.log("🚀 ~ file: index.tsx:503 ~ res:", res?.data);
+    dispatch({ type: START_LOADING });
 
-    if (res?.data?.status === 200) {
-      return true;
-    } else if (res?.data?.status === 201) {
-      return false;
-    } else if(res?.data?.status === 202) {
-      setFormData({
-        ...formData,
-        address: res?.data?.data[0]?.address ? res?.data?.data[0]?.address : '',
-        adhar_no: res?.data?.data[0]?.adhar_no ? res?.data?.data[0]?.adhar_no : '',
-        age: res?.data?.data[0]?.age ? res?.data?.data[0]?.age : '',
-        agent_code: res?.data?.data[0]?.agent_code ? res?.data?.data[0]?.agent_code : '',
-        area: res?.data?.data[0]?.area ? res?.data?.data[0]?.area : '',
-        city: res?.data?.data[0]?.city ? res?.data?.data[0]?.city : '',
-        coumpany_name: res?.data?.data[0]?.coumpany_name ? res?.data?.data[0]?.coumpany_name : '',
-        current_stay: res?.data?.data[0]?.current_stay ? res?.data?.data[0]?.current_stay : '',
-        desigantion: res?.data?.data[0]?.desigantion ? res?.data?.data[0]?.desigantion : '',
-        email: res?.data?.data[0]?.email ? res?.data?.data[0]?.email : '',
-        first_name: res?.data?.data[0]?.first_name ? res?.data?.data[0]?.first_name : '',
-        funding_emi_type: res?.data?.data[0]?.funding_emi_type ? res?.data?.data[0]?.funding_emi_type : '',
-        gender: res?.data?.data[0]?.gender ? res?.data?.data[0]?.gender : '',
-        locality: res?.data?.data[0]?.locality ? res?.data?.data[0]?.locality : '',
-        location: res?.data?.data[0]?.location ? res?.data?.data[0]?.location : '',
-        marital_status: res?.data?.data[0]?.marital_status ? res?.data?.data[0]?.marital_status : '',
-        mobile: res?.data?.data[0]?.mobile ? res?.data?.data[0]?.mobile : '',
-        no_of_family_member: res?.data?.data[0]?.no_of_family_member ? res?.data?.data[0]?.no_of_family_member : '',
-        occupation: res?.data?.data[0]?.occupation ? res?.data?.data[0]?.occupation : '',
-        office_address: res?.data?.data[0]?.office_address ? res?.data?.data[0]?.office_address : '',
-        pancard_no: res?.data?.data[0]?.pancard_no ? res?.data?.data[0]?.pancard_no : '',
-        visit_type: res?.data?.data[0]?.visit_type ? res?.data?.data[0]?.visit_type : '',
-        whatsapp_no: res?.data?.data[0]?.whatsapp_no ? res?.data?.data[0]?.whatsapp_no : '',
-        birth_date: res?.data?.data[0]?.birth_date ?
+    try {
+      const res = await apiCall(
+        "post",
+        apiEndPoints.CHECK_VISIT_AVAILABLE,
+        params
+      );
+      if (res?.data?.status === 200) {
+        dispatch({ type: STOP_LOADING });
+        return true;
+      } else if (res?.data?.status === 201) {
+        setMobileError(res?.data?.message)
+        setOkIsVisible(true)
+        dispatch({ type: STOP_LOADING });
+        return false;
+      } else if (res?.data?.status === 202) {
+        setFormData({
+          ...formData,
+          address: res?.data?.data[0]?.address ? res?.data?.data[0]?.address : '',
+          adhar_no: res?.data?.data[0]?.adhar_no ? res?.data?.data[0]?.adhar_no : '',
+          age: res?.data?.data[0]?.age ? res?.data?.data[0]?.age : '',
+          agent_code: res?.data?.data[0]?.agent_code ? res?.data?.data[0]?.agent_code : '',
+          area: res?.data?.data[0]?.area ? res?.data?.data[0]?.area : '',
+          city: res?.data?.data[0]?.city ? res?.data?.data[0]?.city : '',
+          coumpany_name: res?.data?.data[0]?.coumpany_name ? res?.data?.data[0]?.coumpany_name : '',
+          current_stay: res?.data?.data[0]?.current_stay ? res?.data?.data[0]?.current_stay : '',
+          desigantion: res?.data?.data[0]?.desigantion ? res?.data?.data[0]?.desigantion : '',
+          email: res?.data?.data[0]?.email ? res?.data?.data[0]?.email : '',
+          first_name: res?.data?.data[0]?.first_name ? res?.data?.data[0]?.first_name : '',
+          funding_emi_type: res?.data?.data[0]?.funding_emi_type ? res?.data?.data[0]?.funding_emi_type : '',
+          gender: res?.data?.data[0]?.gender ? res?.data?.data[0]?.gender : '',
+          locality: res?.data?.data[0]?.locality ? res?.data?.data[0]?.locality : '',
+          location: res?.data?.data[0]?.location ? res?.data?.data[0]?.location : '',
+          marital_status: res?.data?.data[0]?.marital_status ? res?.data?.data[0]?.marital_status : '',
+          mobile: res?.data?.data[0]?.mobile ? res?.data?.data[0]?.mobile : '',
+          no_of_family_member: res?.data?.data[0]?.no_of_family_member ? res?.data?.data[0]?.no_of_family_member : '',
+          occupation: res?.data?.data[0]?.occupation ? res?.data?.data[0]?.occupation : '',
+          office_address: res?.data?.data[0]?.office_address ? res?.data?.data[0]?.office_address : '',
+          pancard_no: res?.data?.data[0]?.pancard_no ? res?.data?.data[0]?.pancard_no : '',
+          visit_type: res?.data?.data[0]?.visit_type ? res?.data?.data[0]?.visit_type : '',
+          whatsapp_no: res?.data?.data[0]?.whatsapp_no ? res?.data?.data[0]?.whatsapp_no : '',
+          birth_date: res?.data?.data[0]?.birth_date ?
             moment(res?.data?.data[0]?.birth_date).format(DATE_FORMAT) : '',
-    })
+            visit_confirmation_status: 2,
 
+
+        })
+        dispatch({ type: STOP_LOADING });
+        return true;
+
+      }
+    } catch (e) {
+      dispatch({
+        type: STOP_LOADING,
+
+      });
     }
 
   };
@@ -637,7 +654,8 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         } else {
           var isValidMobile: any = true;
         }
-        console.log("🚀 ~ file: index.tsx:597 ~ isValidMobile:", isValidMobile);
+        console.log("🚀 ~ file: index.tsx:652 ~ OnpressCreateEdit ~ isValidMobile:", isValidMobile)
+        
         if (isValidMobile) {
           let add_params: any = {
             first_name: formData?.first_name,
@@ -715,15 +733,17 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
           }
 
           if (formData?.property_id !== "") {
-            //dispatch(addVisitor(add_params));
+            dispatch(addVisitor(add_params));
           } else {
-            //dispatch(addVisitorWithoutProperty(add_params));
+            dispatch(addVisitorWithoutProperty(add_params));
           }
-        } else {
-          Alert.alert("");
         }
       }
     }
+  };
+
+  const onPressRightButton = () => {
+    setOkIsVisible(false);
   };
 
   return (
@@ -752,7 +772,14 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       employeeList={employeeList}
       handleEmployeeDropdownPress={handleEmployeeDropdownPress}
       handleCpNameDropdownPress={handleCpNameDropdownPress}
+
+      mobileerror={mobileerror}
+      onPressRightButton={onPressRightButton}
+      okIsVisible={okIsVisible}
+      setOkIsVisible={setOkIsVisible}
     />
+
+
   );
 };
 
