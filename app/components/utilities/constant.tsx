@@ -39,8 +39,8 @@ export const DATE_TIME_FORMAT = 'DD-MM-YYYY, h:mm a'
 export const AMOUNT_TYPE = [{ value: "Cr" }, { value: "L" }, { value: "K" }]
 export const ONE_MONTH_DATES = new Date(new Date().setDate(new Date().getDate() + 31));
 
-// export const  GLOBAL_URL = 'http://192.168.1.27:3000' // virendra 
-// export const  GLOBAL_URL = 'http://192.168.1.5:3000' // remi
+// export const  GLOBAL_URL = 'http://192.168.43.177:3000' // virendra 
+//export const  GLOBAL_URL = 'http://192.168.1.5:3000' // remi
 
 // export const  GLOBAL_URL = 'https://prodapi.justoverse.com:3002' //prod
 // export const GLOBAL_URL = 'https://api.justoverse.com:3000'

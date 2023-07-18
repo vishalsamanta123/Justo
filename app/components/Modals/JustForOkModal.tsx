@@ -10,15 +10,13 @@ import { DATE_FORMAT, WHITE_COLOR } from "app/components/utilities/constant";
 import strings from "../utilities/Localization";
 
 const JustForOkModal = (props: any) => {
-    const onPressRightButton = () => {
-        props.setIsVisible(false)
-    }
+    
     return (
         <Modal isVisible={props.Visible}>
             <View style={[styles.conteconfirm, {backgroundColor: WHITE_COLOR, borderRadius: 10}]}>
                 <View style={styles.topContainer}>
                     <View />
-                    <Text style={styles.topTxt}>Not Found</Text>
+                    <Text style={styles.topTxt}>{props?.headertitle ? props?.headertitle : "Not Found" }</Text>
                     <View>
                         <TouchableOpacity onPress={() => {
                             props.setIsVisible(false)
@@ -29,14 +27,14 @@ const JustForOkModal = (props: any) => {
                 </View>
                 <View style={styles.borderView} />
                 <View style={styles.MiddleContainer}>
-                    <Text style={styles.bottomTxt}>JW Property Id not map with this Property. Contact with JV admin for map this.</Text>
+                    <Text style={styles.bottomTxt}>{props.message}</Text>
                 </View>
                 <View style={{ marginVertical: 10, marginHorizontal: 25, flexDirection: 'row',justifyContent: 'center' }}>
                     <View style={styles.btnview}>
                         <Button
                             buttonText={'Ok' }
                             width={130} height={40}
-                            handleBtnPress={() => onPressRightButton()} />
+                            handleBtnPress={() => props.onPressRightButton()} />
                     </View>
                 </View>
             </View>

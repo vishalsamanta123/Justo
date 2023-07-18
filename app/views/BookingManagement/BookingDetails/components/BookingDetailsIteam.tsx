@@ -8,7 +8,6 @@ import { BLACK_COLOR, DATE_BY_DAY, DATE_TIME_FORMAT, Isios, ROLE_IDS } from 'app
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import images from 'app/assets/images'
-import FastImages from 'app/components/FastImage'
 
 const BookingDetailsItem = (props: any) => {
     const getLoginType = useSelector((state: any) => state.login);
@@ -291,7 +290,7 @@ const BookingDetailsItem = (props: any) => {
                                     strings.notfount : item?.tranjection_upi_cheque_number}</Text>
                             </View>
                         </View>)}
-                    <View style={styles.Txtview}>
+                    {/* <View style={styles.Txtview}>
                         <View style={styles.projectContainer}>
                             <Text style={styles.projectTxt}>Configuration Qty</Text>
                         </View>
@@ -300,6 +299,50 @@ const BookingDetailsItem = (props: any) => {
                             <Text style={styles.nameTxt}>
                                 {item?.configuration ?
                                     `${item?.configuration} / ${item?.quantity}` : strings.notfount}</Text>
+                        </View>
+                    </View> */}
+                    <View style={styles.Txtview}>
+                        <View style={styles.projectContainer}>
+                            <Text style={styles.projectTxt}>Configuration</Text>
+                        </View>
+                        <View><Text>:</Text></View>
+                        <View style={styles.nameContainer}>
+                            <Text style={styles.nameTxt}>
+                                {item?.flat_type ?
+                                    item?.flat_type : strings.notfount}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.Txtview}>
+                        <View style={styles.projectContainer}>
+                            <Text style={styles.projectTxt}>Floor</Text>
+                        </View>
+                        <View><Text>:</Text></View>
+                        <View style={styles.nameContainer}>
+                            <Text style={styles.nameTxt}>
+                                {item?.floor ?
+                                    item?.floor : strings.notfount}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.Txtview}>
+                        <View style={styles.projectContainer}>
+                            <Text style={styles.projectTxt}>Flat Number</Text>
+                        </View>
+                        <View><Text>:</Text></View>
+                        <View style={styles.nameContainer}>
+                            <Text style={styles.nameTxt}>
+                                {item?.flat_no ?
+                                    item?.flat_no : strings.notfount}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.Txtview}>
+                        <View style={styles.projectContainer}>
+                            <Text style={styles.projectTxt}>Saleble Area</Text>
+                        </View>
+                        <View><Text>:</Text></View>
+                        <View style={styles.nameContainer}>
+                            <Text style={styles.nameTxt}>
+                                {item?.saleable_area ?
+                                    item?.saleable_area : strings.notfount}</Text>
                         </View>
                     </View>
                 </>)

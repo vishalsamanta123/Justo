@@ -44,6 +44,7 @@ const AddAppointmentItem = (props: any) => {
             <View style={styles.inputWrap}>
               <DropdownInput
                 require={true}
+                disable={true}
                 headingText={"Select Update Type"}
                 placeholder={props?.appointMentForm?.update_type}
                 data={
@@ -253,7 +254,7 @@ const AddAppointmentItem = (props: any) => {
             }
           />
         </View>
-        <View style={styles.inputWrap}>
+        {/* <View style={styles.inputWrap}>
           <Text style={styles.genderTxt}>{strings.pickupAppointment}</Text>
         </View>
         <View style={styles.genderView}>
@@ -374,7 +375,7 @@ const AddAppointmentItem = (props: any) => {
               />
             </View>
           </>
-        ) : null}
+        ) : null} */}
         <View style={styles.bottomView}>
           <CheckBox
             value={true}

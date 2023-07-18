@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   borderView: {
     borderBottomColor: GRAY_COLOR,
     borderBottomWidth: 1,
+    
   },
   topContainer: {
     flexDirection: "row",
@@ -75,6 +76,7 @@ const styles = StyleSheet.create({
   },
   MiddleContainer: {
     marginVertical: normalizeSpacing(10),
+    padding: 3.5
   },
   closeIcon: {
     tintColor: "red",

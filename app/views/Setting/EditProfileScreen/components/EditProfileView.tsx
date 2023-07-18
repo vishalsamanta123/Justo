@@ -24,6 +24,8 @@ const EditProfileView = (props: any) => {
   const { onPressBack, allDetails, setEditData, editData } = props;
   const insets = useSafeAreaInsets();
   const [profileVisible, setProfileVisible] = useState(false);
+  console.log("🚀 ~ file: EditProfileView.tsx:210",editData?.dateofbirth)
+
   return (
     <View style={styles.mainContainer}>
       <Header
@@ -206,7 +208,9 @@ const EditProfileView = (props: any) => {
                 dateofbirth: data,
               });
             }}
-            value={moment(editData?.dateofbirth).format(DATE_FORMAT_EXCL)}
+            value={
+              editData?.dateofbirth ?  moment(editData?.dateofbirth).format(DATE_FORMAT_EXCL) : strings.notfount
+            }
           />
           <View style={styles.inputWrap}>
             <InputField

@@ -29,6 +29,7 @@ const AppointmentDtailsItem = (props: any) => {
       ? props?.detail?.booking_status[0]
       : "";
   console.log('props?.detail: ', props?.detail);
+  console.log("🚀 ~ file: AppointmentDtailsItem.tsx:98 ~ props?.detail?.expected_possession_date:", props?.detail?.expected_possession_date)
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -95,7 +96,8 @@ const AppointmentDtailsItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props?.detail?.expected_possession_date === "" ||
-            props?.detail?.expected_possession_date === undefined
+            props?.detail?.expected_possession_date === undefined ||
+            props?.detail?.expected_possession_date === null
               ? strings.notfount
               : moment.utc(props?.detail?.expected_possession_date).format(DATE_BY_DAY)}
           </Text>

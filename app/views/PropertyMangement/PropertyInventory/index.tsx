@@ -26,14 +26,14 @@ const PropertyInventory = ({ navigation, route }: any) => {
   const handleBackPress = () => {
     navigation.goBack();
   };
-  const handleGetDropdownData = async () => {
+  const handleGetDropdownData = async (type: any) => {
     const params = {
       params: {
         login: JW_LOGIN,
         password: JW_PASSWORD,
         // project : "MP/0001",
         project: propName,
-        type: formData.flatType ? formData.flatType : "",
+        type: type === 'clear' ? "" : formData.flatType ? formData.flatType : "",
       },
     };
     dispatch({ type: START_LOADING });
@@ -55,7 +55,7 @@ const PropertyInventory = ({ navigation, route }: any) => {
         const tempFloors = new Set(temp.map((el: any) => el["Floor"]));
         setFloors(Array.from(tempFloors));
 
-        if (formData.floor) {
+        if (type !== "clear" &&  formData.floor) {
           filteredData = temp.filter(
             (item: any) => item["Floor"] == formData.floor
           );
@@ -72,7 +72,7 @@ const PropertyInventory = ({ navigation, route }: any) => {
     }
   };
   useEffect(() => {
-    handleGetDropdownData();
+    handleGetDropdownData("");
   }, []);
 
   const setcofigdata = (item: any) => {
@@ -89,17 +89,17 @@ const PropertyInventory = ({ navigation, route }: any) => {
   };
   const handleInventorymodalClose = () => {
     setFilterisVisible(false);
-    setFormData({
-      ...formData,
-      floor: "",
-      flatType: "",
-    });
-    handleGetDropdownData();
+    // setFormData({
+    //   ...formData,
+    //   floor: "",
+    //   flatType: "",
+    // });
+    handleGetDropdownData("");
   };
 
   const handleAddfilter = () => {
     setFilterisVisible(false);
-    handleGetDropdownData();
+    handleGetDropdownData("");
     setFormData({
       ...formData,
       floor: formData.floor,
@@ -112,7 +112,16 @@ const PropertyInventory = ({ navigation, route }: any) => {
       floor: "",
       flatType: "",
     });
-    handleGetDropdownData();
+    handleGetDropdownData("clear");
+  };
+  const handleReset = () => {
+    handleGetDropdownData("clear");
+    setFormData({
+      ...formData,
+      floor: "",
+      flatType: "",
+    });
+    setFilterisVisible(false);
   };
   return (
     <>
@@ -133,6 +142,7 @@ const PropertyInventory = ({ navigation, route }: any) => {
         setFormData={setFormData}
         handleAddfilter={handleAddfilter}
         setcofigdata={setcofigdata}
+        handleReset={handleReset}
       />
     </>
   );

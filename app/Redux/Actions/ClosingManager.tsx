@@ -36,7 +36,7 @@ export const getClosingDetail = (params: any) => async (dispatch: any) => {
     dispatch({ type: START_LOADING });
     try {
         const res = await apiCall("post", apiEndPoints.GETCMDETAIL, params);
-        console.log('res: ', res);
+        console.log('res: ', res?.data);
         if (res.data.status === 200) {
             dispatch({
                 type: GET_CLOSINGMANAGER_DETAIL,

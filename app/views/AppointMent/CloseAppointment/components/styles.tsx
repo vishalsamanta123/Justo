@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
         tintColor: WHITE_COLOR,
       },
       mainContainer: {
-        backgroundColor: WHITE_COLOR,
         borderRadius: 5,
       },
       headerStyle: {

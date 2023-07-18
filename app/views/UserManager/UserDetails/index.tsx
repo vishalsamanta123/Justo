@@ -14,6 +14,7 @@ const UserDetailsScreen = ({ navigation, route }: any) => {
 
   useFocusEffect(
     React.useCallback(() => {
+      console.log('calllllllllllll',data?._id)
       dispatch(getClosingDetail({ user_id: data?._id }));
       return () => {};
     }, [navigation])

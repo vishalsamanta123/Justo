@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: PRIMARY_THEME_COLOR,
   },
+  RightFirstIconStyle: {
+    tintColor: WHITE_COLOR,
+  },
   leftImageIconStyle: {
     tintColor: WHITE_COLOR,
   },
@@ -22,40 +25,47 @@ const styles = StyleSheet.create({
   },
   propertyListView: {
     flex: 1,
-//marginTop: normalizeSpacing(2),
+    margin: normalizeSpacing(2),
+  },
+  btnView: {
+    // flex: 0.6,
+    // top: 5,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // marginLeft: normalizeSpacing(22),
+    marginBottom: normalizeSpacing(10),
+  },
+  btnView1: {
+    alignItems: 'center',
+    marginBottom: normalizeSpacing(15),
+  },
+  propertyListViewsec: {
+    flex: 5.4,
+    margin: normalizeSpacing(0),
   },
   IteamView: {
     backgroundColor: WHITE_COLOR,
-    padding: normalizeSpacing(10),
+    marginHorizontal: normalizeSpacing(10),
     borderRadius: 10,
     marginVertical: normalizeSpacing(10),
   },
   Txtview: {
     flexDirection: 'row',
-    // justifyContent: 'center',
     alignItems: 'center',
     borderBottomColor: GRAY_COLOR,
     borderBottomWidth: 1,
-    paddingVertical: normalizeSpacing(10),
+    padding: normalizeSpacing(4),
+    marginTop: normalizeSpacing(2),
   },
   projectContainer: {
     flex: 2.5,
-    alignItems: 'flex-start',
-    height:'100%',
-    marginLeft:normalizeSpacing(15),
+    alignItems: 'flex-end',
   },
   projectTxt: {
     fontSize: normalize(15),
     fontFamily: FONT_FAMILY_SEMIBOLD,
     color: GRAY_LIGHT_COLOR
-  },
-  headingTxt: {
-    fontSize: normalize(20),
-    fontFamily: FONT_FAMILY_SEMIBOLD,
-  },
-  headingView: {
-    padding: normalizeSpacing(10),
-    alignItems: 'center'
   },
   nameContainer: {
     flex: 3.5,
@@ -71,31 +81,46 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: normalizeSpacing(10),
-    marginHorizontal: normalizeSpacing(10),
+    alignItems: 'flex-end'
+  },
+  buttonbox: {
+    top: 12,
+    backgroundColor: WHITE_COLOR,
+    width: normalizeWidth(100),
+    height: normalizeHeight(30),
+    marginLeft: normalizeSpacing(8),
+    justifyContent: 'center',
+    borderRadius: 7,
   },
   button: {
+    top: 5,
     backgroundColor: WHITE_COLOR,
-    width: normalizeWidth(90),
-    height: normalizeHeight(25),
-    alignItems: 'center',
+    width: normalizeWidth(150),
+    height: normalizeHeight(35),
+    marginLeft: normalizeSpacing(5),
     justifyContent: 'center',
-    borderWidth: 0.5
+    //borderWidth: 0.5,
+    borderRadius: 7,
+
+
+  },
+  Viewbutton: {
+    top: 10,
+    backgroundColor: PRIMARY_THEME_COLOR,
+    borderBottomEndRadius: 10,
+    borderTopLeftRadius: 10,
+    padding: normalizeSpacing(5)
+  },
+  arrow: {
+    tintColor: WHITE_COLOR,
+    width: normalizeWidth(30),
+    height: normalizeHeight(30)
   },
   buttonTxt: {
-    // color: WHITE_COLOR,
-    // textAlign: 'center'
+    color: WHITE_COLOR,
+    textAlign: 'center'
   },
-  closeIconTouch:{
-    position: 'relative'
-  },
-  closeIcon: {
-    tintColor: "red",
-    width: normalizeWidth(30),
-    height: normalizeHeight(30),
-  },
-  linkTouch:{
 
-  }
 });
 
 export default styles;

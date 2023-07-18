@@ -102,7 +102,6 @@ const InventoryModal = (props: any) => {
               // valueField={"type"}
               value={props.formData?.floor}
               onChange={(item: any) => {
-              console.log('item: ', typeof item);
                 props.setFormData({
                   ...props.formData,
                   floor: item,
@@ -121,11 +120,26 @@ const InventoryModal = (props: any) => {
               }}
             />
           </View>
-          <View style={{ marginVertical: 20 }}>
-            <View style={{ flexDirection: "row", justifyContent: "center" }}>
+          <View
+            style={{
+              marginVertical: 20,
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <View style={{}}>
               <Button
-                width={235}
-                buttonText={'Apply'}
+                width={120}
+                buttonText={"Reset"}
+                handleBtnPress={() => {
+                  props.handleReset()
+                }}
+              />
+            </View>
+            <View style={{}}>
+              <Button
+                width={120}
+                buttonText={"Apply"}
                 handleBtnPress={() => props.handleAddfilter()}
               />
             </View>

@@ -117,65 +117,67 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
 
   const addEditAgency = useSelector((state: any) => state.addEditAgency) || [];
 
-  useEffect(() => {
+  const handleClearData = (type: any) => {
     setAgencyData({
-      ...agencyData,
-      owner_name: "",
-      adhar_no: "",
-      pancard_no: "",
-      gender: "",
-      date_of_birth: "",
-      primary_mobile: "",
-      whatsapp_number: "",
-      email: "",
-      working_location: [],
-      rera_certificate_no: "",
-      rera_certificate: "",
-      propidership_declaration_letter: "",
-      cancel_cheaque: "",
-      bank_name: "",
-      branch_name: "",
-      account_no: "",
-      ifsc_code: "",
-      gst: "",
-      pancard: "",
-      declaration_letter_of_company: "",
-      rera_registration: "",
-      company_name: "",
-      company_rera_no: "",
-      company_rera_certificate: "",
-      company_email_id: "",
-      company_address: "",
-      company_latitude: "",
-      company_longitude: "",
-      company_gst: "",
-      company_pancard: "",
-      company_bank_name: "",
-      company_branch_name: "",
-      company_account_no: "",
-      company_ifsc_code: "",
-      _id: "",
-      agency_name: "",
-      location: "",
-      latitude: "",
-      longitude: "",
-      company_employee: [],
-      property_tag: [],
-      norera_register: null,
-      setprimary_mobile: "",
-      setemail: "",
-    });
-    setEmailMobValidation({
-      primary_mobile: null,
-      email: null,
-    });
-  }, [agencyData?.cp_type]);
+          ...agencyData,
+          cp_type: type,
+          owner_name: "",
+          adhar_no: "",
+          pancard_no: "",
+          gender: "",
+          date_of_birth: "",
+          primary_mobile: "",
+          whatsapp_number: "",
+          email: "",
+          working_location: [],
+          rera_certificate_no: "",
+          rera_certificate: "",
+          propidership_declaration_letter: "",
+          cancel_cheaque: "",
+          bank_name: "",
+          branch_name: "",
+          account_no: "",
+          ifsc_code: "",
+          gst: "",
+          pancard: "",
+          declaration_letter_of_company: "",
+          rera_registration: "",
+          company_name: "",
+          company_rera_no: "",
+          company_rera_certificate: "",
+          company_email_id: "",
+          company_address: "",
+          company_latitude: "",
+          company_longitude: "",
+          company_gst: "",
+          company_pancard: "",
+          company_bank_name: "",
+          company_branch_name: "",
+          company_account_no: "",
+          company_ifsc_code: "",
+          _id: "",
+          agency_name: "",
+          location: "",
+          latitude: "",
+          longitude: "",
+          company_employee: [],
+          property_tag: [],
+          norera_register: null,
+          setprimary_mobile: "",
+          setemail: "",
+        });
+        setEmailMobValidation({
+          primary_mobile: null,
+          email: null,
+        });
+        setEmployees([])
+  }
   useEffect(() => {
-    if (response?.data?.length > 0) {
-      console.log('response?.data[0]?.property_tag: ', response?.data[0]);
+    if (response?.data?.length > 0 && type === "edit") {
       const arr: any = response?.data[0]?.property_tag.map((prop: any) => prop?.property_id);
       setSelectedPropertyIds(arr);
       setSelectedProperty(response?.data[0]?.property_tag);
+      console.log("🚀 ~ file: index.tsx:180 ~ response?.data[0]?.property_tag:", response?.data[0]?.property_tag)
     }
   }, [response]);
   useEffect(() => {
@@ -214,7 +216,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
             company_ifsc_code:
               response?.data[0]?.agencies?.agency_bank_detail?.ifsc_code ?? "",
             rera_certificate: response?.data[0]?.rera_certificate ?? "",
-            pancard: response?.data[0]?.agencies?.pancard ?? "",
+            pancard: response?.data[0]?.pancard ?? "",
             declaration_letter_of_company:
               response?.data[0]?.agencies?.declaration_letter_of_company ?? "",
             location: response?.data[0]?.location ?? "",
@@ -283,18 +285,13 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
         })
       );
     }
-    dispatch(
-      getAllProperty({
-        // offset: 0,
-        // limit: 100,
-        // start_date: data?.start_date ? data?.start_date : '',
-        // end_date: data?.end_date ? data?.end_date : '',
-        // location: data?.location ? data?.location : '',
-        // property_name: data?.property_name ? data?.property_name : '',
-        // property_type: data?.property_type ? data?.property_type : '',
-      })
-    );
-  }, [navigation, detail, response]);
+  }, [navigation, detail]);
+  useLayoutEffect(() => {
+    setEmailMobValidation({
+      primary_mobile: null,
+      email: null,
+    });
+  }, [navigation]);
   useEffect(() => {
     if (addEditAgency?.response?.status === 200) {
       dispatch(removeAgency());
@@ -303,6 +300,11 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
         msg: addEditAgency?.response?.message,
         backgroundColor: GREEN_COLOR,
       });
+      setEmailMobValidation({
+        primary_mobile: null,
+        email: null,
+      });
+      setSelectedProperty([])
     }
   }, [addEditAgency]);
 
@@ -727,12 +729,11 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
     return isError;
   };
   useEffect(() => {
-    console.log("emailAndMobileData?.response: ", emailAndMobileData);
     if (
       emailAndMobileData?.response?.status === 200 ||
       emailAndMobileData?.response?.status === 201
     ) {
-      // dispatch(emailCheckRemove());
+      dispatch(emailCheckRemove());
       if (emailAndMobileData?.response?.status === 200) {
         switch (emailAndMobileData?.check_type) {
           case "mobile":
@@ -818,13 +819,26 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
         : { email: data };
     dispatch(checkEmailMobile(params));
   };
+  const handleVisiblePropertyPress = () => {
+    dispatch(
+      getAllProperty({
+        // offset: 0,
+        // limit: 100,
+        // start_date: data?.start_date ? data?.start_date : '',
+        // end_date: data?.end_date ? data?.end_date : '',
+        // location: data?.location ? data?.location : '',
+        // property_name: data?.property_name ? data?.property_name : '',
+        // property_type: data?.property_type ? data?.property_type : '',
+      })
+    );
+    setIsPropertyVisible(true);
+  };
   const employeeMobileNoSet = (data: any) => {
     setEmployeeFormData({
       ...employeeFormData,
       employeeMobile: data,
     });
 
-    console.log('data.length: ', data);
     if (data.length >= 10) {
       handleCheckEmailMobileforEmployee(1, data);
     } else {
@@ -1031,6 +1045,11 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
         employeeEmail: "",
         employeeGender: "",
       });
+      setEmailMobValidation({
+        ...emailMobvalidation,
+        email: null,
+        primary_mobile: null
+      });
     }
   };
 
@@ -1080,6 +1099,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           handleOnBackEmployeeModal={handleOnBackEmployeeModal}
           employeeMobileNoSet={employeeMobileNoSet}
           employeeEmailAddSet={employeeEmailAddSet}
+          handleClearData={handleClearData}
         />
       ) : (
         // <CompanyBasicInfoView
@@ -1121,6 +1141,8 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
               handleDelete={handleDelete}
               selectedProperty={selectedProperty}
               handleAllocateProperty={handleAllocateProperty}
+              handleVisiblePropertyPress={handleVisiblePropertyPress}
+
             />
           ) : (
             // <CompanyBankInfo

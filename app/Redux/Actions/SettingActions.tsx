@@ -7,11 +7,14 @@ export const updateUserSettingData =
   (userDetail: any) => async (dispatch: any) => {
     dispatch({ type: START_LOADING })
     try {
+    console.log("🚀 ~ file: SettingActions.tsx:8 ~ userDetail:", userDetail)
+
       const header = {
         "Content-Type": "multipart/form-data",
         "access-control-allow-origin": "*",
       };
       const res = await apiCall("post", apiEndPoints.EDITUSER, userDetail, header);
+      console.log("🚀 ~ file: SettingActions.tsx:18 ~ res?.data:", res?.data)
       if (res?.data?.status == 200) {
         dispatch({
           type: UPDATE_PROFILE,

@@ -349,9 +349,9 @@ const VisitorUpdateView = (props: any) => {
 
                 <View style={[styles.inputWrap]}>
                     <DropdownInput
-                        headingText={'Current Stay'}
+                        headingText={'Currently Staying As'}
                         placeholder={props.updateForm?.current_stay ?
-                            props.updateForm?.current_stay : 'Current Stay'}
+                            props.updateForm?.current_stay : 'Currently Staying As'}
                         data={[
                             { label: strings.Rented, value: strings.Rented },
                             { label: strings.Owned, value: strings.Owned },

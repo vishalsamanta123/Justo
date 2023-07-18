@@ -137,7 +137,8 @@ const BookingView = (props: any) => {
                 },
               ]}
             >
-              Attach Photo : <RequiredStart />{" "}
+              Attach Photo : 
+              {/* <RequiredStart />{" "} */}
             </Text>
             <View>
               <Button
@@ -379,7 +380,7 @@ const BookingView = (props: any) => {
             <View style={styles.IteamView}>
               <View style={styles.Txtview}>
                 <View style={styles.projectContainer}>
-                  <Text style={styles.projectTxt}>Saleable Area :</Text>
+                  <Text style={styles.projectTxt}>Carpet Area :</Text>
                 </View>
                 <View style={styles.nameContainer}>
                   <Text style={styles.nameTxt}>

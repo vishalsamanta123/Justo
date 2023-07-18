@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./styles";
 import {
   GRAY_COLOR,
+  PRIMARY_THEME_COLOR,
   RED_COLOR,
 } from "../../../../components/utilities/constant";
 import {
@@ -19,10 +20,11 @@ import images from "app/assets/images";
 import FileViewer from "react-native-file-viewer";
 import RNFS from "react-native-fs";
 import ErrorMessage from "app/components/ErrorMessage";
+import { useNavigation } from "@react-navigation/native";
 
 const PropertyDetailItem = (props: any) => {
   const item = props?.items || {};
-  console.log('item: ', item);
+  const navigation: any = useNavigation()
   const [isVisible, setIsVisible] = useState(false);
   const [onPressData, setOnPressData] = useState<any>({});
   const reraType = props?.items?.rera_certificate?.substring(
@@ -38,6 +40,7 @@ const PropertyDetailItem = (props: any) => {
     props?.items?.declaration_letter_of_company?.substring(
       props?.items?.declaration_letter_of_company?.lastIndexOf(".") + 1
     );
+    console.log("🚀 ~ file: AgentDetailInfo.tsx:565 ~ props?.items?.base_url + props.items.pancard:", props?.items?.base_url + props.items.pancard)
 
   const OpenDoc = async (url: any) => {
     function getUrlExtension(url: any) {
@@ -223,6 +226,19 @@ const PropertyDetailItem = (props: any) => {
           ) : <Text style={styles.nameTxt}>{strings.notfount}</Text>}
         </View>
       </View>
+      {item?.cp_type === 2 ? <View style={styles.Txtview}>
+        <View style={styles.projectContainer}>
+          <Text style={styles.projectTxt}>
+            {"Employees"}
+          </Text>
+        </View>
+        <View>
+          <Text>:</Text>
+        </View>
+        <TouchableOpacity style={styles.nameContainer} onPress={() => {navigation.navigate('EmployeeListing', {ID: item?.cp_id})}}>
+          <Text style={[styles.nameTxt, {color: PRIMARY_THEME_COLOR}]}>{"See All Employees"}</Text>
+        </TouchableOpacity>
+      </View> : null}
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>{strings.location} </Text>
@@ -546,7 +562,7 @@ const PropertyDetailItem = (props: any) => {
             }}
           >
             <FastImages
-              source={{ uri: props?.items?.base_url + props.items.pancard }}
+              source={{ uri: props.items.pancard }}
               style={{
                 width: normalizeWidth(80),
                 height: normalizeHeight(80),

@@ -59,7 +59,7 @@ export const getPermission = (item: any) => async (dispatch: any) => {
     const res = await axios
       .get(`${GLOBAL_URL}/api/userManage/getUsermodels`, options)
       .then(async (res: any) => {
-        //console.log("res", res.data);
+        
         // return res;
         if (res.data.status === 200) {
           let payload = {
