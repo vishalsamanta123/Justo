@@ -94,7 +94,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   });
   const [configuration, setConfiguration] = useState<any>([]);
   const masterData = useSelector((state: any) => state.masterData) || {};
-  const propertyData = useSelector((state: any) => state.propertyData) || {};
+  // const propertyData = useSelector((state: any) => state.propertyData) || {};
   const companyData = useSelector((state: any) => state.companyData) || {};
   const employeeData = useSelector((state: any) => state.employeeData) || {};
   const editData = useSelector((state: any) => state.editVisitorData) || {};
@@ -107,7 +107,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   const [dropdownAgentList, setDropdownAgentList] = useState<any>([]);
   const [companyList, setCompanyList] = useState<any>([]);
   const [employeeList, setEmployeeList] = useState<any>([]);
-  const [mobileerror, setMobileError] = useState<any>('');
+  const [mobileerror, setMobileError] = useState<any>("");
   const [okIsVisible, setOkIsVisible] = useState(false);
   useEffect(() => {
     if (type === "edit") {
@@ -211,29 +211,59 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     }
   }, [masterData, dropDownType]);
 
-  useEffect(() => {
-    // dispatch(
-    //   getAllProperty({
-    //     offset: 0,
-    //     limit: "",
-    //   })
-    // );
-    // getAllPropertyData();
-    if (propertyData?.response?.status === 200) {
-      if (propertyData?.response?.data?.length > 0) {
-        const activeData = propertyData?.response?.data.filter((el: any) => {
-          return el.status == true;
-        });
-        activeData?.length > 0
-          ? setAllProperty(activeData)
-          : setAllProperty([]);
+  const handleGetProperty = async (id: any) => {
+    dispatch({ type: START_LOADING });
+    const params = {
+      cp_id: id,
+    };
+    const res = await apiCall(
+      "post",
+      apiEndPoints.GET_CP_PROPERTY_FOR_SM,
+      params
+    );
+    const response: any = res?.data;
+    if (response?.status === 200) {
+      if (response?.data?.length > 0) {
+        dispatch({ type: STOP_LOADING });
+        setAllProperty(response?.data);
       } else {
+        dispatch({ type: STOP_LOADING });
         setAllProperty([]);
       }
     } else {
+      dispatch({ type: STOP_LOADING });
+      ErrorMessage({
+        msg: response?.message,
+        backgroundColor: RED_COLOR,
+      });
       setAllProperty([]);
     }
-  }, [propertyData]);
+  };
+
+  // useEffect(() => {
+  // dispatch(
+  //   getAllProperty({
+  //     offset: 0,
+  //     limit: "",
+  //   })
+  // );
+  // getAllPropertyData();
+
+  // if (propertyData?.response?.status === 200) {
+  //   if (propertyData?.response?.data?.length > 0) {
+  //     const activeData = propertyData?.response?.data.filter((el: any) => {
+  //       return el.status == true;
+  //     });
+  //     activeData?.length > 0
+  //       ? setAllProperty(activeData)
+  //       : setAllProperty([]);
+  //   } else {
+  //     setAllProperty([]);
+  //   }
+  // } else {
+  //   setAllProperty([]);
+  // }
+  // }, [propertyData]);
 
   // const getAllPropertyData = () => {
   //   if (propertyData?.response?.status === 200) {
@@ -283,18 +313,18 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         isError = false;
         errorMessage = "Please check entered mobile number";
       } else if (
+        formData?.lead_source === "" ||
+        formData.lead_source === undefined
+      ) {
+        isError = false;
+        errorMessage = "Please enter Lead Source";
+      } else if (
         type != "edit" &&
         formData?.property_id === "" &&
         formData?.property_type_title === ""
       ) {
         isError = false;
         errorMessage = "Please select property name";
-      } else if (
-        formData?.lead_source === "" ||
-        formData.lead_source === undefined
-      ) {
-        isError = false;
-        errorMessage = "Please enter Lead Source";
       } else if (formData.gender == undefined || formData.gender == "") {
         isError = false;
         errorMessage = strings.genderReqVal;
@@ -361,19 +391,19 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         formData?.min_budget_type === "K"
           ? (tempMinVal = formData?.min_budget * 1000)
           : formData?.min_budget_type === "L"
-            ? (tempMinVal = formData?.min_budget * 100000)
-            : formData?.min_budget_type === "Cr"
-              ? (tempMinVal = formData?.min_budget * 10000000)
-              : null;
+          ? (tempMinVal = formData?.min_budget * 100000)
+          : formData?.min_budget_type === "Cr"
+          ? (tempMinVal = formData?.min_budget * 10000000)
+          : null;
 
         let tempMaxVal: any;
         formData?.max_budget_type === "K"
           ? (tempMaxVal = formData?.max_budget * 1000)
           : formData?.max_budget_type === "L"
-            ? (tempMaxVal = formData?.max_budget * 100000)
-            : formData?.max_budget_type === "Cr"
-              ? (tempMaxVal = formData?.max_budget * 10000000)
-              : null;
+          ? (tempMaxVal = formData?.max_budget * 100000)
+          : formData?.max_budget_type === "Cr"
+          ? (tempMaxVal = formData?.max_budget * 10000000)
+          : null;
 
         if (tempMinVal >= tempMaxVal) {
           isError = false;
@@ -385,24 +415,25 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       ) {
         isError = false;
         errorMessage = "Please enter minimum emi also";
-      } else if (formData?.min_emi_budget || formData.max_emi_budget) {
+      }
+      if (formData?.min_emi_budget || formData.max_emi_budget) {
         let tempMinVal: any;
         formData?.min_emi_budget_type === "K"
           ? (tempMinVal = formData?.min_emi_budget * 1000)
           : formData?.min_emi_budget_type === "L"
-            ? (tempMinVal = formData?.min_emi_budget * 100000)
-            : formData?.min_emi_budget_type === "Cr"
-              ? (tempMinVal = formData?.min_emi_budget * 10000000)
-              : null;
+          ? (tempMinVal = formData?.min_emi_budget * 100000)
+          : formData?.min_emi_budget_type === "Cr"
+          ? (tempMinVal = formData?.min_emi_budget * 10000000)
+          : null;
 
         let tempMaxVal: any;
         formData?.max_emi_budget_type === "K"
           ? (tempMaxVal = formData?.max_emi_budget * 1000)
           : formData?.max_emi_budget_type === "L"
-            ? (tempMaxVal = formData?.max_emi_budget * 100000)
-            : formData?.max_emi_budget_type === "Cr"
-              ? (tempMaxVal = formData?.max_emi_budget * 10000000)
-              : null;
+          ? (tempMaxVal = formData?.max_emi_budget * 100000)
+          : formData?.max_emi_budget_type === "Cr"
+          ? (tempMaxVal = formData?.max_emi_budget * 10000000)
+          : null;
         if (tempMinVal >= tempMaxVal) {
           isError = false;
           errorMessage = "Maximum Emi should more than Minimum Emi";
@@ -458,8 +489,8 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         msg: editData?.update
           ? editData?.response?.message
           : addData?.create
-            ? addData?.response?.message
-            : "no message",
+          ? addData?.response?.message
+          : "no message",
         backgroundColor: GREEN_COLOR,
       });
     }
@@ -514,53 +545,83 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         dispatch({ type: STOP_LOADING });
         return true;
       } else if (res?.data?.status === 201) {
-        setMobileError(res?.data?.message)
-        setOkIsVisible(true)
+        setMobileError(res?.data?.message);
+        setOkIsVisible(true);
         dispatch({ type: STOP_LOADING });
         return false;
       } else if (res?.data?.status === 202) {
         setFormData({
           ...formData,
-          address: res?.data?.data[0]?.address ? res?.data?.data[0]?.address : '',
-          adhar_no: res?.data?.data[0]?.adhar_no ? res?.data?.data[0]?.adhar_no : '',
-          age: res?.data?.data[0]?.age ? res?.data?.data[0]?.age : '',
-          agent_code: res?.data?.data[0]?.agent_code ? res?.data?.data[0]?.agent_code : '',
-          area: res?.data?.data[0]?.area ? res?.data?.data[0]?.area : '',
-          city: res?.data?.data[0]?.city ? res?.data?.data[0]?.city : '',
-          coumpany_name: res?.data?.data[0]?.coumpany_name ? res?.data?.data[0]?.coumpany_name : '',
-          current_stay: res?.data?.data[0]?.current_stay ? res?.data?.data[0]?.current_stay : '',
-          desigantion: res?.data?.data[0]?.desigantion ? res?.data?.data[0]?.desigantion : '',
-          email: res?.data?.data[0]?.email ? res?.data?.data[0]?.email : '',
-          first_name: res?.data?.data[0]?.first_name ? res?.data?.data[0]?.first_name : '',
-          funding_emi_type: res?.data?.data[0]?.funding_emi_type ? res?.data?.data[0]?.funding_emi_type : '',
-          gender: res?.data?.data[0]?.gender ? res?.data?.data[0]?.gender : '',
-          locality: res?.data?.data[0]?.locality ? res?.data?.data[0]?.locality : '',
-          location: res?.data?.data[0]?.location ? res?.data?.data[0]?.location : '',
-          marital_status: res?.data?.data[0]?.marital_status ? res?.data?.data[0]?.marital_status : '',
-          mobile: res?.data?.data[0]?.mobile ? res?.data?.data[0]?.mobile : '',
-          no_of_family_member: res?.data?.data[0]?.no_of_family_member ? res?.data?.data[0]?.no_of_family_member : '',
-          occupation: res?.data?.data[0]?.occupation ? res?.data?.data[0]?.occupation : '',
-          office_address: res?.data?.data[0]?.office_address ? res?.data?.data[0]?.office_address : '',
-          pancard_no: res?.data?.data[0]?.pancard_no ? res?.data?.data[0]?.pancard_no : '',
-          visit_type: res?.data?.data[0]?.visit_type ? res?.data?.data[0]?.visit_type : '',
-          whatsapp_no: res?.data?.data[0]?.whatsapp_no ? res?.data?.data[0]?.whatsapp_no : '',
-          birth_date: res?.data?.data[0]?.birth_date ?
-            moment(res?.data?.data[0]?.birth_date).format(DATE_FORMAT) : '',
-            visit_confirmation_status: 2,
-
-
-        })
+          address: res?.data?.data[0]?.address
+            ? res?.data?.data[0]?.address
+            : "",
+          adhar_no: res?.data?.data[0]?.adhar_no
+            ? res?.data?.data[0]?.adhar_no
+            : "",
+          age: res?.data?.data[0]?.age ? res?.data?.data[0]?.age : "",
+          agent_code: res?.data?.data[0]?.agent_code
+            ? res?.data?.data[0]?.agent_code
+            : "",
+          area: res?.data?.data[0]?.area ? res?.data?.data[0]?.area : "",
+          city: res?.data?.data[0]?.city ? res?.data?.data[0]?.city : "",
+          coumpany_name: res?.data?.data[0]?.coumpany_name
+            ? res?.data?.data[0]?.coumpany_name
+            : "",
+          current_stay: res?.data?.data[0]?.current_stay
+            ? res?.data?.data[0]?.current_stay
+            : "",
+          desigantion: res?.data?.data[0]?.desigantion
+            ? res?.data?.data[0]?.desigantion
+            : "",
+          email: res?.data?.data[0]?.email ? res?.data?.data[0]?.email : "",
+          first_name: res?.data?.data[0]?.first_name
+            ? res?.data?.data[0]?.first_name
+            : "",
+          funding_emi_type: res?.data?.data[0]?.funding_emi_type
+            ? res?.data?.data[0]?.funding_emi_type
+            : "",
+          gender: res?.data?.data[0]?.gender ? res?.data?.data[0]?.gender : "",
+          locality: res?.data?.data[0]?.locality
+            ? res?.data?.data[0]?.locality
+            : "",
+          location: res?.data?.data[0]?.location
+            ? res?.data?.data[0]?.location
+            : "",
+          marital_status: res?.data?.data[0]?.marital_status
+            ? res?.data?.data[0]?.marital_status
+            : "",
+          mobile: res?.data?.data[0]?.mobile ? res?.data?.data[0]?.mobile : "",
+          no_of_family_member: res?.data?.data[0]?.no_of_family_member
+            ? res?.data?.data[0]?.no_of_family_member
+            : "",
+          occupation: res?.data?.data[0]?.occupation
+            ? res?.data?.data[0]?.occupation
+            : "",
+          office_address: res?.data?.data[0]?.office_address
+            ? res?.data?.data[0]?.office_address
+            : "",
+          pancard_no: res?.data?.data[0]?.pancard_no
+            ? res?.data?.data[0]?.pancard_no
+            : "",
+          visit_type: res?.data?.data[0]?.visit_type
+            ? res?.data?.data[0]?.visit_type
+            : "",
+          whatsapp_no: res?.data?.data[0]?.whatsapp_no
+            ? res?.data?.data[0]?.whatsapp_no
+            : "",
+          birth_date: res?.data?.data[0]?.birth_date
+            ? moment(res?.data?.data[0]?.birth_date).format(DATE_FORMAT)
+            : "",
+          visit_confirmation_status: 2,
+        });
         dispatch({ type: STOP_LOADING });
         return true;
-
       }
     } catch (e) {
       dispatch({
         type: STOP_LOADING,
-
       });
     }
-
   };
   const OnpressCreateEdit = async () => {
     if (validation()) {
@@ -654,8 +715,11 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         } else {
           var isValidMobile: any = true;
         }
-        console.log("🚀 ~ file: index.tsx:652 ~ OnpressCreateEdit ~ isValidMobile:", isValidMobile)
-        
+        console.log(
+          "🚀 ~ file: index.tsx:652 ~ OnpressCreateEdit ~ isValidMobile:",
+          isValidMobile
+        );
+
         if (isValidMobile) {
           let add_params: any = {
             first_name: formData?.first_name,
@@ -772,14 +836,13 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       employeeList={employeeList}
       handleEmployeeDropdownPress={handleEmployeeDropdownPress}
       handleCpNameDropdownPress={handleCpNameDropdownPress}
-
       mobileerror={mobileerror}
       onPressRightButton={onPressRightButton}
       okIsVisible={okIsVisible}
       setOkIsVisible={setOkIsVisible}
+      handleGetProperty={handleGetProperty}
+      setAllProperty={setAllProperty}
     />
-
-
   );
 };
 

@@ -23,12 +23,10 @@ import { useFocusEffect } from "@react-navigation/native";
 import { START_LOADING, STOP_LOADING } from "app/Redux/types";
 import { apiCallJW } from "app/components/utilities/httpClient";
 import apiEndPoints from "app/components/utilities/apiEndPoints";
+import { getAgencyDetail } from "app/Redux/Actions/AgencyActions";
 
 const BookingScreen = ({ navigation, route }: any) => {
   const { getBookingData = {}, type = "" } = route?.params || {};
-  console.log("getBookingData: ", getBookingData?.customer_first_name);
-  console.log("🚀 ~ file: index.tsx:331 ~ getBookingData.crm_person_email:", getBookingData.crm_person_email)
-
   const dispatch: any = useDispatch();
   const [bookingData, setBookingData] = useState({
     lead_id: getBookingData?.lead_id ? getBookingData?.lead_id : "",
@@ -58,6 +56,7 @@ const BookingScreen = ({ navigation, route }: any) => {
   const addedBookingData =
     useSelector((state: any) => state.addedBooking) || {};
   const { response = {} } = useSelector((state: any) => state.booking) || {};
+  const agencyDetails = useSelector((state: any) => state.agency);
   const [masterDatas, setMasterDatas] = useState<any>([]);
   const [propertyConfData, setPropertyConfData] = useState<any>([]);
   const [inventory, setInventory] = useState<any>([]);
@@ -67,13 +66,48 @@ const BookingScreen = ({ navigation, route }: any) => {
   const [dropDownType, setDropDownType] = useState<any>(null);
   const [quantity, setQuantity] = useState<any>(false);
   const [maininventory, setMainInventory] = useState<any>([]);
+  console.log("🚀 ~ file: index.tsx:63 ~ agencyDetails:", agencyDetails?.response?.data)
 
-  useFocusEffect(
-    React.useCallback(() => {
-      getDropDownData(0);
-      return () => {};
-    }, [navigation])
-  );
+//   https://demoapi.justoworks.co.in/cp/fetch_channel_partner_id
+// {"params": {
+//     "login": "api", 
+//     "password": "76db466cb187c33c5f170d6352afad44da671002", 
+//     "record": {
+//         "name": "Sample", agent_name
+//         "state_code": "KL", 
+//         "country_code": "IN",
+//         "mobile": "9966666666", primary_mobile
+//         "owner_name": "Owner",  agent_name
+//         "street": "Street", 
+//         "street2": "Street2",
+//         "city": "City",
+//         "zip": "600066", 
+//         "gstin": "00076", gst
+//         "rera_number": "001", rera_certificate_no
+//         "pan": "00045", pancard_no
+//         "aadhar": "000055", adhar_no
+//         "phone": "234234", primary_mobile
+//         "email": "mailto:sample@sample.com", email
+//         "website": "sample.com",
+//         "bank": "Sample Bank",  cp_bank_detail
+//         "ifsc": "000001", cp_bank_detail
+//         "account_number": "000002" cp_bank_detail
+//     }
+// }}
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     getDropDownData(0);
+  //     // if (getBookingData?.cp_id) {
+  //       dispatch(getAgencyDetail({
+  //         // cp_id: getBookingData.cp_id,
+  //         cp_id: "64ae806ddb45a1f0ae72dc9a",
+  //       })
+  //       );
+  //     // }
+  //     return () => {};
+  //   }, [navigation])
+  // );
 
   const getDropDownData = (data: any) => {
     setDropDownType(data);

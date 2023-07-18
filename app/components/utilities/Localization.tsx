@@ -139,6 +139,7 @@ const strings = new LocalizedStrings({
     correctEmailReqVal: 'Email format is wrong. Please enter correct Email',
     emailAlreadyReqVal: 'Email is already registered. Please enter other Email',
     addressReqVal: 'Address is require. Please enter Address',
+    correctAddress: 'Please enter correct address',
     employeesReqVal: 'Employees are require. Please add Employees',
     wrkngLocReqVal: 'Working Location is require. Please enter Working Location',
     reraCertNoReqVal: 'RERA Certificate No. is require. Please enter RERA Certificate No.',

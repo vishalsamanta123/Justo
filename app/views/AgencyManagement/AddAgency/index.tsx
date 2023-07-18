@@ -97,6 +97,10 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
     location: "",
     latitude: "",
     longitude: "",
+    state_code: "",
+    country_code: "",
+    city: "",
+    zip: "",
     company_employee: [],
     property_tag: [],
     norera_register: null,
@@ -119,65 +123,74 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
 
   const handleClearData = (type: any) => {
     setAgencyData({
-          ...agencyData,
-          cp_type: type,
-          owner_name: "",
-          adhar_no: "",
-          pancard_no: "",
-          gender: "",
-          date_of_birth: "",
-          primary_mobile: "",
-          whatsapp_number: "",
-          email: "",
-          working_location: [],
-          rera_certificate_no: "",
-          rera_certificate: "",
-          propidership_declaration_letter: "",
-          cancel_cheaque: "",
-          bank_name: "",
-          branch_name: "",
-          account_no: "",
-          ifsc_code: "",
-          gst: "",
-          pancard: "",
-          declaration_letter_of_company: "",
-          rera_registration: "",
-          company_name: "",
-          company_rera_no: "",
-          company_rera_certificate: "",
-          company_email_id: "",
-          company_address: "",
-          company_latitude: "",
-          company_longitude: "",
-          company_gst: "",
-          company_pancard: "",
-          company_bank_name: "",
-          company_branch_name: "",
-          company_account_no: "",
-          company_ifsc_code: "",
-          _id: "",
-          agency_name: "",
-          location: "",
-          latitude: "",
-          longitude: "",
-          company_employee: [],
-          property_tag: [],
-          norera_register: null,
-          setprimary_mobile: "",
-          setemail: "",
-        });
-        setEmailMobValidation({
-          primary_mobile: null,
-          email: null,
-        });
-        setEmployees([])
-  }
+      ...agencyData,
+      cp_type: type,
+      owner_name: "",
+      adhar_no: "",
+      pancard_no: "",
+      gender: "",
+      date_of_birth: "",
+      primary_mobile: "",
+      whatsapp_number: "",
+      email: "",
+      working_location: [],
+      rera_certificate_no: "",
+      rera_certificate: "",
+      propidership_declaration_letter: "",
+      cancel_cheaque: "",
+      bank_name: "",
+      branch_name: "",
+      account_no: "",
+      ifsc_code: "",
+      gst: "",
+      pancard: "",
+      declaration_letter_of_company: "",
+      rera_registration: "",
+      company_name: "",
+      company_rera_no: "",
+      company_rera_certificate: "",
+      company_email_id: "",
+      company_address: "",
+      company_latitude: "",
+      company_longitude: "",
+      company_gst: "",
+      company_pancard: "",
+      company_bank_name: "",
+      company_branch_name: "",
+      company_account_no: "",
+      company_ifsc_code: "",
+      _id: "",
+      agency_name: "",
+      location: "",
+      latitude: "",
+      longitude: "",
+      state_code: "",
+      country_code: "",
+      city: "",
+      zip: "",
+      company_employee: [],
+      property_tag: [],
+      norera_register: null,
+      setprimary_mobile: "",
+      setemail: "",
+    });
+    setEmailMobValidation({
+      primary_mobile: null,
+      email: null,
+    });
+    setEmployees([]);
+  };
   useEffect(() => {
     if (response?.data?.length > 0 && type === "edit") {
-      const arr: any = response?.data[0]?.property_tag.map((prop: any) => prop?.property_id);
+      const arr: any = response?.data[0]?.property_tag.map(
+        (prop: any) => prop?.property_id
+      );
       setSelectedPropertyIds(arr);
       setSelectedProperty(response?.data[0]?.property_tag);
-      console.log("🚀 ~ file: index.tsx:180 ~ response?.data[0]?.property_tag:", response?.data[0]?.property_tag)
+      console.log(
+        "🚀 ~ file: index.tsx:180 ~ response?.data[0]?.property_tag:",
+        response?.data[0]?.property_tag
+      );
     }
   }, [response]);
   useEffect(() => {
@@ -220,6 +233,10 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
             declaration_letter_of_company:
               response?.data[0]?.agencies?.declaration_letter_of_company ?? "",
             location: response?.data[0]?.location ?? "",
+            state_code: response?.data[0]?.state_code ?? "",
+            country_code: response?.data[0]?.country_code ?? "",
+            city: response?.data[0]?.city ?? "",
+            zip: response?.data[0]?.zip ?? "",
             norera_register:
               handleValues(allDatas?.rera_certificate_no) &&
               handleValues(allDatas?.rera_certificate) === false
@@ -253,8 +270,12 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
     if (propertyData?.response) {
       const { response, loading, list } = propertyData;
       if (response?.status === 200 && response?.data?.length > 0) {
-        setPropertyList(response?.data?.filter((el: any) => el?.status === true));
-        setFinalPropertyList(response?.data?.filter((el: any) => el?.status === true));
+        setPropertyList(
+          response?.data?.filter((el: any) => el?.status === true)
+        );
+        setFinalPropertyList(
+          response?.data?.filter((el: any) => el?.status === true)
+        );
       } else {
         setPropertyList([]);
       }
@@ -304,7 +325,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
         primary_mobile: null,
         email: null,
       });
-      setSelectedProperty([])
+      setSelectedProperty([]);
     }
   }, [addEditAgency]);
 
@@ -371,6 +392,12 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           ) {
             isError = false;
             errorMessage = strings.addressReqVal;
+          } else if (
+            agencyData.zip == undefined ||
+            agencyData.zip == ""
+          ) {
+            isError = false;
+            errorMessage = strings.correctAddress;
           } else if (
             agencyData.gender == undefined ||
             agencyData.gender == ""
@@ -691,9 +718,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
     ) {
       isError = false;
       errorMessage = strings.mobileNoValidReqVal;
-    } else if (
-      emailMobvalidation.primary_mobile === "wrongEmployeeMobile"
-    ) {
+    } else if (emailMobvalidation.primary_mobile === "wrongEmployeeMobile") {
       isError = false;
       errorMessage = strings.mobileAlreadyValidReqVal;
     } else if (
@@ -705,9 +730,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
     } else if (validateEmail.test(employeeFormData.employeeEmail) === false) {
       isError = false;
       errorMessage = strings.correctEmailReqVal;
-    }  else if (
-      emailMobvalidation.email == "wrongEmployeeEmail"
-    ) {
+    } else if (emailMobvalidation.email == "wrongEmployeeEmail") {
       isError = false;
       errorMessage = strings.emailAlreadyReqVal;
     } else if (
@@ -773,7 +796,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
         if (emailAndMobileData?.response?.status === 201) {
           switch (emailAndMobileData?.check_type) {
             case "mobile":
-              if(isVisibleAddEmployee){
+              if (isVisibleAddEmployee) {
                 setEmailMobValidation({
                   ...emailMobvalidation,
                   primary_mobile: "wrongEmployeeMobile",
@@ -786,7 +809,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
               }
               break;
             case "email":
-              if(isVisibleAddEmployee){
+              if (isVisibleAddEmployee) {
                 setEmailMobValidation({
                   ...emailMobvalidation,
                   email: "wrongEmployeeEmail",
@@ -813,10 +836,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
     dispatch(checkEmailMobile(params));
   };
   const handleCheckEmailMobileforEmployee = (type: any, data: any) => {
-    const params =
-      type == 1
-        ? { mobile: data }
-        : { email: data };
+    const params = type == 1 ? { mobile: data } : { email: data };
     dispatch(checkEmailMobile(params));
   };
   const handleVisiblePropertyPress = () => {
@@ -1048,7 +1068,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
       setEmailMobValidation({
         ...emailMobvalidation,
         email: null,
-        primary_mobile: null
+        primary_mobile: null,
       });
     }
   };
@@ -1142,7 +1162,6 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
               selectedProperty={selectedProperty}
               handleAllocateProperty={handleAllocateProperty}
               handleVisiblePropertyPress={handleVisiblePropertyPress}
-
             />
           ) : (
             // <CompanyBankInfo
