@@ -602,6 +602,8 @@ const strings = new LocalizedStrings({
     // CPChecking
     todaycpcheking: 'Today CP Checking',
     allcpcheking: 'All CP Checking',
+
+    filterData: 'Filter Data',
   },
 });
 

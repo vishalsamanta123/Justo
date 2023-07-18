@@ -8,14 +8,21 @@ import {
   GetSTReport,
 } from "app/Redux/Actions/ReportActions";
 import { ROLE_IDS } from "app/components/utilities/constant";
+import { useIsFocused } from "@react-navigation/native";
 import moment from "moment";
 
 const ReportScreen = ({ navigation }: any) => {
   const [reportData, setReportData] = useState([]);
+  const [filterModalVisible, setIsFilterModalVisible] = useState(false);
+  const [filterData, setFilterData] = useState({
+    startdate: "",
+    enddate: "",
+  });
   const dispatch: any = useDispatch();
   const handleDrawerPress = () => {
     navigation.toggleDrawer();
   };
+  const isFocused = useIsFocused();
   const { userData = {} } = useSelector((state: any) => state.userData);
   const ReportData = useSelector((state: any) => state.reportData);
   const roleId = userData?.data?.role_id || "";
@@ -35,41 +42,63 @@ const ReportScreen = ({ navigation }: any) => {
   var todayDate = currentYears + "-" + currentMonths + "-" + currentDay;
 
   useLayoutEffect(() => {
-    if (roleId === ROLE_IDS.closingmanager_id) {
-      dispatch(
-        GetCMReport({
-          start_date: firstdDate.toString(),
-          end_date: todayDate.toString(),
-        })
-      );
-    } else if (roleId === ROLE_IDS.closingtl_id) {
-      dispatch(
-        GetCTReport({
-          start_date: firstdDate.toString(),
-          end_date: todayDate.toString(),
-        })
-      );
-    } else if (roleId === ROLE_IDS.sourcingmanager_id) {
-      dispatch(
-        GetSMReport({
-          start_date: firstdDate.toString(),
-          end_date: todayDate.toString(),
-        })
-      );
-    } else if (roleId === ROLE_IDS.sourcingtl_id) {
-      dispatch(
-        GetSTReport({
-          start_date: firstdDate.toString(),
-          end_date: todayDate.toString(),
-        })
-      );
-    }
-  }, []);
+    getData(firstdDate, todayDate);
+  }, [isFocused]);
   useEffect(() => {
     if (ReportData?.response?.data.length > 0) {
       setReportData(ReportData?.response?.data);
     }
   }, [ReportData]);
+
+  const getData = (startDate: any, endDate: any) => {
+    if (roleId === ROLE_IDS.closingmanager_id) {
+      dispatch(
+        GetCMReport({
+          start_date: startDate.toString(),
+          end_date: endDate.toString(),
+        })
+      );
+    } else if (roleId === ROLE_IDS.closingtl_id) {
+      dispatch(
+        GetCTReport({
+          start_date: startDate.toString(),
+          end_date: endDate.toString(),
+        })
+      );
+    } else if (roleId === ROLE_IDS.sourcingmanager_id) {
+      dispatch(
+        GetSMReport({
+          start_date: startDate.toString(),
+          end_date: endDate.toString(),
+        })
+      );
+    } else if (roleId === ROLE_IDS.sourcingtl_id) {
+      dispatch(
+        GetSTReport({
+          start_date: startDate.toString(),
+          end_date: endDate.toString(),
+        })
+      );
+    }
+  };
+
+  const handleOnFilterPress = () => {
+    setIsFilterModalVisible(true);
+  };
+
+  const onReset = () => {
+    setIsFilterModalVisible(false);
+    setFilterData({
+      startdate: "",
+      enddate: "",
+    });
+    getData(firstdDate, todayDate);
+  };
+
+  const handleFilter = () => {
+    setIsFilterModalVisible(false);
+    getData(filterData?.startdate, filterData?.enddate);
+  };
   return (
     <>
       <ReportView
@@ -77,6 +106,13 @@ const ReportScreen = ({ navigation }: any) => {
         roleId={roleId}
         reportData={reportData}
         userData={userData}
+        handleOnFilterPress={handleOnFilterPress}
+        setIsFilterModalVisible={setIsFilterModalVisible}
+        FilterModalVisible={filterModalVisible}
+        filterData={filterData}
+        setFilterData={setFilterData}
+        handleFilter={handleFilter}
+        onReset={onReset}
       />
     </>
   );
