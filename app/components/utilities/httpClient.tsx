@@ -9,6 +9,9 @@ const httpClient = axios.create({
 const httpClientJW = axios.create({
   baseURL: `https://justoworks.co.in/`,
 });
+const httpClientJWDemo = axios.create({
+  baseURL: `https://demoapi.justoworks.co.in/`,
+});
 
 
 export function setDefaultHeader(header: any, value: any) {
@@ -67,6 +70,47 @@ export async function apiCall(
   }
 }
 export async function apiCallJW(
+  method: any,
+  url: any,
+  data: any,
+  header = { "Content-Type": "application/json", "access-control-allow-origin": "*" }
+) {
+  try {
+    const response = await httpClientJW({
+      method,
+      url,
+      data,
+      headers: header,
+      // withCredentials: false,
+    });
+    if (response.status === 200) {
+      return response;
+    }
+    if (response.status === 201) {
+      return response;
+    }
+    if (response.status === 202) {
+      return response;
+    }
+  } catch (error: any) {
+    // console.log('errordsfdfdfs: ', error);
+    if (error.response) {
+      if (error.response.status === 401) {
+        // console.log(`${url}: `, error.response);
+        return error.response;
+      }
+      return error.response;
+    } else if (error.request) {
+      // console.log("Error request 1: ", error.request);
+      return error.response;
+    } else {
+      // console.log("Error message 2: ", error.message);
+    }
+    // return error;
+    return error.response;
+  }
+}
+export async function apiCallJWDemo(
   method: any,
   url: any,
   data: any,

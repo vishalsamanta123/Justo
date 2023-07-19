@@ -224,7 +224,12 @@ const AddNewVisitorForm = (props: any) => {
                   cp_id: "",
                   cp_emp_id: "",
                 });
-                props.setAllProperty([])
+                if (
+                  userData?.userData?.data?.role_id !== ROLE_IDS.closingtl_id ||
+                  userData?.userData?.data?.role_id !== ROLE_IDS.closingmanager_id
+                ){
+                  props.setAllProperty([])
+                }
               }}
               newRenderItem={(item: any) => {
                 return (

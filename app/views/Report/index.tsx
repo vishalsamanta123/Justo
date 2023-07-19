@@ -13,22 +13,22 @@ const ReportScreen = ({ navigation }: any) => {
   const { userData = {} } = useSelector((state: any) => state.userData);
   const cmReportData = useSelector((state: any) => state.cmReportData);
   const roleId = userData?.data?.role_id || "";
-  useLayoutEffect(() => {
-    if (roleId === ROLE_IDS.closingmanager_id) {
-      dispatch(
-        GetCMReport({
-          start_date: "",
-          end_date: "",
-        })
-      );
-    }
-  }, []);
+  // useLayoutEffect(() => {
+  //   if (roleId === ROLE_IDS.closingmanager_id) {
+  //     dispatch(
+  //       GetCMReport({
+  //         start_date: "",
+  //         end_date: "",
+  //       })
+  //     );
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    if (cmReportData?.response?.data.length > 0) {
-      setReportData(cmReportData?.response?.data);
-    }
-  }, [cmReportData]);
+  // useEffect(() => {
+  //   if (cmReportData?.response?.data.length > 0) {
+  //     setReportData(cmReportData?.response?.data);
+  //   }
+  // }, [cmReportData]);
   return (
     <>
       <ReportView

@@ -171,6 +171,7 @@ export default {
 
   // JW
   GET_INVENTORY_JW: "inventory/fetch_record_details",
+  CP_REGISTOR_JW: "cp/fetch_channel_partner_id",
   
   // Report
   GET_CM_REPORT : '/authreport/getCMreport'

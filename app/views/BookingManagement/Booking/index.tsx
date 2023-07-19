@@ -21,7 +21,7 @@ import ErrorMessage from "app/components/ErrorMessage";
 import { updateBookingDetailStatus } from "app/Redux/Actions/BookingActions";
 import { useFocusEffect } from "@react-navigation/native";
 import { START_LOADING, STOP_LOADING } from "app/Redux/types";
-import { apiCallJW } from "app/components/utilities/httpClient";
+import { apiCallJW, apiCallJWDemo } from "app/components/utilities/httpClient";
 import apiEndPoints from "app/components/utilities/apiEndPoints";
 import { getAgencyDetail } from "app/Redux/Actions/AgencyActions";
 
@@ -50,7 +50,7 @@ const BookingScreen = ({ navigation, route }: any) => {
     flat_type: "",
     floor: "",
     flat_name: "",
-    saleable_area: ""
+    saleable_area: "",
   });
   const masterData = useSelector((state: any) => state.masterData) || {};
   const addedBookingData =
@@ -66,34 +66,34 @@ const BookingScreen = ({ navigation, route }: any) => {
   const [dropDownType, setDropDownType] = useState<any>(null);
   const [quantity, setQuantity] = useState<any>(false);
   const [maininventory, setMainInventory] = useState<any>([]);
-  console.log("🚀 ~ file: index.tsx:63 ~ agencyDetails:", agencyDetails?.response?.data)
+ 
 
-//   https://demoapi.justoworks.co.in/cp/fetch_channel_partner_id
-// {"params": {
-//     "login": "api", 
-//     "password": "76db466cb187c33c5f170d6352afad44da671002", 
-//     "record": {
-//         "name": "Sample", agent_name
-//         "state_code": "KL", 
-//         "country_code": "IN",
-//         "mobile": "9966666666", primary_mobile
-//         "owner_name": "Owner",  agent_name
-//         "street": "Street", 
-//         "street2": "Street2",
-//         "city": "City",
-//         "zip": "600066", 
-//         "gstin": "00076", gst
-//         "rera_number": "001", rera_certificate_no
-//         "pan": "00045", pancard_no
-//         "aadhar": "000055", adhar_no
-//         "phone": "234234", primary_mobile
-//         "email": "mailto:sample@sample.com", email
-//         "website": "sample.com",
-//         "bank": "Sample Bank",  cp_bank_detail
-//         "ifsc": "000001", cp_bank_detail
-//         "account_number": "000002" cp_bank_detail
-//     }
-// }}
+  //   https://demoapi.justoworks.co.in/cp/fetch_channel_partner_id
+  // {"params": {
+  //     "login": "api",
+  //     "password": "76db466cb187c33c5f170d6352afad44da671002",
+  //     "record": {
+  //         "name": "Sample", agent_name
+  //         "state_code": "KL",
+  //         "country_code": "IN",
+  //         "mobile": "9966666666", primary_mobile
+  //         "owner_name": "Owner",  agent_name
+  //         "street": "Street",
+  //         "street2": "Street2",
+  //         "city": "City",
+  //         "zip": "600066",
+  //         "gstin": "00076", gst
+  //         "rera_number": "001", rera_certificate_no
+  //         "pan": "00045", pancard_no
+  //         "aadhar": "000055", adhar_no
+  //         "phone": "234234", primary_mobile
+  //         "email": "mailto:sample@sample.com", email
+  //         "website": "sample.com",
+  //         "bank": "Sample Bank",  cp_bank_detail
+  //         "ifsc": "000001", cp_bank_detail
+  //         "account_number": "000002" cp_bank_detail
+  //     }
+  // }}
 
   // useFocusEffect(
   //   React.useCallback(() => {
@@ -108,6 +108,44 @@ const BookingScreen = ({ navigation, route }: any) => {
   //     return () => {};
   //   }, [navigation])
   // );
+
+  const handleJwCpRegistor = async () => {
+    const data = agencyDetails?.response?.data[0] || {}
+    console.log("🚀 ~ file: index.tsx:120 ~ data:", data)
+    const params = {
+      login: "api",
+      password: "76db466cb187c33c5f170d6352afad44da671002",
+      record: {
+        name: data?.agent_name ? data?.agent_name : "",
+        state_code: data?.state_code ? data?.state_code : "KL",
+        country_code: data?.country_code ? data?.country_code : "IN",
+        mobile: data?.primary_mobile ? data?.primary_mobile : "", // primary_mobile",
+        owner_name: data?.agent_name ? data?.agent_name : "", //  agent_name",
+        street: data?.location ? data?.location : "", //location 
+        street2: data?.street2 ? data?.street2 : "Street2", 
+        city: data?.city ? data?.city : "City",
+        zip:  data?.zip ? data?.zip : "600066",
+        gstin: data?.gst ? data?.gst : "", // gst",
+        rera_number: data?.rera_certificate_no ? data?.rera_certificate_no : "",// rera_certificate_no",
+        pan: data?.pancard_no ? data?.pancard_no : "",// pancard_no",
+        aadhar: data?.adhar_no ? data?.adhar_no : "",// adhar_no",
+        phone: data?.primary_mobile ? data?.primary_mobile : "",// primary_mobile",
+        email: data?.email ? data?.email : "", //email",
+        website: data?.website ? data?.website : "sample.com",
+        bank: data?.cp_bank_detail?.bank_name ? data?.cp_bank_detail?.bank_name : "", // cp_bank_detail",
+        ifsc: data?.cp_bank_detail?.ifsc_code ? data?.cp_bank_detail?.ifsc_code : "", // cp_bank_detail",
+        account_number: data?.cp_bank_detail?.account_no ? data?.cp_bank_detail?.account_no : "" // cp_bank_detail",
+      },
+    };
+    console.log("🚀 ~ file: index.tsx:138 ~ params.record:", params.record);
+    const res = await apiCallJWDemo(
+      "post",
+      apiEndPoints.CP_REGISTOR_JW,
+      params
+    );
+    console.log("Registor res", res?.data)
+    return false
+  };
 
   const getDropDownData = (data: any) => {
     setDropDownType(data);
@@ -141,7 +179,6 @@ const BookingScreen = ({ navigation, route }: any) => {
         type: bookingData.flat_type ? bookingData.flat_type : "",
       },
     };
-    console.log("🚀 ~ file: index.tsx:120 ~ params:", params)
 
     dispatch({ type: START_LOADING });
     try {
@@ -150,7 +187,7 @@ const BookingScreen = ({ navigation, route }: any) => {
         apiEndPoints.GET_INVENTORY_JW,
         params
       );
-      console.log("🚀 ~ file: index.tsx:122 ~ res?.data?.result:", res?.data?.result)
+      
       if (res?.data?.result?.data.length > 0) {
         const temp = res?.data?.result?.data;
         const arr = temp;
@@ -227,7 +264,7 @@ const BookingScreen = ({ navigation, route }: any) => {
       flat_type: item,
       floor: "",
       flat_name: "",
-      saleable_area: ""
+      saleable_area: "",
     });
     var filteredData = maininventory.filter(
       (itemget: any) => itemget["Flat Type"] == item
@@ -259,25 +296,21 @@ const BookingScreen = ({ navigation, route }: any) => {
     ) {
       isError = false;
       errorMessage = "Payment Type is require. Please select payment type";
-    } 
+    }
     // else if (
     //   typeof bookingData.cheque_image != "object" ||
     //   bookingData.cheque_image == ""
     // ) {
     //   isError = false;
     //   errorMessage = "Image is require. Please select image";
-    // } 
+    // }
     else if (
       bookingData.flat_type == undefined ||
       bookingData.flat_type == ""
     ) {
       isError = false;
-      errorMessage =
-        "Configuration is require. Please select configuration";
-    } else if (
-      bookingData.floor == undefined ||
-      bookingData.floor == ""
-    ) {
+      errorMessage = "Configuration is require. Please select configuration";
+    } else if (bookingData.floor == undefined || bookingData.floor == "") {
       isError = false;
       errorMessage = "floor is require. Please enter floor";
     } else if (
@@ -287,7 +320,6 @@ const BookingScreen = ({ navigation, route }: any) => {
       isError = false;
       errorMessage = "Flat name is require. Please enter Flat name";
     }
-    
 
     // else if (
     //   bookingData.quantity == undefined ||
@@ -338,8 +370,9 @@ const BookingScreen = ({ navigation, route }: any) => {
     });
   };
 
-  const handleBookPress = () => {
+  const handleBookPress = async () => {
     if (validation()) {
+      // if(await handleJwCpRegistor()){
       const newFormdata = new FormData();
       if (typeof bookingData?.cheque_image === "object") {
         newFormdata.append("cheque_image", bookingData.cheque_image);
@@ -379,11 +412,12 @@ const BookingScreen = ({ navigation, route }: any) => {
       } else {
         dispatch(AddBooking(newFormdata));
       }
+    // }
     }
   };
-  console.log("🚀 ~ file: index.tsx:329 ~ flatTypes:", flatTypes.length);
-  console.log("🚀 ~ file: index.tsx:330 ~ floors:", floors.length);
-  console.log("🚀 ~ file: index.tsx:332 ~ inventory:", inventory.length);
+  // console.log("🚀 ~ file: index.tsx:329 ~ flatTypes:", flatTypes.length);
+  // console.log("🚀 ~ file: index.tsx:330 ~ floors:", floors.length);
+  // console.log("🚀 ~ file: index.tsx:332 ~ inventory:", inventory.length);
 
   return (
     <>

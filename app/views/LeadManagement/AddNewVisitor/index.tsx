@@ -94,7 +94,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   });
   const [configuration, setConfiguration] = useState<any>([]);
   const masterData = useSelector((state: any) => state.masterData) || {};
-  // const propertyData = useSelector((state: any) => state.propertyData) || {};
+  const propertyData = useSelector((state: any) => state.propertyData) || {};
   const companyData = useSelector((state: any) => state.companyData) || {};
   const employeeData = useSelector((state: any) => state.employeeData) || {};
   const editData = useSelector((state: any) => state.editVisitorData) || {};
@@ -240,36 +240,42 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     }
   };
 
-  // useEffect(() => {
-  // dispatch(
-  //   getAllProperty({
-  //     offset: 0,
-  //     limit: "",
-  //   })
-  // );
-  // getAllPropertyData();
+  useEffect(() => {
+    if (
+      userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+      userData?.data?.role_id === ROLE_IDS.closingmanager_id
+    ) {
+      console.log("getAllProperty CALLED===============")
+      dispatch(
+        getAllProperty({
+          offset: 0,
+          limit: "",
+        })
+      );
+      getAllPropertyData();
 
-  // if (propertyData?.response?.status === 200) {
-  //   if (propertyData?.response?.data?.length > 0) {
-  //     const activeData = propertyData?.response?.data.filter((el: any) => {
-  //       return el.status == true;
-  //     });
-  //     activeData?.length > 0
-  //       ? setAllProperty(activeData)
-  //       : setAllProperty([]);
-  //   } else {
-  //     setAllProperty([]);
-  //   }
-  // } else {
-  //   setAllProperty([]);
-  // }
-  // }, [propertyData]);
+      if (propertyData?.response?.status === 200) {
+        if (propertyData?.response?.data?.length > 0) {
+          const activeData = propertyData?.response?.data.filter((el: any) => {
+            return el.status == true;
+          });
+          activeData?.length > 0
+            ? setAllProperty(activeData)
+            : setAllProperty([]);
+        } else {
+          setAllProperty([]);
+        }
+      } else {
+        setAllProperty([]);
+      }
+    }
+  }, []);
 
-  // const getAllPropertyData = () => {
-  //   if (propertyData?.response?.status === 200) {
-  //     setAllProperty(propertyData?.response?.data);
-  //   }
-  // };
+  const getAllPropertyData = () => {
+    if (propertyData?.response?.status === 200) {
+      setAllProperty(propertyData?.response?.data);
+    }
+  };
 
   const handleBackPress = () => {
     navigation.goBack();

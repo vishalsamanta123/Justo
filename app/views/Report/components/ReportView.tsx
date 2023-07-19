@@ -29,7 +29,7 @@ const ReportView = (props: any) => {
         statusBarColor={PRIMARY_THEME_COLOR}
         barStyle={"light-content"}
       />
-      {roleId === ROLE_IDS.sourcingmanager_id ? (
+      {/* {roleId === ROLE_IDS.sourcingmanager_id ? (
         <SMReportTable />
       ) : roleId === ROLE_IDS.closingmanager_id ? (
         <CMReportTable data={reportData} userData={userData} />
@@ -37,9 +37,9 @@ const ReportView = (props: any) => {
         <STReportTable />
       ) : roleId === ROLE_IDS.closingtl_id ? (
         <CTReportTable />
-      ) : (
+      ) : ( */}
         <ComingSoonScreen />
-      )}
+      {/* )} */}
     </View>
   );
 };
