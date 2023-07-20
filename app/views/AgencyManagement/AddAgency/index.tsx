@@ -233,10 +233,10 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
             declaration_letter_of_company:
               response?.data[0]?.agencies?.declaration_letter_of_company ?? "",
             location: response?.data[0]?.location ?? "",
-            state_code: response?.data[0]?.state_code ?? "",
-            country_code: response?.data[0]?.country_code ?? "",
-            city: response?.data[0]?.city ?? "",
-            zip: response?.data[0]?.zip ?? "",
+            // state_code: response?.data[0]?.state_code ?? "",
+            // country_code: response?.data[0]?.country_code ?? "",
+            // city: response?.data[0]?.city ?? "",
+            // zip: response?.data[0]?.zip ?? "",
             norera_register:
               handleValues(allDatas?.rera_certificate_no) &&
               handleValues(allDatas?.rera_certificate) === false
@@ -386,19 +386,22 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           ) {
             isError = false;
             errorMessage = strings.reraCertNoReqVal;
-          } else if (
-            agencyData.location == undefined ||
-            agencyData.location == ""
-          ) {
-            isError = false;
-            errorMessage = strings.addressReqVal;
-          } else if (
-            agencyData.zip == undefined ||
-            agencyData.zip == ""
-          ) {
-            isError = false;
-            errorMessage = strings.correctAddress;
-          } else if (
+          }
+          // else if (
+          //   agencyData.location == undefined ||
+          //   agencyData.location == ""
+          // ) {
+          //   isError = false;
+          //   errorMessage = strings.addressReqVal;
+          // } 
+          // else if (
+          //   agencyData.zip == undefined ||
+          //   agencyData.zip == ""
+          // ) {
+          //   isError = false;
+          //   errorMessage = strings.correctAddress;
+          // } 
+          else if (
             agencyData.gender == undefined ||
             agencyData.gender == ""
           ) {
@@ -473,13 +476,15 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           ) {
             isError = false;
             errorMessage = strings.reraCertNoReqVal;
-          } else if (
-            agencyData.location == undefined ||
-            agencyData.location == ""
-          ) {
-            isError = false;
-            errorMessage = strings.addressReqVal;
-          } else if (employees?.length === 0 && type !== "edit") {
+          } 
+          // else if (
+          //   agencyData.location == undefined ||
+          //   agencyData.location == ""
+          // ) {
+          //   isError = false;
+          //   errorMessage = strings.addressReqVal;
+          // } 
+          else if (employees?.length === 0 && type !== "edit") {
             isError = false;
             errorMessage = strings.employeesReqVal;
           }

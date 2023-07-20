@@ -21,6 +21,7 @@ import {
   Isios,
   ROLE_IDS,
   Regexs,
+  CONST_IDS,
 } from "../../../../components/utilities/constant";
 import strings from "../../../../components/utilities/Localization";
 import styles from "./Styles";
@@ -67,6 +68,8 @@ const AddNewVisitorForm = (props: any) => {
         ? "add_appointment"
         : "add_appointment _site_visite",
   });
+
+  console.log("🚀 ~ file: AddNewVisitorForm.tsx:249 ~ CONST_IDS?.cp_lead_source_id:", CONST_IDS.cp_lead_source_id)
 
   useEffect(() => {
     if (props.type == "edit") {
@@ -244,7 +247,7 @@ const AddNewVisitorForm = (props: any) => {
               }}
             />
           </View>
-          {props?.formData?.lead_source === "645b3a414194e4010913546c" ? (
+          {props?.formData?.lead_source === CONST_IDS?.cp_lead_source_id ? (
             <>
               <View style={styles.inputWrap}>
                 <DropdownInput

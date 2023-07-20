@@ -65,6 +65,10 @@ export const ROLE_IDS = {
   clusterhead_id: "63da1736ee01b8d62ceb7ea2",
   callcenter_id: "63732080d9363c459e3155a2"
 }
+export const CONST_IDS = {
+  cp_lead_source_id: "645b3a414194e4010913546c",
+  by_self_lead_source_id: "63ecd90787f864d94a3882ee",
+}
 export const Regexs = {
   AadharRegex: new RegExp(/^[2-9]{1}[0-9]{3}\s[0-9]{4}\s[0-9]{4}$/),
   panRegex: new RegExp(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/),

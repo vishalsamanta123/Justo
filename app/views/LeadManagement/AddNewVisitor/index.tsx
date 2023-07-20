@@ -13,6 +13,7 @@ import {
 } from "app/Redux/Actions/LeadsActions";
 import ErrorMessage from "app/components/ErrorMessage";
 import {
+  CONST_IDS,
   GREEN_COLOR,
   RED_COLOR,
   ROLE_IDS,
@@ -380,7 +381,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         isError = false;
         errorMessage = "Please enter minimum budget also";
       }
-      if (formData?.lead_source === "645b3a414194e4010913546c") {
+      if (formData?.lead_source === CONST_IDS.cp_lead_source_id) {
         if (formData.cp_type == undefined || formData.cp_type == "") {
           isError = false;
           errorMessage = "Please Enter Channel Partner type";

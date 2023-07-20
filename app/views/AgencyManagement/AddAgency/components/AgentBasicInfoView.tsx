@@ -453,7 +453,7 @@ const AgentBasicInfoView = (props: any) => {
 
         <View style={styles.inputWrap}>
           <InputField
-            require={true}
+            // require={true}
             placeholderText={
               props?.agencyData?.cp_type === 1
                 ? strings.address
@@ -510,10 +510,10 @@ const AgentBasicInfoView = (props: any) => {
                 location: data?.description,
                 latitude: detail?.geometry?.location?.lat,
                 longitude: detail?.geometry?.location?.lng,
-                zip: zipcode[0]?.short_name,
-                city: city[0]?.short_name,
-                state_code: state[0]?.short_name,
-                country_code: country[0]?.short_name,
+                // zip: zipcode[0]?.short_name,
+                // city: city[0]?.short_name,
+                // state_code: state[0]?.short_name,
+                // country_code: country[0]?.short_name,
               });
             }}
           />
