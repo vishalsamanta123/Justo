@@ -1,7 +1,12 @@
-import { normalize, normalizeWidth } from "app/components/scaleFontSize";
+import {
+  normalize,
+  normalizeHeight,
+  normalizeWidth,
+} from "app/components/scaleFontSize";
 import {
   BLACK_COLOR,
   GREEN_COLOR,
+  Isios,
   PRIMARY_THEME_COLOR,
   RED_COLOR,
   WHITE_COLOR,
@@ -28,266 +33,95 @@ import XLSX from "xlsx";
 import RNFS from "react-native-fs";
 
 const SMReportTable = (props: any) => {
-  const { data } = props;
-  // console.log("🚀 ~ file: SMReportTable.tsx:32 ~ SMReportTable ~ data:", data[0]?.propertyData)
-  // const data = [
-  //   {
-  //     _id: "6406d11bc72657d5bcaffd1d",
-  //     property_id: "6406d11bc72657d5bcaffd18",
-  //     user_id: "6406ca8cffa098bb23eb1437",
-  //     username: "Aman ji lal sm",
-  //     property_title: "Justo Demo Township",
-  //     propertyData: [
-  //       {
-  //         header: "CP Map (Allocated)",
-  //         data: [22, ""],
-  //       },
-  //       {
-  //         header: "Inactive/Deactive CP",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "Booking / Transactional CP",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "Walk-in Active CP",
-  //         data: [22, ""],
-  //       },
-  //       {
-  //         header: "Visitor No Shows",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "MTD site visit",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "CP Firm name / Individual CP Name",
-  //         data: [
-  //           "sachin patidar",
-  //           "Nitesh up",
-  //           "kapil",
-  //           "Pravesh Devda",
-  //           "Test Remi",
-  //           "vrashank",
-  //           "Test1305",
-  //           "Ramesh",
-  //           "Ramesh company",
-  //           "lifo",
-  //           "shareef",
-  //           "Rubina ji",
-  //           "Vihan company",
-  //           "komal",
-  //           "nimish company",
-  //           "jayesh company",
-  //           "babu bhaiya company",
-  //           "kaleen bhaiya ki comp",
-  //           "Remi Ji 11",
-  //           "titu company ",
-  //           "amit shah",
-  //           "Microsoft "
-  //         ],
-  //       },
-  //       {
-  //         header: "CP Visit Count",
-  //         data: [0, ""],
-  //       }
-  //     ],
-  //   },
-  //   {
-  //     _id: "6436807fe7381c65694dce96",
-  //     property_id: "64367bfa5990c608a7999e83",
-  //     user_id: "6406ca8cffa098bb23eb1437",
-  //     username: "Aman ji lal sm",
-  //     property_title: "Justo Test New",
-  //     propertyData: [
-  //       {
-  //         header: "CP Map (Allocated)",
-  //         data: [22, ""],
-  //       },
-  //       {
-  //         header: "Inactive/Deactive CP",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "Booking / Transactional CP",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "Walk-in Active CP",
-  //         data: [22, ""],
-  //       },
-  //       {
-  //         header: "Visitor No Shows",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "MTD site visit",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "CP Firm name / Individual CP Name",
-  //         data: [
-  //           "sachin patidar",
-  //           "Nitesh up",
-  //           "kapil",
-  //           "Pravesh Devda",
-  //           "Test Remi",
-  //           "vrashank",
-  //           "Test1305",
-  //           "Ramesh",
-  //           "Ramesh company",
-  //           "lifo",
-  //           "shareef",
-  //           "Rubina ji",
-  //           "Vihan company",
-  //           "komal",
-  //           "nimish company",
-  //           "jayesh company",
-  //           "babu bhaiya company",
-  //           "kaleen bhaiya ki comp",
-  //           "Remi Ji 11",
-  //           "titu company ",
-  //           "amit shah",
-  //           "Microsoft "
-  //         ],
-  //       },
-  //       {
-  //         header: "CP Visit Count",
-  //         data: [0, ""],
-  //       }
-  //     ],
-  //   },
-  //   {
-  //     _id: "646cc54eaa48bfca9dee660e",
-  //     property_id: "645c65044194e401091393e7",
-  //     user_id: "6406ca8cffa098bb23eb1437",
-  //     username: "Aman ji lal sm",
-  //     property_title: "The Rising - Saniket",
-  //     propertyData: [
-  //       {
-  //         header: "CP Map (Allocated)",
-  //         data: [22, ""],
-  //       },
-  //       {
-  //         header: "Inactive/Deactive CP",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "Booking / Transactional CP",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "Walk-in Active CP",
-  //         data: [22, ""],
-  //       },
-  //       {
-  //         header: "Visitor No Shows",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "MTD site visit",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "CP Firm name / Individual CP Name",
-  //         data: [
-  //           "sachin patidar",
-  //           "Nitesh up",
-  //           "kapil",
-  //           "Pravesh Devda",
-  //           "Test Remi",
-  //           "vrashank",
-  //           "Test1305",
-  //           "Ramesh",
-  //           "Ramesh company",
-  //           "lifo",
-  //           "shareef",
-  //           "Rubina ji",
-  //           "Vihan company",
-  //           "komal",
-  //           "nimish company",
-  //           "jayesh company",
-  //           "babu bhaiya company",
-  //           "kaleen bhaiya ki comp",
-  //           "Remi Ji 11",
-  //           "titu company ",
-  //           "amit shah",
-  //           "Microsoft "
-  //         ],
-  //       },
-  //       {
-  //         header: "CP Visit Count",
-  //         data: [0, ""],
-  //       }
-  //     ],
-  //   },
-  //   {
-  //     _id: "64a5128bf2e4fcea92cee191",
-  //     property_id: "645108ba4194e40109118932",
-  //     user_id: "6406ca8cffa098bb23eb1437",
-  //     username: "Aman ji lal sm",
-  //     property_title: "EKA Elitas",
-  //     propertyData: [
-  //       {
-  //         header: "CP Map (Allocated)",
-  //         data: [22, ""],
-  //       },
-  //       {
-  //         header: "Inactive/Deactive CP",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "Booking / Transactional CP",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "Walk-in Active CP",
-  //         data: [22, ""],
-  //       },
-  //       {
-  //         header: "Visitor No Shows",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "MTD site visit",
-  //         data: [0, ""],
-  //       },
-  //       {
-  //         header: "CP Firm name / Individual CP Name",
-  //         data: [
-  //           "sachin patidar",
-  //           "Nitesh up",
-  //           "kapil",
-  //           "Pravesh Devda",
-  //           "Test Remi",
-  //           "vrashank",
-  //           "Test1305",
-  //           "Ramesh",
-  //           "Ramesh company",
-  //           "lifo",
-  //           "shareef",
-  //           "Rubina ji",
-  //           "Vihan company",
-  //           "komal",
-  //           "nimish company",
-  //           "jayesh company",
-  //           "babu bhaiya company",
-  //           "kaleen bhaiya ki comp",
-  //           "Remi Ji 11",
-  //           "titu company ",
-  //           "amit shah",
-  //           "Microsoft "
-  //         ],
-  //       },
-  //       {
-  //         header: "CP Visit Count",
-  //         data: [0, ""],
-  //       }
-  //     ],
-  //   }
-  // ];
+  // const { data } = props;
+  const headerData = [
+    "CP Map (Allocated)",
+    "Inactive/Deactive CP",
+    "Booking / Transactional CP",
+    "Walk-in Active CP",
+    "Visitor No Shows",
+    "MTD site visit",
+    "CP Firm name / Individual CP Name",
+    "CP Visit Count",
+  ];
+  const data = [
+    {
+      _id: "6406d11bc72657d5bcaffd1d",
+      property_id: "6406d11bc72657d5bcaffd18",
+      user_id: "6406ca8cffa098bb23eb1437",
+      username: "Aman ji lal sm",
+      property_title: "Justo Demo Township",
+      propertyData: [
+        {
+          CP_Map: 22,
+          Inactive_Deactive_CP: 0,
+          Booking_CP: 0,
+          WalkIn_CP: 22,
+          No_Shows: 0,
+          MTD_site_visit: 0,
+          CP_Name: "Sachin Patidar",
+          CP_Visit_Count: 0,
+        },
+      ],
+    },
+    {
+      _id: "6436807fe7381c65694dce96",
+      property_id: "64367bfa5990c608a7999e83",
+      user_id: "6406ca8cffa098bb23eb1437",
+      username: "Aman ji lal sm",
+      property_title: "Justo Test New",
+      propertyData: [
+        {
+          CP_Map: 22,
+          Inactive_Deactive_CP: 0,
+          Booking_CP: 0,
+          WalkIn_CP: 22,
+          No_Shows: 0,
+          MTD_site_visit: 0,
+          CP_Name: "Pravesh Devda",
+          CP_Visit_Count: 0,
+        },
+      ],
+    },
+    {
+      _id: "646cc54eaa48bfca9dee660e",
+      property_id: "645c65044194e401091393e7",
+      user_id: "6406ca8cffa098bb23eb1437",
+      username: "Aman ji lal sm",
+      property_title: "The Rising - Saniket",
+      propertyData: [
+        {
+          CP_Map: 22,
+          Inactive_Deactive_CP: 0,
+          Booking_CP: 0,
+          WalkIn_CP: 22,
+          No_Shows: 0,
+          MTD_site_visit: 0,
+          CP_Name: "Kapil lalu",
+          CP_Visit_Count: 0,
+        },
+      ],
+    },
+    {
+      _id: "64a5128bf2e4fcea92cee191",
+      property_id: "645108ba4194e40109118932",
+      user_id: "6406ca8cffa098bb23eb1437",
+      username: "Aman ji lal sm",
+      property_title: "EKA Elitas",
+      propertyData: [
+        {
+          CP_Map: 22,
+          Inactive_Deactive_CP: 0,
+          Booking_CP: 0,
+          WalkIn_CP: 22,
+          No_Shows: 0,
+          MTD_site_visit: 0,
+          CP_Name: "lalu Prasad",
+          CP_Visit_Count: 0,
+        },
+      ],
+    },
+  ];
   const { width, height } = Dimensions.get("window"),
     vw = width / 100,
     vh = height / 100;
@@ -387,7 +221,6 @@ const SMReportTable = (props: any) => {
             />
           </TouchableOpacity>
         </View>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View>
             {data.map((item: any, index: any) => {
               return (
@@ -395,6 +228,7 @@ const SMReportTable = (props: any) => {
                   <View
                     style={{
                       marginBottom: normalize(10),
+                      width: "100%"
                     }}
                     key={index}
                   >
@@ -403,45 +237,140 @@ const SMReportTable = (props: any) => {
                         {item.property_title}
                       </Text>
                     </View>
-                    {item?.propertyData.map((item: any, index: any) => {
-                      return (
-                        <View
-                          key={index}
-                          style={{
-                            flexDirection: "row",
-                          }}
-                        >
-                          <View style={styles.ThemeColorBox}>
-                            <Text
-                              style={{ ...styles.boxText, color: WHITE_COLOR }}
+                    <View
+                      style={{
+                        flexDirection: "row",
+                      }}
+                    >
+                      <View
+                        style={{
+                          flexDirection: "column",
+                          width: "70%",
+                        }}
+                      >
+                        {headerData.map((item: any, index: any) => {
+                          return (
+                            <View
+                              key={index}
+                              style={{
+                                // width: normalizeWidth(140),
+                                width: "100%",
+                                // height: normalizeHeight(90),
+                                borderWidth: normalize(Isios ? 1.2 : 2),
+                                padding: normalize(12),
+                                backgroundColor: PRIMARY_THEME_COLOR,
+                              }}
                             >
-                              {item.header}
-                            </Text>
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: WHITE_COLOR,
+                                }}
+                              >
+                                {item}
+                              </Text>
+                            </View>
+                          );
+                        })}
+                      </View>
+                      {item?.propertyData?.map((item: any, index: any) => {
+                        return (
+                          <View
+                            style={{
+                              flexDirection: "column",
+                              width: "30%",
+                            }}
+                          >
+                            <View style={styles.dataItems}>
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: BLACK_COLOR,
+                                }}
+                              >
+                                {item?.CP_Map}
+                              </Text>
+                            </View>
+                            <View style={styles.dataItems}>
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: BLACK_COLOR,
+                                }}
+                              >
+                                {item?.Inactive_Deactive_CP}
+                              </Text>
+                            </View>
+                            <View style={styles.dataItems}>
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: BLACK_COLOR,
+                                }}
+                              >
+                                {item?.Booking_CP}
+                              </Text>
+                            </View>
+                            <View style={styles.dataItems}>
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: BLACK_COLOR,
+                                }}
+                              >
+                                {item?.WalkIn_CP}
+                              </Text>
+                            </View>
+                            <View style={styles.dataItems}>
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: BLACK_COLOR,
+                                }}
+                              >
+                                {item?.No_Shows}
+                              </Text>
+                            </View>
+                            <View style={styles.dataItems}>
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: BLACK_COLOR,
+                                }}
+                              >
+                                {item?.MTD_site_visit}
+                              </Text>
+                            </View>
+                            <View style={styles.dataItems}>
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: BLACK_COLOR,
+                                }}
+                              >
+                                {item?.CP_Name}
+                              </Text>
+                            </View>
+                            <View style={styles.dataItems}>
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: BLACK_COLOR,
+                                }}
+                              >
+                                {item?.CP_Visit_Count}
+                              </Text>
+                            </View>
                           </View>
-                          {item?.data.map((item: any, index: any) => {
-                            return (
-                              <View key={index} style={styles.box}>
-                                <Text
-                                  style={{
-                                    ...styles.boxText,
-                                    color: BLACK_COLOR,
-                                  }}
-                                >
-                                  {item}
-                                </Text>
-                              </View>
-                            );
-                          })}
-                        </View>
-                      );
-                    })}
+                        );
+                      })}
+                    </View>
                   </View>
                 </>
               );
             })}
           </View>
         </ScrollView>
-      </ScrollView>
     </SafeAreaView>
   );
 };

@@ -40,13 +40,36 @@ const CMReportTable = (props: any) => {
   const { width, height } = Dimensions.get("window"),
     vw = width / 100,
     vh = height / 100;
+  const headerData = [
+    "Total Site Visitors",
+    "Direct Walk-ins",
+    "No Shows",
+    "CP(Walk-ins) Appointments",
+    "Total Appointments",
+    "Booking",
+    "No. of (follow-ups scheduled)",
+    "Total Not Interested",
+    "Conversion %",
+    "Gand Total",
+    "Total Registration",
+    "Total Cancelation",
+  ];
 
   const onPressDownload = async () => {
     let array = data.map((item: any) => {
       return {
-        status: item.header,
-        FTD: item.data[0],
-        FTM: item.data[1],
+        "Total Site Visitors": item?.VisitorAttended,
+        "Direct Walk-ins": item?.DirectWalkins,
+        "No Shows": item?.Noshow,
+        "CP(Walk-ins) Appointments": item?.CPWalkins,
+        "Total Appointments": item?.TotalAppointmentsrevisit,
+        Booking: item?.Booking,
+        "No. of": item?.followschedule,
+        "Total Not Interested": item?.TotalNotInterested,
+        "Conversion %": item?.Conversion,
+        "Gand Total": item?.GrandTotal,
+        "Total Registration": item?.Registration,
+        "Total Cancelation": item?.TotalCancelation,
       };
     });
     const res = await handlePermission(
@@ -122,7 +145,7 @@ const CMReportTable = (props: any) => {
               width: "100%",
             }}
           >
-            <View
+            {/* <View
               style={{
                 alignItems: "flex-end",
                 marginBottom: normalize(10),
@@ -143,7 +166,7 @@ const CMReportTable = (props: any) => {
                   style={styles.downloadImg}
                 />
               </TouchableOpacity>
-            </View>
+            </View> */}
             <View
               style={{
                 width: "100%",
@@ -162,7 +185,7 @@ const CMReportTable = (props: any) => {
                 CM : {userData?.data?.user_name}
               </Text>
             </View>
-            <View
+            {/* <View
               style={{
                 flexDirection: "row",
               }}
@@ -231,18 +254,196 @@ const CMReportTable = (props: any) => {
                   FTM
                 </Text>
               </View>
-            </View>
+            </View> */}
             <View>
-              {data.map((item: any, index: any) => {
-                return (
-                  <>
+              <View
+                style={{
+                  flexDirection: "row",
+                  width: "100%",
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "column",
+                    width: "70%",
+                  }}
+                >
+                  {headerData.map((item: any, index: any) => {
+                    return (
+                      <View
+                        key={index}
+                        style={{
+                          // width: normalizeWidth(140),
+                          width: "100%",
+                          // height: normalizeHeight(90),
+                          borderWidth: normalize(Isios ? 1.2 : 2),
+                          padding: normalize(12),
+                          backgroundColor: PRIMARY_THEME_COLOR,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: WHITE_COLOR,
+                          }}
+                        >
+                          {item}
+                        </Text>
+                      </View>
+                    );
+                  })}
+                </View>
+                {data?.map((item: any, index: any) => {
+                  return (
                     <View
-                      key={index}
                       style={{
-                        flexDirection: "row",
+                        flexDirection: "column",
+                        width: "30%",
                       }}
                     >
                       <View
+                        style={{
+                          width: "100%",
+                          // height: normalizeHeight(90),
+                          borderWidth: normalize(Isios ? 1.2 : 2),
+                          padding: normalize(12),
+                        }}
+                      >
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.VisitorAttended}
+                        </Text>
+                      </View>
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.DirectWalkins}
+                        </Text>
+                      </View>
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.Noshow}
+                        </Text>
+                      </View>
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.CPWalkins}
+                        </Text>
+                      </View>
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.TotalAppointmentsrevisit}
+                        </Text>
+                      </View>
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.Booking}
+                        </Text>
+                      </View>
+                      {/* <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.ReadytoBook}
+                        </Text>
+                      </View> */}
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.followschedule}
+                        </Text>
+                      </View>
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.TotalNotInterested}
+                        </Text>
+                      </View>
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.Conversion}
+                        </Text>
+                      </View>
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.GrandTotal}
+                        </Text>
+                      </View>
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.Registration}
+                        </Text>
+                      </View>
+                      <View style={styles.dataItems}>
+                        <Text
+                          style={{
+                            ...styles.boxText,
+                            color: BLACK_COLOR,
+                          }}
+                        >
+                          {item?.TotalCancelation}
+                        </Text>
+                      </View>
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+            {/* <View
                         style={{
                           width: "50%",
                           borderWidth: normalize(Isios ? 1.2 : 2),
@@ -281,13 +482,9 @@ const CMReportTable = (props: any) => {
                             </Text>
                           </View>
                         );
-                      })}
-                    </View>
-                  </>
-                );
-              })}
-            </View>
-            {/* <View
+                      })} */}
+          </View>
+          {/* <View
               style={{
                 flexDirection: "row",
               }}
@@ -332,7 +529,6 @@ const CMReportTable = (props: any) => {
                 ></Text>
               </View>
             </View> */}
-          </View>
         </ScrollView>
       </ScrollView>
     </SafeAreaView>

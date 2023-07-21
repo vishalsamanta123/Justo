@@ -37,23 +37,47 @@ const CTReportTable = (props: any) => {
   const { width, height } = Dimensions.get("window"),
     vw = width / 100,
     vh = height / 100;
+  console.log("🚀 ~ file: CTReportTable.tsx:37 ~ CTReportTable ~ data:", data);
   const headeData = [
     "CM Name",
-    "Total Site Visit",
-    "Direct Walk-ins",
-    "No Shows",
+    "Lead Assign",
     "CP (Walk-ins) Appointments",
-    "Total Appointments (Revisit)",
+    "Direct Walk-ins",
+    "Total Site Visit",
+    "No Shows",
+    "Visitor Attended",
+    "Appointments (Revisit)",
+    "Not Interested",
+    "Visit Cancel",
     "Booking",
     "Ready to Book",
-    "No. of (follow-ups scheduled)",
-    "Total Not Interested",
-    "Conversion % (Walk-in to Booking",
-    "Total Cancelation",
     "Total Registration",
+    "Cancelation Booking",
+    "Conversion % (Walk-in to Booking)",
+    "No. of (follow-ups scheduled)",
   ];
 
   const onPressDownload = async () => {
+    let array = data.map((item: any) => {
+      return {
+        "CM Name": item?.user_name,
+        "Lead Assign": item?.total_visit,
+        "CP (Walk-ins) Appointments": item?.CPWalkins,
+        "Direct Walk-ins": item?.DirectWalkins,
+        "Total Site Visit": item?.VisitorAttended,
+        "No Shows": item?.Noshow,
+        "Visitor Attended": item?.TotalAppointments,
+        "Appointments (Revisit)": item?.TotalAppointmentsrevisit,
+        "Not Interested": item?.TotalNotInterested,
+        "Visit Cancel": item?.TotalCancelation,
+        Booking: item?.Booking,
+        "Ready to Book": item?.ReadytoBook,
+        "Total Registration": item?.Registration,
+        "Cancelation Booking": item?.CancelBooking,
+        "Conversion % (Walk-in to Booking)": item?.Conversion,
+        "No. of (follow-ups scheduled)": item?.followschedule,
+      };
+    });
     const res = await handlePermission(
       "gallery",
       strings.txt_setting_heading_media,
@@ -71,7 +95,7 @@ const CTReportTable = (props: any) => {
           backgroundColor: BLACK_COLOR,
         });
         const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(data);
+        const worksheet = XLSX.utils.json_to_sheet(array);
         XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
         const excelFile = XLSX.write(workbook, {
           type: "base64",
@@ -103,23 +127,6 @@ const CTReportTable = (props: any) => {
         console.log("Error generating Excel file:", error);
       }
     }
-    // let array = data.map((item: any) => {
-    //   return {
-    //     "CM Name": item?.username,
-    //     "Total Site Visit": item?.VisitorAttended,
-    //     "Direct Walk-ins": item?.DirectWalkins,
-    //     "No Shows": item?.Noshow,
-    //     "CP (Walk-ins) Appointments": item?.CPWalkins,
-    //     "Total Appointments (Revisit)": item?.TotalAppointments,
-    //     Booking: item?.Booking,
-    //     "Ready to Book": item?.ReadytoBook,
-    //     "No. of (follow-ups scheduled)": item?.noOfFollowups,
-    //     "Total Not Interested": item?.TotalNotInterested,
-    //     "Conversion % (Walk-in to Booking": item?.Conversion,
-    //     "Total Cancelation": item?.TotalCancelation,
-    //     "Total Registration": item?.Registration,
-    //   };
-    // });
   };
 
   return (
@@ -131,6 +138,7 @@ const CTReportTable = (props: any) => {
         }}
         contentContainerStyle={{
           margin: normalize(10),
+          paddingBottom : normalize(15)
         }}
       >
         <View
@@ -204,7 +212,7 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item?.UserName}
+                        {item?.user_name}
                       </Text>
                     </View>
                     <View style={styles.cTDataItems}>
@@ -214,7 +222,17 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item?.VisitorAttended}
+                        {item?.total_visit}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.CPWalkins}
                       </Text>
                     </View>
                     <View style={styles.cTDataItems}>
@@ -234,7 +252,7 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item?.Noshow}
+                        {item.VisitorAttended}
                       </Text>
                     </View>
                     <View style={styles.cTDataItems}>
@@ -244,7 +262,7 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item.CPWalkins}
+                        {item.Noshow}
                       </Text>
                     </View>
                     <View style={styles.cTDataItems}>
@@ -254,7 +272,7 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item.TotalAppointments}
+                        {item?.TotalAppointments}
                       </Text>
                     </View>
                     <View style={styles.cTDataItems}>
@@ -264,27 +282,7 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item?.Booking}
-                      </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
-                      <Text
-                        style={{
-                          ...styles.boxText,
-                          color: BLACK_COLOR,
-                        }}
-                      >
-                        {item?.ReadytoBook}
-                      </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
-                      <Text
-                        style={{
-                          ...styles.boxText,
-                          color: BLACK_COLOR,
-                        }}
-                      >
-                        {item.noOfFollowups}
+                        {item?.TotalAppointmentsrevisit}
                       </Text>
                     </View>
                     <View style={styles.cTDataItems}>
@@ -304,16 +302,6 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item.Conversion}
-                      </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
-                      <Text
-                        style={{
-                          ...styles.boxText,
-                          color: BLACK_COLOR,
-                        }}
-                      >
                         {item.TotalCancelation}
                       </Text>
                     </View>
@@ -324,7 +312,57 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
+                        {item.Booking}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.ReadytoBook}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
                         {item.Registration}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.CancelBooking}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.Conversion}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.followschedule}
                       </Text>
                     </View>
                   </View>
