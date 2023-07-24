@@ -205,16 +205,36 @@ const SMReportTable = (props: any) => {
         const workbook = XLSX.utils.book_new();
 
         data.forEach((property: any) => {
-          const { property_title, propertyData } = property;
+          const { property_title, smDetails } = property;
+
           const worksheetData: any = [];
 
-          propertyData.forEach((item: any) => {
-            const { header, data } = item;
-            const rowData = [header, ...data];
+          smDetails.map((item: any) => {
+            const rowData = {
+              "CP Map (Allocated)": item?.cpcount,
+              "Inactive/Deactive CP": item?.inactiveCP,
+              "Booking / Transactional CP": item?.BookingCountTotal,
+              "Walk-in Active CP": item?.activeCP,
+              "Visitor No Shows": item?.NoshowAppintment,
+              "Site visit": item?.SitevisitCountTotal,
+            };
             worksheetData.push(rowData);
+            item?.CPInfo.map((val: any) => {
+              const cpData = {
+                "CP Firm name / Individual CP Name": val?.Cp_name,
+                "CP Visit Count": val?.leadCount,
+              };
+              worksheetData.push(cpData);
+            });
           });
 
-          const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+          // smDetails.forEach((item: any) => {
+          //   const { header, data } = item;
+          //   const rowData = [header, ...data];
+          //   worksheetData.push(rowData);
+          // });
+
+          const worksheet = XLSX.utils.json_to_sheet(worksheetData);
           XLSX.utils.book_append_sheet(workbook, worksheet, property_title);
         });
 

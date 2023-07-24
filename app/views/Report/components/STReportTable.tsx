@@ -34,10 +34,11 @@ import RNFS from "react-native-fs";
 
 const STReportTable = (props: any) => {
   const { data } = props;
-  // console.log(
-  //   "🚀 ~ file: STReportTable.tsx:37 ~ STReportTable ~ data:",
-  //   data[0]?.smDetails
-  // );
+  console.log("🚀 ~ file: STReportTable.tsx:37 ~ STReportTable ~ data:", data);
+  console.log(
+    "🚀 ~ file: STReportTable.tsx:37 ~ STReportTable ~ data:",
+    data[0]?.smDetails
+  );
   // const data = [
   //   {
   //     _id: "6406d11bc72657d5bcaffd1a",
@@ -297,10 +298,13 @@ const STReportTable = (props: any) => {
     "Inactive/Dormat CP",
     "Vistors",
     "Visitor No Shows ",
-    "MTD site visit",
-    "Booking /Transactional CP",
-    "CP Name",
-    "Visit Count",
+    "Site Visit",
+    "Cancel Visit",
+    "Revisit",
+    "Reschedule",
+    "Customer Lost",
+    "Booking /Transactional",
+    "Cancel Booking",
   ];
 
   const onPressDownload = async () => {
@@ -326,14 +330,17 @@ const STReportTable = (props: any) => {
             const rowData = {
               "SM Name": item?.username,
               "CP Map": item?.cpcount,
-              "Walk-in Active CP": item.activeCP,
-              "Inactive/Dormat CP": item.inactiveCP,
-              "Vistors": item.leadcount,
-              "Visitor No Shows ": item.NoshowAppintment,
-              "MTD site visit": item.SitevisitCountTotal,
-              "Booking /Transactional CP": item.BookingCountTotal,
-              "CP Name": "",
-              "Visit Count": "",
+              "Walk-in Active CP": item?.activeCP,
+              "Inactive/Dormat CP": item?.inactiveCP,
+              Vistors: item?.leadcount,
+              "Visitor No Shows ": item?.NoshowAppintment,
+              "Site Visit": item?.SitevisitCountTotal,
+              "Cancel Visit": item?.CancelAppintment,
+              Revisit: item?.RevisitAppintment,
+              Reschedule: item?.RescheduleApp,
+              "Customer Lost": item?.CustomerlostAppintment,
+              "Booking /Transactional CP": item?.BookingCountTotal,
+              "Cancel Booking": item?.CancelBooking,
             };
             worksheetData.push(rowData);
           });
@@ -559,6 +566,46 @@ const STReportTable = (props: any) => {
                                       color: BLACK_COLOR,
                                     }}
                                   >
+                                    {item.CancelAppintment}
+                                  </Text>
+                                </View>
+                                <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item.RevisitAppintment}
+                                  </Text>
+                                </View>
+                                <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item.RescheduleApp}
+                                  </Text>
+                                </View>
+                                <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item.CustomerlostAppintment}
+                                  </Text>
+                                </View>
+                                <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
                                     {item?.BookingCountTotal}
                                   </Text>
                                 </View>
@@ -569,17 +616,7 @@ const STReportTable = (props: any) => {
                                       color: BLACK_COLOR,
                                     }}
                                   >
-                                    {item?.cpName}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item.visitCount}
+                                    {item?.CancelBooking}
                                   </Text>
                                 </View>
                               </View>

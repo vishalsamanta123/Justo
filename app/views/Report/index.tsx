@@ -99,6 +99,7 @@ const ReportScreen = ({ navigation }: any) => {
     setIsFilterModalVisible(false);
     getData(filterData?.startdate, filterData?.enddate);
   };
+  console.log("🚀 ~ file: index.tsx:108 ~ ReportScreen ~ reportData:", ReportData?.response?.data)
   return (
     <>
       <ReportView
