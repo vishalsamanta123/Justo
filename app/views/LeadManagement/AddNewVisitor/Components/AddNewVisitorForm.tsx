@@ -21,6 +21,7 @@ import {
   Isios,
   ROLE_IDS,
   Regexs,
+  CONST_IDS,
 } from "../../../../components/utilities/constant";
 import strings from "../../../../components/utilities/Localization";
 import styles from "./Styles";
@@ -68,6 +69,7 @@ const AddNewVisitorForm = (props: any) => {
         : "add_appointment _site_visite",
   });
 
+  console.log("🚀 ~ file: AddNewVisitorForm.tsx:249 ~ CONST_IDS?.cp_lead_source_id:", CONST_IDS.cp_lead_source_id)
 
   useEffect(() => {
     if (props.type == "edit") {
@@ -195,47 +197,6 @@ const AddNewVisitorForm = (props: any) => {
 
           <View style={[styles.inputWrap]}>
             <DropdownInput
-              require={true}
-              headingText={"Property"}
-              placeholder={
-                props.formData?.property_title
-                  ? props.formData?.property_title
-                  : "Property"
-              }
-              data={props?.allProperty}
-              disable={
-                props.type == "edit" || props.type == "propertySelect"
-                  ? true
-                  : false
-              }
-              inputWidth={"100%"}
-              paddingLeft={16}
-              maxHeight={300}
-              labelField="property_title"
-              valueField={"_id"}
-              value={props?.formData?.property_id}
-              onChange={(item: any) => {
-                props.setFormData({
-                  ...props.formData,
-                  property_id: item.property_id,
-                  property_type_title: item.property_type,
-                  property_title: item.property_title,
-                  pickup: item?.pickup,
-                });
-              }}
-              newRenderItem={(item: any) => {
-                return (
-                  <>
-                    <View style={Styles.item}>
-                      <Text style={Styles.textItem}>{item.property_title}</Text>
-                    </View>
-                  </>
-                );
-              }}
-            />
-          </View>
-          <View style={[styles.inputWrap]}>
-            <DropdownInput
               headingText={"Lead Source"}
               placeholder={
                 props.formData?.lead_source_title
@@ -262,11 +223,16 @@ const AddNewVisitorForm = (props: any) => {
                   ...props.formData,
                   lead_source: item._id,
                   lead_source_title: item.title,
-
                   cp_type: "",
                   cp_id: "",
                   cp_emp_id: "",
                 });
+                if (
+                  !(userData?.userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                  userData?.userData?.data?.role_id === ROLE_IDS.closingmanager_id)
+                ){
+                  props.setAllProperty([])
+                }
               }}
               newRenderItem={(item: any) => {
                 return (
@@ -281,7 +247,7 @@ const AddNewVisitorForm = (props: any) => {
               }}
             />
           </View>
-          {props?.formData?.lead_source === "645b3a414194e4010913546c" ? (
+          {props?.formData?.lead_source === CONST_IDS?.cp_lead_source_id ? (
             <>
               <View style={styles.inputWrap}>
                 <DropdownInput
@@ -301,7 +267,11 @@ const AddNewVisitorForm = (props: any) => {
                       cp_type: item.value,
                       cp_id: "",
                       cp_emp_id: "",
+                      property_id: "",
+                      property_type_title: "",
+                      property_title: "",
                     });
+                    props.setAllProperty([])
                   }}
                   newRenderItem={(item: any) => {
                     return (
@@ -330,7 +300,12 @@ const AddNewVisitorForm = (props: any) => {
                       props.setFormData({
                         ...props.formData,
                         cp_id: item._id,
+                        property_id: "",
+                        property_type_title: "",
+                        property_title: "",
                       });
+                      props.handleGetProperty(item._id)
+
                     }}
                     newRenderItem={(item: any) => {
                       return (
@@ -361,7 +336,11 @@ const AddNewVisitorForm = (props: any) => {
                           ...props.formData,
                           cp_id: item._id,
                           cp_emp_id: "",
+                          property_id: "",
+                          property_type_title: "",
+                          property_title: "",
                         });
+                        props.handleGetProperty(item._id)
                       }}
                       newRenderItem={(item: any) => {
                         return (
@@ -409,6 +388,48 @@ const AddNewVisitorForm = (props: any) => {
               ) : null}
             </>
           ) : null}
+
+          <View style={[styles.inputWrap]}>
+            <DropdownInput
+              require={true}
+              headingText={"Property"}
+              placeholder={
+                props.formData?.property_title
+                  ? props.formData?.property_title
+                  : "Property"
+              }
+              data={props?.allProperty}
+              disable={
+                props.type == "edit" || props.type == "propertySelect"
+                  ? true
+                  : false
+              }
+              inputWidth={"100%"}
+              paddingLeft={16}
+              maxHeight={300}
+              labelField="property_title"
+              valueField={"_id"}
+              value={props?.formData?.property_id}
+              onChange={(item: any) => {
+                props.setFormData({
+                  ...props.formData,
+                  property_id: item.property_id,
+                  property_type_title: item.property_type,
+                  property_title: item.property_title,
+                  // pickup: item?.pickup,
+                });
+              }}
+              newRenderItem={(item: any) => {
+                return (
+                  <>
+                    <View style={Styles.item}>
+                      <Text style={Styles.textItem}>{item.property_title}</Text>
+                    </View>
+                  </>
+                );
+              }}
+            />
+          </View>
           <View
             style={[styles.genderView, { marginLeft: normalizeSpacing(20) }]}
           >
@@ -1484,14 +1505,13 @@ const AddNewVisitorForm = (props: any) => {
         </View>
       </ScrollView>
 
-       <JustForOkModal
-            headertitle="Message"
-            message={props.mobileerror}
-            onPressRightButton={props.onPressRightButton}
-            Visible={props.okIsVisible}
-            
-            setIsVisible={props.setOkIsVisible}
-          />
+      <JustForOkModal
+        headertitle="Message"
+        message={props.mobileerror}
+        onPressRightButton={props.onPressRightButton}
+        Visible={props.okIsVisible}
+        setIsVisible={props.setOkIsVisible}
+      />
     </View>
   );
 };

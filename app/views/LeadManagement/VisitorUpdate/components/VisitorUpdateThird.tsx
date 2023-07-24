@@ -122,7 +122,7 @@ const VisitorUpdateView = (props: any) => {
                 </View>
                 {/* 63ecd90787f864d94a3882ee */}
                 {/* 63ecd94387f864d94a38838d */}
-                <View style={[styles.inputWrap]}>
+                {/* <View style={[styles.inputWrap]}>
                         <DropdownInput
                             headingText={'Lead Source'}
                             placeholder={props.updateForm?.lead_source ?
@@ -153,7 +153,7 @@ const VisitorUpdateView = (props: any) => {
                                 );
                             }}
                         />
-                    </View>
+                    </View> */}
                 <View style={styles.inputWrap}>
                     <InputField
                         placeholderText={"Remark"}

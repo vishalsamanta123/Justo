@@ -108,6 +108,7 @@ import { navigate, navigationRef } from "app/components/utilities/GlobalFuncatio
 import PropertyInventory from "app/views/PropertyMangement/PropertyInventory";
 import CloseAppointment from "app/views/AppointMent/CloseAppointment";
 import EmployeeListing from "app/views/AgencyManagement/EmployeeListing";
+import AddEmployee from "app/views/AgencyManagement/AddEmployee";
 
 const Stack = createNativeStackNavigator();
 const AppStack = createNativeStackNavigator();
@@ -188,6 +189,7 @@ const AppComponent = () => {
       />
       <AppStack.Screen name="AgencyDetails" component={AgencyDetails} />
       <AppStack.Screen name="AddnewAgency" component={AddnewAgency} />
+      <AppStack.Screen name="AddEmployee" component={AddEmployee} />
       <AppStack.Screen name="AgencyBankInfo" component={AgencyBankInfo} />
 
       {/* Lead Management Screens */}

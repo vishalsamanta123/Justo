@@ -41,7 +41,10 @@ const AgentBasicInfoView = (props: any) => {
       working_location: array,
     });
   };
-  console.log("🚀 ~ file: AgentBasicInfoView.tsx:360 ~ props?.emailMobvalidation?.email:", props?.emailMobvalidation?.email)
+  console.log(
+    "🚀 ~ file: AgentBasicInfoView.tsx:360 ~ props?.emailMobvalidation?.email:",
+    props?.emailMobvalidation?.email
+  );
 
   const renderEmployee = (item: any, index: any) => {
     return (
@@ -450,7 +453,7 @@ const AgentBasicInfoView = (props: any) => {
 
         <View style={styles.inputWrap}>
           <InputField
-            require={true}
+            // require={true}
             placeholderText={
               props?.agencyData?.cp_type === 1
                 ? strings.address
@@ -470,11 +473,47 @@ const AgentBasicInfoView = (props: any) => {
             }}
             inputType={"location"}
             onPressSelect={(data: any, detail: any) => {
+              console.log(
+                "🚀 ~ file: AgentBasicInfoView.tsx:473 ~ data:",
+                detail.address_components
+              );
+              const city = detail?.address_components?.filter((el: any) =>
+                el?.types?.includes("administrative_area_level_3")
+              );
+              console.log(
+                "🚀 ~ file: AgentBasicInfoView.tsx:483 ~ city:",
+                city[0]?.short_name
+              );
+              const state = detail?.address_components?.filter((el: any) =>
+                el?.types?.includes("administrative_area_level_1")
+              );
+              console.log(
+                "🚀 ~ file: AgentBasicInfoView.tsx:487 ~ state:",
+                state[0]?.short_name
+              );
+              const country = detail?.address_components?.filter((el: any) =>
+                el?.types?.includes("country")
+              );
+              console.log(
+                "🚀 ~ file: AgentBasicInfoView.tsx:491 ~ country:",
+                country[0]?.short_name
+              );
+              const zipcode = detail?.address_components?.filter((el: any) =>
+                el?.types?.includes("postal_code")
+              );
+              console.log(
+                "🚀 ~ file: AgentBasicInfoView.tsx:495 ~ zipcode:",
+                zipcode[0]?.short_name
+              );
               props.setAgencyData({
                 ...props.agencyData,
                 location: data?.description,
                 latitude: detail?.geometry?.location?.lat,
                 longitude: detail?.geometry?.location?.lng,
+                // zip: zipcode[0]?.short_name,
+                // city: city[0]?.short_name,
+                // state_code: state[0]?.short_name,
+                // country_code: country[0]?.short_name,
               });
             }}
           />

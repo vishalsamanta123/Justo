@@ -6,19 +6,30 @@ import VisitorUpdateThirdView from "./components/VisitorUpdateThird";
 import { addVisitorRemove, editVisitor, getVisitorDetail, } from "app/Redux/Actions/LeadsActions";
 import { getAllMaster } from "app/Redux/Actions/MasterActions";
 import ErrorMessage from "app/components/ErrorMessage";
-import { GREEN_COLOR, RED_COLOR, Regexs } from "app/components/utilities/constant";
+import { CONST_IDS, GREEN_COLOR, RED_COLOR, ROLE_IDS, Regexs } from "app/components/utilities/constant";
 import { getAllProperty } from "app/Redux/Actions/propertyActions";
+import { getAssignCPList } from "app/Redux/Actions/SourcingManagerActions";
+import { getEmployeeList } from "app/Redux/Actions/CompanyActions";
+import { START_LOADING, STOP_LOADING } from "app/Redux/types";
+import { apiCall } from "app/components/utilities/httpClient";
+import apiEndPoints from "app/components/utilities/apiEndPoints";
 
 const VisitorUpdateScreen = ({ navigation, route }: any) => {
   const data = route?.params || 0
   const dispatch: any = useDispatch()
   const { response = {}, detail = "" } = useSelector((state: any) => state.visitorData)
-  console.log('response: ', response);
   const masterData = useSelector((state: any) => state.masterData) || {}
   const editData = useSelector((state: any) => state.editVisitorData) || {}
   const propertyData = useSelector((state: any) => state.propertyData) || {};
+  const { userData = {} } = useSelector((state: any) => state.userData) || [];
+  const SmCpList = useSelector((state: any) => state.SourcingManager) || [];
+  const employeeData = useSelector((state: any) => state.employeeData) || {};
   const [screenType, setScreenType] = useState(0)
   const [masterDatas, setMasterDatas] = useState<any>([])
+  const [agentList, setAgentList] = useState<any>([]);
+  const [companyList, setCompanyList] = useState<any>([]);
+  const [employeeList, setEmployeeList] = useState<any>([]);
+  const [dropdownAgentList, setDropdownAgentList] = useState<any>([]);
   const [configuration, setConfiguration] = useState<any>([]);
   const [dropDownType, setDropDownType] = useState(0);
   const [updateForm, setUpdateForm] = React.useState<any>({
@@ -68,19 +79,81 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
     current_stay: '',
     property_type: '',
     preferred_bank: '',
-    lead_source: ''
+    lead_source: '',
+
+    cp_type: "",
+    cp_id: "",
+    cp_emp_id: "",
   });
 
   const [allProperty, setAllProperty] = useState<any>([]);
 
-  useEffect(() => {
-    dispatch(
-      getAllProperty({
-        offset: 0,
-        limit: "",
-      })
+  // useEffect(() => {
+  //   dispatch(
+  //     getAllProperty({
+  //       offset: 0,
+  //       limit: "",
+  //     })
+  //   );
+  //   getAllPropertyData();
+  // }, []);
+  const handleGetProperty = async (id: any) => {
+    dispatch({ type: START_LOADING });
+    const params = {
+      cp_id: id,
+    };
+    const res = await apiCall(
+      "post",
+      apiEndPoints.GET_CP_PROPERTY_FOR_SM,
+      params
     );
-    getAllPropertyData();
+    const response: any = res?.data;
+    if (response?.status === 200) {
+      if (response?.data?.length > 0) {
+        dispatch({ type: STOP_LOADING });
+        setAllProperty(response?.data);
+      } else {
+        dispatch({ type: STOP_LOADING });
+        setAllProperty([]);
+      }
+    } else {
+      dispatch({ type: STOP_LOADING });
+      ErrorMessage({
+        msg: response?.message,
+        backgroundColor: RED_COLOR,
+      });
+      setAllProperty([]);
+    }
+  };
+  useEffect(() => {
+    if (
+      userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+      userData?.data?.role_id === ROLE_IDS.closingmanager_id
+    ) {
+      console.log("getAllProperty CALLED===============")
+      dispatch(
+        getAllProperty({
+          offset: 0,
+          limit: "",
+        })
+      );
+      getAllPropertyData();
+
+      if (propertyData?.response?.status === 200) {
+        if (propertyData?.response?.data?.length > 0) {
+          const activeData = propertyData?.response?.data.filter((el: any) => {
+            return el.status == true;
+          });
+          activeData?.length > 0
+            ? setAllProperty(activeData)
+            : setAllProperty([]);
+        } else {
+          setAllProperty([]);
+        }
+      } else {
+        setAllProperty([]);
+      }
+    }
   }, []);
 
   const getAllPropertyData = () => {
@@ -99,7 +172,6 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
 
   useEffect(() => {
     if (response?.status === 200) {
-      console.log('response?.data[0]: ', response?.data[0]);
       setUpdateForm({
         ...response?.data[0]?.customer_detail,
         lead_id: response?.data[0]?._id,
@@ -125,6 +197,11 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         max_emi_budget_type: response?.data[0]?.max_emi_budget_type,
         lead_source: response?.data[0]?.lead_source,
         create_by: response?.data[0]?.create_by,
+        lead_source_id: response?.data[0]?.lead_source_id,
+        cp_type: response?.data[0]?.cp_type,
+        cp_id: response?.data[0]?.cp_id,
+        cp_emp_id: response?.data[0]?.cp_emp_id,
+        cp_name: response?.data[0]?.cp_name,
       })
     }
   }, [response])
@@ -137,7 +214,47 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
 
   useEffect(() => {
     handleDropdownPress(2)
+    dispatch(
+      getAssignCPList({
+        user_id: userData?.data?.user_id,
+        status: "",
+      })
+    );
   }, [navigation]);
+
+  useEffect(() => {
+    if (SmCpList?.response?.status === 200) {
+      setAgentList(SmCpList?.response?.data);
+    } else {
+      setAgentList([]);
+    }
+  }, [SmCpList]);
+  useEffect(() => {
+    if (employeeData?.response?.status === 200) {
+      setEmployeeList(employeeData?.response?.data);
+    } else {
+      setEmployeeList([]);
+    }
+  }, [employeeData]);
+  const handleCompanyDropdownPress = () => {
+    const tempArr = agentList.filter((el: any) => el?.cp_type === 2);
+    setCompanyList(tempArr);
+  };
+  const handleCpNameDropdownPress = () => {
+    const tempArr = agentList.filter(
+      (el: any) => el?.cp_type !== 2 || el?.cp_type === undefined
+    );
+    setDropdownAgentList(tempArr);
+  };
+
+  const handleEmployeeDropdownPress = () => {
+    console.log("🚀 ~ file: index.tsx:247 ~ updateForm?.cp_id:", updateForm?.cp_id)
+    dispatch(
+      getEmployeeList({
+        agency_id: updateForm?.cp_id,
+      })
+    );
+  };
 
   const handleDropdownPress = (type: any) => {
     // setMasterDatas([])
@@ -151,9 +268,7 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
 
   useEffect(() => {
     if (masterData?.response?.status === 200) {
-      console.log('masterData?.response?.data: ', masterData?.response?.data);
       if (masterData?.response?.data?.length > 0) {
-        console.log('dropDownType: ', dropDownType);
         if (dropDownType === 2) {
           setConfiguration(masterData?.response?.data);
         } else {
@@ -205,6 +320,18 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
       } else if (updateForm?.whatsapp_no && Regexs.phoneNumRegex.test(updateForm?.whatsapp_no) === false) {
         isError = false;
         errorMessage = "Please enter valid whatsapp number";
+      }
+      if (updateForm?.lead_source === CONST_IDS.cp_lead_source_id) {
+        if (updateForm.cp_type == undefined || updateForm.cp_type == "") {
+          isError = false;
+          errorMessage = "Please Enter Channel Partner type";
+        } else if (updateForm.cp_id == undefined || updateForm.cp_id == "") {
+          isError = false;
+          errorMessage =
+            updateForm.cp_type === 1
+              ? "Please Enter CP Name"
+              : "Please Enter CP Company Name";
+        }
       }
       if (updateForm?.adhar_no) {
         if (Regexs.AadharRegex.test(updateForm?.adhar_no) === false) {
@@ -316,7 +443,7 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         setScreenType(type)
       }
     } else {
-      const edit_params = {
+      let edit_params: any = {
         lead_id: updateForm?.lead_id,
         first_name: updateForm?.first_name,
         email: updateForm?.email,
@@ -363,7 +490,30 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         current_stay: updateForm?.current_stay,
         property_type: updateForm?.property_type,
         preferred_bank: updateForm?.preferred_bank,
-        lead_source: updateForm?.lead_source,
+        lead_source: updateForm?.lead_source_id,
+        lead_source_title: updateForm?.lead_source_title,
+        // cp_type: updateForm?.cp_type,
+        // cp_id: updateForm?.cp_id,
+        // cp_emp_id: updateForm?.cp_emp_id,
+        cp_name: updateForm?.cp_name,
+      }
+      if (updateForm?.cp_emp_id) {
+        edit_params = {
+          ...edit_params,
+          cp_emp_id: updateForm?.cp_emp_id,
+        };
+      }
+      if (updateForm?.cp_type) {
+        edit_params = {
+          ...edit_params,
+          cp_type: updateForm?.cp_type,
+        };
+      }
+      if (updateForm?.cp_id) {
+        edit_params = {
+          ...edit_params,
+          cp_id: updateForm?.cp_id,
+        };
       }
       dispatch(editVisitor(edit_params))
     }
@@ -378,6 +528,16 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
           setUpdateForm={setUpdateForm}
           onPressNext={onPressNext}
           allProperty={allProperty}
+          handleDropdownPress={handleDropdownPress}
+          masterDatas={masterDatas}
+          handleCpNameDropdownPress={handleCpNameDropdownPress}
+          dropdownAgentList={dropdownAgentList}
+          companyList={companyList}
+          handleCompanyDropdownPress={handleCompanyDropdownPress}
+          employeeList={employeeList}
+          handleEmployeeDropdownPress={handleEmployeeDropdownPress}
+          handleGetProperty={handleGetProperty}
+          setAllProperty={setAllProperty}
         /> :
         <>
           {screenType === 1 ?

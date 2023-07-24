@@ -40,11 +40,11 @@ export const AMOUNT_TYPE = [{ value: "Cr" }, { value: "L" }, { value: "K" }]
 export const ONE_MONTH_DATES = new Date(new Date().setDate(new Date().getDate() + 31));
 
 // export const  GLOBAL_URL = 'http://192.168.43.177:3000' // virendra 
-// export const  GLOBAL_URL = 'http://192.168.1.5:3000' // remi
+ export const  GLOBAL_URL = 'http://192.168.1.5:3000' // remi
 
 // export const  GLOBAL_URL = 'https://prodapi.justoverse.com:3002' //prod
 // export const GLOBAL_URL = 'https://api.justoverse.com:3000'
-export const GLOBAL_URL = 'https://itinformatix.org:3044'
+// export const GLOBAL_URL = 'https://itinformatix.org:3044'
 // export const  MAP_KEY = 'AIzaSyDdLk5tb75SiJvRk9F2B4almu-sBAi1-EM'
 export const MAP_KEY = 'AIzaSyCbDx7Lk4eTMzptrQKXZvOPYgEMggrq8o4'
 export const JW_LOGIN = 'api'
@@ -64,6 +64,10 @@ export const ROLE_IDS = {
   sitehead_id: "63d37697b29929d68de050f9",
   clusterhead_id: "63da1736ee01b8d62ceb7ea2",
   callcenter_id: "63732080d9363c459e3155a2"
+}
+export const CONST_IDS = {
+  cp_lead_source_id: "645b3a414194e4010913546c",
+  by_self_lead_source_id: "63ecd90787f864d94a3882ee",
 }
 export const Regexs = {
   AadharRegex: new RegExp(/^[2-9]{1}[0-9]{3}\s[0-9]{4}\s[0-9]{4}$/),

@@ -1,7 +1,7 @@
 import { authStore, changePasswordReducer, forgotReducer, loadingReducer, otpVerifyReducer, updatepasswordReducer, userData, userDetailReducer, userReducer } from "./AuthReducer";
 import { addEditAgencyReducer, addTargetForCpReducer, agencyCreateFormReducer, agencyReducer, agencyStatusReducer } from "./AgencyReducer";
 import { SourcingManagerReducer } from "./SourcingManagerReducer";
-import { agentReducer, emailAndMobileReducer } from "./AgentReducer";
+import { addAgentReducer, agentReducer, editAgentReducer, emailAndMobileReducer } from "./AgentReducer";
 import { competitorpropertyReducer, propertyDetailReducer, propertyFormReducer, propertyReducer, removeAllocatePropertyDataReducer } from "./propertyReducers";
 import { settingReducer } from "./SettingReducer";
 import { appointmentReducer, editAddAppointmentReducer } from "./AppointmentWithCpReducer";
@@ -44,6 +44,8 @@ export default {
     agencyStatus: agencyStatusReducer,
     addEditAgency: addEditAgencyReducer,
     addTargetForCpData: addTargetForCpReducer,
+    editAgentData: editAgentReducer,
+    addAgentData: addAgentReducer,
 
     SourcingManager: SourcingManagerReducer,
     propertyform: propertyFormReducer,

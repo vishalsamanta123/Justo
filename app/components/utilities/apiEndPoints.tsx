@@ -80,6 +80,7 @@ export default {
   TRANSFER_VISIT: "/channelPartner/transferVisitAgent",
   GET_CP_ACTIVE_LEAD: "/channelPartner/getCpActiveLead",
   ADD_TARGET_FOR_CP: '/channelPartner/addTargetForChannelPartner',
+  UPDATE_CP_PROPERTY_SM: '/channelPartner/updateCppropertySM',
 
   // Appointment
   GET_APPOINTMENT_LIST: '/appointment/getAppointmentList',
@@ -133,6 +134,7 @@ export default {
   GET_VISITOR_DETAIL_: "/visit/getVisitDetails",
   VISITOR_STATUS_UPDATE: "/visit/updateVisitStatus",
   CHECK_VISIT_AVAILABLE: "/visit/customerCheckForMobile",
+  GET_CP_PROPERTY_FOR_SM: "/property/getCpPropertySM",
   ADD_VISITOR_: "/visit/addVisit",
   EDIT_VISITOR_: "/visit/editVisit",
   GET_USERVISTLIST: '/visit/getUserVisitList',
@@ -170,6 +172,7 @@ export default {
 
   // JW
   GET_INVENTORY_JW: "inventory/fetch_record_details",
+  CP_REGISTOR_JW: "cp/fetch_channel_partner_id",
   
   // Report
   GET_CM_REPORT : '/authreport/getCMreport',

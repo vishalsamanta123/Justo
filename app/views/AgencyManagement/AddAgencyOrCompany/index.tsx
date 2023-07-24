@@ -112,7 +112,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
     norera_register: null,
     setprimary_mobile: "",
     setemail: "",
-
+    rera_registration: ""
   });
 
   const [imagePicker, setImagePicker] = useState(false);

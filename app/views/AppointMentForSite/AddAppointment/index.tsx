@@ -36,7 +36,8 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
     number_of_guest: '',
     property_title: '',
     first_name: '',
-    update_type: ''
+    update_type: '',
+    remark: ''
   })
   useEffect(() => {
     if (type === 'edit' || type === 'reSheduled') {
@@ -103,7 +104,8 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
         number_of_guest: '',
         property_title: '',
         first_name: '',
-        update_type: ''
+        update_type: '',
+        remark: ''
       })
     }
   }, [editAppointmentData])
@@ -216,6 +218,7 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
         pickup_latitude: response?.data[0]?.pickup_latitude,
         pickup_longitude: response?.data[0]?.pickup_longitude,
         number_of_guest: response?.data[0]?.number_of_guest,
+        remark: response?.data[0]?.remark,
       })
       if (response?.data[0]?.property_id === "") {
         setPropertyStatus(false)
@@ -232,7 +235,8 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
         pickup: "No",
         type: response?.data[0]?.type,
         checkin_status: response?.data[0]?.checkin_status,
-        update_type: 1
+        update_type: 1,
+        remark: response?.data[0]?.remark,
       })
       if (response?.data[0]?.property_id === "") {
         setPropertyStatus(false)
@@ -266,6 +270,7 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
       type: 1,
       drop_off_location: appointMentForm?.pickup_address,
       update_type: appointMentForm?.update_type,
+      remark: appointMentForm?.remark,
       visit_status: strings.warm
       // visit_status: appointMentForm?.visit_status
     }

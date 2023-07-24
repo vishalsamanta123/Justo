@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { normalizeSpacing, normalize, normalizeHeight } from "../../../../components/scaleFontSize";
-import { BLACK_COLOR, FONT_FAMILY_SEMIBOLD, GRAY_LIGHT_COLOR, PRIMARY_THEME_COLOR, WHITE_COLOR } from "../../../../components/utilities/constant";
+import { BLACK_COLOR, FONT_FAMILY_MEDIUM, FONT_FAMILY_SEMIBOLD, GRAY_LIGHT_COLOR, PRIMARY_THEME_COLOR, WHITE_COLOR } from "../../../../components/utilities/constant";
 
 const styles = StyleSheet.create({
   headerStyle: {
@@ -125,7 +125,14 @@ const styles = StyleSheet.create({
   bottomContentView:{
     flexDirection: 'row',
     // width: '80%',
-  }
+  },
+  titleTxt: {
+    fontSize: normalize(16),
+    color: PRIMARY_THEME_COLOR,
+    fontFamily: FONT_FAMILY_MEDIUM,
+    marginLeft: 5,
+    marginVertical: normalize(8),
+  },
 })
 
 export default styles

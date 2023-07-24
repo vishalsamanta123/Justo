@@ -1,4 +1,4 @@
-import { AGENT_LIST, AGENT_STATUSUPDATE, ADD_AGENT, ADD_AGENT_FORM, GET_AGENT_DETAIL, EDIT_AGENT, CHECK_EMAIL_MOBILE, REMOVE_EMAIL_NUMBER_CHECK } from "../types";
+import { AGENT_LIST, AGENT_STATUSUPDATE, ADD_AGENT, ADD_AGENT_FORM, GET_AGENT_DETAIL, EDIT_AGENT, CHECK_EMAIL_MOBILE, REMOVE_EMAIL_NUMBER_CHECK, REMOVE_AGENT } from "../types";
 
 const initialState = {
   response: null,
@@ -8,6 +8,11 @@ const initialState = {
 const initialStateForm = {
   response: null,
   update: false,
+};
+const initialEditState = {
+  response: null,
+  detail: false,
+  create: false,
 };
 
 export function agentReducer(state = initialState, action: any) {
@@ -82,6 +87,20 @@ export function addAgentReducer(state = initialStateForm, action: any) {
         update: false,
         response: action.payload,
       };
+      case ADD_AGENT:
+      return {
+        ...state,
+        detail: false,
+        create: true,
+        response: action.payload,
+      };
+    case REMOVE_AGENT:
+      return {
+        ...state,
+        detail: false,
+        create: false,
+        response: action.payload,
+      };
     // case PROPERTY_FORM_UPDATE:
     //   return {
     //     ...state,
@@ -89,6 +108,24 @@ export function addAgentReducer(state = initialStateForm, action: any) {
     //     response: action.payload,
     //   };
 
+    default:
+      return state;
+  }
+}
+export function editAgentReducer(state = initialEditState, action: any) {
+  switch (action.type) {
+    case EDIT_AGENT:
+      return {
+        ...state,
+        update: true,
+        response: action.payload,
+      };
+    case REMOVE_AGENT:
+      return {
+        ...state,
+        update: false,
+        response: action.payload,
+      };
     default:
       return state;
   }

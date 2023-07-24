@@ -40,7 +40,6 @@ const PropertyDetailItem = (props: any) => {
     props?.items?.declaration_letter_of_company?.substring(
       props?.items?.declaration_letter_of_company?.lastIndexOf(".") + 1
     );
-    console.log("🚀 ~ file: AgentDetailInfo.tsx:565 ~ props?.items?.base_url + props.items.pancard:", props?.items?.base_url + props.items.pancard)
 
   const OpenDoc = async (url: any) => {
     function getUrlExtension(url: any) {
@@ -226,7 +225,7 @@ const PropertyDetailItem = (props: any) => {
           ) : <Text style={styles.nameTxt}>{strings.notfount}</Text>}
         </View>
       </View>
-      {item?.cp_type === 2 ? <View style={styles.Txtview}>
+      {/* {item?.cp_type === 2 ? <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>
             {"Employees"}
@@ -238,7 +237,7 @@ const PropertyDetailItem = (props: any) => {
         <TouchableOpacity style={styles.nameContainer} onPress={() => {navigation.navigate('EmployeeListing', {ID: item?.cp_id})}}>
           <Text style={[styles.nameTxt, {color: PRIMARY_THEME_COLOR}]}>{"See All Employees"}</Text>
         </TouchableOpacity>
-      </View> : null}
+      </View> : null} */}
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>{strings.location} </Text>
