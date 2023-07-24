@@ -254,6 +254,22 @@ const AddAppointmentItem = (props: any) => {
             }
           />
         </View>
+        <View style={{}}>
+          <Text style={styles.titleTxt}>{strings.comment}</Text>
+          <InputField
+            placeholderText={strings.comment}
+            handleInputBtnPress={() => {}}
+            inputheight={80}
+            multiline={true}
+            valueshow={props?.appointMentForm?.remark}
+            onChangeText={(val: any) => {
+              props.setAppointMentForm({
+                ...props.appointMentForm,
+                remark: val,
+              });
+            }}
+          />
+        </View>
         {/* <View style={styles.inputWrap}>
           <Text style={styles.genderTxt}>{strings.pickupAppointment}</Text>
         </View>

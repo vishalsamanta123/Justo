@@ -80,6 +80,7 @@ export default {
   TRANSFER_VISIT: "/channelPartner/transferVisitAgent",
   GET_CP_ACTIVE_LEAD: "/channelPartner/getCpActiveLead",
   ADD_TARGET_FOR_CP: '/channelPartner/addTargetForChannelPartner',
+  UPDATE_CP_PROPERTY_SM: '/channelPartner/updateCppropertySM',
 
   // Appointment
   GET_APPOINTMENT_LIST: '/appointment/getAppointmentList',

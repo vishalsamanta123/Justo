@@ -9,7 +9,7 @@ import images from "../../../../assets/images";
 import strings from "../../../../components/utilities/Localization";
 import ConfirmModal from "../../../../components/Modals/ConfirmModal";
 import FilterModal from "./EmployeeFilterModel";
-import { PRIMARY_THEME_COLOR_DARK } from "../../../../components/utilities/constant";
+import { PRIMARY_THEME_COLOR_DARK, PURPLE_COLOR } from "../../../../components/utilities/constant";
 
 import {
   BLACK_COLOR,
@@ -21,6 +21,7 @@ import EmptyListScreen from "app/components/CommonScreen/EmptyListScreen";
 import { useSelector } from "react-redux";
 import { normalizeWidth } from "app/components/scaleFontSize";
 import usePermission from "app/components/utilities/UserPermissions";
+import Button from "app/components/Button";
 
 const EmployeeView = (props: any) => {
   const loadingref = false;
@@ -47,8 +48,6 @@ const EmployeeView = (props: any) => {
     setFilterisVisible(false);
     props.getAgencyList(0, {});
   };
-  console.log("🚀 ~ file: EmployeeView.tsx:70 ~ props?.agentList:", props?.agentList)
-
 
   return (
     <View style={styles.mainContainer}>
@@ -61,15 +60,31 @@ const EmployeeView = (props: any) => {
         leftImageIconStyle={styles.leftImageIconStyle}
         handleOnLeftIconPress={props.handleBackPress}
         statusBarColor={PRIMARY_THEME_COLOR}
-        barStyle={'light-content'}
+        barStyle={"light-content"}
       />
       <View style={styles.propertyListView}>
-        <View style={styles.btnView}>
+        <View
+          style={{
+            marginVertical: 10,
+            flexDirection: "row",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Button
+            height={30}
+            width={150}
+            buttonText={strings.addEmployee}
+            handleBtnPress={() => props.onAddEmployeeButtonPress({}, "add")}
+          />
+        </View>
+        <View style={[styles.btnView, {marginBottom: 50}]}>
           <View style={styles.propertyListViewsec}>
             <FlatList
               showsVerticalScrollIndicator={false}
               data={Array.isArray(props?.agentList) ? props?.agentList : []}
-              ListEmptyComponent={<EmptyListScreen message={strings.employee} />}
+              ListEmptyComponent={
+                <EmptyListScreen message={strings.employee} />
+              }
               renderItem={({ item }) => (
                 <AgencyListItem
                   items={item}

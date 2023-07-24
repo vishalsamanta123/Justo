@@ -22,9 +22,11 @@ import {
 } from "../types";
 
 export const getAllAgentList = (params: any) => async (dispatch: any) => {
+  console.log("🚀 ~ file: AgencyActions.tsx:25 ~ params:", params)
   dispatch({ type: START_LOADING });
   try {
     const res = await apiCall("post", apiEndPoints.AGENTLIST, params);
+    console.log("🚀 ~ file: AgencyActions.tsx:29 ~ res.data:", res.data)
     if (res.data.status == 200) {
       dispatch({
         type: AGENT_LIST,

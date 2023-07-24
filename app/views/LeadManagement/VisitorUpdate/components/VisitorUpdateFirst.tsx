@@ -48,14 +48,7 @@ const VisitorUpdateView = (props: any) => {
       ? obj.title === "Channel Partner"
       : obj.title !== ""
   );
-  console.log(
-    "🚀 ~ file: VisitorUpdateFirst.tsx:228 ~ props?.updateForm?.lead_source_id:",
-    props?.updateForm?.lead_source_id
-  );
-  console.log(
-    "🚀 ~ file: VisitorUpdateFirst.tsx:228 ~ props?.updateForm?.lead_source_id:",
-    props?.updateForm?.lead_source
-  );
+  console.log("🚀 ~ file: VisitorUpdateFirst.tsx:192 ~  ", (userData?.data?.role_id === ROLE_IDS.closingtl_id || userData?.data?.role_id === ROLE_IDS.closingmanager_id))
 
   return (
     <View style={styles.mainContainer}>
@@ -139,6 +132,10 @@ const VisitorUpdateView = (props: any) => {
           <InputField
             disableSpecialCharacters={true}
             placeholderText={"Name"}
+            editable={
+              (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                  userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? false : true
+            }
             handleInputBtnPress={() => {}}
             onChangeText={(text: any) => {
               props.setUpdateForm({
@@ -185,6 +182,10 @@ const VisitorUpdateView = (props: any) => {
               props.updateForm?.lead_source
                 ? props.updateForm?.lead_source
                 : "Lead Source"
+            }
+            disable={
+              (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                  userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
             }
             data={
               leadsourcefilteredData?.length > 0 &&
@@ -243,6 +244,10 @@ const VisitorUpdateView = (props: any) => {
                 placeholder={"Select Channel Partner type"}
                 data={CpType}
                 require
+                disable={
+                  (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                      userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+                }
                 inputWidth={"100%"}
                 paddingLeft={Isios ? 6 : 10}
                 maxHeight={300}
@@ -283,6 +288,10 @@ const VisitorUpdateView = (props: any) => {
                   data={props?.dropdownAgentList}
                   inputWidth={"100%"}
                   require
+                  disable={
+                    (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                        userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+                  }
                   paddingLeft={Isios ? 6 : 10}
                   maxHeight={300}
                   labelField="agent_name"
@@ -320,6 +329,10 @@ const VisitorUpdateView = (props: any) => {
                     }
                     data={props.companyList}
                     require
+                    disable={
+                      (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                          userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+                    }
                     inputWidth={"100%"}
                     paddingLeft={Isios ? 6 : 10}
                     maxHeight={300}
@@ -356,6 +369,10 @@ const VisitorUpdateView = (props: any) => {
                       inputWidth={"100%"}
                       paddingLeft={Isios ? 6 : 10}
                       maxHeight={300}
+                      disable={
+                        (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                            userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+                      }
                       labelField="employee_name"
                       valueField={"user_id"}
                       onFocus={() => props.handleEmployeeDropdownPress()}
@@ -385,6 +402,10 @@ const VisitorUpdateView = (props: any) => {
         <View style={styles.inputWrap}>
           <DropdownInput
             require={true}
+            disable={
+              (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                  userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+            }
             headingText={"Property Name"}
             placeholder={
               props.updateForm?.property_title

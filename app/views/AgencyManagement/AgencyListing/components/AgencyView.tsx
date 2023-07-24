@@ -21,6 +21,7 @@ import EmptyListScreen from "app/components/CommonScreen/EmptyListScreen";
 import { useSelector } from "react-redux";
 import { normalizeWidth } from "app/components/scaleFontSize";
 import usePermission from "app/components/utilities/UserPermissions";
+import AddPropertyModel from "app/components/Modals/AddPropertyModel";
 
 const AgencyView = (props: any) => {
   const loadingref = false;
@@ -109,7 +110,7 @@ const AgencyView = (props: any) => {
               </Text>
             </TouchableOpacity>)}
 
-          {approve &&
+          {/* {approve &&
             (<TouchableOpacity
               onPress={() => ShowPendinglist()}
               style={[
@@ -130,7 +131,7 @@ const AgencyView = (props: any) => {
               >
                 {strings.pendingconfirm}
               </Text>
-            </TouchableOpacity>)}
+            </TouchableOpacity>)} */}
         </View>
         {allocate &&
           (<View style={styles.btnView1}>
@@ -197,6 +198,9 @@ const AgencyView = (props: any) => {
                 onPressView={props.onPressView}
                 setChangeStatus={props.setChangeStatus}
                 setNewVisitor={setNewVisitor}
+                openAllocatePropertyModal={props.openAllocatePropertyModal}
+                onAddEmployeeButtonPress={props.onAddEmployeeButtonPress}
+                onPressSeeEmployee={props.onPressSeeEmployee}
               />
             )}
             onEndReached={() => {
@@ -241,6 +245,16 @@ const AgencyView = (props: any) => {
         filterData={props.filterData}
         Visible={FilterisVisible}
         setIsVisible={setFilterisVisible}
+      />
+      <AddPropertyModel
+        isVisible={props.isPropertyVisible}
+        setIsVisible={props.setIsPropertyVisible}
+        handleSearch={props.handleSearch}
+        finalPropertyList={props.finalPropertyList}
+        handleSelects={props.handleSelects}
+        handleDelete={props.handleDelete}
+        selectedProperty={props.selectedProperty}
+        handleAllocateProperty={props.handleAllocateProperty}
       />
     </View>
   );

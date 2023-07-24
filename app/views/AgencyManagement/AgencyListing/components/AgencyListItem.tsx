@@ -18,16 +18,33 @@ const AgencyListItem = (props: any) => {
   const { view, edit, status } = usePermission({
     view: "view_channelpartner",
     edit: "edit_channelpartner",
-    status: 'channelpartner_status_update'
+    status: "channelpartner_status_update",
   });
+  
   return (
     <View style={styles.IteamView}>
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>{strings.cpCapital + " " + strings.name} :</Text>
+          <Text style={styles.projectTxt}>
+            {strings.cpCapital + " " + strings.name} :
+          </Text>
         </View>
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>{props?.items.agent_name}</Text>
+        </View>
+      </View>
+      <View style={styles.Txtview}>
+        <View style={styles.projectContainer}>
+          <Text style={styles.projectTxt}>
+            {strings.cpCapital + " " + strings.name} :
+          </Text>
+        </View>
+        <View style={styles.nameContainer}>
+          <Text style={styles.nameTxt}>{props?.items?.cp_type
+                ? `${
+                    props?.items?.cp_type === 2 ? "Company" : "Individual"
+                  }`
+                : strings.notfount}</Text>
         </View>
       </View>
       <View style={styles.Txtview}>
@@ -44,12 +61,14 @@ const AgencyListItem = (props: any) => {
       </View>
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>{strings.RERA + " " + strings.shortNum} :</Text>
+          <Text style={styles.projectTxt}>
+            {strings.RERA + " " + strings.shortNum} :
+          </Text>
         </View>
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props.items.rera_certificate_no === "" ||
-              props.items.rera_certificate_no === undefined
+            props.items.rera_certificate_no === undefined
               ? strings.notfount
               : props.items.rera_certificate_no}
           </Text>
@@ -62,7 +81,7 @@ const AgencyListItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props.items.total_visit === "" ||
-              props.items.total_visit === undefined
+            props.items.total_visit === undefined
               ? strings.notfount
               : props.items.total_visit}
           </Text>
@@ -75,7 +94,7 @@ const AgencyListItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props.items.total_site_visit === "" ||
-              props.items.total_site_visit === undefined
+            props.items.total_site_visit === undefined
               ? strings.notfount
               : props.items.total_site_visit}
           </Text>
@@ -88,7 +107,7 @@ const AgencyListItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props.items.total_closing_lead === "" ||
-              props.items.total_closing_lead === undefined
+            props.items.total_closing_lead === undefined
               ? strings.notfount
               : props.items.total_closing_lead}
           </Text>
@@ -112,8 +131,8 @@ const AgencyListItem = (props: any) => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        {edit &&
-          (<Button
+        {edit && (
+          <Button
             width={78}
             height={30}
             bgcolor={WHITE_COLOR}
@@ -124,9 +143,10 @@ const AgencyListItem = (props: any) => {
             btnTxtsize={14}
             border={10}
             handleBtnPress={() => props.onPressView(props.items, "edit")}
-          />)}
-        {status &&
-          (<Button
+          />
+        )}
+        {/* {status && (
+          <Button
             width={78}
             height={30}
             bgcolor={WHITE_COLOR}
@@ -147,14 +167,42 @@ const AgencyListItem = (props: any) => {
                 props?.setChangeStatus(props.items);
               }
             }}
-          />)}
-        {view &&
-          (<TouchableOpacity
+          />
+        )} */}
+        {view && (
+          <TouchableOpacity
             style={styles.Viewbutton}
             onPress={() => props.onPressView(props.items, "view")}
           >
             <Image source={images.forwardArrow} style={styles.arrow} />
-          </TouchableOpacity>)}
+          </TouchableOpacity>
+        )}
+      </View>
+      <View style={{alignItems: 'flex-start', marginBottom: 10, flexDirection: 'row'}}>
+        <Button
+          width={130}
+          height={30}
+          bgcolor={WHITE_COLOR}
+          bordercolor={PURPLE_COLOR}
+          borderWidth={1}
+          btnTxtcolor={PURPLE_COLOR}
+          buttonText={strings.allocateProperty}
+          btnTxtsize={14}
+          border={10}
+          handleBtnPress={() => props.openAllocatePropertyModal(props.items?._id)}
+        />
+        {props?.items?.cp_type === 2 ? <Button
+          width={120}
+          height={30}
+          bgcolor={WHITE_COLOR}
+          bordercolor={PURPLE_COLOR}
+          borderWidth={1}
+          btnTxtcolor={PURPLE_COLOR}
+          buttonText={"See Employees"}
+          btnTxtsize={14}
+          border={10}
+          handleBtnPress={() => props.onPressSeeEmployee(props.items?._id)}
+        /> : null}
       </View>
     </View>
   );

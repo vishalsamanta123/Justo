@@ -15,11 +15,9 @@ const EmployeeListing = ({ navigation, route }: any) => {
   const { ID } = route?.params || {};
   const { response = {}, list = false } =
     useSelector((state: any) => state.agentData) || [];
-  console.log("🚀 ~ file: index.tsx:18 ~ response:", response);
   const statusUpdate = useSelector((state: any) => state.agencyStatus) || {};
   const { userData = {} } = useSelector((state: any) => state.userData) || [];
   const moreData = response?.total_data || 0;
-  console.log("🚀 ~ file: index.tsx:22 ~ moreData:", moreData)
   const [agentList, setAgentList] = useState<any>([]);
   const [offSET, setOffset] = useState(0);
   const [filterData, setFilterData] = useState({
@@ -42,7 +40,7 @@ const EmployeeListing = ({ navigation, route }: any) => {
 
   useEffect(() => {
     if (response?.status === 200) {
-      if(offSET === 0) {
+      if (offSET === 0) {
         setAgentList(response?.data);
       } else {
         setAgentList([...agentList, ...response?.data]);
@@ -54,7 +52,6 @@ const EmployeeListing = ({ navigation, route }: any) => {
 
   const getAgencyList = (offset: any, filterData: any) => {
     setOffset(offset);
-    console.log("🚀 ~ file: index.tsx:58 ~ ID:", ID)
     dispatch(
       getAllAgentList({
         user_type: 2,
@@ -69,15 +66,14 @@ const EmployeeListing = ({ navigation, route }: any) => {
   const handleBackPress = () => {
     navigation.goBack();
   };
-  // const onPressView = (data: any, type: any) => {
-  //   if (type === "edit") {
-  //     navigation.navigate("AddnewAgency", { type, data });
-  //   } else {
-  //     if (type === "view") {
-  //       navigation.navigate("AgencyDetails", { data });
-  //     }
-  //   }
-  // };
+  const onAddEmployeeButtonPress = (data: any, type: any) => {
+    navigation.navigate("AddEmployee", { data, type, ID: ID });
+  };
+  const onPressView = (data: any, type: any) => {
+    if (type === "edit") {
+      navigation.navigate("AddEmployee", { type, data });
+    }
+  };
 
   const Onreachedend = (offSet: any) => {
     setOffset(offSet);
@@ -109,7 +105,8 @@ const EmployeeListing = ({ navigation, route }: any) => {
       getAgencyList={getAgencyList}
       setOffset={setOffset}
       setAgentList={setAgentList}
-      // onPressView={onPressView}
+      onPressView={onPressView}
+      onAddEmployeeButtonPress={onAddEmployeeButtonPress}
     />
   );
 };

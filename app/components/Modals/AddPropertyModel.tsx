@@ -29,6 +29,19 @@ const AddPropertyModel = (props: any) => {
     //   });
     //   props.setSelectedLoginIdCp(ordersData);
   }, [props.selectedCp]);
+
+  function checkActiveStatus(propertyId: any) {
+    const property = props?.selectedProperty.find(
+      (item: any) => item.property_id === propertyId
+    );
+    return property ? property.active_status : false;
+  }
+  function checkCpproperty(propertyId: any) {
+    const property = props.finalPropertyList.find(
+      (item: any) => item.property_id === propertyId
+    );
+    return property ? true : false;
+  }
   return (
     <Modal isVisible={props.isVisible}>
       {/* <ScrollView
@@ -51,23 +64,26 @@ const AddPropertyModel = (props: any) => {
             {props?.selectedProperty?.length > 0 ? (
               <>
                 {props?.selectedProperty?.map((item: any, index: any) => {
-                  return (
-                    <View
-                      style={[
-                        styles.innerBoxVw,
-                        { justifyContent: "flex-start" },
-                      ]}
-                    >
-                      <Text style={styles.userNameTxt}>
-                        {item.property_title}
-                      </Text>
-                      <TouchableOpacity
-                        onPress={() => props.handleDelete(item, index)}
+                  const getSelectedbycp = checkCpproperty(item?.property_id);
+                  return item.active_status && getSelectedbycp ? (
+                    <>
+                      <View
+                        style={[
+                          styles.innerBoxVw,
+                          { justifyContent: "flex-start" },
+                        ]}
                       >
-                        <Image source={images.close} style={styles.crossVw} />
-                      </TouchableOpacity>
-                    </View>
-                  );
+                        <Text style={styles.userNameTxt}>
+                          {item.property_title}
+                        </Text>
+                        <TouchableOpacity
+                          onPress={() => props.handleDelete(item, index)}
+                        >
+                          <Image source={images.close} style={styles.crossVw} />
+                        </TouchableOpacity>
+                      </View>
+                    </>
+                  ) : null;
                 })}
               </>
             ) : (
@@ -89,12 +105,13 @@ const AddPropertyModel = (props: any) => {
             data={props.finalPropertyList}
             // data={response?.data}
             renderItem={({ item, index }: any) => {
-              const getSelected =
+              /* const getSelected =
                 props?.selectedProperty?.length === 0
                   ? ""
                   : props?.selectedProperty?.map(
                       ({ property_title }: any) => property_title
-                    );
+                    ); */
+              const getSelected = checkActiveStatus(item?.property_id);
               return (
                 <View style={styles.innerBoxVwlist}>
                   <Text style={styles.innerBoxVwlistfont}>
@@ -102,19 +119,13 @@ const AddPropertyModel = (props: any) => {
                   </Text>
                   <TouchableOpacity
                     onPress={() =>
-                      !getSelected?.toString()?.includes(item.property_title)
-                        ? props.handleSelects(item)
-                        : console.log("")
+                      !getSelected ? props.handleSelects(item) : console.log("")
                     }
                     style={styles.checkBoxVw}
                   >
                     <Image
                       style={styles.checksVw}
-                      source={
-                        getSelected?.toString()?.includes(item.property_title)
-                          ? images.check
-                          : null
-                      }
+                      source={getSelected ? images.check : null}
                     />
                   </TouchableOpacity>
                 </View>

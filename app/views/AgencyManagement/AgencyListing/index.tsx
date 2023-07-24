@@ -1,6 +1,6 @@
 import { useFocusEffect } from "@react-navigation/native";
 import ErrorMessage from "app/components/ErrorMessage";
-import { GREEN_COLOR } from "app/components/utilities/constant";
+import { GREEN_COLOR, RED_COLOR } from "app/components/utilities/constant";
 import { getAllAgentList } from "app/Redux/Actions/AgencyActions";
 import {
   getAssignCPList,
@@ -11,14 +11,26 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AgencyView from "./components/AgencyView";
 import { transferVisitList } from "app/Redux/Actions/TransferVisitAction";
+import { getAllProperty } from "app/Redux/Actions/propertyActions";
+import apiEndPoints from "app/components/utilities/apiEndPoints";
+import { START_LOADING, STOP_LOADING } from "app/Redux/types";
+import { apiCall } from "app/components/utilities/httpClient";
 
 const AgencyListing = ({ navigation, route }: any) => {
-  const { type } = route?.params || {}
+  const { type } = route?.params || {};
   const { response = {}, list = false } =
     useSelector((state: any) => state.agentData) || [];
   const statusUpdate = useSelector((state: any) => state.agencyStatus) || {};
   const SmCpList = useSelector((state: any) => state.SourcingManager) || [];
   const { userData = {} } = useSelector((state: any) => state.userData) || [];
+  const propertyData = useSelector((state: any) => state.propertyData) || {};
+  const [propertyList, setPropertyList] = useState<any>([]);
+  const [selectedProperty, setSelectedProperty] = useState<any>([]);
+  const [selectedPropertyIds, setSelectedPropertyIds] = useState<any>([]);
+  const [finalPropertyList, setFinalPropertyList] = useState<any>([]);
+  const [isPropertyVisible, setIsPropertyVisible] = useState(false);
+
+  const [CP_ID, setCP_ID] = useState("");
   const moreData = response?.total_data || 0;
   const [agentList, setAgentList] = useState<any>([]);
   const [offSET, setOffset] = useState(0);
@@ -34,15 +46,15 @@ const AgencyListing = ({ navigation, route }: any) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      setAgentList([])
-      if (type === 'active') {
+      setAgentList([]);
+      if (type === "active") {
         getAgencyList(0, {
-          status: ""
+          status: "",
         });
       } else {
         getAgencyList(0, {});
       }
-      return () => { };
+      return () => {};
     }, [navigation, statusUpdate, type])
   );
 
@@ -64,7 +76,10 @@ const AgencyListing = ({ navigation, route }: any) => {
         enddate: filterData.enddate,
         search_by_name: filterData.search_by_name,
         search_by_location: filterData.search_by_location,
-        status: filterData?.status || filterData?.status === false ? filterData?.status : '',
+        status:
+          filterData?.status || filterData?.status === false
+            ? filterData?.status
+            : "",
       })
     );
   };
@@ -80,6 +95,136 @@ const AgencyListing = ({ navigation, route }: any) => {
   }, [statusUpdate]);
   const handleDrawerPress = () => {
     navigation.toggleDrawer();
+  };
+  useEffect(() => {
+    if (propertyData?.response) {
+      const { response, loading, list } = propertyData;
+      if (response?.status === 200 && response?.data?.length > 0) {
+        setPropertyList(
+          response?.data?.filter((el: any) => el?.status === true)
+        );
+        setFinalPropertyList(
+          response?.data?.filter((el: any) => el?.status === true)
+        );
+      } else {
+        setPropertyList([]);
+      }
+    }
+  }, [propertyData, selectedProperty]);
+
+  const handleSearch = (searchKey: any) => {
+    if (searchKey !== "") {
+      const lowerCased = searchKey?.toLowerCase();
+      const searchArray = [...propertyList];
+      const list = searchArray?.filter((item) => {
+        return item?.property_title?.toLowerCase()?.match(lowerCased);
+      });
+      setFinalPropertyList(list);
+    } else {
+      setFinalPropertyList(propertyList);
+    }
+  };
+
+  const handleSelects = (items: any) => {
+    var array: any[] = [...selectedProperty];
+    var newarr = {
+      property_id: items.property_id,
+      active_status: true,
+      _id: items._id,
+      property_title: items.property_title,
+      //"property_type": items.active_status,
+    };
+    const index = array.findIndex(
+      (el: any) => el.property_id === newarr.property_id
+    );
+    if (index > 0) {
+      array[index].active_status = true;
+    } else {
+      array.push(newarr);
+    }
+    setSelectedProperty(array);
+  };
+  const handleDelete = (items: any, index: any) => {
+    var arrays: any[] = [...selectedProperty];
+    // arrays?.splice(index, 1);
+    arrays[index].active_status = false;
+    setSelectedProperty(arrays);
+  };
+  const handleAllocateProperty = async () => {
+    const arr: any = selectedProperty.map((prop: any) => prop?.property_id);
+    setSelectedPropertyIds(arr);
+    const params = {
+      cp_id: CP_ID,
+      property_tag: JSON.stringify(selectedProperty),
+    };
+    const res = await apiCall(
+      "post",
+      apiEndPoints.UPDATE_CP_PROPERTY_SM,
+      params
+    );
+    const response: any = res?.data;
+    if (response?.status === 200) {
+      dispatch({ type: STOP_LOADING });
+      setIsPropertyVisible(false);
+      ErrorMessage({
+        msg: response?.message,
+        backgroundColor: GREEN_COLOR,
+      });
+    } else {
+      dispatch({ type: STOP_LOADING });
+      ErrorMessage({
+        msg: response?.message,
+        backgroundColor: RED_COLOR,
+      });
+    }
+  };
+  const openAllocatePropertyModal = async (id: any) => {
+    dispatch(
+      getAllProperty({
+        // offset: 0,
+        // limit: 100,
+        // start_date: data?.start_date ? data?.start_date : '',
+        // end_date: data?.end_date ? data?.end_date : '',
+        // location: data?.location ? data?.location : '',
+        // property_name: data?.property_name ? data?.property_name : '',
+        // property_type: data?.property_type ? data?.property_type : '',
+      })
+    );
+    dispatch({ type: START_LOADING });
+    setIsPropertyVisible(true);
+    setCP_ID(id);
+    const params = {
+      cp_id: id,
+    };
+    const res = await apiCall(
+      "post",
+      apiEndPoints.GET_CP_PROPERTY_FOR_SM,
+      params
+    );
+    const response: any = res?.data;
+    if (response?.status === 200) {
+      if (response?.data?.length > 0) {
+        dispatch({ type: STOP_LOADING });
+        //setPropertyList(response?.data);
+        setSelectedProperty(response?.data);
+        // setFinalPropertyList(response?.data);
+        setIsPropertyVisible(true);
+      } else {
+        dispatch({ type: STOP_LOADING });
+        setPropertyList([]);
+        setIsPropertyVisible(true);
+        // setFinalPropertyList([]);
+      }
+    } else {
+      dispatch({ type: STOP_LOADING });
+      // ErrorMessage({
+      //   msg: response?.message,
+      //   backgroundColor: RED_COLOR,
+      // });
+      setPropertyList([]);
+      // setFinalPropertyList([]);
+    }
+    // setIsPropertyVisible(true);
   };
   const handleStatusChange = (item: any) => {
     dispatch(
@@ -98,10 +243,15 @@ const AgencyListing = ({ navigation, route }: any) => {
       }
     }
   };
+  const onPressSeeEmployee = (data: any) => {
+    navigation.navigate('EmployeeListing', {ID: data})
+  };
   const onPressDeactivates = (data: any, type: any) => {
-    dispatch(transferVisitList({
-      user_id: data?._id
-    }));
+    dispatch(
+      transferVisitList({
+        user_id: data?._id,
+      })
+    );
     getAgencyList(0, {});
     // navigation.navigate("DeactiveAgency", { data });
   };
@@ -138,6 +288,16 @@ const AgencyListing = ({ navigation, route }: any) => {
       setOffset={setOffset}
       setAgentList={setAgentList}
       onPressDeactivates={onPressDeactivates}
+      isPropertyVisible={isPropertyVisible}
+      setIsPropertyVisible={setIsPropertyVisible}
+      handleSearch={handleSearch}
+      finalPropertyList={finalPropertyList}
+      handleSelects={handleSelects}
+      handleDelete={handleDelete}
+      selectedProperty={selectedProperty}
+      handleAllocateProperty={handleAllocateProperty}
+      openAllocatePropertyModal={openAllocatePropertyModal}
+      onPressSeeEmployee={onPressSeeEmployee}
     />
   );
 };
