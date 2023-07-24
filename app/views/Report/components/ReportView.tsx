@@ -45,7 +45,6 @@ const ReportView = (props: any) => {
           statusBarColor={PRIMARY_THEME_COLOR}
           barStyle={"light-content"}
         />
-          {console.log("🚀 ~ file: ReportView.tsx:55 ~ ReportView ~ roleId === ROLE_IDS.closingtl_id:", roleId , ROLE_IDS.closingtl_id)}
         {roleId === ROLE_IDS.sourcingmanager_id ? (
           <SMReportTable data={reportData} />
         ) : roleId === ROLE_IDS.closingmanager_id ? (
