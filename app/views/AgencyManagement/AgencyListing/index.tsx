@@ -135,9 +135,9 @@ const AgencyListing = ({ navigation, route }: any) => {
       //"property_type": items.active_status,
     };
     const index = array.findIndex(
-      (el: any) => el.property_id === newarr.property_id
+      (el: any) => el.property_id === items.property_id
     );
-    if (index > 0) {
+    if (index > -1) {
       array[index].active_status = true;
     } else {
       array.push(newarr);

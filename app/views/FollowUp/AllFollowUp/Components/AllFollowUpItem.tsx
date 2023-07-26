@@ -5,7 +5,6 @@ import { DATE_TIME_FORMAT, WHITE_COLOR } from '../../../../components/utilities/
 import moment from 'moment'
 
 const AllFollowUpItem = (props: any) => {
-    console.log("🚀 ~ file: AllFollowUpItem.tsx:18 ~ props.items:", props.items)
 
     return (
         <ScrollView>

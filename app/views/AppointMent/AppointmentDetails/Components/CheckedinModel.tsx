@@ -13,34 +13,42 @@ import { GREEN_COLOR } from "app/components/utilities/constant";
 import { getAppointmentDetail } from "app/Redux/Actions/AppointmentWithCpActions";
 
 const CheckedinModel = (props: any) => {
+    const {getDetail} = props
     const dispatch: any = useDispatch()
     const { response = {} } = useSelector((state: any) => state.masterRemove);
 
-
+   
     const handleQrScan = () => {
         dispatch(
             cpAppointmentCheckIn({
                 appointment_id: props.data?._id,
+               
             })
         );
        /*  dispatch(getAppointmentDetail({
             appointment_id: props?.data?._id
           })) */
           props.setIsVisible(false)  
+          
     };
     useEffect(() => {
         if (response?.status === 200) {
-            dispatch(getAppointmentDetail({
+           /*  dispatch(getAppointmentDetail({
                 appointment_id: props?.data?._id
-            }))
+            })) */
+            getDetail()
+
             dispatch(removeMasters())
             props.setIsVisible(false)
         } else if (response?.status === 201) {
             dispatch(removeMasters())
             props.setIsVisible(false)
-            dispatch(getAppointmentDetail({
+            /* dispatch(getAppointmentDetail({
                 appointment_id: props?.data?._id
-            }))
+            })) */
+
+            getDetail()
+            
             Alert.alert('Alert', response?.message)
         }
     }, [response])

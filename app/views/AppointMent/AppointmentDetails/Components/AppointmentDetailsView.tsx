@@ -16,7 +16,7 @@ import { Isios } from "app/components/utilities/constant";
 import JustForOkModal from "app/components/Modals/JustForOkModal";
 
 const AppointmentDetailsView = (props: any) => {
-  const { detailsData } = props;
+  const { detailsData,getDetail } = props;
   const getLoginType = useSelector((state: any) => state.login);
   const { userData = {} } = useSelector((state: any) => state.userData) || [];
   const insets = useSafeAreaInsets();
@@ -219,6 +219,7 @@ const AppointmentDetailsView = (props: any) => {
         Visible={CpChecking}
         setIsVisible={() => setCpChecking(false)}
         data={data}
+        getDetail={getDetail}
       />
       {/* Cancel Booking Model */}
       <CancelModal

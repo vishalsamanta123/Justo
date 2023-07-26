@@ -192,6 +192,7 @@ const AppointmentDetails = ({ navigation, route }: any) => {
       errorMessage={errorMessage}
       setOkIsVisible={setOkIsVisible}
       detailsData={detailsData}
+      getDetail={getDetail}
     />
   );
 };

@@ -153,7 +153,6 @@ const App = () => {
   useEffect(() => {
     requestUserPermission();
     const unsubscribe = messaging().onMessage(async (remoteMessage: any) => {
-      console.log("A new FCM message arrived!", JSON.stringify(remoteMessage));
       if (remoteMessage.notification.title !== "") {
         onDisplayNotification(
           remoteMessage.notification.title,
