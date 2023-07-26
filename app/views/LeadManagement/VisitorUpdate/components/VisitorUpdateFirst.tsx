@@ -587,7 +587,7 @@ const VisitorUpdateView = (props: any) => {
           />
         </View>
         <View style={[styles.inputWrap, { marginBottom: normalize(10) }]}>
-          <InputField
+          {/* <InputField
             inputType={"location"}
             placeholderText={"Location"}
             headingText={"Location"}
@@ -606,7 +606,29 @@ const VisitorUpdateView = (props: any) => {
                 longitude: detail?.geometry?.location?.lng,
               });
             }}
-          />
+          /> */}
+
+<InputField
+              placeholderText={"Location"}
+              handleInputBtnPress={() => {}}
+              onChangeText={(data: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  location: data,
+                });
+              }}
+              valueshow={props?.updateForm?.location}
+              headingText={"Location"}
+              inputType={"location"}
+              onPressSelect={(data: any, detail: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  location: data?.description,
+                  latitude: detail?.geometry?.location?.lat,
+                  longitude: detail?.geometry?.location?.lng,
+                });
+              }}
+            />
         </View>
         <View style={[styles.inputWrap, { marginBottom: normalize(10) }]}>
           <InputField
