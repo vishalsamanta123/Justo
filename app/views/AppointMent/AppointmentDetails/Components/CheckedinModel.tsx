@@ -23,9 +23,10 @@ const CheckedinModel = (props: any) => {
                 appointment_id: props.data?._id,
             })
         );
-        dispatch(getAppointmentDetail({
+       /*  dispatch(getAppointmentDetail({
             appointment_id: props?.data?._id
-          }))
+          })) */
+          props.setIsVisible(false)  
     };
     useEffect(() => {
         if (response?.status === 200) {
@@ -65,7 +66,7 @@ const CheckedinModel = (props: any) => {
                                 width={120}
                                 handleBtnPress={() => {
                                     handleQrScan()
-                                    props.setIsVisible(false)
+                                    
                                 }}
                                 buttonText={strings.yes}
                             />

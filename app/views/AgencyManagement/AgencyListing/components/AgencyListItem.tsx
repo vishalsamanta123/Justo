@@ -145,7 +145,7 @@ const AgencyListItem = (props: any) => {
             handleBtnPress={() => props.onPressView(props.items, "edit")}
           />
         )}
-        {/* {status && (
+         {status && (
           <Button
             width={78}
             height={30}
@@ -168,7 +168,7 @@ const AgencyListItem = (props: any) => {
               }
             }}
           />
-        )} */}
+        )} 
         {view && (
           <TouchableOpacity
             style={styles.Viewbutton}

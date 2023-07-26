@@ -191,7 +191,7 @@ const AgencyListing = ({ navigation, route }: any) => {
       })
     );
     dispatch({ type: START_LOADING });
-    setIsPropertyVisible(true);
+   
     setCP_ID(id);
     const params = {
       cp_id: id,
@@ -203,25 +203,30 @@ const AgencyListing = ({ navigation, route }: any) => {
     );
     const response: any = res?.data;
     if (response?.status === 200) {
+      setIsPropertyVisible(true);
       if (response?.data?.length > 0) {
         dispatch({ type: STOP_LOADING });
         //setPropertyList(response?.data);
         setSelectedProperty(response?.data);
         // setFinalPropertyList(response?.data);
-        setIsPropertyVisible(true);
+        
       } else {
         dispatch({ type: STOP_LOADING });
         setPropertyList([]);
-        setIsPropertyVisible(true);
+        setSelectedProperty([]);
+        
+        
         // setFinalPropertyList([]);
       }
     } else {
+      setIsPropertyVisible(true);
       dispatch({ type: STOP_LOADING });
       // ErrorMessage({
       //   msg: response?.message,
       //   backgroundColor: RED_COLOR,
       // });
-      setPropertyList([]);
+      setSelectedProperty([]);
+     
       // setFinalPropertyList([]);
     }
     // setIsPropertyVisible(true);

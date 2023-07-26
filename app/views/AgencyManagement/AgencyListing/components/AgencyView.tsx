@@ -110,7 +110,7 @@ const AgencyView = (props: any) => {
               </Text>
             </TouchableOpacity>)}
 
-          {/* {approve &&
+          {approve &&
             (<TouchableOpacity
               onPress={() => ShowPendinglist()}
               style={[
@@ -131,7 +131,7 @@ const AgencyView = (props: any) => {
               >
                 {strings.pendingconfirm}
               </Text>
-            </TouchableOpacity>)} */}
+            </TouchableOpacity>)} 
         </View>
         {allocate &&
           (<View style={styles.btnView1}>

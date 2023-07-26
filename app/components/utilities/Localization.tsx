@@ -124,6 +124,7 @@ const strings = new LocalizedStrings({
     //validations
     reasonSelectVal: 'Please select the Reason',
     agentNameReqVal: 'Name of CP is require. Please enter Name of CP',
+    NameCorrectlyVal: 'Please enter Name Correctly',
     ownerNameReqVal: 'Owner Name is require. Please enter Owner Name',
     aadharReqVal: 'Aadhaar No. is require. Please enter Aadhaar No.',
     aadharValidVal: 'Please enter the valid Aadhaar number',

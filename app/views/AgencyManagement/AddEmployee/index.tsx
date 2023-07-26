@@ -62,12 +62,14 @@ const AddEmployee = ({ navigation, route }: any) => {
     ifsc_code: "",
     norera_register: null,
     _id:
-      type === "edit"
-        ? response?.data[0]?._id
+      response?.data?.length > 0
+        ? type === "edit"
           ? response?.data[0]?._id
+            ? response?.data[0]?._id
+            : ""
+          : userData?.response?.data[0]?.login_id
+          ? userData?.response?.data[0]?.login_id
           : ""
-        : userData?.response?.data[0]?.login_id
-        ? userData?.response?.data[0]?.login_id
         : "",
   });
   const [emailMobvalidation, setEmailMobValidation] = useState({
@@ -81,25 +83,27 @@ const AddEmployee = ({ navigation, route }: any) => {
   useEffect(() => {
     const { data = {}, type = "" } = route?.params;
     if (type === "edit") {
-      if (response?.status === 200) {
-        const allDatas = response?.data[0] || {};
-        const bankdata = response?.data[0]?.cp_bank_detail || {};
-        setAgentInfoData({
-          ...response?.data[0],
-          cancel_cheaque: bankdata?.cancel_cheaque,
-          bank_name: bankdata?.bank_name,
-          branch_name: bankdata?.branch_name,
-          account_no: bankdata?.account_no,
-          ifsc_code: bankdata?.ifsc_code,
-          norera_register:
-            handleValues(allDatas?.rera_certificate_no) === false &&
-            handleValues(allDatas?.rera_certificate) === false
-              ? 0
-              : 1,
-          profile_base_url: allDatas?.profile_base_url
-            ? allDatas?.profile_base_url
-            : "",
-        });
+      if (response?.data?.length > 0) {
+        if (response?.status === 200) {
+          const allDatas = response?.data[0] || {};
+          const bankdata = response?.data[0]?.cp_bank_detail || {};
+          setAgentInfoData({
+            ...response?.data[0],
+            cancel_cheaque: bankdata?.cancel_cheaque,
+            bank_name: bankdata?.bank_name,
+            branch_name: bankdata?.branch_name,
+            account_no: bankdata?.account_no,
+            ifsc_code: bankdata?.ifsc_code,
+            norera_register:
+              handleValues(allDatas?.rera_certificate_no) === false &&
+              handleValues(allDatas?.rera_certificate) === false
+                ? 0
+                : 1,
+            profile_base_url: allDatas?.profile_base_url
+              ? allDatas?.profile_base_url
+              : "",
+          });
+        }
       }
     }
   }, [response]);
@@ -169,6 +173,9 @@ const AddEmployee = ({ navigation, route }: any) => {
       if (agent_name === "" || agent_name === undefined) {
         isError = false;
         errorMessage = strings.employeeNameReqVal;
+      } else if (Regexs.oneSpaceRegex.test(agent_name) === false) {
+        isError = false;
+        errorMessage = strings.NameCorrectlyVal;
       }
       // else if (adhar_no === "" || adhar_no === undefined) {
       //   isError = false;
@@ -221,6 +228,16 @@ const AddEmployee = ({ navigation, route }: any) => {
         isError = false;
         errorMessage = strings.genderReqVal;
       }
+      // else if (whatsapp_number === "" || whatsapp_number === undefined) {
+      //   isError = false;
+      //   errorMessage = strings.whatsappNoReqVal;
+      // } else if (
+      //   whatsapp_number !== "" &&
+      //   Regexs.mobilenumRegex.test(whatsapp_number) === false
+      // ) {
+      //   isError = false;
+      //   errorMessage = strings.whatsappNoValidReqVal;
+      // }
       // else if (location === "" || location === undefined) {
       //   isError = false;
       //   errorMessage = strings.addressReqVal;

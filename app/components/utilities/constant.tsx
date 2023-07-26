@@ -40,11 +40,11 @@ export const AMOUNT_TYPE = [{ value: "Cr" }, { value: "L" }, { value: "K" }]
 export const ONE_MONTH_DATES = new Date(new Date().setDate(new Date().getDate() + 31));
 
 // export const  GLOBAL_URL = 'http://192.168.43.177:3000' // virendra 
- export const  GLOBAL_URL = 'http://192.168.1.5:3000' // remi
+//  export const  GLOBAL_URL = 'http://192.168.1.5:3000' // remi
 
 // export const  GLOBAL_URL = 'https://prodapi.justoverse.com:3002' //prod
 // export const GLOBAL_URL = 'https://api.justoverse.com:3000'
-// export const GLOBAL_URL = 'https://itinformatix.org:3044'
+export const GLOBAL_URL = 'https://itinformatix.org:3044'
 // export const  MAP_KEY = 'AIzaSyDdLk5tb75SiJvRk9F2B4almu-sBAi1-EM'
 export const MAP_KEY = 'AIzaSyCbDx7Lk4eTMzptrQKXZvOPYgEMggrq8o4'
 export const JW_LOGIN = 'api'
@@ -82,6 +82,7 @@ export const Regexs = {
   specialCharacters: new RegExp(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/),
   alphaNumeric: new RegExp(/^[A-Za-z0-9\s]*$/),
   gstRegex: new RegExp(/\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}/),
+  oneSpaceRegex: new RegExp(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/),
 }
 
 export const todayDate = {

@@ -179,6 +179,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
       email: null,
     });
     setEmployees([]);
+    setSelectedProperty([]);
   };
   useEffect(() => {
     if (response?.data?.length > 0 && type === "edit") {
@@ -349,6 +350,11 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
             isError = false;
             errorMessage = strings.agentNameReqVal;
           } else if (
+            Regexs.oneSpaceRegex.test(agencyData.owner_name) === false
+          ) {
+            isError = false;
+            errorMessage = strings.NameCorrectlyVal;
+          } else if (
             agencyData.primary_mobile == undefined ||
             agencyData.primary_mobile == ""
           ) {
@@ -393,18 +399,15 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           // ) {
           //   isError = false;
           //   errorMessage = strings.addressReqVal;
-          // } 
+          // }
           // else if (
           //   agencyData.zip == undefined ||
           //   agencyData.zip == ""
           // ) {
           //   isError = false;
           //   errorMessage = strings.correctAddress;
-          // } 
-          else if (
-            agencyData.gender == undefined ||
-            agencyData.gender == ""
-          ) {
+          // }
+          else if (agencyData.gender == undefined || agencyData.gender == "") {
             isError = false;
             errorMessage = strings.genderReqVal;
           } else if (
@@ -439,6 +442,11 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
             isError = false;
             errorMessage = strings.agentNameReqVal;
           } else if (
+            Regexs.oneSpaceRegex.test(agencyData.owner_name) === false
+          ) {
+            isError = false;
+            errorMessage = strings.NameCorrectlyVal;
+          }else if (
             agencyData.primary_mobile == undefined ||
             agencyData.primary_mobile == ""
           ) {
@@ -476,14 +484,14 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           ) {
             isError = false;
             errorMessage = strings.reraCertNoReqVal;
-          } 
+          }
           // else if (
           //   agencyData.location == undefined ||
           //   agencyData.location == ""
           // ) {
           //   isError = false;
           //   errorMessage = strings.addressReqVal;
-          // } 
+          // }
           else if (employees?.length === 0 && type !== "edit") {
             isError = false;
             errorMessage = strings.employeesReqVal;
@@ -555,15 +563,18 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           //   isError = false;
           //   errorMessage = strings.accountNoValidVal;
           // }
-          if (
-            agencyData.account_no !== "" ||
-            agencyData.account_no == undefined
+          // if (
+          //   agencyData.account_no !== "" ||
+          //   agencyData.account_no == undefined
+          // ) {
+          else if (
+            agencyData.account_no !== "" &&
+            Regexs.accountnumRegex.test(agencyData.account_no) === false
           ) {
-            if (Regexs.accountnumRegex.test(agencyData.account_no) === false) {
-              isError = false;
-              errorMessage = strings.accountNoValidVal;
-            }
+            isError = false;
+            errorMessage = strings.accountNoValidVal;
           }
+          // }
           //  else if (
           //   agencyData.ifsc_code == "" ||
           //   agencyData.ifsc_code == undefined
@@ -603,15 +614,20 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           } else if (selectedProperty?.length === 0) {
             isError = false;
             errorMessage = strings.propertyReqVal;
-          } else if (
-            agencyData.account_no !== "" ||
-            agencyData.account_no == undefined
+          }
+          // else if (
+          //   agencyData.account_no !== "" ||
+          //   agencyData.account_no == undefined
+          // ) {
+          else if (
+            agencyData.account_no !== "" &&
+            Regexs.accountnumRegex.test(agencyData.account_no) === false
           ) {
-            if (Regexs.accountnumRegex.test(agencyData.account_no) === false) {
-              isError = false;
-              errorMessage = strings.accountNoValidVal;
-            }
-          } else if (
+            isError = false;
+            errorMessage = strings.accountNoValidVal;
+          }
+          // }
+          else if (
             agencyData.ifsc_code !== "" &&
             Regexs.ifscRegex.test(agencyData.ifsc_code) === false
           ) {

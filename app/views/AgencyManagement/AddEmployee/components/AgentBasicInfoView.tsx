@@ -41,7 +41,8 @@ const AgentBasicInfoView = (props: any) => {
       working_location: array,
     });
   };
-  console.log("🚀 ~ file: AgentBasicInfoView.tsx:71 ~ props?.agentInfoData?.profile_picture:", props?.agentInfoData?.profile_picture)
+
+  console.log("🚀 ~ file: AgentBasicInfoView.tsx:202 ~ props?.agentInfoData?.email:", props?.agentInfoData?.email)
 
 
   const insets = useSafeAreaInsets();
@@ -323,7 +324,7 @@ const AgentBasicInfoView = (props: any) => {
               </Text>
             </View>
           </View>
-          <View style={styles.inputWrap}>
+          {/* <View style={styles.inputWrap}>
             <InputCalender
               // require={true}
               mode={"date"}
@@ -359,9 +360,9 @@ const AgentBasicInfoView = (props: any) => {
                   : ""
               }
             />
-          </View>
+          </View> */}
 
-          <View style={styles.inputWrap}>
+          {/* <View style={styles.inputWrap}>
             <InputField
               disableSpecialCharacters={true}
               // require={true}
@@ -378,9 +379,9 @@ const AgentBasicInfoView = (props: any) => {
               maxLength={10}
               keyboardtype={"number-pad"}
             />
-          </View>
+          </View> */}
 
-          <View style={[styles.inputWrap, {}]}>
+          {/* <View style={[styles.inputWrap, {}]}>
             <InputField
               // require={true}
               placeholderText={strings.address}
@@ -402,7 +403,7 @@ const AgentBasicInfoView = (props: any) => {
                 });
               }}
             />
-          </View>
+          </View> */}
           {/*  <View style={styles.inputWrap}>
           <InputField
           require={true}

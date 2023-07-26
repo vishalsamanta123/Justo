@@ -134,6 +134,7 @@ export const getAllSourcingManager = (params: any) => async (dispatch: any) => {
     }
 };
 export const cpAppointmentCheckIn = (params: any) => async (dispatch: any) => {
+    dispatch({ type: START_LOADING })
     try {
         const res = await apiCall("post", apiEndPoints.CHECKIN_APPOINTMENT, params);
         if (res.data.status == 200) {
@@ -153,6 +154,9 @@ export const cpAppointmentCheckIn = (params: any) => async (dispatch: any) => {
             type: GET_APPOINTMENT_CHECKIN_ERROR,
             payload: console.log(e),
         });
+    }
+    finally {
+        dispatch({ type: STOP_LOADING })
     }
 };
 export const removeMasters = () => async (dispatch: any) => {

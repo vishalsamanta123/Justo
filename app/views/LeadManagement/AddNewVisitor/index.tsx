@@ -300,6 +300,9 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       if (formData?.first_name === "" || formData?.first_name === undefined) {
         isError = false;
         errorMessage = "Please fill visitor name";
+      } else if (Regexs.oneSpaceRegex.test(formData?.first_name) === false) {
+        isError = false;
+        errorMessage = strings.NameCorrectlyVal;
       } else if (
         formData?.mobile === "" ||
         formData?.mobile === undefined ||

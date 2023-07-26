@@ -321,8 +321,8 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         isError = false;
         errorMessage = "Please enter valid whatsapp number";
       }
-      if (updateForm?.lead_source === CONST_IDS.cp_lead_source_id) {
-        if (updateForm.cp_type == undefined || updateForm.cp_type == "") {
+      if (updateForm?.lead_source_id === CONST_IDS.cp_lead_source_id) {
+        if ( updateForm.cp_type == null || updateForm.cp_type == undefined || updateForm.cp_type == "") {
           isError = false;
           errorMessage = "Please Enter Channel Partner type";
         } else if (updateForm.cp_id == undefined || updateForm.cp_id == "") {

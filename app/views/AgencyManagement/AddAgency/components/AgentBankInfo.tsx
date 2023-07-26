@@ -28,9 +28,9 @@ const AgentBankInfo = (props: any) => {
     return (
       <View style={styles.innerBoxVw}>
         <Text style={styles.innerBoxTxt}>{item.property_title}</Text>
-        <TouchableOpacity onPress={() => props.handleDelete(item, index)}>
+        {props.type === "add" ?<TouchableOpacity onPress={() => props.handleDelete(item, index)}>
           <Image source={images.close} style={styles.crossVw} />
-        </TouchableOpacity>
+        </TouchableOpacity> : null}
       </View>
     );
   };
@@ -83,6 +83,7 @@ const AgentBankInfo = (props: any) => {
                   ...props.agencyData,
                   gstApplicable: 1,
                   propidership_declaration_letter: "",
+                  gst: "",
                 });
               }}
               color={PRIMARY_THEME_COLOR}
@@ -112,6 +113,7 @@ const AgentBankInfo = (props: any) => {
                   ...props.agencyData,
                   gstApplicable: 2,
                   propidership_declaration_letter: "",
+                  gst: "",
                 });
               }}
               color={PRIMARY_THEME_COLOR}
@@ -314,46 +316,66 @@ const AgentBankInfo = (props: any) => {
             </View>
           </View>
         ) : null}
-        <View
-          style={[
-            styles.inputWrap,
-            { flexDirection: "row", alignItems: "center" },
-          ]}
-        >
+        {props.type === "add" ? (
           <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+            style={[
+              styles.inputWrap,
+              { flexDirection: "row", alignItems: "center" },
+            ]}
           >
-            <Text style={styles.headingText}>{strings.allocateProperty}</Text>
-            <RequiredStart />
-          </View>
-          <View style={{ flex: 0.5 }}>
-            <TouchableOpacity
-              style={[
-                styles.browseVw,
-                {
-                  top: 0,
-                },
-              ]}
-              onPress={() => {
-                props.handleVisiblePropertyPress();
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <Text
-                style={{
-                  color: PRIMARY_THEME_COLOR,
-                  fontSize: normalize(15),
+              <Text style={styles.headingText}>{strings.allocateProperty}</Text>
+              <RequiredStart />
+            </View>
+            <View style={{ flex: 0.5 }}>
+              <TouchableOpacity
+                style={[
+                  styles.browseVw,
+                  {
+                    top: 0,
+                  },
+                ]}
+                onPress={() => {
+                  props.handleVisiblePropertyPress();
                 }}
               >
-                {strings.add}
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{
+                    color: PRIMARY_THEME_COLOR,
+                    fontSize: normalize(15),
+                  }}
+                >
+                  {strings.add}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        ) : (
+          <View
+            style={[
+              styles.inputWrap,
+              {  alignItems: "flex-start"},
+            ]}
+          >
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Text style={styles.headingText}>{strings.allocatedProperty}</Text>
+            </View>
+          </View>
+        )}
         <View style={styles.propertyWrap}>
           {props.selectedProperty?.length > 0 ? (
             props.selectedProperty?.map((prop: any, index: any) =>

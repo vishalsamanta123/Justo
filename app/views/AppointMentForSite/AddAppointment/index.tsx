@@ -236,7 +236,7 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
         type: response?.data[0]?.type,
         checkin_status: response?.data[0]?.checkin_status,
         update_type: 1,
-        remark: response?.data[0]?.remark,
+        remark: "",
       })
       if (response?.data[0]?.property_id === "") {
         setPropertyStatus(false)
