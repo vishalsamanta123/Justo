@@ -37,15 +37,15 @@ const AllFollowUpItem = (props: any) => {
                         <Text style={styles.nameTxt}>{moment(props.items.followup_date).format(DATE_TIME_FORMAT)}</Text>
                     </View>
                 </View>
-                <View style={styles.Txtviewlast}>
+                {props?.items?.resiontitle?.length > 0 ? <View style={styles.Txtviewlast}>
                     <View style={styles.projectContainer}>
-                        <Text style={styles.projectTxt}>Resion Title </Text>
+                        <Text style={styles.projectTxt}>Disposition </Text>
                     </View>
                     <View><Text>:</Text></View>
                     <View style={styles.nameContainer}>
-                        <Text style={styles.nameTxt}>{props.items.resiontitle.length > 0 ? props?.items?.resiontitle[0] : strings.notfount}</Text>
+                        <Text style={styles.nameTxt}>{props?.items?.resiontitle?.length > 0 ? props?.items?.resiontitle[0] : strings.notfount}</Text>
                     </View>
-                </View>
+                </View> : null}
                 <View style={styles.Txtviewlast}>
                     <View style={styles.projectContainer}>
                         <Text style={styles.projectTxt}>Description </Text>

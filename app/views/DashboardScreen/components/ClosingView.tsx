@@ -11,7 +11,7 @@ const ClosingDashboardView = (props: any) => {
     return (
         <View style={styles.mainContainerWrap}>
             <View style={styles.secondPortion}>
-                <View style={styles.secondCardView}>
+                {/* <View style={styles.secondCardView}>
                     <View style={styles.cardTextView}>
                         <Text style={styles.cardText}>Booking Target</Text>
                     </View>
@@ -26,7 +26,7 @@ const ClosingDashboardView = (props: any) => {
                     <View style={styles.numberView}>
                         <Text style={styles.numberText}>{achieveTargetData?.achieve_closing_target}/{targetData?.closing_target}</Text>
                     </View>
-                </View>
+                </View> */}
             </View>
             {/* Bottom Section */}
             <View style={styles.thirdPortion}>
@@ -35,7 +35,8 @@ const ClosingDashboardView = (props: any) => {
                     style={styles.thirdPortioncardView}>
                     <View style={styles.thirdPortionCardTextView}>
                         <Text style={styles.thirdPortionCardText}>
-                            Site Visit
+                            {/* Site Visit */}
+                            Today's Appointments
                         </Text>
                     </View>
                     <View style={styles.numberView}>
@@ -47,7 +48,8 @@ const ClosingDashboardView = (props: any) => {
                     style={styles.thirdPortioncardView}>
                     <View style={styles.thirdPortionCardTextView}>
                         <Text style={styles.thirdPortionCardText}>
-                            {strings.todayCompVisit}
+                            {/* {strings.todayCompVisit} */}
+                            Today's Checkin
                         </Text>
                     </View>
                     <View style={styles.numberView}>
@@ -59,14 +61,15 @@ const ClosingDashboardView = (props: any) => {
                     style={styles.thirdPortioncardView}>
                     <View style={styles.thirdPortionCardTextView}>
                         <Text style={styles.thirdPortionCardText}>
-                            Booking
+                            {/* Booking */}
+                            Today's Booking
                         </Text>
                     </View>
                     <View style={styles.numberView}>
                         <Text style={styles.thirdPortionNumberText}>{props?.dashboardData?.today_booking}</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     onPress={() => props.onpressBooking('', 'today')}
                     style={styles.thirdPortioncardView}>
                     <View style={styles.thirdPortionCardTextView}>
@@ -76,7 +79,7 @@ const ClosingDashboardView = (props: any) => {
                         <Text style={styles.thirdPortionNumberText}>
                             {props?.dashboardData?.total_ready_booking}</Text>
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                     onPress={() => props.onpressBooking('cancel', 'cancelBooking')}
                     style={styles.thirdPortioncardView}>

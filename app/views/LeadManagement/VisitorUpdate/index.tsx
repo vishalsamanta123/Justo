@@ -467,16 +467,17 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
     ) {
       isError = false;
       errorMessage = "Please fill visitor name";
-    } else if (Regexs.phoneNumRegex.test(updateForm?.mobile) === false) {
-      isError = false;
-      errorMessage = "Please enter valid Mobile number";
-    } else if (
-      updateForm?.whatsapp_no &&
-      Regexs.phoneNumRegex.test(updateForm?.whatsapp_no) === false
-    ) {
-      isError = false;
-      errorMessage = "Please enter valid whatsapp number";
-    }
+    } 
+    // else if (Regexs.phoneNumRegex.test(updateForm?.mobile) === false) {
+    //   isError = false;
+    //   errorMessage = "Please enter valid Mobile number";
+    // } else if (
+    //   updateForm?.whatsapp_no &&
+    //   Regexs.phoneNumRegex.test(updateForm?.whatsapp_no) === false
+    // ) {
+    //   isError = false;
+    //   errorMessage = "Please enter valid whatsapp number";
+    // }
     if (updateForm?.lead_source_id === CONST_IDS.cp_lead_source_id) {
       if (
         updateForm.cp_type == null ||

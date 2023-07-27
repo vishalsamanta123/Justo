@@ -156,22 +156,22 @@ const AddNewVisitorForm = (props: any) => {
                   ...props.formData,
                   mobile: data,
                 });
-                if (Regexs.mobilenumRegex.test(data)) {
+                // if (Regexs.mobilenumRegex.test(data)) {
+                //   props.setEmailMobValidation({
+                //     ...props.emailMobvalidation,
+                //     mobile: null,
+                //   });
+                // } else {
                   props.setEmailMobValidation({
                     ...props.emailMobvalidation,
                     mobile: null,
                   });
-                } else {
-                  props.setEmailMobValidation({
-                    ...props.emailMobvalidation,
-                    mobile: null,
-                  });
-                }
+                // }
               }}
               valueshow={props?.formData?.mobile}
               headingText={strings.mobileNo}
               keyboardtype={"number-pad"}
-              maxLength={10}
+              maxLength={15}
               rightImageVw={styles.tickImgVw}
               rightImageSty={styles.tickImg}
               rightImgSrc={
@@ -502,7 +502,7 @@ const AddNewVisitorForm = (props: any) => {
               valueshow={props?.formData?.whatsapp_no}
               headingText={strings.whatsappNo}
               keyboardtype={"number-pad"}
-              maxLength={10}
+              maxLength={15}
             />
           </View>
           <View style={styles.inputWrap}>

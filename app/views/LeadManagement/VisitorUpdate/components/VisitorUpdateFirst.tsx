@@ -181,7 +181,7 @@ const VisitorUpdateView = (props: any) => {
             }
             headingText={"Mobile No."}
             keyboardtype={"number-pad"}
-            maxLength={10}
+            maxLength={15}
           />
         </View>
 
@@ -591,7 +591,7 @@ const VisitorUpdateView = (props: any) => {
             valueshow={props?.updateForm?.whatsapp_no?.toString()}
             headingText={strings.whatsappNo}
             keyboardtype={"number-pad"}
-            maxLength={10}
+            maxLength={15}
           />
         </View>
         <View style={styles.inputWrap}>

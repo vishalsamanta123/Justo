@@ -72,7 +72,7 @@ const strings = new LocalizedStrings({
     notInterested: 'Not Interested',
     source: 'Source',
     score: 'Score',
-    todayLead: 'Today Leads',
+    todayLead: `Today's Leads`,
     totalVisitor: 'Total Visitor',
     totalSiteVisit: 'Total Site Visit',
     totalCloseVisit: 'Total Closer Visit',

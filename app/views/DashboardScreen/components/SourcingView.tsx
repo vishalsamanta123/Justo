@@ -11,7 +11,7 @@ const SourcingDashboardView = (props: any) => {
     return (
         <View style={{ flex: 1 }}>
             <View style={styles.secondPortion}>
-                <View style={styles.firstCardView}>
+                {/* <View style={styles.firstCardView}>
                     <View style={styles.cardTextView}>
                         <Text style={styles.cardText}>Visit Target</Text>
                     </View>
@@ -26,7 +26,7 @@ const SourcingDashboardView = (props: any) => {
                     <View style={styles.numberView}>
                         <Text style={styles.numberText}>{achieveTargetData?.achieve_site_visit_target}/{targetData?.site_visit_target}</Text>
                     </View>
-                </View>
+                </View> */}
             </View>
             {/* Bottom Section */}
             <View style={styles.thirdPortion}>
@@ -45,7 +45,7 @@ const SourcingDashboardView = (props: any) => {
                     style={styles.thirdPortioncardView}>
                     <View style={styles.thirdPortionCardTextView}>
                         <Text style={styles.thirdPortionCardText} numberOfLines={2}>
-                            Today Site Visit
+                            Today's Site Visit
                         </Text>
                     </View>
                     <View style={styles.numberView}>

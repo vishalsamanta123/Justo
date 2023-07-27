@@ -310,13 +310,15 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       ) {
         isError = false;
         errorMessage = "Please fill mobile number";
-      } else if (
-        formData?.mobile &&
-        Regexs.mobilenumRegex.test(formData?.mobile) === false
-      ) {
-        isError = false;
-        errorMessage = "Please Enter valid mobile number";
-      } else if (
+      } 
+      // else if (
+      //   formData?.mobile &&
+      //   Regexs.mobilenumRegex.test(formData?.mobile) === false
+      // ) {
+      //   isError = false;
+      //   errorMessage = "Please Enter valid mobile number";
+      // } 
+      else if (
         formData?.visit_confirmation_status === "" ||
         formData?.visit_confirmation_status === undefined
       ) {
@@ -350,13 +352,15 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       ) {
         isError = false;
         errorMessage = "Please enter valid Pancard number";
-      } else if (
-        formData?.whatsapp_no &&
-        Regexs.phoneNumRegex.test(formData?.whatsapp_no) === false
-      ) {
-        isError = false;
-        errorMessage = "Please enter valid whatsapp number";
-      } else if (
+      } 
+      // else if (
+      //   formData?.whatsapp_no &&
+      //   Regexs.phoneNumRegex.test(formData?.whatsapp_no) === false
+      // ) {
+      //   isError = false;
+      //   errorMessage = "Please enter valid whatsapp number";
+      // } 
+      else if (
         formData?.email &&
         Regexs.emailRegex.test(formData?.email) === false
       ) {
