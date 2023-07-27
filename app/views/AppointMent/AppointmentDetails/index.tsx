@@ -33,14 +33,14 @@ const AppointmentDetails = ({ navigation, route }: any) => {
   const addedBookingData =
     useSelector((state: any) => state.addedBooking) || {};
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     dispatch(getAppointmentDetail({
-  //       appointment_id: data?._id
-  //     }))
-  //     return () => { };
-  //   }, [navigation])
-  //   );
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(getAppointmentDetail({
+        appointment_id: data?._id
+      }))
+      return () => { };
+    }, [navigation])
+    );
 
   const getDetail = async () => {
     const res = await apiCall("post", apiEndPoints.GET_APPOINTMENT_DETAILS, {

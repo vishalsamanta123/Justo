@@ -3,6 +3,7 @@ import React from 'react'
 import styles from './Styles'
 import { DATE_TIME_FORMAT, WHITE_COLOR } from '../../../../components/utilities/constant'
 import moment from 'moment'
+import strings from 'app/components/utilities/Localization'
 
 const AllFollowUpItem = (props: any) => {
 
@@ -38,11 +39,20 @@ const AllFollowUpItem = (props: any) => {
                 </View>
                 <View style={styles.Txtviewlast}>
                     <View style={styles.projectContainer}>
+                        <Text style={styles.projectTxt}>Resion Title </Text>
+                    </View>
+                    <View><Text>:</Text></View>
+                    <View style={styles.nameContainer}>
+                        <Text style={styles.nameTxt}>{props.items.resiontitle.length > 0 ? props?.items?.resiontitle[0] : strings.notfount}</Text>
+                    </View>
+                </View>
+                <View style={styles.Txtviewlast}>
+                    <View style={styles.projectContainer}>
                         <Text style={styles.projectTxt}>Description </Text>
                     </View>
                     <View><Text>:</Text></View>
                     <View style={styles.nameContainer}>
-                        <Text style={styles.nameTxt}>{props.items.remark}</Text>
+                        <Text style={styles.nameTxt}>{props.items.remark ? props.items.remark : strings.notfount}</Text>
                     </View>
                 </View>
             </View>

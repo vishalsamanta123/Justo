@@ -13,6 +13,7 @@ import Header from "../../../../components/Header";
 import images from "../../../../assets/images";
 import strings from "../../../../components/utilities/Localization";
 import {
+  AMOUNT_TYPE,
   BLACK_COLOR,
   CONST_IDS,
   DATE_FORMAT,
@@ -23,7 +24,10 @@ import {
 import InputField from "../../../../components/InputField";
 import { RadioButton } from "react-native-paper";
 import Button from "../../../../components/Button";
-import { normalize } from "../../../../components/scaleFontSize";
+import {
+  normalize,
+  normalizeSpacing,
+} from "../../../../components/scaleFontSize";
 import moment from "moment";
 import InputCalender from "app/components/InputCalender";
 import DropdownInput from "app/components/DropDown";
@@ -48,7 +52,11 @@ const VisitorUpdateView = (props: any) => {
       ? obj.title === "Channel Partner"
       : obj.title !== ""
   );
-  console.log("🚀 ~ file: VisitorUpdateFirst.tsx:192 ~  ", (userData?.data?.role_id === ROLE_IDS.closingtl_id || userData?.data?.role_id === ROLE_IDS.closingmanager_id))
+  console.log(
+    "🚀 ~ file: VisitorUpdateFirst.tsx:192 ~  ",
+    userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+      userData?.data?.role_id === ROLE_IDS.closingmanager_id
+  );
 
   return (
     <View style={styles.mainContainer}>
@@ -133,8 +141,10 @@ const VisitorUpdateView = (props: any) => {
             disableSpecialCharacters={true}
             placeholderText={"Name"}
             editable={
-              (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-                  userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? false : true
+              userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+              userData?.data?.role_id === ROLE_IDS.closingmanager_id
+                ? false
+                : true
             }
             handleInputBtnPress={() => {}}
             onChangeText={(text: any) => {
@@ -184,8 +194,10 @@ const VisitorUpdateView = (props: any) => {
                 : "Lead Source"
             }
             disable={
-              (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-                  userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+              userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+              userData?.data?.role_id === ROLE_IDS.closingmanager_id
+                ? true
+                : false
             }
             data={
               leadsourcefilteredData?.length > 0 &&
@@ -234,9 +246,9 @@ const VisitorUpdateView = (props: any) => {
             }}
           />
         </View>
-        {(props?.updateForm?.lead_source_id === CONST_IDS?.cp_lead_source_id ||
+        {props?.updateForm?.lead_source_id === CONST_IDS?.cp_lead_source_id ||
         props?.updateForm?.lead_source_id ===
-          CONST_IDS?.by_self_lead_source_id) ? (
+          CONST_IDS?.by_self_lead_source_id ? (
           <>
             <View style={styles.inputWrap}>
               <DropdownInput
@@ -245,8 +257,10 @@ const VisitorUpdateView = (props: any) => {
                 data={CpType}
                 require
                 disable={
-                  (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-                      userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+                  userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                  userData?.data?.role_id === ROLE_IDS.closingmanager_id
+                    ? true
+                    : false
                 }
                 inputWidth={"100%"}
                 paddingLeft={Isios ? 6 : 10}
@@ -289,8 +303,10 @@ const VisitorUpdateView = (props: any) => {
                   inputWidth={"100%"}
                   require
                   disable={
-                    (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-                        userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+                    userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                    userData?.data?.role_id === ROLE_IDS.closingmanager_id
+                      ? true
+                      : false
                   }
                   paddingLeft={Isios ? 6 : 10}
                   maxHeight={300}
@@ -330,8 +346,10 @@ const VisitorUpdateView = (props: any) => {
                     data={props.companyList}
                     require
                     disable={
-                      (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-                          userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+                      userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                      userData?.data?.role_id === ROLE_IDS.closingmanager_id
+                        ? true
+                        : false
                     }
                     inputWidth={"100%"}
                     paddingLeft={Isios ? 6 : 10}
@@ -370,8 +388,10 @@ const VisitorUpdateView = (props: any) => {
                       paddingLeft={Isios ? 6 : 10}
                       maxHeight={300}
                       disable={
-                        (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-                            userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+                        userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+                        userData?.data?.role_id === ROLE_IDS.closingmanager_id
+                          ? true
+                          : false
                       }
                       labelField="employee_name"
                       valueField={"user_id"}
@@ -403,8 +423,10 @@ const VisitorUpdateView = (props: any) => {
           <DropdownInput
             require={true}
             disable={
-              (userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-                  userData?.data?.role_id === ROLE_IDS.closingmanager_id) ? true : false
+              userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+              userData?.data?.role_id === ROLE_IDS.closingmanager_id
+                ? true
+                : false
             }
             headingText={"Property Name"}
             placeholder={
@@ -608,27 +630,27 @@ const VisitorUpdateView = (props: any) => {
             }}
           /> */}
 
-<InputField
-              placeholderText={"Location"}
-              handleInputBtnPress={() => {}}
-              onChangeText={(data: any) => {
-                props.setUpdateForm({
-                  ...props.updateForm,
-                  location: data,
-                });
-              }}
-              valueshow={props?.updateForm?.location}
-              headingText={"Location"}
-              inputType={"location"}
-              onPressSelect={(data: any, detail: any) => {
-                props.setUpdateForm({
-                  ...props.updateForm,
-                  location: data?.description,
-                  latitude: detail?.geometry?.location?.lat,
-                  longitude: detail?.geometry?.location?.lng,
-                });
-              }}
-            />
+          <InputField
+            placeholderText={"Location"}
+            handleInputBtnPress={() => {}}
+            onChangeText={(data: any) => {
+              props.setUpdateForm({
+                ...props.updateForm,
+                location: data,
+              });
+            }}
+            valueshow={props?.updateForm?.location}
+            headingText={"Location"}
+            inputType={"location"}
+            onPressSelect={(data: any, detail: any) => {
+              props.setUpdateForm({
+                ...props.updateForm,
+                location: data?.description,
+                latitude: detail?.geometry?.location?.lat,
+                longitude: detail?.geometry?.location?.lng,
+              });
+            }}
+          />
         </View>
         <View style={[styles.inputWrap, { marginBottom: normalize(10) }]}>
           <InputField
@@ -842,15 +864,544 @@ const VisitorUpdateView = (props: any) => {
             </View>
           </View>
         </View>
+        <View style={styles.typeVw}>
+          <Text style={styles.typeTxt}>Property Required</Text>
+          <View style={styles.typeBorders} />
+        </View>
+        <View style={[styles.inputWrap, { marginTop: normalizeSpacing(16) }]}>
+          <DropdownInput
+            headingText={strings.configurations}
+            placeholder={
+              props.updateForm?.configuration
+                ? props.updateForm?.configuration
+                : strings.configurations
+            }
+            data={
+              Array.isArray(props?.configuration) ? props?.configuration : []
+            }
+            inputWidth={"100%"}
+            paddingLeft={16}
+            maxHeight={300}
+            labelField={"title"}
+            valueField={"_id"}
+            value={props?.updateForm?.configuration_id}
+            onChange={(item: any) => {
+              props.setUpdateForm({
+                ...props.updateForm,
+                configuration_id: item._id,
+                configuration: item.title,
+              });
+            }}
+            newRenderItem={(item: any) => {
+              return (
+                <>
+                  <View style={Styles.item}>
+                    <Text style={Styles.textItem}>{item.title}</Text>
+                  </View>
+                </>
+              );
+            }}
+          />
+        </View>
+        <View style={styles.inputWrap}>
+          <InputCalender
+            leftIcon={images.event}
+            mode={"date"}
+            placeholderText={"Expected Possession Date"}
+            headingText={"Expected Possession Date"}
+            editable={false}
+            minimumDate={new Date()}
+            dateData={(data: any) => {
+              props.setUpdateForm({
+                ...props.updateForm,
+                expected_possession_date: moment(data).format(DATE_FORMAT),
+              });
+            }}
+            setDateshow={(data: any) => {
+              props.setUpdateForm({
+                ...props.updateForm,
+                expected_possession_date: moment(data).format(DATE_FORMAT),
+              });
+            }}
+            value={
+              props?.updateForm?.expected_possession_date === "" ||
+              props?.updateForm?.expected_possession_date === undefined ||
+              props?.updateForm?.expected_possession_date === null
+                ? ""
+                : moment(props?.updateForm?.expected_possession_date).format(
+                    DATE_FORMAT
+                  )
+            }
+          />
+        </View>
+        <View style={styles.inputWrap}>
+          <InputField
+            disableSpecialCharacters={true}
+            placeholderText={"Area(Sq ft.)"}
+            handleInputBtnPress={() => {}}
+            onChangeText={(text: any) => {
+              props.setUpdateForm({
+                ...props.updateForm,
+                areain_sqlft: text,
+              });
+            }}
+            maxLength={10}
+            valueshow={props?.updateForm?.areain_sqlft?.toString()}
+            headingText={"Area(Sq ft.)"}
+            keyboardtype={"number-pad"}
+          />
+        </View>
+        <View style={styles.smallCont}>
+          <Text style={[styles.headingsTxt, { width: "56%" }]}>Min Budget</Text>
+          <Text style={[styles.headingsTxt, { width: "50%" }]}>Max Budget</Text>
+        </View>
+        <View style={styles.inputContVw}>
+          <View style={styles.smallContVw}>
+            <TextInput
+              value={props?.updateForm?.min_budget?.toString()}
+              onChangeText={(data: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  min_budget: data,
+                });
+              }}
+              maxLength={4}
+              keyboardType={"number-pad"}
+              placeholder="Min Budget"
+              style={styles.budgetInput}
+            />
+            <DropdownInput
+              inputWidth={Isios ? 45 : 49}
+              inputheight={Isios ? 20 : 38}
+              paddingLeft={Isios ? 6 : 10}
+              itemContainerStyle={{ width: 100 }}
+              iconStyle={{ width: 15, height: 15 }}
+              data={AMOUNT_TYPE}
+              itemTextStyle={{ fontSize: 8 }}
+              labelField="value"
+              valueField={"value"}
+              placeholder={props?.updateForm?.min_budget_type}
+              value={props?.updateForm?.min_budget_type}
+              onChange={(item: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  min_budget_type: item.value,
+                });
+              }}
+              newRenderItem={(item: any) => {
+                return (
+                  <>
+                    <View style={Styles.item}>
+                      <Text style={Styles.textItem}>{item.value}</Text>
+                    </View>
+                  </>
+                );
+              }}
+            />
+          </View>
+          <View style={[styles.smallContVw, { justifyContent: "flex-end" }]}>
+            <TextInput
+              value={props?.updateForm?.max_budget?.toString()}
+              onChangeText={(data: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  max_budget: data,
+                });
+              }}
+              maxLength={4}
+              keyboardType={"number-pad"}
+              placeholder="Max Budget"
+              style={styles.budgetInput}
+            />
+            <DropdownInput
+              inputWidth={Isios ? 45 : 49}
+              inputheight={Isios ? 20 : 38}
+              paddingLeft={Isios ? 6 : 10}
+              itemContainerStyle={{ width: 100 }}
+              iconStyle={{ width: 15, height: 15 }}
+              data={AMOUNT_TYPE}
+              itemTextStyle={{ fontSize: 8 }}
+              labelField="value"
+              valueField={"value"}
+              placeholder={props?.updateForm?.max_budget_type}
+              value={props?.updateForm?.max_budget_type}
+              onChange={(item: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  max_budget_type: item.value,
+                });
+              }}
+              newRenderItem={(item: any) => {
+                return (
+                  <>
+                    <View style={Styles.item}>
+                      <Text style={Styles.textItem}>{item.value}</Text>
+                    </View>
+                  </>
+                );
+              }}
+            />
+          </View>
+        </View>
+        <View style={styles.selectsView}>
+          <Text style={styles.selectsTxt}>{"Nature Of Fuding"}</Text>
+        </View>
+        <View style={styles.straightVw}>
+          <View style={[styles.radioView, { marginHorizontal: 0 }]}>
+            <RadioButton.Android
+              value={props.updateForm?.funding_type}
+              status={
+                props.updateForm.funding_type === "loan"
+                  ? "checked"
+                  : "unchecked"
+              }
+              onPress={() =>
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  funding_type: "loan",
+                })
+              }
+              color={PRIMARY_THEME_COLOR}
+            />
+            <Text style={styles.checkTxt}>{"Loan"}</Text>
+          </View>
+          <View style={[styles.radioView, { marginHorizontal: 0 }]}>
+            <RadioButton.Android
+              value={props.updateForm?.funding_type}
+              status={
+                props.updateForm.funding_type === "self"
+                  ? "checked"
+                  : "unchecked"
+              }
+              onPress={() =>
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  funding_type: "self",
+                })
+              }
+              color={PRIMARY_THEME_COLOR}
+            />
+            <Text style={styles.checkTxt}>{"Self Funding"}</Text>
+          </View>
+          <View style={[styles.radioView, { marginHorizontal: 0 }]}>
+            <RadioButton.Android
+              value={props.updateForm?.funding_type}
+              status={
+                props.updateForm.funding_type === "both"
+                  ? "checked"
+                  : "unchecked"
+              }
+              onPress={() =>
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  funding_type: "both",
+                })
+              }
+              color={PRIMARY_THEME_COLOR}
+            />
+            <Text style={styles.checkTxt}>{"Both"}</Text>
+          </View>
+        </View>
+        <View style={styles.smallCont}>
+          <Text style={[styles.headingsTxt, { width: "56%" }]}>
+            Min EMI Pay
+          </Text>
+          <Text style={[styles.headingsTxt, { width: "50%" }]}>
+            Max EMI Pay
+          </Text>
+        </View>
+        <View style={styles.inputContVw}>
+          <View style={styles.smallContVw}>
+            <TextInput
+              value={props?.updateForm?.min_emi_budget?.toString()}
+              onChangeText={(data: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  min_emi_budget: data,
+                });
+              }}
+              maxLength={4}
+              keyboardType={"number-pad"}
+              placeholder="Min EMI Pay"
+              style={styles.budgetInput}
+            />
+            <DropdownInput
+              inputWidth={Isios ? 45 : 49}
+              inputheight={Isios ? 20 : 38}
+              paddingLeft={Isios ? 6 : 10}
+              itemContainerStyle={{ width: 100 }}
+              iconStyle={{ width: 15, height: 15 }}
+              data={AMOUNT_TYPE}
+              itemTextStyle={{ fontSize: 8 }}
+              labelField="value"
+              valueField={"value"}
+              placeholder={props?.updateForm?.min_emi_budget_type}
+              value={props?.updateForm?.min_emi_budget_type}
+              onChange={(item: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  min_emi_budget_type: item.value,
+                });
+              }}
+              newRenderItem={(item: any) => {
+                return (
+                  <>
+                    <View style={Styles.item}>
+                      <Text style={Styles.textItem}>{item.value}</Text>
+                    </View>
+                  </>
+                );
+              }}
+            />
+          </View>
+          <View style={[styles.smallContVw, { justifyContent: "flex-end" }]}>
+            <TextInput
+              value={props?.updateForm?.max_emi_budget}
+              onChangeText={(data: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  max_emi_budget: data,
+                });
+              }}
+              maxLength={4}
+              keyboardType={"number-pad"}
+              placeholder="Max EMI Pay"
+              style={styles.budgetInput}
+            />
+            <DropdownInput
+              inputWidth={Isios ? 45 : 49}
+              inputheight={Isios ? 20 : 38}
+              paddingLeft={Isios ? 6 : 10}
+              itemContainerStyle={{ width: 100 }}
+              iconStyle={{ width: 15, height: 15 }}
+              data={AMOUNT_TYPE}
+              itemTextStyle={{ fontSize: 8 }}
+              labelField="value"
+              valueField={"value"}
+              placeholder={props?.updateForm?.max_emi_budget_type}
+              value={props?.updateForm?.max_emi_budget_type}
+              onChange={(item: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  max_emi_budget_type: item.value,
+                });
+              }}
+              newRenderItem={(item: any) => {
+                return (
+                  <>
+                    <View style={Styles.item}>
+                      <Text style={Styles.textItem}>{item.value}</Text>
+                    </View>
+                  </>
+                );
+              }}
+            />
+          </View>
+        </View>
+        <View style={styles.selectsView}>
+          <Text style={styles.selectsTxt}>{"Purpose"}</Text>
+        </View>
+        <View style={[styles.straightVw, { width: "80%" }]}>
+          <View style={[styles.radioView, { marginHorizontal: 0 }]}>
+            <RadioButton.Android
+              value={props.updateForm?.purpose}
+              status={
+                props.updateForm.purpose === "end user"
+                  ? "checked"
+                  : "unchecked"
+              }
+              onPress={() =>
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  purpose: "end user",
+                })
+              }
+              color={PRIMARY_THEME_COLOR}
+            />
+            <Text style={styles.checkTxt}>{"End User"}</Text>
+          </View>
+          <View style={[styles.radioView, { marginHorizontal: 0 }]}>
+            <RadioButton.Android
+              value={props.updateForm?.purpose}
+              status={
+                props.updateForm.purpose === "invest" ? "checked" : "unchecked"
+              }
+              onPress={() =>
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  purpose: "invest",
+                })
+              }
+              color={PRIMARY_THEME_COLOR}
+            />
+            <Text style={styles.checkTxt}>{"Investment"}</Text>
+          </View>
+        </View>
+        <View style={styles.typeVw}>
+          <Text style={styles.typeTxt}>Occupation Details</Text>
+          <View style={styles.typeBorders} />
+        </View>
+        <View style={styles.selectsView}>
+          <Text style={styles.selectsTxt}>{"Occupation"}</Text>
+        </View>
+        <View style={styles.straightVw}>
+          <View style={[styles.radioView, {}]}>
+            <RadioButton.Android
+              value={props.updateForm?.occupation}
+              status={
+                props.updateForm.occupation === "salaried"
+                  ? "checked"
+                  : "unchecked"
+              }
+              onPress={() =>
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  occupation: "salaried",
+                })
+              }
+              color={PRIMARY_THEME_COLOR}
+            />
+            <Text style={styles.checkTxt}>{"Salaried"}</Text>
+          </View>
+          <View style={[styles.radioView, {}]}>
+            <RadioButton.Android
+              value={props.updateForm?.occupation}
+              status={
+                props.updateForm.occupation === "self employee"
+                  ? "checked"
+                  : "unchecked"
+              }
+              onPress={() =>
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  occupation: "self employee",
+                })
+              }
+              color={PRIMARY_THEME_COLOR}
+            />
+            <Text style={styles.checkTxt}>{"Self Employed"}</Text>
+          </View>
+          <View style={[styles.radioView, {}]}>
+            <RadioButton.Android
+              value={props.updateForm?.occupation}
+              status={
+                props.updateForm.occupation === "professional"
+                  ? "checked"
+                  : "unchecked"
+              }
+              onPress={() =>
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  occupation: "professional",
+                })
+              }
+              color={PRIMARY_THEME_COLOR}
+            />
+            <Text style={styles.checkTxt}>{"Professional"}</Text>
+          </View>
+        </View>
+        <View style={styles.inputWrap}>
+          <InputField
+            disableSpecialCharacters={true}
+            placeholderText={"Company Name"}
+            handleInputBtnPress={() => {}}
+            onChangeText={(text: any) => {
+              props.setUpdateForm({
+                ...props.updateForm,
+                coumpany_name: text,
+              });
+            }}
+            valueshow={props?.updateForm?.coumpany_name}
+            headingText={"Company Name"}
+          />
+        </View>
+        <View style={styles.inputWrap}>
+          <InputField
+            disableSpecialCharacters={true}
+            placeholderText={"Designation"}
+            handleInputBtnPress={() => {}}
+            onChangeText={(text: any) => {
+              props.setUpdateForm({
+                ...props.updateForm,
+                desigantion: text,
+              });
+            }}
+            valueshow={props?.updateForm?.desigantion}
+            headingText={"Designation"}
+          />
+        </View>
+        <View style={styles.inputWrap}>
+          <InputField
+            placeholderText={"Office Address"}
+            handleInputBtnPress={() => {}}
+            onChangeText={(text: any) => {
+              props.setUpdateForm({
+                ...props.updateForm,
+                office_address: text,
+              });
+            }}
+            valueshow={props?.updateForm?.office_address}
+            headingText={"Office Address"}
+          />
+        </View>
+        {/* 63ecd90787f864d94a3882ee */}
+        {/* 63ecd94387f864d94a38838d */}
+        {/* <View style={[styles.inputWrap]}>
+                        <DropdownInput
+                            headingText={'Lead Source'}
+                            placeholder={props.updateForm?.lead_source ?
+                                props.updateForm?.lead_source: 'Lead Source'}
+                            data={props?.masterDatas?.length > 0 && Array.isArray(props?.masterDatas) ? props?.masterDatas : []}
+                            onFocus={() => props.handleDropdownPress(13)}
+                            inputWidth={'100%'}
+                            require
+                            paddingLeft={16}
+                            maxHeight={300}
+                            labelField={"title"}
+                            valueField={'_id'}
+                            value={props?.updateForm?.lead_source}
+                            onChange={(item: any) => {
+                                props.setUpdateForm({
+                                    ...props.updateForm,
+                                    lead_source: item._id,
+                                    lead_source_title: item.title
+                                })
+                            }}
+                            newRenderItem={(item: any) => {
+                                return item.title !== "" && (
+                                    <>
+                                        <View style={Styles.item}>
+                                            <Text style={Styles.textItem}>{item.title}</Text>
+                                        </View>
+                                    </>
+                                );
+                            }}
+                        />
+                    </View> */}
+        <View style={styles.inputWrap}>
+          <InputField
+            placeholderText={"Remark"}
+            handleInputBtnPress={() => {}}
+            onChangeText={(text: any) => {
+              props.setUpdateForm({
+                ...props.updateForm,
+                remark: text,
+              });
+            }}
+            valueshow={props?.updateForm?.remark}
+            headingText={"Remark"}
+          />
+        </View>
+        <View style={styles.inputWrap}>
+          <Button
+            // handleBtnPress={(type: any) => props.onPressNext(1)}
+            // rightImage={images.forwardArrow}
+            handleBtnPress={(type: any) => props.onPressNext(null)}
+            buttonText={strings.update}
+            textTransform={"uppercase"}
+          />
+        </View>
       </ScrollView>
-      <View style={styles.noMoveVw}>
-        <Button
-          handleBtnPress={(type: any) => props.onPressNext(1)}
-          rightImage={images.forwardArrow}
-          buttonText={strings.next}
-          textTransform={"uppercase"}
-        />
-      </View>
     </View>
   );
 };

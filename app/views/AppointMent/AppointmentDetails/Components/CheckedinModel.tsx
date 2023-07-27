@@ -33,21 +33,21 @@ const CheckedinModel = (props: any) => {
     };
     useEffect(() => {
         if (response?.status === 200) {
-           /*  dispatch(getAppointmentDetail({
+            dispatch(getAppointmentDetail({
                 appointment_id: props?.data?._id
-            })) */
-            getDetail()
+            }))
+            //getDetail()
 
             dispatch(removeMasters())
             props.setIsVisible(false)
         } else if (response?.status === 201) {
             dispatch(removeMasters())
             props.setIsVisible(false)
-            /* dispatch(getAppointmentDetail({
+            dispatch(getAppointmentDetail({
                 appointment_id: props?.data?._id
-            })) */
+            }))
 
-            getDetail()
+            //getDetail()
             
             Alert.alert('Alert', response?.message)
         }

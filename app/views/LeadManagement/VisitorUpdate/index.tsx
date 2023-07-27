@@ -1,12 +1,22 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import VisitorUpdateFirstView from './components/VisitorUpdateFirst'
+import VisitorUpdateFirstView from "./components/VisitorUpdateFirst";
 import VisitorUpdateSecondView from "./components/VisitorUpdateSecond";
 import VisitorUpdateThirdView from "./components/VisitorUpdateThird";
-import { addVisitorRemove, editVisitor, getVisitorDetail, } from "app/Redux/Actions/LeadsActions";
+import {
+  addVisitorRemove,
+  editVisitor,
+  getVisitorDetail,
+} from "app/Redux/Actions/LeadsActions";
 import { getAllMaster } from "app/Redux/Actions/MasterActions";
 import ErrorMessage from "app/components/ErrorMessage";
-import { CONST_IDS, GREEN_COLOR, RED_COLOR, ROLE_IDS, Regexs } from "app/components/utilities/constant";
+import {
+  CONST_IDS,
+  GREEN_COLOR,
+  RED_COLOR,
+  ROLE_IDS,
+  Regexs,
+} from "app/components/utilities/constant";
 import { getAllProperty } from "app/Redux/Actions/propertyActions";
 import { getAssignCPList } from "app/Redux/Actions/SourcingManagerActions";
 import { getEmployeeList } from "app/Redux/Actions/CompanyActions";
@@ -15,17 +25,19 @@ import { apiCall } from "app/components/utilities/httpClient";
 import apiEndPoints from "app/components/utilities/apiEndPoints";
 
 const VisitorUpdateScreen = ({ navigation, route }: any) => {
-  const data = route?.params || 0
-  const dispatch: any = useDispatch()
-  const { response = {}, detail = "" } = useSelector((state: any) => state.visitorData)
-  const masterData = useSelector((state: any) => state.masterData) || {}
-  const editData = useSelector((state: any) => state.editVisitorData) || {}
+  const data = route?.params || 0;
+  const dispatch: any = useDispatch();
+  const { response = {}, detail = "" } = useSelector(
+    (state: any) => state.visitorData
+  );
+  const masterData = useSelector((state: any) => state.masterData) || {};
+  const editData = useSelector((state: any) => state.editVisitorData) || {};
   const propertyData = useSelector((state: any) => state.propertyData) || {};
   const { userData = {} } = useSelector((state: any) => state.userData) || [];
   const SmCpList = useSelector((state: any) => state.SourcingManager) || [];
   const employeeData = useSelector((state: any) => state.employeeData) || {};
-  const [screenType, setScreenType] = useState(0)
-  const [masterDatas, setMasterDatas] = useState<any>([])
+  const [screenType, setScreenType] = useState(0);
+  const [masterDatas, setMasterDatas] = useState<any>([]);
   const [agentList, setAgentList] = useState<any>([]);
   const [companyList, setCompanyList] = useState<any>([]);
   const [employeeList, setEmployeeList] = useState<any>([]);
@@ -70,16 +82,16 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
     max_emi_budget: "",
     max_emi_budget_type: "",
     locality: "",
-    property_id: '',
-    budget: '',
-    property_type_title: '',
-    remark: '',
-    marital_status: '',
-    no_of_family_member: '',
-    current_stay: '',
-    property_type: '',
-    preferred_bank: '',
-    lead_source: '',
+    property_id: "",
+    budget: "",
+    property_type_title: "",
+    remark: "",
+    marital_status: "",
+    no_of_family_member: "",
+    current_stay: "",
+    property_type: "",
+    preferred_bank: "",
+    lead_source: "",
 
     cp_type: "",
     cp_id: "",
@@ -130,7 +142,7 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
       userData?.data?.role_id === ROLE_IDS.closingtl_id ||
       userData?.data?.role_id === ROLE_IDS.closingmanager_id
     ) {
-      console.log("getAllProperty CALLED===============")
+      console.log("getAllProperty CALLED===============");
       dispatch(
         getAllProperty({
           offset: 0,
@@ -164,11 +176,13 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
 
   useLayoutEffect(() => {
     if (data?.lead_id) {
-      dispatch(getVisitorDetail({
-        lead_id: data?.lead_id
-      }))
+      dispatch(
+        getVisitorDetail({
+          lead_id: data?.lead_id,
+        })
+      );
     }
-  }, [detail, data,])
+  }, [detail, data]);
 
   useEffect(() => {
     if (response?.status === 200) {
@@ -179,8 +193,11 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         expected_possession_date: response?.data[0]?.expected_possession_date,
         property_id: response?.data[0]?.property_id,
         property_type_title: response?.data[0]?.property_type_title,
-        locality: response?.data[0]?.customer_detail?.locality && response?.data[0]?.customer_detail?.locality != '' ?
-          response?.data[0]?.customer_detail?.locality : '',
+        locality:
+          response?.data[0]?.customer_detail?.locality &&
+          response?.data[0]?.customer_detail?.locality != ""
+            ? response?.data[0]?.customer_detail?.locality
+            : "",
         configuration_id: response?.data[0]?.configuration_id,
         configuration: response?.data[0]?.configuration,
         areain_sqlft: response?.data[0]?.areain_sqlft,
@@ -202,18 +219,20 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         cp_id: response?.data[0]?.cp_id,
         cp_emp_id: response?.data[0]?.cp_emp_id,
         cp_name: response?.data[0]?.cp_name,
-      })
+      });
     }
-  }, [response])
+  }, [response]);
 
   useEffect(() => {
-    dispatch(getAllMaster({
-      type: 2
-    }))
-  }, [])
+    dispatch(
+      getAllMaster({
+        type: 2,
+      })
+    );
+  }, []);
 
   useEffect(() => {
-    handleDropdownPress(2)
+    handleDropdownPress(2);
     dispatch(
       getAssignCPList({
         user_id: userData?.data?.user_id,
@@ -248,7 +267,10 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
   };
 
   const handleEmployeeDropdownPress = () => {
-    console.log("🚀 ~ file: index.tsx:247 ~ updateForm?.cp_id:", updateForm?.cp_id)
+    console.log(
+      "🚀 ~ file: index.tsx:247 ~ updateForm?.cp_id:",
+      updateForm?.cp_id
+    );
     dispatch(
       getEmployeeList({
         agency_id: updateForm?.cp_id,
@@ -258,13 +280,13 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
 
   const handleDropdownPress = (type: any) => {
     // setMasterDatas([])
-    setDropDownType(type)
+    setDropDownType(type);
     dispatch(
       getAllMaster({
         type: type,
       })
     );
-  }
+  };
 
   useEffect(() => {
     if (masterData?.response?.status === 200) {
@@ -276,173 +298,306 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         }
       }
     } else {
-      setMasterDatas([])
-      setConfiguration([])
+      setMasterDatas([]);
+      setConfiguration([]);
     }
   }, [masterData, dropDownType]);
 
   useEffect(() => {
     if (masterData?.response?.status === 200) {
       setMasterDatas(
-        masterData?.response?.data?.length > 0 ?
-          masterData?.response?.data : [])
+        masterData?.response?.data?.length > 0 ? masterData?.response?.data : []
+      );
     }
-  }, [masterData])
-
+  }, [masterData]);
 
   useEffect(() => {
     if (editData?.update) {
       dispatch(addVisitorRemove());
-      navigation.goBack(null)
+      navigation.goBack(null);
       ErrorMessage({
-        msg: editData?.update ? editData?.response?.message :
-          'no message',
-        backgroundColor: GREEN_COLOR
-      })
+        msg: editData?.update ? editData?.response?.message : "no message",
+        backgroundColor: GREEN_COLOR,
+      });
     }
-  }, [editData])
+  }, [editData]);
+  // const validation = () => {
+  //   let isError = true;
+  //   let errorMessage: any = ''
+  //   if (screenType === 0) {
+  //     if (updateForm?.property_id === '' && updateForm?.property_type_title === '') {
+  //       isError = false;
+  //       errorMessage = "Please select property name"
+  //     } else if (
+  //       updateForm?.first_name === "" ||
+  //       updateForm?.first_name === undefined
+  //     ) {
+  //       isError = false;
+  //       errorMessage = "Please fill visitor name";
+  //     } else if (Regexs.phoneNumRegex.test(updateForm?.mobile) === false) {
+  //       isError = false;
+  //       errorMessage = "Please enter valid Mobile number";
+  //     } else if (updateForm?.whatsapp_no && Regexs.phoneNumRegex.test(updateForm?.whatsapp_no) === false) {
+  //       isError = false;
+  //       errorMessage = "Please enter valid whatsapp number";
+  //     }
+  //     if (updateForm?.lead_source_id === CONST_IDS.cp_lead_source_id) {
+  //       if ( updateForm.cp_type == null || updateForm.cp_type == undefined || updateForm.cp_type == "") {
+  //         isError = false;
+  //         errorMessage = "Please Enter Channel Partner type";
+  //       } else if (updateForm.cp_id == undefined || updateForm.cp_id == "") {
+  //         isError = false;
+  //         errorMessage =
+  //           updateForm.cp_type === 1
+  //             ? "Please Enter CP Name"
+  //             : "Please Enter CP Company Name";
+  //       }
+  //     }
+  //     if (updateForm?.adhar_no) {
+  //       if (Regexs.AadharRegex.test(updateForm?.adhar_no) === false) {
+  //         isError = false;
+  //         errorMessage = "Please enter valid Aadhaar number";
+  //       }
+  //     }
+  //     if (updateForm?.pancard_no) {
+  //       if (Regexs.panRegex.test(updateForm?.pancard_no) === false) {
+  //         isError = false;
+  //         errorMessage = "Please enter valid Pancard number";
+  //       }
+  //     }
+  //     if (updateForm?.email) {
+  //       if (Regexs.emailRegex.test(updateForm?.email) === false) {
+  //         isError = false;
+  //         errorMessage = "Please enter valid Email id";
+  //       }
+  //     }
+  //     if (updateForm?.no_of_family_member) {
+  //       if (updateForm?.no_of_family_member?.length > 2) {
+  //         isError = false;
+  //         errorMessage = "Please enter valid family member";
+  //       }
+  //     }
+  //   }
+  //   if (screenType === 1) {
+  //     if (updateForm?.min_budget && !updateForm.max_budget) {
+  //       isError = false;
+  //       errorMessage = "Please enter Maximum budget";
+  //     }
+  //     else if (updateForm?.max_budget && !updateForm.min_budget) {
+  //       isError = false;
+  //       errorMessage = "Please enter Minimum budget";
+  //     }
+  //     else if (updateForm?.max_emi_budget && !updateForm.min_emi_budget) {
+  //       isError = false;
+  //       errorMessage = "Please enter Minimum EMI budget";
+  //     }
+  //     else if (updateForm?.min_emi_budget && !updateForm.max_emi_budget) {
+  //       isError = false;
+  //       errorMessage = "Please enter Maximum EMI budget";
+  //     }
+  //     if (updateForm?.min_budget && updateForm.max_budget) {
+  //       let tempMinVal: any;
+  //       updateForm?.min_budget_type === "K"
+  //         ? (tempMinVal = updateForm?.min_budget * 1000)
+  //         : updateForm?.min_budget_type === "L"
+  //           ? (tempMinVal = updateForm?.min_budget * 100000)
+  //           : updateForm?.min_budget_type === "Cr"
+  //             ? (tempMinVal = updateForm?.min_budget * 10000000)
+  //             : null;
+
+  //       let tempMaxVal: any;
+  //       updateForm?.max_budget_type === "K"
+  //         ? (tempMaxVal = updateForm?.max_budget * 1000)
+  //         : updateForm?.max_budget_type === "L"
+  //           ? (tempMaxVal = updateForm?.max_budget * 100000)
+  //           : updateForm?.max_budget_type === "Cr"
+  //             ? (tempMaxVal = updateForm?.max_budget * 10000000)
+  //             : null;
+
+  //       if (tempMinVal >= tempMaxVal) {
+  //         isError = false;
+  //         errorMessage = "Maximum budget should more than Minimum budget";
+  //       }
+  //     }
+  //     if (updateForm?.min_emi_budget && updateForm.max_emi_budget) {
+  //       let tempMinVal: any;
+  //       updateForm?.min_emi_budget_type === "K"
+  //         ? (tempMinVal = updateForm?.min_emi_budget * 1000)
+  //         : updateForm?.min_emi_budget_type === "L"
+  //           ? (tempMinVal = updateForm?.min_emi_budget * 100000)
+  //           : updateForm?.min_emi_budget_type === "Cr"
+  //             ? (tempMinVal = updateForm?.min_emi_budget * 10000000)
+  //             : null;
+
+  //       let tempMaxVal: any;
+  //       updateForm?.max_emi_budget_type === "K"
+  //         ? (tempMaxVal = updateForm?.max_emi_budget * 1000)
+  //         : updateForm?.max_emi_budget_type === "L"
+  //           ? (tempMaxVal = updateForm?.max_emi_budget * 100000)
+  //           : updateForm?.max_emi_budget_type === "Cr"
+  //             ? (tempMaxVal = updateForm?.max_emi_budget * 10000000)
+  //             : null;
+
+  //       if (tempMinVal >= tempMaxVal) {
+  //         isError = false;
+  //         errorMessage = "Maximum Emi should more than Minimum Emi";
+  //       }
+  //     }
+  //   }
+  //   if (errorMessage !== '') {
+  //     ErrorMessage({
+  //       msg: errorMessage,
+  //       backgroundColor: RED_COLOR
+  //     })
+  //   }
+  //   return isError;
+  // }
   const validation = () => {
     let isError = true;
-    let errorMessage: any = ''
-    if (screenType === 0) {
-      if (updateForm?.property_id === '' && updateForm?.property_type_title === '') {
-        isError = false;
-        errorMessage = "Please select property name"
-      } else if (
-        updateForm?.first_name === "" ||
-        updateForm?.first_name === undefined
+    let errorMessage: any = "";
+    if (
+      updateForm?.property_id === "" &&
+      updateForm?.property_type_title === ""
+    ) {
+      isError = false;
+      errorMessage = "Please select property name";
+    } else if (
+      updateForm?.first_name === "" ||
+      updateForm?.first_name === undefined
+    ) {
+      isError = false;
+      errorMessage = "Please fill visitor name";
+    } else if (Regexs.phoneNumRegex.test(updateForm?.mobile) === false) {
+      isError = false;
+      errorMessage = "Please enter valid Mobile number";
+    } else if (
+      updateForm?.whatsapp_no &&
+      Regexs.phoneNumRegex.test(updateForm?.whatsapp_no) === false
+    ) {
+      isError = false;
+      errorMessage = "Please enter valid whatsapp number";
+    }
+    if (updateForm?.lead_source_id === CONST_IDS.cp_lead_source_id) {
+      if (
+        updateForm.cp_type == null ||
+        updateForm.cp_type == undefined ||
+        updateForm.cp_type == ""
       ) {
         isError = false;
-        errorMessage = "Please fill visitor name";
-      } else if (Regexs.phoneNumRegex.test(updateForm?.mobile) === false) {
+        errorMessage = "Please Enter Channel Partner type";
+      } else if (updateForm.cp_id == undefined || updateForm.cp_id == "") {
         isError = false;
-        errorMessage = "Please enter valid Mobile number";
-      } else if (updateForm?.whatsapp_no && Regexs.phoneNumRegex.test(updateForm?.whatsapp_no) === false) {
-        isError = false;
-        errorMessage = "Please enter valid whatsapp number";
-      }
-      if (updateForm?.lead_source_id === CONST_IDS.cp_lead_source_id) {
-        if ( updateForm.cp_type == null || updateForm.cp_type == undefined || updateForm.cp_type == "") {
-          isError = false;
-          errorMessage = "Please Enter Channel Partner type";
-        } else if (updateForm.cp_id == undefined || updateForm.cp_id == "") {
-          isError = false;
-          errorMessage =
-            updateForm.cp_type === 1
-              ? "Please Enter CP Name"
-              : "Please Enter CP Company Name";
-        }
-      }
-      if (updateForm?.adhar_no) {
-        if (Regexs.AadharRegex.test(updateForm?.adhar_no) === false) {
-          isError = false;
-          errorMessage = "Please enter valid Aadhaar number";
-        }
-      }
-      if (updateForm?.pancard_no) {
-        if (Regexs.panRegex.test(updateForm?.pancard_no) === false) {
-          isError = false;
-          errorMessage = "Please enter valid Pancard number";
-        }
-      }
-      if (updateForm?.email) {
-        if (Regexs.emailRegex.test(updateForm?.email) === false) {
-          isError = false;
-          errorMessage = "Please enter valid Email id";
-        }
-      }
-      if (updateForm?.no_of_family_member) {
-        if (updateForm?.no_of_family_member?.length > 2) {
-          isError = false;
-          errorMessage = "Please enter valid family member";
-        }
+        errorMessage =
+          updateForm.cp_type === 1
+            ? "Please Enter CP Name"
+            : "Please Enter CP Company Name";
       }
     }
-    if (screenType === 1) {
-      if (updateForm?.min_budget && !updateForm.max_budget) {
+    if (updateForm?.adhar_no) {
+      if (Regexs.AadharRegex.test(updateForm?.adhar_no) === false) {
         isError = false;
-        errorMessage = "Please enter Maximum budget";
-      }
-      else if (updateForm?.max_budget && !updateForm.min_budget) {
-        isError = false;
-        errorMessage = "Please enter Minimum budget";
-      }
-      else if (updateForm?.max_emi_budget && !updateForm.min_emi_budget) {
-        isError = false;
-        errorMessage = "Please enter Minimum EMI budget";
-      }
-      else if (updateForm?.min_emi_budget && !updateForm.max_emi_budget) {
-        isError = false;
-        errorMessage = "Please enter Maximum EMI budget";
-      }
-      if (updateForm?.min_budget && updateForm.max_budget) {
-        let tempMinVal: any;
-        updateForm?.min_budget_type === "K"
-          ? (tempMinVal = updateForm?.min_budget * 1000)
-          : updateForm?.min_budget_type === "L"
-            ? (tempMinVal = updateForm?.min_budget * 100000)
-            : updateForm?.min_budget_type === "Cr"
-              ? (tempMinVal = updateForm?.min_budget * 10000000)
-              : null;
-
-        let tempMaxVal: any;
-        updateForm?.max_budget_type === "K"
-          ? (tempMaxVal = updateForm?.max_budget * 1000)
-          : updateForm?.max_budget_type === "L"
-            ? (tempMaxVal = updateForm?.max_budget * 100000)
-            : updateForm?.max_budget_type === "Cr"
-              ? (tempMaxVal = updateForm?.max_budget * 10000000)
-              : null;
-
-        if (tempMinVal >= tempMaxVal) {
-          isError = false;
-          errorMessage = "Maximum budget should more than Minimum budget";
-        }
-      }
-      if (updateForm?.min_emi_budget && updateForm.max_emi_budget) {
-        let tempMinVal: any;
-        updateForm?.min_emi_budget_type === "K"
-          ? (tempMinVal = updateForm?.min_emi_budget * 1000)
-          : updateForm?.min_emi_budget_type === "L"
-            ? (tempMinVal = updateForm?.min_emi_budget * 100000)
-            : updateForm?.min_emi_budget_type === "Cr"
-              ? (tempMinVal = updateForm?.min_emi_budget * 10000000)
-              : null;
-
-        let tempMaxVal: any;
-        updateForm?.max_emi_budget_type === "K"
-          ? (tempMaxVal = updateForm?.max_emi_budget * 1000)
-          : updateForm?.max_emi_budget_type === "L"
-            ? (tempMaxVal = updateForm?.max_emi_budget * 100000)
-            : updateForm?.max_emi_budget_type === "Cr"
-              ? (tempMaxVal = updateForm?.max_emi_budget * 10000000)
-              : null;
-
-        if (tempMinVal >= tempMaxVal) {
-          isError = false;
-          errorMessage = "Maximum Emi should more than Minimum Emi";
-        }
+        errorMessage = "Please enter valid Aadhaar number";
       }
     }
-    if (errorMessage !== '') {
+    if (updateForm?.pancard_no) {
+      if (Regexs.panRegex.test(updateForm?.pancard_no) === false) {
+        isError = false;
+        errorMessage = "Please enter valid Pancard number";
+      }
+    }
+    if (updateForm?.email) {
+      if (Regexs.emailRegex.test(updateForm?.email) === false) {
+        isError = false;
+        errorMessage = "Please enter valid Email id";
+      }
+    }
+    if (updateForm?.no_of_family_member) {
+      if (updateForm?.no_of_family_member?.length > 2) {
+        isError = false;
+        errorMessage = "Please enter valid family member";
+      }
+    }
+    if (updateForm?.min_budget && !updateForm.max_budget) {
+      isError = false;
+      errorMessage = "Please enter Maximum budget";
+    } else if (updateForm?.max_budget && !updateForm.min_budget) {
+      isError = false;
+      errorMessage = "Please enter Minimum budget";
+    } else if (updateForm?.max_emi_budget && !updateForm.min_emi_budget) {
+      isError = false;
+      errorMessage = "Please enter Minimum EMI budget";
+    } else if (updateForm?.min_emi_budget && !updateForm.max_emi_budget) {
+      isError = false;
+      errorMessage = "Please enter Maximum EMI budget";
+    }
+    if (updateForm?.min_budget && updateForm.max_budget) {
+      let tempMinVal: any;
+      updateForm?.min_budget_type === "K"
+        ? (tempMinVal = updateForm?.min_budget * 1000)
+        : updateForm?.min_budget_type === "L"
+        ? (tempMinVal = updateForm?.min_budget * 100000)
+        : updateForm?.min_budget_type === "Cr"
+        ? (tempMinVal = updateForm?.min_budget * 10000000)
+        : null;
+
+      let tempMaxVal: any;
+      updateForm?.max_budget_type === "K"
+        ? (tempMaxVal = updateForm?.max_budget * 1000)
+        : updateForm?.max_budget_type === "L"
+        ? (tempMaxVal = updateForm?.max_budget * 100000)
+        : updateForm?.max_budget_type === "Cr"
+        ? (tempMaxVal = updateForm?.max_budget * 10000000)
+        : null;
+
+      if (tempMinVal >= tempMaxVal) {
+        isError = false;
+        errorMessage = "Maximum budget should more than Minimum budget";
+      }
+    }
+    if (updateForm?.min_emi_budget && updateForm.max_emi_budget) {
+      let tempMinVal: any;
+      updateForm?.min_emi_budget_type === "K"
+        ? (tempMinVal = updateForm?.min_emi_budget * 1000)
+        : updateForm?.min_emi_budget_type === "L"
+        ? (tempMinVal = updateForm?.min_emi_budget * 100000)
+        : updateForm?.min_emi_budget_type === "Cr"
+        ? (tempMinVal = updateForm?.min_emi_budget * 10000000)
+        : null;
+
+      let tempMaxVal: any;
+      updateForm?.max_emi_budget_type === "K"
+        ? (tempMaxVal = updateForm?.max_emi_budget * 1000)
+        : updateForm?.max_emi_budget_type === "L"
+        ? (tempMaxVal = updateForm?.max_emi_budget * 100000)
+        : updateForm?.max_emi_budget_type === "Cr"
+        ? (tempMaxVal = updateForm?.max_emi_budget * 10000000)
+        : null;
+
+      if (tempMinVal >= tempMaxVal) {
+        isError = false;
+        errorMessage = "Maximum Emi should more than Minimum Emi";
+      }
+    }
+    if (errorMessage !== "") {
       ErrorMessage({
         msg: errorMessage,
-        backgroundColor: RED_COLOR
-      })
+        backgroundColor: RED_COLOR,
+      });
     }
     return isError;
-  }
+  };
   const handleBackPress = () => {
     // if (validation()) {
     navigation.goBack();
     // }
   };
   const onPressNext = (type: any) => {
-    if (type != null) {
-      if (validation()) {
-        setScreenType(type)
-      }
-    } else {
+    // if (type != null) {
+    //   if (validation()) {
+    //     setScreenType(type)
+    //   }
+    // } else
+    if (validation()) {
       let edit_params: any = {
         lead_id: updateForm?.lead_id,
         first_name: updateForm?.first_name,
@@ -465,7 +620,9 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         configuration: updateForm?.configuration,
         areain_sqlft: updateForm?.areain_sqlft,
         income: updateForm?.income,
-        budget: updateForm?.max_budget ? updateForm?.max_budget : updateForm?.budget && '',
+        budget: updateForm?.max_budget
+          ? updateForm?.max_budget
+          : updateForm?.budget && "",
         funding_type: updateForm?.funding_type,
         purpose: updateForm?.purpose,
         whenby: updateForm?.whenby,
@@ -481,10 +638,18 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         expected_possession_date: updateForm?.expected_possession_date,
         property_id: updateForm?.property_id,
         property_type_title: updateForm?.property_type_title,
-        min_emi_budget: updateForm?.min_emi_budget ? updateForm.min_emi_budget : '',
-        min_emi_budget_type: updateForm?.min_emi_budget_type ? updateForm?.min_emi_budget_type : '',
-        max_emi_budget: updateForm?.max_emi_budget ? updateForm?.max_emi_budget : '',
-        max_emi_budget_type: updateForm?.max_emi_budget_type ? updateForm?.max_emi_budget_type : '',
+        min_emi_budget: updateForm?.min_emi_budget
+          ? updateForm.min_emi_budget
+          : "",
+        min_emi_budget_type: updateForm?.min_emi_budget_type
+          ? updateForm?.min_emi_budget_type
+          : "",
+        max_emi_budget: updateForm?.max_emi_budget
+          ? updateForm?.max_emi_budget
+          : "",
+        max_emi_budget_type: updateForm?.max_emi_budget_type
+          ? updateForm?.max_emi_budget_type
+          : "",
         marital_status: updateForm?.marital_status,
         no_of_family_member: updateForm?.no_of_family_member,
         current_stay: updateForm?.current_stay,
@@ -496,7 +661,7 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         // cp_id: updateForm?.cp_id,
         // cp_emp_id: updateForm?.cp_emp_id,
         cp_name: updateForm?.cp_name,
-      }
+      };
       if (updateForm?.cp_emp_id) {
         edit_params = {
           ...edit_params,
@@ -515,12 +680,12 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
           cp_id: updateForm?.cp_id,
         };
       }
-      dispatch(editVisitor(edit_params))
+      dispatch(editVisitor(edit_params));
     }
-  }
+  };
   return (
     <>
-      {screenType === 0 ?
+      {/* {screenType === 0 ?
         <VisitorUpdateFirstView
           handleBackPress={handleBackPress}
           screenType={screenType}
@@ -563,8 +728,27 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
             />
           }
         </>
-      }
+      } */}
+      <VisitorUpdateFirstView
+        handleBackPress={handleBackPress}
+        screenType={screenType}
+        updateForm={updateForm}
+        setUpdateForm={setUpdateForm}
+        onPressNext={onPressNext}
+        allProperty={allProperty}
+        handleDropdownPress={handleDropdownPress}
+        masterDatas={masterDatas}
+        handleCpNameDropdownPress={handleCpNameDropdownPress}
+        dropdownAgentList={dropdownAgentList}
+        companyList={companyList}
+        handleCompanyDropdownPress={handleCompanyDropdownPress}
+        employeeList={employeeList}
+        handleEmployeeDropdownPress={handleEmployeeDropdownPress}
+        handleGetProperty={handleGetProperty}
+        setAllProperty={setAllProperty}
+        configuration={configuration}
+      />
     </>
-  )
-}
-export default VisitorUpdateScreen
+  );
+};
+export default VisitorUpdateScreen;
