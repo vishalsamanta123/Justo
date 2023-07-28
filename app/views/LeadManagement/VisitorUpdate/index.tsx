@@ -41,6 +41,7 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
   const [agentList, setAgentList] = useState<any>([]);
   const [companyList, setCompanyList] = useState<any>([]);
   const [employeeList, setEmployeeList] = useState<any>([]);
+  const [sourcingPropertyList, setSourcingPropertyList] = useState<any>([]);
   const [dropdownAgentList, setDropdownAgentList] = useState<any>([]);
   const [configuration, setConfiguration] = useState<any>([]);
   const [dropDownType, setDropDownType] = useState(0);
@@ -109,8 +110,26 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
   //   );
   //   getAllPropertyData();
   // }, []);
+  useEffect(() => {
+    if (propertyData?.response) {
+      const { response, loading, list } = propertyData;
+      if (response?.status === 200 && response?.data?.length > 0) {
+        setSourcingPropertyList(
+          response?.data?.filter((el: any) => el?.status === true)
+        );
+      } else {
+        setSourcingPropertyList([]);
+      }
+    }
+  }, [propertyData]);
   const handleGetProperty = async (id: any) => {
     dispatch({ type: START_LOADING });
+    dispatch(
+      getAllProperty({
+        offset: 0,
+        limit: "",
+      })
+    );
     const params = {
       cp_id: id,
     };
@@ -123,7 +142,8 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
     if (response?.status === 200) {
       if (response?.data?.length > 0) {
         dispatch({ type: STOP_LOADING });
-        setAllProperty(response?.data);
+        const list = sourcingPropertyList?.filter((o1: any) => response?.data?.some((o2: any) => o1?.property_id === o2?.property_id))
+        setAllProperty(list);
       } else {
         dispatch({ type: STOP_LOADING });
         setAllProperty([]);

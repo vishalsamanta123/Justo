@@ -51,11 +51,13 @@ const BookingScreen = ({ navigation, route }: any) => {
     floor: "",
     flat_name: "",
     saleable_area: "",
+    carpet_area: ""
   });
   const masterData = useSelector((state: any) => state.masterData) || {};
   const addedBookingData =
     useSelector((state: any) => state.addedBooking) || {};
   const { response = {} } = useSelector((state: any) => state.booking) || {};
+  const [okIsVisible, setOkIsVisible] = useState(false);
   const agencyDetails = useSelector((state: any) => state.agency);
   const [masterDatas, setMasterDatas] = useState<any>([]);
   const [propertyConfData, setPropertyConfData] = useState<any>([]);
@@ -66,7 +68,6 @@ const BookingScreen = ({ navigation, route }: any) => {
   const [dropDownType, setDropDownType] = useState<any>(null);
   const [quantity, setQuantity] = useState<any>(false);
   const [maininventory, setMainInventory] = useState<any>([]);
- 
 
   //   https://demoapi.justoworks.co.in/cp/fetch_channel_partner_id
   // {"params": {
@@ -110,8 +111,8 @@ const BookingScreen = ({ navigation, route }: any) => {
   // );
 
   const handleJwCpRegistor = async () => {
-    const data = agencyDetails?.response?.data[0] || {}
-    console.log("🚀 ~ file: index.tsx:120 ~ data:", data)
+    const data = agencyDetails?.response?.data[0] || {};
+    console.log("🚀 ~ file: index.tsx:120 ~ data:", data);
     const params = {
       login: "api",
       password: "76db466cb187c33c5f170d6352afad44da671002",
@@ -121,20 +122,26 @@ const BookingScreen = ({ navigation, route }: any) => {
         country_code: data?.country_code ? data?.country_code : "IN",
         mobile: data?.primary_mobile ? data?.primary_mobile : "", // primary_mobile",
         owner_name: data?.agent_name ? data?.agent_name : "", //  agent_name",
-        street: data?.location ? data?.location : "", //location 
-        street2: data?.street2 ? data?.street2 : "Street2", 
+        street: data?.location ? data?.location : "", //location
+        street2: data?.street2 ? data?.street2 : "Street2",
         city: data?.city ? data?.city : "City",
-        zip:  data?.zip ? data?.zip : "600066",
+        zip: data?.zip ? data?.zip : "600066",
         gstin: data?.gst ? data?.gst : "", // gst",
-        rera_number: data?.rera_certificate_no ? data?.rera_certificate_no : "",// rera_certificate_no",
-        pan: data?.pancard_no ? data?.pancard_no : "",// pancard_no",
-        aadhar: data?.adhar_no ? data?.adhar_no : "",// adhar_no",
-        phone: data?.primary_mobile ? data?.primary_mobile : "",// primary_mobile",
+        rera_number: data?.rera_certificate_no ? data?.rera_certificate_no : "", // rera_certificate_no",
+        pan: data?.pancard_no ? data?.pancard_no : "", // pancard_no",
+        aadhar: data?.adhar_no ? data?.adhar_no : "", // adhar_no",
+        phone: data?.primary_mobile ? data?.primary_mobile : "", // primary_mobile",
         email: data?.email ? data?.email : "", //email",
         website: data?.website ? data?.website : "sample.com",
-        bank: data?.cp_bank_detail?.bank_name ? data?.cp_bank_detail?.bank_name : "", // cp_bank_detail",
-        ifsc: data?.cp_bank_detail?.ifsc_code ? data?.cp_bank_detail?.ifsc_code : "", // cp_bank_detail",
-        account_number: data?.cp_bank_detail?.account_no ? data?.cp_bank_detail?.account_no : "" // cp_bank_detail",
+        bank: data?.cp_bank_detail?.bank_name
+          ? data?.cp_bank_detail?.bank_name
+          : "", // cp_bank_detail",
+        ifsc: data?.cp_bank_detail?.ifsc_code
+          ? data?.cp_bank_detail?.ifsc_code
+          : "", // cp_bank_detail",
+        account_number: data?.cp_bank_detail?.account_no
+          ? data?.cp_bank_detail?.account_no
+          : "", // cp_bank_detail",
       },
     };
     console.log("🚀 ~ file: index.tsx:138 ~ params.record:", params.record);
@@ -143,8 +150,8 @@ const BookingScreen = ({ navigation, route }: any) => {
       apiEndPoints.CP_REGISTOR_JW,
       params
     );
-    console.log("Registor res", res?.data)
-    return false
+    console.log("Registor res", res?.data);
+    return false;
   };
 
   const getDropDownData = (data: any) => {
@@ -187,7 +194,7 @@ const BookingScreen = ({ navigation, route }: any) => {
         apiEndPoints.GET_INVENTORY_JW,
         params
       );
-      
+
       if (res?.data?.result?.data.length > 0) {
         const temp = res?.data?.result?.data;
         const arr = temp;
@@ -249,7 +256,8 @@ const BookingScreen = ({ navigation, route }: any) => {
         msg: addedBookingData?.response?.message,
         backgroundColor: GREEN_COLOR,
       });
-      navigation.navigate("BookingList", { type: "request" });
+      // navigation.navigate("BookingList", { type: "request" });
+      setOkIsVisible(true);
     }
   }, [addedBookingData]);
 
@@ -265,6 +273,7 @@ const BookingScreen = ({ navigation, route }: any) => {
       floor: "",
       flat_name: "",
       saleable_area: "",
+      carpet_area: ""
     });
     var filteredData = maininventory.filter(
       (itemget: any) => itemget["Flat Type"] == item
@@ -281,6 +290,10 @@ const BookingScreen = ({ navigation, route }: any) => {
       });
     }
   };
+  const onPressRightButton = () => {
+    navigation.navigate("BookingList", { type: "request" });
+    setOkIsVisible(false);
+  };
   const validation = () => {
     let isError = true;
     let errorMessage: any = "";
@@ -296,15 +309,13 @@ const BookingScreen = ({ navigation, route }: any) => {
     ) {
       isError = false;
       errorMessage = "Payment Type is require. Please select payment type";
-    }
-    // else if (
-    //   typeof bookingData.cheque_image != "object" ||
-    //   bookingData.cheque_image == ""
-    // ) {
-    //   isError = false;
-    //   errorMessage = "Image is require. Please select image";
-    // }
-    else if (
+    } else if (
+      typeof bookingData.cheque_image != "object" ||
+      bookingData.cheque_image == ""
+    ) {
+      isError = false;
+      errorMessage = "Attachment is require. Please select image";
+    } else if (
       bookingData.flat_type == undefined ||
       bookingData.flat_type == ""
     ) {
@@ -312,7 +323,7 @@ const BookingScreen = ({ navigation, route }: any) => {
       errorMessage = "Configuration is require. Please select configuration";
     } else if (bookingData.floor == undefined || bookingData.floor == "") {
       isError = false;
-      errorMessage = "floor is require. Please enter floor";
+      errorMessage = "Floor is require. Please enter floor";
     } else if (
       bookingData.flat_name == undefined ||
       bookingData.flat_name == ""
@@ -396,6 +407,7 @@ const BookingScreen = ({ navigation, route }: any) => {
       newFormdata.append("floor", bookingData.floor);
       newFormdata.append("flat_no", bookingData.flat_name);
       newFormdata.append("saleable_area", bookingData.saleable_area);
+      newFormdata.append("carpet_area", bookingData.carpet_area);
       newFormdata.append("jw_project_id", getBookingData.jw_project_id);
       newFormdata.append("crm_person_email", getBookingData.crm_person_email);
       // newFormdata.append("booking_date", bookingData.booking_date);
@@ -412,7 +424,7 @@ const BookingScreen = ({ navigation, route }: any) => {
       } else {
         dispatch(AddBooking(newFormdata));
       }
-    // }
+      // }
     }
   };
   // console.log("🚀 ~ file: index.tsx:329 ~ flatTypes:", flatTypes.length);
@@ -441,6 +453,9 @@ const BookingScreen = ({ navigation, route }: any) => {
         inventory={inventory}
         getBookingData={getBookingData}
         setcofigdata={setcofigdata}
+        okIsVisible={okIsVisible}
+        setOkIsVisible={setOkIsVisible}
+        onPressRightButton={onPressRightButton}
       />
     </>
   );

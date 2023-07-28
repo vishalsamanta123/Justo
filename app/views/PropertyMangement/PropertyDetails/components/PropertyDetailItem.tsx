@@ -71,7 +71,7 @@ const PropertyDetailItem = (props: any) => {
           <Text style={styles.nameTxt}>{props.items.property_title}</Text>
         </View>
       </View>
-      <View style={styles.Txtview}>
+      {/* <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>{strings.totalVisitor} </Text>
         </View>
@@ -103,10 +103,10 @@ const PropertyDetailItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>{props.items.close_visit}</Text>
         </View>
-      </View>
+      </View> */}
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>Locality </Text>
+          <Text style={styles.projectTxt}>Cluster Name </Text>
         </View>
         <View>
           <Text>:</Text>

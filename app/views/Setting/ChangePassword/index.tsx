@@ -4,7 +4,7 @@ import ChangePasswordView from "./components/ChangePasswordView";
 import strings from "app/components/utilities/Localization";
 import ErrorMessage from "app/components/ErrorMessage";
 import { GREEN_COLOR, RED_COLOR } from "app/components/utilities/constant";
-import { changePassword } from "app/Redux/Actions/AuthActions";
+import { changePassword, userLogout } from "app/Redux/Actions/AuthActions";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CHANGEPASSWORD_NULL } from "app/Redux/types";
@@ -32,7 +32,8 @@ const ChangePasswordScreen = ({ navigation, route }: any) => {
           msg: response.message,
           backgroundColor: GREEN_COLOR,
         });
-
+        dispatch(userLogout())
+        navigation.navigate('AuthLoading');
         dispatch({
           type: CHANGEPASSWORD_NULL,
           payload: {}

@@ -139,7 +139,7 @@ const AgentBankInfo = (props: any) => {
               disableSpecialCharacters={true}
               // require={true}
               placeholderText={
-                props?.agencyData?.cp_type === 1 ? strings.gst : strings.compGst
+                "22AAAAA0000A1Z5"
               }
               maxLength={20}
               headingText={

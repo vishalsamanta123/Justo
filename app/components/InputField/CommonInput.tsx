@@ -68,7 +68,7 @@ const CommonInput = (props: any) => {
             props.placeholderText === "3675 9834 6012" ||
             props.placeholderText === "BNZAA2318JM"
               ? props.placeholderText
-              : null
+              : props.placeholderText
           }
           placeholderTextColor={GRAY_COLOR}
           secureTextEntry={props.isSecureText}

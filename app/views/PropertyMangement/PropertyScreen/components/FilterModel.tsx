@@ -136,8 +136,10 @@ const FilterModal = (props: any) => {
             </View> */}
             <View style={[styles.inputWrap, { top: normalizeSpacing(8) }]}>
               <InputField
-                placeholderText={strings.searchBy + " " + strings.name}
-                headingText={strings.searchBy + " " + strings.name}
+                // placeholderText={strings.searchBy + " "  + strings.name}
+                // headingText={strings.searchBy + " "  + strings.name}
+                placeholderText={"Search by project Name"}
+                headingText={"Search by project Name"}
                 handleInputBtnPress={() => { }}
                 onChangeText={(val: any) => {
                   props.setFilterform({

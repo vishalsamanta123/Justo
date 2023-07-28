@@ -22,7 +22,8 @@ import {
 
 const LeadDetailsIteam = (props: any) => {
   const item = props?.items || {};
-  return (
+  const appointment_status = item?.appointment_status
+    return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.topDetailsView}>
         <View style={styles.topTxtView}>
@@ -180,7 +181,7 @@ const LeadDetailsIteam = (props: any) => {
               },
             ]}
           >
-            {item?.lead_status === 1
+            {/* {item?.lead_status === 1
               ? "New Lead"
               : item?.lead_status === 2
               ? "In Follow up"
@@ -191,8 +192,21 @@ const LeadDetailsIteam = (props: any) => {
               : item?.lead_status === 5
               ? "Registration"
               : item?.lead_status === 6
-              ? "Close"
-              : item?.lead_status === 7 && "Ready To Book"}
+              ? "Not interested"
+              : item?.lead_status === 7 && "Ready To Book"} */}
+            {appointment_status === 1
+              ? "Ready to visit"
+              : appointment_status === 2
+              ? "Visited"
+              : appointment_status === 3
+              ? "Booking"
+              : appointment_status === 4
+              ? "Cancel visit"
+              : appointment_status === 5
+              ? "Reschedule"
+              : appointment_status === 6
+              ? "Not interested"
+              : "New Lead"}
           </Text>
         </View>
       </View>

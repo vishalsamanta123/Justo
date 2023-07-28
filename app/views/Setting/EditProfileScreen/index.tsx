@@ -69,7 +69,10 @@ const EditProfileScreen = ({ navigation, route }: any) => {
   };
 
   const [editData, setEditData] = useState(allDetails?.allDetails);
-  console.log("🚀 ~ file: index.tsx:72 ~ allDetails?.allDetails:", allDetails?.allDetails)
+  console.log(
+    "🚀 ~ file: index.tsx:145 ~ editData?.whatsapp_no:",
+    typeof editData?.whatsapp_no
+  );
 
   // const handleNextPress = () => {
   //   dispatch(addAgentForm(editData))
@@ -82,80 +85,98 @@ const EditProfileScreen = ({ navigation, route }: any) => {
         backgroundColor: GREEN_COLOR,
       });
       navigation.goBack(null);
+    } else {
+      ErrorMessage({
+        msg: response.message,
+        backgroundColor: RED_COLOR,
+      });
     }
   };
 
   const validation = () => {
     // Keyboard.dismiss();
     // if (!isKeyboardVisible) {
-      let isError = true;
-      let errorMessage: any = "";
-      if (editData.firstname == undefined || editData.firstname == "") {
-        isError = false;
-        errorMessage = "First Name is require. Please enter Owner Name";
-      }
-      //  else if (editData?.adhar_no && editData?.adhar_no !== 'null') {
-      //   if (Regexs.AadharRegex.test(editData?.adhar_no) === false) {
-      //     isError = false;
-      //     errorMessage = "Please enter valid Aadhaar number";
-      //   }
-      // }
-      // else if (editData?.pancard_no && editData?.pancard_no !== 'null') {
-      //   if (Regexs.panRegex.test(editData?.pancard_no) === false) {
-      //     isError = false;
-      //     errorMessage = "Please enter valid Pancard number";
-      //   }
-      // } 
-      else if (editData.gender == undefined || editData.gender == "") {
-        isError = false;
-        errorMessage = "Gender is require. Please enter Gender";
-      } else if (
-        editData.dateofbirth == undefined ||
-        editData.dateofbirth == ""
-      ) {
-        isError = false;
-        errorMessage = "Date of Birth is require. Please enter Date of Birth";
-      } else if (
-        editData.mobile == undefined ||
-        editData.mobile == ""
-      ) {
-        isError = false;
-        errorMessage = "Mobile No. is require. Please enter Mobile No.";
-      }
-      //  else if (
-      //   editData.whatsapp_no == undefined ||
-      //   editData.whatsapp_no == ""
-      // ) {
-      //   isError = false;
-      //   errorMessage = "WhatsaApp No. is require. Please enter WhatsaApp No.";
-      // } 
-       else if (
-         (editData.whatsapp_no !== "" || 
-        editData.whatsapp_no == null ) && 
-        editData?.whatsapp_no?.length < 10
-      ) {
-        isError = false;
-        errorMessage = "WhatsaApp No. is require. Please enter WhatsaApp No.";
-      } 
-      else if (editData.email == undefined || editData.email == "") {
-        isError = false;
-        errorMessage = "Email is require. Please enter Email";
-      } else if (validateEmail.test(editData.email) === false) {
-        isError = false;
-        errorMessage = "Email format is wrong. Please enter correct Email";
-      } 
-      if (errorMessage !== "") {
-        ErrorMessage({
-          msg: errorMessage,
-          backgroundColor: RED_COLOR,
-        });
-      }
-      if(!isError){
-        Keyboard.dismiss()
-      }
-      return isError;
+    let isError = true;
+    let errorMessage: any = "";
+    // if (editData.justo_employee_code == undefined || editData.justo_employee_code == "") {
+    //   isError = false;
+    //   errorMessage = "Employee Code is require Please enter Employee code";
+    // } else
+     if (editData.firstname == undefined || editData.firstname == "") {
+      isError = false;
+      errorMessage = "First Name is require. Please enter Owner Name";
+    } else if (
+      editData?.adhar_no &&
+      Regexs.AadharRegex.test(editData?.adhar_no) === false
+    ) {
+      isError = false;
+      errorMessage = "Please enter valid Aadhaar number";
+    } else if (
+      editData?.pancard_no &&
+      Regexs.panRegex.test(editData?.pancard_no) === false
+    ) {
+      isError = false;
+      errorMessage = "Please enter valid Pancard number";
+    } else if (editData.gender == undefined || editData.gender == "") {
+      isError = false;
+      errorMessage = "Gender is require. Please enter Gender";
+    }
+    // else if (
+    //   editData.dateofbirth == undefined ||
+    //   editData.dateofbirth == ""
+    // ) {
+    //   isError = false;
+    //   errorMessage = "Date of Birth is require. Please enter Date of Birth";
+    // }
+    else if (editData.mobile == undefined || editData.mobile == "") {
+      isError = false;
+      errorMessage = "Mobile No. is require. Please enter Mobile No.";
+    }
+    //  else if (
+    //   editData.whatsapp_no == undefined ||
+    //   editData.whatsapp_no == ""
+    // ) {
+    //   isError = false;
+    //   errorMessage = "WhatsaApp No. is require. Please enter WhatsaApp No.";
+    // }
+    //  else if (
+    //    (editData.whatsapp_no !== "" ||
+    //   editData.whatsapp_no !== null ) &&
+    //   editData?.whatsapp_no?.length < 10
+    // ) {
+    //   isError = false;
+    //   errorMessage = "WhatsaApp No. is require. Please enter WhatsaApp No.";
+    // }
+    else if (
+      editData?.whatsapp_no &&
+      editData?.whatsapp_no !== "null" &&
+      Regexs.phoneNumRegex.test(editData?.whatsapp_no) === false
+    ) {
+      isError = false;
+      errorMessage = "Please enter valid whatsapp number";
+    } else if (editData.email == undefined || editData.email == "") {
+      isError = false;
+      errorMessage = "Email is require. Please enter Email";
+    } else if (validateEmail.test(editData.email) === false) {
+      isError = false;
+      errorMessage = "Email format is wrong. Please enter correct Email";
+    }
+    if (errorMessage !== "") {
+      ErrorMessage({
+        msg: errorMessage,
+        backgroundColor: RED_COLOR,
+      });
+    }
+    if (!isError) {
+      Keyboard.dismiss();
+    }
+    return isError;
     // }
   };
+  console.log(
+    "🚀 ~ file: index.tsx:177 ~ editData?.justo_employee_code:",
+    editData?.justo_employee_code
+  );
 
   const handleNextPress = async () => {
     if (validation()) {
@@ -175,10 +196,10 @@ const EditProfileScreen = ({ navigation, route }: any) => {
       formData.append("city", editData?.city);
       formData.append("justo_employee_code", editData?.justo_employee_code);
 
-      // formData.append("location", editData?.location);
-      // formData.append("latitude", editData?.latitude);
-      // formData.append("longitude", editData?.longitude);
-      // formData.append("address", editData?.agencies?.address);
+      formData.append("area", editData?.area);
+      formData.append("latitude", editData?.latitude);
+      formData.append("longitude", editData?.longitude);
+      formData.append("address", editData?.address);
       // formData.append("pin_code", editData?.agencies?.pin_code);
       // formData.append("gst", editData?.agencies?.gst);
       // formData.append("working_location", editData?.working_location);

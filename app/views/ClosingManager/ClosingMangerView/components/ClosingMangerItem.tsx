@@ -26,7 +26,8 @@ const ClosingManagersItem = (props: any) => {
             </View>
             <View style={styles.Txtview} >
                 <View style={styles.projectContainer}>
-                    <Text style={styles.projectTxt}>Total Booking :</Text>
+                    {/* <Text style={styles.projectTxt}>Total Booking :</Text> */}
+                    <Text style={styles.projectTxt}>No. of bookings :</Text>
                 </View>
                 {/* <View><Text>:</Text></View> */}
                 <View style={styles.nameContainer}>
@@ -35,17 +36,16 @@ const ClosingManagersItem = (props: any) => {
                         props.items.total_booking : '0'}</Text>
                 </View>
             </View>
-            <View style={styles.Txtview}>
+            {/* <View style={styles.Txtview}>
                 <View style={styles.projectContainer}>
                     <Text style={styles.projectTxt}>Total Closing :</Text>
                 </View>
-                {/* <View><Text>:</Text></View> */}
                 <View style={styles.nameContainer}>
                     <Text style={styles.nameTxt}>{props.items.total_closing_booking != "" ||
                         props.items.total_closing_booking != undefined ?
                         props.items.total_closing_booking : '0'}</Text>
                 </View>
-            </View>
+            </View> */}
             <View style={styles.Txtview} >
                 <View style={styles.projectContainer}>
                     <Text style={styles.projectTxt}>Mobile No. :</Text>
@@ -79,7 +79,7 @@ const ClosingManagersItem = (props: any) => {
                         moment(props.items.last_login).format(DATE_FORMAT) : ''}</Text>
                 </View>
             </View>
-            <View style={styles.buttonContainer}>
+            <View style={[styles.buttonContainer, !edit ? {justifyContent: 'flex-end'} : {}]}>
                 {edit &&
                     (<Button
                         width={78}
@@ -93,7 +93,7 @@ const ClosingManagersItem = (props: any) => {
                         border={10}
                         handleBtnPress={() => props.onPressEditCM('edit', props.items)}
                     />)}
-                    <Button
+                    {/* <Button
                         width={90}
                         height={30}
                         bgcolor={WHITE_COLOR}
@@ -104,7 +104,7 @@ const ClosingManagersItem = (props: any) => {
                         btnTxtsize={14}
                         border={10}
                         handleBtnPress={() => props.onPressEditTarget(props.items)}
-                    />
+                    /> */}
                 {view &&
                     (<TouchableOpacity style={styles.Viewbutton}
                         onPress={() => props.onPressView()}

@@ -36,7 +36,8 @@ const SourcingManagersItem = (props: any) => {
       </View>
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>{strings.total + " " + strings.visit} :</Text>
+          {/* <Text style={styles.projectTxt}>{strings.total + " " + strings.visit} :</Text> */}
+          <Text style={styles.projectTxt}>{strings.totalVisitor} :</Text>
         </View>
         {/* <View><Text>:</Text></View> */}
         <View style={styles.nameContainer}>
@@ -45,7 +46,8 @@ const SourcingManagersItem = (props: any) => {
       </View>
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>{strings.total + " " + strings.siteVisit} :</Text>
+          {/* <Text style={styles.projectTxt}>{strings.total + " " + strings.siteVisit} :</Text> */}
+          <Text style={styles.projectTxt}>{strings.totalSiteVisit} :</Text>
         </View>
         {/* <View><Text>:</Text></View> */}
         <View style={styles.nameContainer}>
@@ -54,7 +56,8 @@ const SourcingManagersItem = (props: any) => {
       </View>
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>{strings.total + " " + strings.closeVisit} :</Text>
+          {/* <Text style={styles.projectTxt}>{strings.total + " " + strings.booking} :</Text> */}
+          <Text style={styles.projectTxt}>{strings.totalCloseVisit} :</Text>
         </View>
         {/* <View><Text>:</Text></View> */}
         <View style={styles.nameContainer}>
@@ -118,7 +121,7 @@ const SourcingManagersItem = (props: any) => {
           </TouchableOpacity>
         )}
       </View>
-      <View style={{alignItems: 'flex-start', marginVertical: 10}}>
+      {/* <View style={{alignItems: 'flex-start', marginVertical: 10}}>
           <Button
             width={110}
             height={30}
@@ -132,7 +135,7 @@ const SourcingManagersItem = (props: any) => {
             border={10}
             handleBtnPress={() => props.onPressEditTarget(props.items)}
           />
-      </View>
+      </View> */}
     </View>
   );
 };

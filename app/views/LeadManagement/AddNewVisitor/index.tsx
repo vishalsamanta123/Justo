@@ -107,6 +107,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   const [agentList, setAgentList] = useState<any>([]);
   const [dropdownAgentList, setDropdownAgentList] = useState<any>([]);
   const [companyList, setCompanyList] = useState<any>([]);
+  const [sourcingPropertyList, setSourcingPropertyList] = useState<any>([]);
   const [employeeList, setEmployeeList] = useState<any>([]);
   const [mobileerror, setMobileError] = useState<any>("");
   const [okIsVisible, setOkIsVisible] = useState(false);
@@ -179,6 +180,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       })
     );
   };
+  console.log("🚀 ~ file: index.tsx:185 ~ agentList:", agentList)
   const handleCompanyDropdownPress = () => {
     const tempArr = agentList.filter((el: any) => el?.cp_type === 2);
     setCompanyList(tempArr);
@@ -212,8 +214,27 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     }
   }, [masterData, dropDownType]);
 
+  useEffect(() => {
+    if (propertyData?.response) {
+      const { response, loading, list } = propertyData;
+      if (response?.status === 200 && response?.data?.length > 0) {
+        setSourcingPropertyList(
+          response?.data?.filter((el: any) => el?.status === true)
+        );
+      } else {
+        setSourcingPropertyList([]);
+      }
+    }
+  }, [propertyData]);
+
   const handleGetProperty = async (id: any) => {
     dispatch({ type: START_LOADING });
+    dispatch(
+      getAllProperty({
+        offset: 0,
+        limit: "",
+      })
+    );
     const params = {
       cp_id: id,
     };
@@ -226,7 +247,8 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     if (response?.status === 200) {
       if (response?.data?.length > 0) {
         dispatch({ type: STOP_LOADING });
-        setAllProperty(response?.data);
+        const list = sourcingPropertyList?.filter((o1: any) => response?.data?.some((o2: any) => o1?.property_id === o2?.property_id))
+        setAllProperty(list);
       } else {
         dispatch({ type: STOP_LOADING });
         setAllProperty([]);
@@ -244,7 +266,8 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   useEffect(() => {
     if (
       userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-      userData?.data?.role_id === ROLE_IDS.closingmanager_id
+      userData?.data?.role_id === ROLE_IDS.closingmanager_id ||
+      userData?.data?.role_id === ROLE_IDS.sitehead_id  
     ) {
       console.log("getAllProperty CALLED===============")
       dispatch(

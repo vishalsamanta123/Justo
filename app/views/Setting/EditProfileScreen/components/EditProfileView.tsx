@@ -19,12 +19,15 @@ import { useSelector } from "react-redux";
 import InputCalender from "app/components/InputCalender";
 import PicturePickerModal from "app/components/Modals/PicturePicker";
 import FastImages from "app/components/FastImage";
+import CityModal from "app/components/Modals/CityModal";
 
 const EditProfileView = (props: any) => {
   const { onPressBack, allDetails, setEditData, editData } = props;
   const insets = useSafeAreaInsets();
   const [profileVisible, setProfileVisible] = useState(false);
-  console.log("🚀 ~ file: EditProfileView.tsx:210",editData?.dateofbirth)
+  const [ShowCity, setShowCity] = useState(false);
+
+  console.log("🚀 ~ file: EditProfileView.tsx:210", editData?.dateofbirth);
 
   return (
     <View style={styles.mainContainer}>
@@ -38,9 +41,10 @@ const EditProfileView = (props: any) => {
         barStyle={"light-content"}
         statusBarColor={PRIMARY_THEME_COLOR}
       />
-      <ScrollView 
-        keyboardShouldPersistTaps={'handled'}
-        automaticallyAdjustKeyboardInsets={Isios ? true : false}>
+      <ScrollView
+        keyboardShouldPersistTaps={"handled"}
+        automaticallyAdjustKeyboardInsets={Isios ? true : false}
+      >
         <View style={styles.wrap}>
           {/*  <Text style={styles.headingText}>{strings.basicInfoText}</Text> */}
           {/* <View style={styles.nderlineStyle} /> */}
@@ -66,11 +70,26 @@ const EditProfileView = (props: any) => {
               />
             </View>
           </TouchableOpacity>
+          {/* {editData?.justo_employee_code ? null : <View style={styles.inputWrap}>
+            <InputField
+              require={true}
+              disableSpecialCharacters={true}
+              valueshow={editData?.justo_employee_code}
+              handleInputBtnPress={() => {}}
+              onChangeText={(e: any) => {
+                setEditData({
+                  ...editData,
+                  justo_employee_code: e,
+                });
+              }}
+              headingText={"Employee code"}
+            />
+          </View>} */}
           <View style={styles.inputWrap}>
             <InputField
               disableSpecialCharacters={true}
               valueshow={editData?.firstname}
-              handleInputBtnPress={() => { }}
+              handleInputBtnPress={() => {}}
               onChangeText={(e: any) => {
                 setEditData({
                   ...editData,
@@ -84,7 +103,7 @@ const EditProfileView = (props: any) => {
             <InputField
               disableSpecialCharacters={true}
               valueshow={editData?.lastname}
-              handleInputBtnPress={() => { }}
+              handleInputBtnPress={() => {}}
               onChangeText={(e: any) => {
                 setEditData({
                   ...editData,
@@ -97,15 +116,16 @@ const EditProfileView = (props: any) => {
           <View style={styles.inputWrap}>
             <InputField
               valueshow={editData?.adhar_no}
-              handleInputBtnPress={() => { }}
+              handleInputBtnPress={() => {}}
               onChangeText={(e: any) => {
                 setEditData({
                   ...editData,
                   adhar_no: e,
                 });
               }}
-              inputType={'aadhaar'}
+              inputType={"aadhaar"}
               headingText={"Aadhaar No."}
+              placeholderText={"3675 9834 6012"}
               maxLength={14}
               keyboardtype={"number-pad"}
             />
@@ -114,7 +134,8 @@ const EditProfileView = (props: any) => {
             <InputField
               disableSpecialCharacters={true}
               valueshow={editData?.pancard_no}
-              handleInputBtnPress={() => { }}
+              handleInputBtnPress={() => {}}
+              placeholderText={"BNZAA2318JM"}
               onChangeText={(e: any) => {
                 setEditData({
                   ...editData,
@@ -144,7 +165,9 @@ const EditProfileView = (props: any) => {
                   styles.radioTxt,
                   {
                     color:
-                      editData?.gender === 1 ? PRIMARY_THEME_COLOR : BLACK_COLOR,
+                      editData?.gender === 1
+                        ? PRIMARY_THEME_COLOR
+                        : BLACK_COLOR,
                   },
                 ]}
               >
@@ -168,7 +191,9 @@ const EditProfileView = (props: any) => {
                   styles.radioTxt,
                   {
                     color:
-                      editData?.gender === 2 ? PRIMARY_THEME_COLOR : BLACK_COLOR,
+                      editData?.gender === 2
+                        ? PRIMARY_THEME_COLOR
+                        : BLACK_COLOR,
                   },
                 ]}
               >
@@ -195,6 +220,7 @@ const EditProfileView = (props: any) => {
             leftIcon={images.event}
             placeholderText={strings.dateOfBirth} //can edit
             editable={false}
+            headingText={strings.dateOfBirth}
             // onChangeText={() => { }}
             dateData={(data: any) => {
               setEditData({
@@ -209,15 +235,16 @@ const EditProfileView = (props: any) => {
               });
             }}
             value={
-              editData?.dateofbirth ?  moment(editData?.dateofbirth).format(DATE_FORMAT_EXCL) : strings.notfount
+              editData?.dateofbirth && editData?.dateofbirth !== "Invalid date"
+                ? moment(editData?.dateofbirth).format(DATE_FORMAT_EXCL)
+                : strings.notfount
             }
           />
           <View style={styles.inputWrap}>
             <InputField
               disableSpecialCharacters={true}
               valueshow={editData?.mobile?.toString()}
-              keyboardtype={'number-pad'}
-
+              keyboardtype={"number-pad"}
               onChangeText={(e: any) => {
                 setEditData({
                   ...editData,
@@ -226,14 +253,14 @@ const EditProfileView = (props: any) => {
               }}
               headingText={strings.mobileNo}
               maxLength={10}
+              editable={false}
             />
           </View>
           <View style={styles.inputWrap}>
             <InputField
               disableSpecialCharacters={true}
               valueshow={editData?.whatsapp_no}
-              keyboardtype={'number-pad'}
-
+              keyboardtype={"number-pad"}
               onChangeText={(e: any) => {
                 setEditData({
                   ...editData,
@@ -247,7 +274,7 @@ const EditProfileView = (props: any) => {
           <View style={styles.inputWrap}>
             <InputField
               valueshow={editData?.email}
-              handleInputBtnPress={() => { }}
+              handleInputBtnPress={() => {}}
               onChangeText={(e: any) => {
                 setEditData({
                   ...editData,
@@ -257,6 +284,59 @@ const EditProfileView = (props: any) => {
               headingText={strings.email + " " + strings.address}
             />
           </View>
+          <View style={[styles.inputWrap, {width: "100%"}]}>
+            <InputField
+              placeholderText={"Area"}
+              handleInputBtnPress={() => {}}
+              onChangeText={(data: any) => {
+                setEditData({
+                  ...editData,
+                  area: data,
+                });
+              }}
+              valueshow={editData?.area}
+              headingText={"Area"}
+              inputType={"location"}
+              onPressSelect={(data: any, detail: any) => {
+                setEditData({
+                  ...editData,
+                  area: data?.description,
+                  latitude: detail?.geometry?.location?.lat,
+                  longitude: detail?.geometry?.location?.lng,
+                });
+              }}
+            />
+          </View>
+          <View style={styles.inputWrap}>
+            <InputField
+              placeholderText={"Address"}
+              handleInputBtnPress={() => {}}
+              onChangeText={(text: any) => {
+                setEditData({
+                  ...editData,
+                  address: text,
+                });
+              }}
+              valueshow={editData?.address}
+              headingText={"Address"}
+            />
+          </View>
+          <View style={styles.inputWrap}>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => setShowCity(true)}
+            >
+              <InputField
+                editable={false}
+                // require={true}
+                placeholderText={"City"}
+                handleInputBtnPress={() => {}}
+                headingText={"City"}
+                valueshow={editData?.city}
+              />
+            </TouchableOpacity>
+          </View>
+
           {/*  <View style={styles.inputWrap}>
             <InputField
               placeholderText={"Sourcing Manager"}
@@ -289,6 +369,12 @@ const EditProfileView = (props: any) => {
                 local_profile_picture: data,
               });
             }}
+          />
+          <CityModal
+            Visible={ShowCity}
+            setIsVisible={setShowCity}
+            setData={props.setEditData}
+            data={props.editData}
           />
         </View>
       </ScrollView>

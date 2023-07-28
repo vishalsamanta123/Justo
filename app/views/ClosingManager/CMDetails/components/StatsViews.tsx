@@ -23,7 +23,7 @@ const StatsView = (props: any) => {
     <ScrollView>
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>Total Booking</Text>
+          <Text style={styles.projectTxt}>No. of bookings</Text>
         </View>
         <View>
           <Text>:</Text>
@@ -47,7 +47,8 @@ const StatsView = (props: any) => {
       </View>
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>{strings.closingPrcntg}</Text>
+          {/* <Text style={styles.projectTxt}>{strings.closingPrcntg}</Text> */}
+          <Text style={styles.projectTxt}>Booking Conversation%</Text>
         </View>
         <View>
           <Text>:</Text>

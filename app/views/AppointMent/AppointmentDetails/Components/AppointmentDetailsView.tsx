@@ -189,13 +189,13 @@ const AppointmentDetailsView = (props: any) => {
               handleBtnPress={() =>
                 props.handleStatusUpdate({ ...data, editType: "closing" })
               }
-              width={Isios ? 180 : 150}
+              width={Isios ? 180 : 160}
             />
             {/* Checked In */}
             <Button
               buttonText={strings.appointmentDone}
               handleBtnPress={() => setCpChecking(true)}
-              width={Isios ? 180 : 150}
+              width={Isios ? 180 : 160}
             />
           </View>
         </View>
@@ -246,6 +246,14 @@ const AppointmentDetailsView = (props: any) => {
         }}
         setIsVisible={props.setOkIsVisible}
       />
+      <JustForOkModal 
+        headertitle={"Success"}
+        message={"Booking has been sent to CRM..."}
+        Visible={props.okBookingIsVisible} 
+        onPressRightButton={()=>{
+          props.setOkBookingIsVisible(false)
+        }}
+        setIsVisible={props.setOkBookingIsVisible} />
     </View>
   );
 };

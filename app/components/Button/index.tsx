@@ -52,6 +52,7 @@ const Button = (props: any) => {
               color: btnTxtcolor,
               fontFamily: FONT_FAMILY_SEMIBOLD,
               textTransform: props.capitalize ? 'none' : 'capitalize',
+              textAlign: 'center'
             }}
           >
             {props.buttonText ? props.buttonText : "Button"}

@@ -23,11 +23,12 @@ import strings from "../../../../components/utilities/Localization";
 import styles from "./styles";
 import { RequiredStart } from "app/components/utilities/GlobalFuncations";
 import EmptyListScreen from "app/components/CommonScreen/EmptyListScreen";
+import JustForOkModal from "app/components/Modals/JustForOkModal";
 
 const BookingView = (props: any) => {
   console.log(
-    "🚀 ~ file: Booking.tsx:421 ~ props?.getBookingData?.saleable_area:",
-    props?.bookingData?.saleable_area
+    "🚀 ~ file: Booking.tsx:421 ~ props?.getBookingData?.carpet_area:",
+    props?.bookingData?.carpet_area
   );
 
   return (
@@ -126,20 +127,22 @@ const BookingView = (props: any) => {
                 />
               </View> */}
           <View style={styles.straightVw}>
-            <Text
-              style={[
-                styles.titleTxt,
-                {
-                  bottom:
-                    typeof props?.bookingData?.cheque_image === "object"
-                      ? 8
-                      : 0,
-                },
-              ]}
-            >
-              Attach Photo : 
-              {/* <RequiredStart />{" "} */}
-            </Text>
+            <View style={{flexDirection: 'row'}}>
+              <Text
+                style={[
+                  styles.titleTxt,
+                  {
+                    bottom:
+                      typeof props?.bookingData?.cheque_image === "object"
+                        ? 8
+                        : 0,
+                  },
+                ]}
+              >
+                Attach Photo :
+              </Text>
+              <RequiredStart />
+            </View>
             <View>
               <Button
                 width={130}
@@ -236,7 +239,7 @@ const BookingView = (props: any) => {
                   ...props.bookingData,
                   floor: item,
                   flat_name: "",
-                  saleable_area: ""
+                  saleable_area: "",
                 });
               }}
               newRenderItem={(item: any) => {
@@ -278,6 +281,7 @@ const BookingView = (props: any) => {
                   ...props.bookingData,
                   flat_name: item["Flat Name"],
                   saleable_area: item["Saleable Area"],
+                  carpet_area: item["Carpet Area"],
                 });
               }}
               newRenderItem={(item: any) => {
@@ -368,8 +372,9 @@ const BookingView = (props: any) => {
             </View> 
             
           </View>*/}
-          {props?.bookingData?.saleable_area ? <View style={styles.inputWrap}>
-            {/* <InputField
+          {props?.bookingData?.saleable_area ? (
+            <View style={styles.inputWrap}>
+              {/* <InputField
               // disableSpecialCharacters={true}
               placeholderText={props?.bookingData?.saleable_area}
               headingText={"Saleable Area"}
@@ -377,19 +382,20 @@ const BookingView = (props: any) => {
               valueshow={props?.bookingData?.saleable_area}
               // keyboardtype={"number-pad"}
             /> */}
-            <View style={styles.IteamView}>
-              <View style={styles.Txtview}>
-                <View style={styles.projectContainer}>
-                  <Text style={styles.projectTxt}>Carpet Area :</Text>
-                </View>
-                <View style={styles.nameContainer}>
-                  <Text style={styles.nameTxt}>
-                    {props?.bookingData?.saleable_area}  Sq. ft.
-                  </Text>
+              <View style={styles.IteamView}>
+                <View style={styles.Txtview}>
+                  <View style={styles.projectContainer}>
+                    <Text style={styles.projectTxt}>Carpet Area :</Text>
+                  </View>
+                  <View style={styles.nameContainer}>
+                    <Text style={styles.nameTxt}>
+                      {props?.bookingData?.carpet_area} Sq. ft.
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
-          </View> : null}
+          ) : null}
           <View style={styles.inputWrap}>
             <InputField
               require={true}
@@ -404,6 +410,21 @@ const BookingView = (props: any) => {
                 });
               }}
               valueshow={props?.bookingData?.description}
+            />
+          </View>
+          <View style={styles.inputWrap}>
+            <InputField
+              require={true}
+              headingText={"CRM Person Email"}
+              placeholderText={"CRM Person Email"}
+              onChangeText={(data: any) => {
+                props.setBookingData({
+                  ...props.bookingData,
+                  description: data,
+                });
+              }}
+              valueshow={props?.getBookingData.crm_person_email}
+              editable={false}
             />
           </View>
           <View style={{ marginVertical: normalize(30) }}>
@@ -425,6 +446,13 @@ const BookingView = (props: any) => {
             cheque_image: data,
           });
         }}
+      />
+      <JustForOkModal
+        headertitle={"Confirmation"}
+        message={"Booking has been sent to CRM..."}
+        Visible={props.okIsVisible}
+        onPressRightButton={props.onPressRightButton}
+        setIsVisible={props.setOkIsVisible}
       />
     </View>
   );

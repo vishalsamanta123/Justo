@@ -243,7 +243,7 @@ const AppointmentItem = (props: any) => {
                     : props?.items?.status === 2
                     ? GREEN_COLOR
                     : props?.items?.status == 3
-                    ? GREEN_COLOR
+                    ?  bookingStatus === 4 ? "red" : GREEN_COLOR
                     : props?.items?.status == 5 || props?.items?.status == 6
                     ? "red"
                     : props?.items?.status === 4
@@ -266,7 +266,8 @@ const AppointmentItem = (props: any) => {
               ? "Not Fit for Sale"
               : props?.items?.status === 3
               ? bookingStatus === 1
-                ? "Ready to Book"
+                ? "Ready to Book" 
+                : bookingStatus === 4 ? "Cancel Booking" 
                 : "Booking"
               : "Completed"}
           </Text>

@@ -19,6 +19,7 @@ const AppointmentDetails = ({ navigation, route }: any) => {
   const [BookingData, setBookingData] = useState<any>({});
   const [detailsData, setDetailsData] = useState<any>([]);
   const [okIsVisible, setOkIsVisible] = useState(false);
+  const [okBookingIsVisible, setOkBookingIsVisible] = useState(false);
   const [errorMessage, seterrorMessage] = useState(false);
   const dispatch: any = useDispatch();
   const { response = {}, detail = "" } = useSelector(
@@ -71,7 +72,8 @@ const AppointmentDetails = ({ navigation, route }: any) => {
         msg: addedBookingData?.response?.message,
         backgroundColor: GREEN_COLOR
       })
-      navigation.navigate("BookingList", { type: "readyToBook" });
+      // navigation.navigate("BookingList", { type: "readyToBook" });
+      setOkBookingIsVisible(true)
     }
     else if (closeAppointment?.response?.status === 200) {
       dispatch(removeEditUser())
@@ -127,7 +129,7 @@ const AppointmentDetails = ({ navigation, route }: any) => {
         "JW Person Id not map with this Property. Contact with JV admin for map this.";
     } else if (
       getBookingData?.lead_score < 70
-      // !getBookingData?.lead_score
+      // getBookingData?.lead_score
     ) {
       isError = true;
       errorMessage = "Visitor score is <70 please update visitor information";

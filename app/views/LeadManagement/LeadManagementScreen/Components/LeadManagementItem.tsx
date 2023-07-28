@@ -21,6 +21,11 @@ const LeadManagementItem = (props: any) => {
     view: "view_visitor",
     edit: "edit_visitor",
   });
+  const appointment_status =
+    props?.items?.appointment_status?.length > 0 &&
+    props?.items?.appointment_status[
+      props?.items?.appointment_status?.length - 1
+    ];
 
   return (
     <View style={styles.IteamView}>
@@ -173,7 +178,7 @@ const LeadManagementItem = (props: any) => {
               },
             ]}
           >
-            {props.items.lead_status === 1
+            {/* {props.items.lead_status === 1
               ? "New Lead"
               : props.items.lead_status === 2
               ? "In Follow up"
@@ -184,8 +189,21 @@ const LeadManagementItem = (props: any) => {
               : props.items.lead_status === 5
               ? "Registration"
               : props.items.lead_status === 6
-              ? "Close"
-              : props.items.lead_status === 7 && "Ready To Book"}
+              ? "Not interested"
+              : props.items.lead_status === 7 && "Ready To Book"} */}
+            {appointment_status === 1
+              ? "Ready to visit"
+              : appointment_status === 2
+              ? "Visited"
+              : appointment_status === 3
+              ? "Booking"
+              : appointment_status === 4
+              ? "Cancel visit"
+              : appointment_status === 5
+              ? "Reschedule"
+              : appointment_status === 6
+              ? "Not interested"
+              : "New Lead"}
           </Text>
         </View>
       </View>

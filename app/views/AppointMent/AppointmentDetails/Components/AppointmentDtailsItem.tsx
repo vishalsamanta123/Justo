@@ -111,7 +111,8 @@ const AppointmentDtailsItem = (props: any) => {
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>
-            {strings.siteVisit + " " + strings.dateTime}
+            {/* {strings.siteVisit + " " + strings.dateTime} */}
+            Last Site Visit Date & Time
           </Text>
         </View>
         <View>
@@ -160,7 +161,7 @@ const AppointmentDtailsItem = (props: any) => {
                     : item?.status === 2
                     ? GREEN_COLOR
                     : item?.status == 3
-                    ? GREEN_COLOR
+                    ? bookingStatus === 4 ? "red" : GREEN_COLOR
                     : item?.status == 5 || item?.status == 6
                     ? "red"
                     : item?.status === 4
@@ -184,6 +185,8 @@ const AppointmentDtailsItem = (props: any) => {
               : item?.status === 3
               ? bookingStatus === 1
                 ? "Ready to Book"
+                : bookingStatus === 4
+                ? "Cancel Booking"
                 : "Booking"
               : "Completed"}
           </Text>

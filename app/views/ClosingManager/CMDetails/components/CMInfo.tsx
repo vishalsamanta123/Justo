@@ -23,7 +23,7 @@ const SMInfoView = (props: any) => {
         <ScrollView>
             <View style={styles.Txtview}>
                 <View style={styles.projectContainer}>
-                    <Text style={styles.projectTxt}>Full Name</Text>
+                    <Text style={styles.projectTxt}>Name</Text>
                 </View>
                 <View><Text>:</Text></View>
                 <View style={styles.nameContainer}>
