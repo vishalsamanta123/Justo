@@ -40,7 +40,6 @@ const BookingDetailsView = (props: any) => {
         RNFS.downloadFile(options)
             .promise.then(() => FileViewer.open(localFile))
             .then((e) => {
-                console.log('e', e)
                 // success
             })
             .catch((error) => {

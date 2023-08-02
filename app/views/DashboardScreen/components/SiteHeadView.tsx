@@ -11,16 +11,18 @@ import {
 const SiteHeadView = (props: any) => {
   return (
     <View style={styles.mainContainerWrap}>
-      <View style={styles.secondPortion}>
-      </View>
+      <View style={styles.secondPortion}></View>
       {/* Bottom Section */}
-      <View style={[styles.thirdPortion, {flex: 3}]}>
-      <TouchableOpacity
-          onPress={() => props.onPressTodayVisit('')}
-          style={[styles.thirdPortioncardView, {height: normalizeHeight(120)}]}
+      <View style={[styles.thirdPortion, { flex: 3 }]}>
+        <TouchableOpacity
+          onPress={() => props.onPressTodayVisit("today")}
+          style={styles.thirdPortioncardView}
         >
           <View style={styles.thirdPortionCardTextView}>
-            <Text style={styles.thirdPortionCardText}>{strings.totalVisitor}</Text>
+            <Text style={styles.thirdPortionCardText}>
+              {/* Site Visit */}
+              Today's Leads
+            </Text>
           </View>
           <View style={styles.numberView}>
             <Text style={styles.thirdPortionNumberText}>
@@ -28,9 +30,59 @@ const SiteHeadView = (props: any) => {
             </Text>
           </View>
         </TouchableOpacity>
-      <TouchableOpacity
+        <TouchableOpacity
+          onPress={() => props.onPressSiteVisit("todayComplete")}
+          style={styles.thirdPortioncardView}
+        >
+          <View style={styles.thirdPortionCardTextView}>
+            <Text style={styles.thirdPortionCardText}>
+              {/* {strings.todayCompVisit} */}
+              Today's Appointments
+            </Text>
+          </View>
+          <View style={styles.numberView}>
+            <Text style={styles.thirdPortionNumberText}>
+              {props?.dashboardData?.total_appoinment}
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.onPressSiteVisit('todayComplete')}
+          style={[
+            styles.thirdPortioncardView,
+            { height: normalizeHeight(120) },
+          ]}
+        >
+          <View style={styles.thirdPortionCardTextView}>
+            <Text style={styles.thirdPortionCardText}>Today's Checkin</Text>
+          </View>
+          <View style={styles.numberView}>
+            <Text style={styles.thirdPortionNumberText}>
+              {props?.dashboardData?.today_checking}
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.onpressBooking('request', 'today')}
+          style={styles.thirdPortioncardView}
+        >
+          <View style={styles.thirdPortionCardTextView}>
+            <Text style={styles.thirdPortionCardText} numberOfLines={2}>
+            Today's Booking
+            </Text>
+          </View>
+          <View style={styles.numberView}>
+            <Text style={styles.thirdPortionNumberText}>
+              {props?.dashboardData?.total_booking}
+            </Text>
+          </View>
+        </TouchableOpacity>
+        {/* <TouchableOpacity
           onPress={() => props.onPressSiteVisit()}
-          style={[styles.thirdPortioncardView, {height: normalizeHeight(120)}]}
+          style={[
+            styles.thirdPortioncardView,
+            { height: normalizeHeight(120) },
+          ]}
         >
           <View style={styles.thirdPortionCardTextView}>
             <Text style={styles.thirdPortionCardText}>Total Appointment</Text>
@@ -40,26 +92,34 @@ const SiteHeadView = (props: any) => {
               {props?.dashboardData?.total_appoinment}
             </Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
-          onPress={() => props.onpressBooking('request')}
-          style={[styles.thirdPortioncardView, {height: normalizeHeight(120)}]}
+          onPress={() => props.onpressBooking('cancel', 'cancelBooking')}
+          style={[
+            styles.thirdPortioncardView,
+            { height: normalizeHeight(120) },
+          ]}
         >
           <View style={styles.thirdPortionCardTextView}>
-            <Text style={styles.thirdPortionCardText}>Total Booking</Text>
+            <Text style={styles.thirdPortionCardText}>Today's Cancel Booking</Text>
           </View>
           <View style={styles.numberView}>
             <Text style={styles.thirdPortionNumberText}>
-              {props?.dashboardData?.total_booking}
+              {props?.dashboardData?.cancel_booking}
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => props.onpressBooking('register')}
-          style={[styles.thirdPortioncardView, {height: normalizeHeight(120)}]}
+        {/* <TouchableOpacity
+          onPress={() => props.onpressBooking("register")}
+          style={[
+            styles.thirdPortioncardView,
+            { height: normalizeHeight(120) },
+          ]}
         >
           <View style={styles.thirdPortionCardTextView}>
-            <Text style={styles.thirdPortionCardText}>Total Registration</Text>
+            <Text style={styles.thirdPortionCardText}>
+              Today's Registration
+            </Text>
           </View>
           <View style={styles.numberView}>
             <Text style={styles.thirdPortionNumberText}>
@@ -68,6 +128,19 @@ const SiteHeadView = (props: any) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => props.onpressBooking("cancel", "cancelBooking")}
+          style={styles.thirdPortioncardView}
+        >
+          <View style={styles.thirdPortionCardTextView}>
+            <Text style={styles.thirdPortionCardText}>{"Cancel Booking"}</Text>
+          </View>
+          <View style={styles.numberView}>
+            <Text style={styles.thirdPortionNumberText}>
+              {props?.dashboardData?.cancel_booking}
+            </Text>
+          </View>
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity
           onPress={() => props.onpressBooking()}
           style={[styles.thirdPortioncardView, {height: normalizeHeight(120)}]}
         >
@@ -79,7 +152,7 @@ const SiteHeadView = (props: any) => {
               {props?.dashboardData?.total_aready_to_book}
             </Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

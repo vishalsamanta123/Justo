@@ -23,6 +23,8 @@ import { getEmployeeList } from "app/Redux/Actions/CompanyActions";
 import { START_LOADING, STOP_LOADING } from "app/Redux/types";
 import { apiCall } from "app/components/utilities/httpClient";
 import apiEndPoints from "app/components/utilities/apiEndPoints";
+import { CountryArray } from "app/components/utilities/countryData";
+import { useFocusEffect } from "@react-navigation/native";
 
 const VisitorUpdateScreen = ({ navigation, route }: any) => {
   const data = route?.params || 0;
@@ -45,6 +47,9 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
   const [dropdownAgentList, setDropdownAgentList] = useState<any>([]);
   const [configuration, setConfiguration] = useState<any>([]);
   const [dropDownType, setDropDownType] = useState(0);
+  const [countryData, setCountryData] = useState(CountryArray);
+  const [countryCode, setCountryCode] = useState("+91");
+  const [countyPicker, setCountyPicker] = useState(false);
   const [updateForm, setUpdateForm] = React.useState<any>({
     lead_id: "",
     first_name: "",
@@ -108,7 +113,7 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
   //       limit: "",
   //     })
   //   );
-  //   getAllPropertyData();
+  // getAllPropertyData();
   // }, []);
   useEffect(() => {
     if (propertyData?.response) {
@@ -142,7 +147,9 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
     if (response?.status === 200) {
       if (response?.data?.length > 0) {
         dispatch({ type: STOP_LOADING });
-        const list = sourcingPropertyList?.filter((o1: any) => response?.data?.some((o2: any) => o1?.property_id === o2?.property_id))
+        const list = sourcingPropertyList?.filter((o1: any) =>
+          response?.data?.some((o2: any) => o1?.property_id === o2?.property_id)
+        );
         setAllProperty(list);
       } else {
         dispatch({ type: STOP_LOADING });
@@ -157,36 +164,74 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
       setAllProperty([]);
     }
   };
-  useEffect(() => {
-    if (
-      userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-      userData?.data?.role_id === ROLE_IDS.closingmanager_id
-    ) {
-      console.log("getAllProperty CALLED===============");
-      dispatch(
-        getAllProperty({
-          offset: 0,
-          limit: "",
-        })
-      );
-      getAllPropertyData();
-
-      if (propertyData?.response?.status === 200) {
-        if (propertyData?.response?.data?.length > 0) {
-          const activeData = propertyData?.response?.data.filter((el: any) => {
-            return el.status == true;
-          });
-          activeData?.length > 0
-            ? setAllProperty(activeData)
-            : setAllProperty([]);
+  useFocusEffect(
+    React.useCallback(() => {
+      if (
+        userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+        userData?.data?.role_id === ROLE_IDS.closingmanager_id ||
+        userData?.data?.role_id === ROLE_IDS.clusterhead_id ||
+        userData?.data?.role_id === ROLE_IDS.sitehead_id ||
+        userData?.data?.role_id === ROLE_IDS.businesshead_id 
+      ) {
+        dispatch(
+          getAllProperty({
+            offset: 0,
+            limit: "",
+          })
+        );
+        getAllPropertyData();
+  
+        if (propertyData?.response?.status === 200) {
+          if (propertyData?.response?.data?.length > 0) {
+            const activeData = propertyData?.response?.data.filter((el: any) => {
+              return el.status == true;
+            });
+            activeData?.length > 0
+              ? setAllProperty(activeData)
+              : setAllProperty([]);
+          } else {
+            setAllProperty([]);
+          }
         } else {
           setAllProperty([]);
         }
-      } else {
-        setAllProperty([]);
       }
-    }
-  }, []);
+      return () => {};
+    }, [navigation])
+  );
+
+  // useEffect(() => {
+  //   if (
+  //     userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+  //     userData?.data?.role_id === ROLE_IDS.closingmanager_id ||
+  //     userData?.data?.role_id === ROLE_IDS.clusterhead_id ||
+  //     userData?.data?.role_id === ROLE_IDS.sitehead_id ||
+  //     userData?.data?.role_id === ROLE_IDS.businesshead_id 
+  //   ) {
+  //     dispatch(
+  //       getAllProperty({
+  //         offset: 0,
+  //         limit: "",
+  //       })
+  //     );
+  //     getAllPropertyData();
+
+  //     if (propertyData?.response?.status === 200) {
+  //       if (propertyData?.response?.data?.length > 0) {
+  //         const activeData = propertyData?.response?.data.filter((el: any) => {
+  //           return el.status == true;
+  //         });
+  //         activeData?.length > 0
+  //           ? setAllProperty(activeData)
+  //           : setAllProperty([]);
+  //       } else {
+  //         setAllProperty([]);
+  //       }
+  //     } else {
+  //       setAllProperty([]);
+  //     }
+  //   }
+  // }, []);
 
   const getAllPropertyData = () => {
     if (propertyData?.response?.status === 200) {
@@ -287,10 +332,6 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
   };
 
   const handleEmployeeDropdownPress = () => {
-    console.log(
-      "🚀 ~ file: index.tsx:247 ~ updateForm?.cp_id:",
-      updateForm?.cp_id
-    );
     dispatch(
       getEmployeeList({
         agency_id: updateForm?.cp_id,
@@ -306,6 +347,40 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         type: type,
       })
     );
+  };
+
+  async function handleCountryCode(search: any) {
+    // setCountryCode(search)
+    if (search) {
+      if (isNaN(search)) {
+        let array = CountryArray.filter((l: any) => {
+          return l.name.toLowerCase().includes(search.toLowerCase());
+        });
+        setCountryData(array);
+      } else {
+        let array = CountryArray.filter((l: any) => {
+          return l.dial_code.includes(+search);
+        });
+        setCountryData(array);
+      }
+    } else {
+      setCountryData(CountryArray);
+    }
+  }
+  async function selectCountryData(countryCode: any, flag: any) {
+    console.log("🚀 ~ file: index.tsx:872 ~ countryCode:", countryCode);
+    setCountryData(CountryArray);
+    setCountryCode(countryCode);
+    setUpdateForm({
+      ...updateForm,
+      country_code: countryCode,
+    });
+    // setCountryFlag(flag)
+    setCountyPicker(false);
+  }
+  const handleCloseCountry = () => {
+    setCountyPicker(!countyPicker);
+    setCountryData(CountryArray);
   };
 
   useEffect(() => {
@@ -482,16 +557,30 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
       isError = false;
       errorMessage = "Please select property name";
     } else if (
-      updateForm?.first_name === "" ||
-      updateForm?.first_name === undefined
+      updateForm?.first_name?.trim() === "" ||
+      updateForm?.first_name?.trim() === undefined
     ) {
       isError = false;
       errorMessage = "Please fill visitor name";
+    } else if (
+      updateForm?.country_code === "" ||
+      updateForm?.country_code === undefined ||
+      updateForm?.country_code === null
+    ) {
+      isError = false;
+      errorMessage = "Please enter country code";
+    } else if (
+      updateForm?.mobile === "" ||
+      updateForm?.mobile === undefined ||
+      updateForm?.mobile === null
+    ) {
+      isError = false;
+      errorMessage = "Please fill mobile number";
+    } else if ( updateForm?.mobile && updateForm?.mobile?.length < 10) {
+      isError = false;
+      errorMessage = "Please enter valid Mobile number";
     } 
-    // else if (Regexs.phoneNumRegex.test(updateForm?.mobile) === false) {
-    //   isError = false;
-    //   errorMessage = "Please enter valid Mobile number";
-    // } else if (
+    // else if (
     //   updateForm?.whatsapp_no &&
     //   Regexs.phoneNumRegex.test(updateForm?.whatsapp_no) === false
     // ) {
@@ -621,7 +710,7 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
     if (validation()) {
       let edit_params: any = {
         lead_id: updateForm?.lead_id,
-        first_name: updateForm?.first_name,
+        first_name: updateForm?.first_name?.trim(),
         email: updateForm?.email,
         mobile: updateForm?.mobile,
         gender: updateForm?.gender,
@@ -682,6 +771,7 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         // cp_id: updateForm?.cp_id,
         // cp_emp_id: updateForm?.cp_emp_id,
         cp_name: updateForm?.cp_name,
+        country_code: updateForm?.country_code,
       };
       if (updateForm?.cp_emp_id) {
         edit_params = {
@@ -768,6 +858,14 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         handleGetProperty={handleGetProperty}
         setAllProperty={setAllProperty}
         configuration={configuration}
+        selectCountryData={selectCountryData}
+        handleCloseCountry={handleCloseCountry}
+        countryData={countryData}
+        countryCode={countryCode}
+        setCountryCode={setCountryCode}
+        countyPicker={countyPicker}
+        setCountyPicker={setCountyPicker}
+        handleCountryCode={handleCountryCode}
       />
     </>
   );

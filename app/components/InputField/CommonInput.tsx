@@ -40,7 +40,7 @@ const CommonInput = (props: any) => {
               textAlignVertical: "top",
               top: props.topping,
               color: GRAY_LIGHT_COLOR,
-              fontSize: 13
+              fontSize: 13,
             },
           ]}
           onChangeText={(val: any) => {

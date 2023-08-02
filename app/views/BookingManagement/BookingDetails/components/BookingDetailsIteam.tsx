@@ -12,7 +12,6 @@ import images from 'app/assets/images'
 const BookingDetailsItem = (props: any) => {
     const getLoginType = useSelector((state: any) => state.login);
     const item = props?.item[0] || {}
-    console.log('item: ', item);
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.topDetailsView}>

@@ -173,7 +173,7 @@ const AddEmployee = ({ navigation, route }: any) => {
       if (agent_name === "" || agent_name === undefined) {
         isError = false;
         errorMessage = strings.employeeNameReqVal;
-      } else if (Regexs.oneSpaceRegex.test(agent_name) === false) {
+      } else if (Regexs.oneSpaceRegex.test(agent_name?.trim()) === false) {
         isError = false;
         errorMessage = strings.NameCorrectlyVal;
       }
@@ -307,7 +307,7 @@ const AddEmployee = ({ navigation, route }: any) => {
       );
       formData.append(
         "agent_name",
-        agentInfoData?.agent_name ? agentInfoData?.agent_name : ""
+        agentInfoData?.agent_name ? agentInfoData?.agent_name?.trim() : ""
       );
       formData.append(
         "primary_mobile",

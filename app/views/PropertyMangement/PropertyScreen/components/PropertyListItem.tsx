@@ -91,10 +91,10 @@ const PropertyListItem = (props: any) => {
           <Text style={styles.nameTxt}>{moment(props.items.createdDate).format(DATE_TIME_FORMAT)}</Text>
         </View>
       </View>
-      <View style={[styles.buttonContainer, roleType === ROLE_IDS.sitehead_id || !allocate ? {
+      <View style={[styles.buttonContainer, roleType === ROLE_IDS.sitehead_id || !(allocate && props.items.status) ? {
         justifyContent: 'flex-end'
       } : {}]}>
-        {allocate &&
+        {allocate && props.items.status &&
         ( roleType === ROLE_IDS.sitehead_id ?
           <></> :
           <TouchableOpacity

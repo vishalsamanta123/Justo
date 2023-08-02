@@ -43,7 +43,6 @@ const VideoContent = ({ navigation, route }: any) => {
   };
 
   const handleSharePress = async (data: any) => {
-    console.log("data: ", data);
     dispatch({ type: START_LOADING });
 
     const fs = RNFetchBlob.fs;
@@ -52,7 +51,6 @@ const VideoContent = ({ navigation, route }: any) => {
     // });
     const mediaUrls = [`${base_url}${data?.document}`];
     let newArr: any = [];
-    console.log("mediaUrls: ", mediaUrls);
 
     mediaUrls.map((url: any) => {
       let imagePath: any = null;
@@ -69,13 +67,11 @@ const VideoContent = ({ navigation, route }: any) => {
         })
         .then(async (base64Data) => {
           // here's base64 encoded image
-          // console.log(`data:image/png;base64,${base64Data}`);
           // mediaArr.push();
           // return JSON.stringify(base64Data);
           // remove the file from storage
           await newArr.push(`data:video/mp4;base64,${base64Data}`);
           setMediaArr(newArr);
-          // console.log("newArr: ", newArr);
           // return fs.unlink(imagePath);
           // if (data?.length === newArr.length) {
           const options = {
@@ -84,7 +80,6 @@ const VideoContent = ({ navigation, route }: any) => {
             message: 'Check This video',
           };
           await Share.open(options).then((res: any) => {
-            console.log("ressd", res);
           }).catch((e)=>{
             console.log('e====>' , e)
           });

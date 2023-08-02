@@ -7,6 +7,10 @@ import {
   TextInput,
   Linking,
   Keyboard,
+  Modal,
+  Image,
+  FlatList,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { RadioButton } from "react-native-paper";
@@ -39,6 +43,7 @@ import { CpType } from "app/components/utilities/DemoData";
 import { normalizeSpacing } from "app/components/scaleFontSize";
 import { RequiredStart } from "app/components/utilities/GlobalFuncations";
 import JustForOkModal from "app/components/Modals/JustForOkModal";
+import CountryPickerModal from "app/components/Modals/CountryPickerModal";
 
 const AddNewVisitorForm = (props: any) => {
   const { masterDatas } = props;
@@ -68,8 +73,6 @@ const AddNewVisitorForm = (props: any) => {
         ? "add_appointment"
         : "add_appointment _site_visite",
   });
-
-  console.log("🚀 ~ file: AddNewVisitorForm.tsx:249 ~ CONST_IDS?.cp_lead_source_id:", CONST_IDS.cp_lead_source_id)
 
   useEffect(() => {
     if (props.type == "edit") {
@@ -145,54 +148,82 @@ const AddNewVisitorForm = (props: any) => {
               headingText={"Visitor Name"}
             />
           </View>
-          <View style={styles.inputWrap}>
-            <InputField
-              require={true}
-              disableSpecialCharacters={true}
-              placeholderText={strings.mobileNo}
-              handleInputBtnPress={() => {}}
-              onChangeText={(data: any) => {
-                props.setFormData({
-                  ...props.formData,
-                  mobile: data,
-                });
-                // if (Regexs.mobilenumRegex.test(data)) {
-                //   props.setEmailMobValidation({
-                //     ...props.emailMobvalidation,
-                //     mobile: null,
-                //   });
-                // } else {
+          <View
+            style={[
+              styles.inputWrap,
+              { flexDirection: "row", justifyContent: "space-between" },
+            ]}
+          >
+            <View style={{ width: "35%" }}>
+              <TouchableOpacity
+                accessible={false}
+                style={{}}
+                onPress={() => {
+                  props.setCountyPicker(true);
+                }}
+                activeOpacity={1.0}
+              >
+                <InputField
+                  require={true}
+                  disableSpecialCharacters={true}
+                  placeholderText={"Country"}
+                  handleInputBtnPress={() => {}}
+                  valueshow={props?.formData?.country_code}
+                  headingText={"Country"}
+                  editable={false}
+                  countryCodeInput={true}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={{ width: "60%" }}>
+              <InputField
+                require={true}
+                disableSpecialCharacters={true}
+                placeholderText={strings.mobileNo}
+                handleInputBtnPress={() => {}}
+                onChangeText={(data: any) => {
+                  props.setFormData({
+                    ...props.formData,
+                    mobile: data,
+                  });
+                  // if (Regexs.mobilenumRegex.test(data)) {
+                  //   props.setEmailMobValidation({
+                  //     ...props.emailMobvalidation,
+                  //     mobile: null,
+                  //   });
+                  // } else {
                   props.setEmailMobValidation({
                     ...props.emailMobvalidation,
                     mobile: null,
                   });
-                // }
-              }}
-              valueshow={props?.formData?.mobile}
-              headingText={strings.mobileNo}
-              keyboardtype={"number-pad"}
-              maxLength={15}
-              rightImageVw={styles.tickImgVw}
-              rightImageSty={styles.tickImg}
-              rightImgSrc={
-                props?.emailMobvalidation?.mobile === "mobile"
-                  ? images.check
-                  : null
-              }
-              onFocus={() => {
-                if (props?.formData?.mobile !== props?.formData?.mobile) {
-                  props.setEmailMobValidation({
-                    ...props.emailMobvalidation,
-                    mobile: null,
-                  });
+                  // }
+                }}
+                valueshow={props?.formData?.mobile}
+                headingText={strings.mobileNo}
+                keyboardtype={"number-pad"}
+                maxLength={15}
+                rightImageVw={styles.tickImgVw}
+                rightImageSty={styles.tickImg}
+                rightImgSrc={
+                  props?.emailMobvalidation?.mobile === "mobile"
+                    ? images.check
+                    : null
                 }
-              }}
-              onBlur={(val: any) => {
-                // if (Regexs.mobilenumRegex.test(props?.formData?.mobile)) {
-                //   props.handleCheckEmailMobile();
-                // }
-              }}
-            />
+                onFocus={() => {
+                  if (props?.formData?.mobile !== props?.formData?.mobile) {
+                    props.setEmailMobValidation({
+                      ...props.emailMobvalidation,
+                      mobile: null,
+                    });
+                  }
+                }}
+                onBlur={(val: any) => {
+                  // if (Regexs.mobilenumRegex.test(props?.formData?.mobile)) {
+                  //   props.handleCheckEmailMobile();
+                  // }
+                }}
+              />
+            </View>
           </View>
 
           <View style={[styles.inputWrap]}>
@@ -218,7 +249,6 @@ const AddNewVisitorForm = (props: any) => {
               valueField={"_id"}
               value={props?.formData?.lead_source}
               onChange={(item: any) => {
-                console.log("item: ", item);
                 props.setFormData({
                   ...props.formData,
                   lead_source: item._id,
@@ -228,10 +258,17 @@ const AddNewVisitorForm = (props: any) => {
                   cp_emp_id: "",
                 });
                 if (
-                  !(userData?.userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-                  userData?.userData?.data?.role_id === ROLE_IDS.closingmanager_id)
-                ){
-                  props.setAllProperty([])
+                  !(
+                    userData?.userData?.data?.role_id ===
+                      ROLE_IDS.closingtl_id ||
+                    userData?.userData?.data?.role_id ===
+                      ROLE_IDS.closingmanager_id ||
+                    userData?.userData?.data?.role_id ===
+                      ROLE_IDS.clusterhead_id ||
+                    userData?.userData?.data?.role_id === ROLE_IDS.sitehead_id
+                  )
+                ) {
+                  props.setAllProperty([]);
                 }
               }}
               newRenderItem={(item: any) => {
@@ -271,7 +308,7 @@ const AddNewVisitorForm = (props: any) => {
                       property_type_title: "",
                       property_title: "",
                     });
-                    props.setAllProperty([])
+                    props.setAllProperty([]);
                   }}
                   newRenderItem={(item: any) => {
                     return (
@@ -304,8 +341,7 @@ const AddNewVisitorForm = (props: any) => {
                         property_type_title: "",
                         property_title: "",
                       });
-                      props.handleGetProperty(item._id)
-
+                      props.handleGetProperty(item._id);
                     }}
                     newRenderItem={(item: any) => {
                       return (
@@ -340,7 +376,7 @@ const AddNewVisitorForm = (props: any) => {
                           property_type_title: "",
                           property_title: "",
                         });
-                        props.handleGetProperty(item._id)
+                        props.handleGetProperty(item._id);
                       }}
                       newRenderItem={(item: any) => {
                         return (
@@ -1511,6 +1547,14 @@ const AddNewVisitorForm = (props: any) => {
         onPressRightButton={props.onPressRightButton}
         Visible={props.okIsVisible}
         setIsVisible={props.setOkIsVisible}
+      />
+      <CountryPickerModal
+        countyPicker={props.countyPicker}
+        setCountyPicker={props.setCountyPicker}
+        handleCountryCode={props.handleCountryCode}
+        handleCloseCountry={props.handleCloseCountry}
+        countryData={props.countryData}
+        selectCountryData={props.selectCountryData}
       />
     </View>
   );

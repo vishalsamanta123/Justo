@@ -22,10 +22,6 @@ const PropertyDetailView = (props: any) => {
   const [isVisible, setIsVisible] = useState(false);
   const [okIsVisible, setOkIsVisible] = useState(false);
   const [propertydetail, setPropertydetail] = useState<any>([]);
-  console.log(
-    "🚀 ~ file: PropertyDetailView.tsx:23 ~ PropertyDetailView ~ propertydetail:",
-    propertydetail
-  );
   const [configurations, setConfigurations] = useState([]);
   const [propertydocument, setPropertydocument] = useState([]);
   const [amenity, setAmenity] = useState([]);

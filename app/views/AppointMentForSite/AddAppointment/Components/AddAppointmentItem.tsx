@@ -28,11 +28,6 @@ import { leadTypes } from "app/components/utilities/DemoData";
 import CheckBox from "@react-native-community/checkbox";
 
 const AddAppointmentItem = (props: any) => {
-  console.log(
-    "🚀 ~ file: AddAppointmentItem.tsx:275 ~ AddAppointmentItem ~ props.appointMentForm?.pickup === 'Yes':",
-    props.appointMentForm
-  );
-
   return (
     <ScrollView
       keyboardShouldPersistTaps={"handled"}

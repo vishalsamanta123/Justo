@@ -13,7 +13,6 @@ import {
 import strings from "app/components/utilities/Localization";
 
 const AppointmentDtailsItem = (props: any) => {
-  console.log("props: ", props);
   const appdetail = props?.status || {};
   const appointment_cancle_by_name =
     props?.status?.appointment_cancle_by?.length > 0
@@ -37,7 +36,6 @@ const AppointmentDtailsItem = (props: any) => {
       .catch((error) => console.warn(error));
   } else {
   }
-  console.log("appdetail.appointment_status: ", appdetail);
 
   return (
     <ScrollView>

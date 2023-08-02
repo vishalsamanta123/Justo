@@ -28,8 +28,6 @@ const AppointmentDtailsItem = (props: any) => {
     props?.detail?.booking_status?.length > 0
       ? props?.detail?.booking_status[0]
       : "";
-  console.log('props?.detail: ', props?.detail);
-  console.log("🚀 ~ file: AppointmentDtailsItem.tsx:98 ~ props?.detail?.expected_possession_date:", props?.detail?.expected_possession_date)
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

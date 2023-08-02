@@ -21,7 +21,7 @@ const CancelBookingItems = (props: any) => {
                     <Text style={styles.projectTxt}>Booking Date :</Text>
                 </View>
                 <View style={styles.nameContainer}>
-                    <Text style={styles.nameTxt}>{moment(item.booking_date).format(DATE_TIME_FORMAT)}</Text>
+                    <Text style={styles.nameTxt}>{moment.utc(item.booking_date).format(DATE_TIME_FORMAT)}</Text>
                 </View>
             </View>
             <View style={styles.Txtview} >

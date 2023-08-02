@@ -376,7 +376,6 @@ const AgentBasicInfoView = (props: any) => {
             headingText={strings.address}
             valueshow={props.agencyData?.location}
             onChangeText={(val: any) => {
-            console.log('val: ', val);
               props.setAgencyData({
                 ...props.agencyData,
                 location: val,

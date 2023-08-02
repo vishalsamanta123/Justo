@@ -39,7 +39,6 @@ const ImageContent = ({ navigation, route }: any) => {
     // });
     const mediaUrls = [`${base_url}${data?.document}`]
     let newArr: any = [];
-    console.log('mediaUrls: ', mediaUrls);
 
     const finalUrls = mediaUrls.map((url: any) => {
       let imagePath: any = null;
@@ -75,9 +74,7 @@ const ImageContent = ({ navigation, route }: any) => {
     const mediaUrls = data?.map((item: any) => {
       return `${base_url}${item?.document}`;
     });
-    // const mediaUrls = [`${base_url}${data?.document}`]
     let newArr: any = [];
-    console.log('mediaUrls: ', mediaUrls);
 
     const finalUrls = mediaUrls.map((url: any) => {
       let imagePath: any = null;

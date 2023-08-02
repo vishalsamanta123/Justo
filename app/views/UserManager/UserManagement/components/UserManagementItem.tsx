@@ -69,7 +69,7 @@ const UserManagementItem = (props: any) => {
                         moment(props.items.last_login).format(DATE_TIME_FORMAT) : ''}</Text>
                 </View>
             </View>
-            <View style={styles.buttonContainer}>
+            <View style={[styles.buttonContainer, {justifyContent: 'flex-end'}]}>
                 {edit &&
                     (<Button
                         width={78}
@@ -83,7 +83,7 @@ const UserManagementItem = (props: any) => {
                         border={10}
                         handleBtnPress={() => props.onPressEditCM('edit', props.items)}
                     />)}
-                {props?.items?.role_id === ROLE_IDS.sitehead_id ||
+                {/* {props?.items?.role_id === ROLE_IDS.sitehead_id ||
                     props?.items?.role_id === ROLE_IDS.receptionist_id || 
                     props?.items?.role_id === ROLE_IDS.callcenter_id ||
                     props?.items?.role_id === ROLE_IDS.clusterhead_id
@@ -99,7 +99,7 @@ const UserManagementItem = (props: any) => {
                         btnTxtsize={14}
                         border={10}
                         handleBtnPress={() => props.onPressEditTarget(props.items)}
-                    />}
+                    />} */}
                 {view &&
                     (<TouchableOpacity style={styles.Viewbutton}
                         onPress={() => props.onPressView()}

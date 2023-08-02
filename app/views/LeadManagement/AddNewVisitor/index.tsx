@@ -33,6 +33,8 @@ import moment from "moment";
 import { DATE_FORMAT } from "react-native-gifted-chat";
 import JustForOkModal from "app/components/Modals/JustForOkModal";
 import { START_LOADING, STOP_LOADING } from "app/Redux/types";
+import { CountryArray } from "app/components/utilities/countryData";
+import { useFocusEffect } from "@react-navigation/native";
 
 const AddNewVisitorScreen = ({ navigation, route }: any) => {
   const { type, data } = route?.params || {};
@@ -84,6 +86,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     cp_type: "",
     cp_id: "",
     cp_emp_id: "",
+    country_code: "",
   });
   const [NavigationType, setNavigationType] = useState(0);
   const [dropDownType, setDropDownType] = useState(0);
@@ -111,6 +114,9 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   const [employeeList, setEmployeeList] = useState<any>([]);
   const [mobileerror, setMobileError] = useState<any>("");
   const [okIsVisible, setOkIsVisible] = useState(false);
+  const [countryData, setCountryData] = useState(CountryArray);
+  const [countryCode, setCountryCode] = useState("+91");
+  const [countyPicker, setCountyPicker] = useState(false);
   useEffect(() => {
     if (type === "edit") {
       if (data?._id) {
@@ -149,7 +155,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   }, [employeeData]);
 
   useEffect(() => {
-    handleDropdownPress(2);
+    handleDropdownPress(13);
     dispatch(
       getAllProperty({
         offset: 0,
@@ -180,7 +186,6 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       })
     );
   };
-  console.log("🚀 ~ file: index.tsx:185 ~ agentList:", agentList)
   const handleCompanyDropdownPress = () => {
     const tempArr = agentList.filter((el: any) => el?.cp_type === 2);
     setCompanyList(tempArr);
@@ -247,7 +252,9 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     if (response?.status === 200) {
       if (response?.data?.length > 0) {
         dispatch({ type: STOP_LOADING });
-        const list = sourcingPropertyList?.filter((o1: any) => response?.data?.some((o2: any) => o1?.property_id === o2?.property_id))
+        const list = sourcingPropertyList?.filter((o1: any) =>
+          response?.data?.some((o2: any) => o1?.property_id === o2?.property_id)
+        );
         setAllProperty(list);
       } else {
         dispatch({ type: STOP_LOADING });
@@ -263,37 +270,76 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     }
   };
 
-  useEffect(() => {
-    if (
-      userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-      userData?.data?.role_id === ROLE_IDS.closingmanager_id ||
-      userData?.data?.role_id === ROLE_IDS.sitehead_id  
-    ) {
-      console.log("getAllProperty CALLED===============")
-      dispatch(
-        getAllProperty({
-          offset: 0,
-          limit: "",
-        })
-      );
-      getAllPropertyData();
+  useFocusEffect(
+    React.useCallback(() => {
+      if (
+        userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+        userData?.data?.role_id === ROLE_IDS.closingmanager_id ||
+        userData?.data?.role_id === ROLE_IDS.sitehead_id ||
+        userData?.data?.role_id === ROLE_IDS.clusterhead_id ||
+        userData?.data?.role_id === ROLE_IDS.businesshead_id
+      ) {
+        dispatch(
+          getAllProperty({
+            offset: 0,
+            limit: "",
+          })
+        );
+        getAllPropertyData();
 
-      if (propertyData?.response?.status === 200) {
-        if (propertyData?.response?.data?.length > 0) {
-          const activeData = propertyData?.response?.data.filter((el: any) => {
-            return el.status == true;
-          });
-          activeData?.length > 0
-            ? setAllProperty(activeData)
-            : setAllProperty([]);
+        if (propertyData?.response?.status === 200) {
+          if (propertyData?.response?.data?.length > 0) {
+            const activeData = propertyData?.response?.data.filter(
+              (el: any) => {
+                return el.status == true;
+              }
+            );
+            activeData?.length > 0
+              ? setAllProperty(activeData)
+              : setAllProperty([]);
+          } else {
+            setAllProperty([]);
+          }
         } else {
           setAllProperty([]);
         }
-      } else {
-        setAllProperty([]);
       }
-    }
-  }, []);
+      return () => {};
+    }, [navigation])
+  );
+
+  // useEffect(() => {
+  //   if (
+  //     userData?.data?.role_id === ROLE_IDS.closingtl_id ||
+  //     userData?.data?.role_id === ROLE_IDS.closingmanager_id ||
+  //     userData?.data?.role_id === ROLE_IDS.sitehead_id ||
+  //     userData?.data?.role_id === ROLE_IDS.clusterhead_id ||
+  //     userData?.data?.role_id === ROLE_IDS.businesshead_id
+  //   ) {
+  //     dispatch(
+  //       getAllProperty({
+  //         offset: 0,
+  //         limit: "",
+  //       })
+  //     );
+  //     getAllPropertyData();
+
+  //     if (propertyData?.response?.status === 200) {
+  //       if (propertyData?.response?.data?.length > 0) {
+  //         const activeData = propertyData?.response?.data.filter((el: any) => {
+  //           return el.status == true;
+  //         });
+  //         activeData?.length > 0
+  //           ? setAllProperty(activeData)
+  //           : setAllProperty([]);
+  //       } else {
+  //         setAllProperty([]);
+  //       }
+  //     } else {
+  //       setAllProperty([]);
+  //     }
+  //   }
+  // }, [propertyData]);
 
   const getAllPropertyData = () => {
     if (propertyData?.response?.status === 200) {
@@ -320,12 +366,24 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       let isError = true;
       let errorMessage: any = "";
 
-      if (formData?.first_name === "" || formData?.first_name === undefined) {
+      if (
+        formData?.first_name?.trim() === "" ||
+        formData?.first_name?.trim() === undefined
+      ) {
         isError = false;
         errorMessage = "Please fill visitor name";
-      } else if (Regexs.oneSpaceRegex.test(formData?.first_name) === false) {
+      } else if (
+        Regexs.oneSpaceRegex.test(formData?.first_name?.trim()) === false
+      ) {
         isError = false;
         errorMessage = strings.NameCorrectlyVal;
+      } else if (
+        formData?.country_code === "" ||
+        formData?.country_code === undefined ||
+        formData?.country_code === null
+      ) {
+        isError = false;
+        errorMessage = "Please enter country code";
       } else if (
         formData?.mobile === "" ||
         formData?.mobile === undefined ||
@@ -333,15 +391,10 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       ) {
         isError = false;
         errorMessage = "Please fill mobile number";
-      } 
-      // else if (
-      //   formData?.mobile &&
-      //   Regexs.mobilenumRegex.test(formData?.mobile) === false
-      // ) {
-      //   isError = false;
-      //   errorMessage = "Please Enter valid mobile number";
-      // } 
-      else if (
+      } else if (formData?.mobile && formData?.mobile?.length < 10) {
+        isError = false;
+        errorMessage = "Please Enter valid mobile number";
+      } else if (
         formData?.visit_confirmation_status === "" ||
         formData?.visit_confirmation_status === undefined
       ) {
@@ -375,14 +428,14 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       ) {
         isError = false;
         errorMessage = "Please enter valid Pancard number";
-      } 
+      }
       // else if (
       //   formData?.whatsapp_no &&
       //   Regexs.phoneNumRegex.test(formData?.whatsapp_no) === false
       // ) {
       //   isError = false;
       //   errorMessage = "Please enter valid whatsapp number";
-      // } 
+      // }
       else if (
         formData?.email &&
         Regexs.emailRegex.test(formData?.email) === false
@@ -567,7 +620,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     let params: any = {
       mobile: formData?.mobile,
       property_id: formData?.property_id,
-      visitor_name: formData?.first_name,
+      visitor_name: formData?.first_name?.trim(),
       cp_id: formData?.cp_id,
     };
     dispatch({ type: START_LOADING });
@@ -665,7 +718,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       if (type === "edit") {
         let edit_params: any = {
           lead_id: formData?.lead_id,
-          first_name: formData?.first_name,
+          first_name: formData?.first_name?.trim(),
           email: formData?.email,
           mobile: formData?.mobile,
           gender: formData?.gender,
@@ -722,6 +775,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
           current_stay: formData?.current_stay,
           property_type: formData?.property_type,
           preferred_bank: formData?.preferred_bank,
+          country_code: formData?.country_code,
           // visit_confirmation_status: formData?.visit_confirmation_status,
           // cp_type: formData?.cp_type,
           // cp_id: formData?.cp_id,
@@ -752,14 +806,9 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         } else {
           var isValidMobile: any = true;
         }
-        console.log(
-          "🚀 ~ file: index.tsx:652 ~ OnpressCreateEdit ~ isValidMobile:",
-          isValidMobile
-        );
-
         if (isValidMobile) {
           let add_params: any = {
-            first_name: formData?.first_name,
+            first_name: formData?.first_name?.trim(),
             email: formData?.email,
             mobile: formData?.mobile,
             gender: formData?.gender,
@@ -810,6 +859,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
             current_stay: formData?.current_stay,
             property_type: formData?.property_type,
             preferred_bank: formData?.preferred_bank,
+            country_code: formData?.country_code,
             visit_confirmation_status: formData?.visit_confirmation_status,
             // cp_type: formData?.cp_type,
             // cp_id: formData?.cp_id,
@@ -833,6 +883,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
             };
           }
 
+          console.log("🚀 ~ file: index.tsx:836 ~ formData:", formData);
           if (formData?.property_id !== "") {
             dispatch(addVisitor(add_params));
           } else {
@@ -847,6 +898,39 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     setOkIsVisible(false);
   };
 
+  async function handleCountryCode(search: any) {
+    console.log("🚀 ~ file: index.tsx:861 ~ search:", search);
+    // setCountryCode(search)
+    if (search) {
+      if (isNaN(search)) {
+        let array = CountryArray.filter((l: any) => {
+          return l.name?.toLowerCase().includes(search?.toLowerCase());
+        });
+        setCountryData(array);
+      } else {
+        let array = CountryArray.filter((l: any) => {
+          return l.dial_code.includes(+search);
+        });
+        setCountryData(array);
+      }
+    } else {
+      setCountryData(CountryArray);
+    }
+  }
+  async function selectCountryData(countryCode: any, flag: any) {
+    setCountryData(CountryArray);
+    setCountryCode(countryCode);
+    setFormData({
+      ...formData,
+      country_code: countryCode,
+    });
+    // setCountryFlag(flag)
+    setCountyPicker(false);
+  }
+  const handleCloseCountry = () => {
+    setCountyPicker(!countyPicker);
+    setCountryData(CountryArray);
+  };
   return (
     <AddNewVisitorForm
       handleBackPress={handleBackPress}
@@ -879,6 +963,14 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       setOkIsVisible={setOkIsVisible}
       handleGetProperty={handleGetProperty}
       setAllProperty={setAllProperty}
+      countryData={countryData}
+      countryCode={countryCode}
+      setCountryCode={setCountryCode}
+      countyPicker={countyPicker}
+      setCountyPicker={setCountyPicker}
+      handleCountryCode={handleCountryCode}
+      selectCountryData={selectCountryData}
+      handleCloseCountry={handleCloseCountry}
     />
   );
 };

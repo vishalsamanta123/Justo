@@ -260,7 +260,6 @@ const ChatScreen = ({ navigation, route }: any) => {
         url: "",
         type: "",
       };
-      console.log("result[0].type", result[0].type)
       if (result[0].type === "image/jpeg") {
         imageRef = storage().ref(`images/${result[0].name}`);
         mediaObject = {

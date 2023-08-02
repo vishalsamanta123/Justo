@@ -9,7 +9,6 @@ import moment from "moment";
 
 const SMInfoView = (props: any) => {
     const item = props?.items || {}
-    console.log('item: ', item);
 
     var birthDate = new Date(item.dateofbirth);
 

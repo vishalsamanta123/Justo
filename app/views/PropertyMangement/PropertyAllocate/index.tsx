@@ -80,15 +80,12 @@ const AllocatePropertyScreen = ({ navigation, route }: any) => {
         //   backgroundColor: GREEN_COLOR
         // })
       } else {
-        console.log('response?.data?.length > 0',)
       }
     } else {
       setCpList([]);
       setSearchcpList([]);
     }
-    console.log('removeAllocateproperty: ', removeAllocateproperty);
     if (removeAllocateproperty?.response?.status === 200) {
-      console.log('if CALLED');
       
       ErrorMessage({
         msg: removeAllocateproperty?.response?.message,
@@ -100,7 +97,6 @@ const AllocatePropertyScreen = ({ navigation, route }: any) => {
     }
   }, [response, removeAllocateproperty]);
   useEffect(() => {
-    console.log('AddTargetForCp: ', AddTargetForCp);
     if (AddTargetForCp?.response?.status === 200) {
       ErrorMessage({
         msg: AddTargetForCp?.response?.message,

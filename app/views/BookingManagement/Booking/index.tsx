@@ -96,23 +96,25 @@ const BookingScreen = ({ navigation, route }: any) => {
   //     }
   // }}
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     getDropDownData(0);
-  //     // if (getBookingData?.cp_id) {
-  //       dispatch(getAgencyDetail({
-  //         // cp_id: getBookingData.cp_id,
-  //         cp_id: "64ae806ddb45a1f0ae72dc9a",
-  //       })
-  //       );
-  //     // }
-  //     return () => {};
-  //   }, [navigation])
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      getDropDownData(0);
+      // if (getBookingData?.cp_id) {
+        dispatch(getAgencyDetail({
+          // cp_id: getBookingData.cp_id,
+          cp_id: "64ae806ddb45a1f0ae72dc9a",
+        })
+        );
+      // }
+      return () => {};
+    }, [navigation])
+  );
+  console.log("🚀 ~ file: index.tsx:115 ~ agencyDetails?.response?.data:", agencyDetails?.response?.data[0])
+  console.log("🚀 ~ file: index.tsx:30 ~ getBookingData:", getBookingData.lead_source[0])
+
 
   const handleJwCpRegistor = async () => {
     const data = agencyDetails?.response?.data[0] || {};
-    console.log("🚀 ~ file: index.tsx:120 ~ data:", data);
     const params = {
       login: "api",
       password: "76db466cb187c33c5f170d6352afad44da671002",
@@ -144,13 +146,11 @@ const BookingScreen = ({ navigation, route }: any) => {
           : "", // cp_bank_detail",
       },
     };
-    console.log("🚀 ~ file: index.tsx:138 ~ params.record:", params.record);
     const res = await apiCallJWDemo(
       "post",
       apiEndPoints.CP_REGISTOR_JW,
       params
     );
-    console.log("Registor res", res?.data);
     return false;
   };
 
@@ -410,6 +410,7 @@ const BookingScreen = ({ navigation, route }: any) => {
       newFormdata.append("carpet_area", bookingData.carpet_area);
       newFormdata.append("jw_project_id", getBookingData.jw_project_id);
       newFormdata.append("crm_person_email", getBookingData.crm_person_email);
+      // newFormdata.append("lead_source", getBookingData?.lead_source?.length > 0 ? getBookingData?.lead_source[0] : "");
       // newFormdata.append("booking_date", bookingData.booking_date);
       newFormdata.append("description", bookingData.description);
       newFormdata.append("booking_status", 2);
@@ -427,9 +428,6 @@ const BookingScreen = ({ navigation, route }: any) => {
       // }
     }
   };
-  // console.log("🚀 ~ file: index.tsx:329 ~ flatTypes:", flatTypes.length);
-  // console.log("🚀 ~ file: index.tsx:330 ~ floors:", floors.length);
-  // console.log("🚀 ~ file: index.tsx:332 ~ inventory:", inventory.length);
 
   return (
     <>

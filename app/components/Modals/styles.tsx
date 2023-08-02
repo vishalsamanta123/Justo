@@ -12,6 +12,7 @@ import {
   FONT_FAMILY_REGULAR,
   FONT_FAMILY_SEMIBOLD,
   GRAY_COLOR,
+  Isios,
   PRIMARY_THEME_COLOR,
   RED_COLOR,
   WHITE_COLOR,
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
   borderView: {
     borderBottomColor: GRAY_COLOR,
     borderBottomWidth: 1,
-    
   },
   topContainer: {
     flexDirection: "row",
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
   MiddleContainer: {
     marginVertical: normalizeSpacing(10),
-    padding: 3.5
+    padding: 3.5,
   },
   closeIcon: {
     tintColor: "red",
@@ -334,14 +334,51 @@ const styles = StyleSheet.create({
   },
   inventoryWrap: {
     margin: 10,
-    marginLeft: 20
+    marginLeft: 20,
   },
   inventoryView: {
-    padding: 5
+    padding: 5,
   },
   inventoryTxt: {
     fontSize: normalize(14),
     fontFamily: FONT_FAMILY_REGULAR,
+  },
+  countyModelCon: {
+    height: Isios ? "90%": '90%',
+    backgroundColor: "#f5f2f2",
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    paddingTop: 10,
+    marginVertical: 20
+  },
+  searchInputCon: {
+    width: "100%",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: "#a9a9a9",
+    marginBottom: 10,
+    height: 40,
+    // justifyContent: "center",
+  },
+  serchInput: {
+    color: "#000",
+    fontFamily: FONT_FAMILY_REGULAR,
+    paddingBottom: 5,
+    paddingLeft: 15,
+    textAlignVertical: 'center'
+  },
+  countryCodeSelect: {
+    height: 35,
+    flexDirection: "row",
+    paddingLeft: 15,
+    alignItems: "center",
+    borderTopWidth: 0.4,
+    borderTopColor: "#a9a9a9",
+  },
+  countrycloseIcon: {
+    tintColor: "red",
+    width: normalizeWidth(35),
+    height: normalizeHeight(35),
   },
 });
 

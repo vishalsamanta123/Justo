@@ -41,11 +41,6 @@ const AgentBasicInfoView = (props: any) => {
       working_location: array,
     });
   };
-
-  console.log("🚀 ~ file: AgentBasicInfoView.tsx:202 ~ props?.agentInfoData?.email:", props?.agentInfoData?.email)
-
-
-  const insets = useSafeAreaInsets();
   return (
     <View style={styles.mainContainer}>
       <Header

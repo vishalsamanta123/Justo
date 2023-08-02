@@ -14,10 +14,6 @@ import styles from "./styles";
 
 const VideoPlayer = (props: any) => {
   const [hideControls, setHideControls] = useState(true);
-    // setInterval(() => {
-    //   console.log('HEEEEE')
-    //     setHideControls(true)
-    // }, 15000)
   return (
     <TouchableWithoutFeedback onPress={() => {setHideControls(!hideControls)}}>
       <Modal isVisible={props.Visible}>

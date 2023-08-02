@@ -154,7 +154,6 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
     let isError = true;
     let errorMessage: any = ''
     // if (type !== 'edit') {
-      console.log("🚀 ~ file: index.tsx:156 ~ type:", type)
       if (type === 'reSheduled') {
         if (appointMentForm.update_type == undefined || appointMentForm.update_type == '') {
           isError = false;
@@ -274,7 +273,6 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
       visit_status: strings.warm
       // visit_status: appointMentForm?.visit_status
     }
-    console.log("🚀 ~ file: index.tsx:266 ~ onPressAddEdit ~ params:", params)
     if (type === 'edit') {
       if (validation()) {
         dispatch(editAppointment({ ...params, appointment_id: item?._id }))

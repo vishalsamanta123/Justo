@@ -26,10 +26,6 @@ const AppointmentScreen = ({ navigation, route }: any) => {
     end_date: moment(new Date).format(DATE_FORMAT)
 
   }
-  // useEffect(() => {
-  //     settype(route?.params)
-  //   console.log('route?.params: ', route?.params);
-  // }, [route, navigation])
 
   useFocusEffect(
     React.useCallback(() => {

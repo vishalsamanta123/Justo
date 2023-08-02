@@ -26,11 +26,6 @@ import EmptyListScreen from "app/components/CommonScreen/EmptyListScreen";
 import JustForOkModal from "app/components/Modals/JustForOkModal";
 
 const BookingView = (props: any) => {
-  console.log(
-    "🚀 ~ file: Booking.tsx:421 ~ props?.getBookingData?.carpet_area:",
-    props?.bookingData?.carpet_area
-  );
-
   return (
     <View style={styles.mainContainer}>
       <Header
@@ -234,7 +229,6 @@ const BookingView = (props: any) => {
               // valueField={"type"}
               value={props.bookingData?.floor}
               onChange={(item: any) => {
-                console.log("item: ", typeof item);
                 props.setBookingData({
                   ...props.bookingData,
                   floor: item,
@@ -273,10 +267,6 @@ const BookingView = (props: any) => {
               // valueField={"configuration_id"}
               value={props?.bookingData.flat_name}
               onChange={(item: any) => {
-                console.log(
-                  "🚀 ~ file: Booking.tsx:266 ~ item:",
-                  item["Saleable Area"]
-                );
                 props.setBookingData({
                   ...props.bookingData,
                   flat_name: item["Flat Name"],

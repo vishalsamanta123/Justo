@@ -65,7 +65,6 @@ const BookingListScreen = ({ navigation, route }: any) => {
   };
 
   const getBookingLits = (offset: any, array: any) => {
-    console.log("array: ", array);
     setOffset(offset);
     if (type === "register") {
       dispatch(

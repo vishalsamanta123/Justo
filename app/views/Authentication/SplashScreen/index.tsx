@@ -33,14 +33,7 @@ const SplashScreen = ({ navigation, route }: any) => {
     setTimeout(() => {
       switch (notificationType) {
         case 'lead':
-          console.log('LEAD CALLED ++ + + ++ ++ ++ ++ +')
           navigate('LeadManagementScreen', {})
-          // navigation.dispatch(
-          //   CommonActions.navigate({
-          //     name: 'LeadManagementScreen',
-          //     params: {},
-          //   })
-          // );
           break;
         case 'appoinment':
           navigate('Appointments', {})

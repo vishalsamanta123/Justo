@@ -34,6 +34,7 @@ import DropdownInput from "app/components/DropDown";
 import Styles from "../../../../components/Modals/styles";
 import { useSelector } from "react-redux";
 import { CpType } from "app/components/utilities/DemoData";
+import CountryPickerModal from "app/components/Modals/CountryPickerModal";
 
 const VisitorUpdateView = (props: any) => {
   const { userData = {} } = useSelector((state: any) => state.userData);
@@ -52,12 +53,6 @@ const VisitorUpdateView = (props: any) => {
       ? obj.title === "Channel Partner"
       : obj.title !== ""
   );
-  console.log(
-    "🚀 ~ file: VisitorUpdateFirst.tsx:192 ~  ",
-    userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-      userData?.data?.role_id === ROLE_IDS.closingmanager_id
-  );
-
   return (
     <View style={styles.mainContainer}>
       <Header
@@ -157,32 +152,62 @@ const VisitorUpdateView = (props: any) => {
             headingText={"Visitor Name"}
           />
         </View>
-        <View style={styles.inputWrap}>
-          <InputField
-            disableSpecialCharacters={true}
-            placeholderText={strings.mobileNo}
-            handleInputBtnPress={() => {}}
-            onChangeText={(text: any) => {
-              props.setUpdateForm({
-                ...props.updateForm,
-                mobile: text,
-              });
-            }}
-            editable={
-              props?.updateForm?.create_by === userId._id ? true : false
-            }
-            valueshow={
-              props?.updateForm?.create_by === userId._id
-                ? props?.updateForm?.mobile?.toString()
-                : `${props?.updateForm?.mobile?.slice(
-                    0,
-                    2
-                  )}******${props?.updateForm?.mobile?.slice(-2)}`
-            }
-            headingText={"Mobile No."}
-            keyboardtype={"number-pad"}
-            maxLength={15}
-          />
+        <View
+          style={[
+            styles.inputWrap,
+            { flexDirection: "row", justifyContent: "space-between" },
+          ]}
+        >
+          <View style={{ width: "35%" }}>
+            <TouchableOpacity
+              accessible={false}
+              style={{}}
+              onPress={() => {
+                if(props?.updateForm?.create_by === userId._id ? true : false) {
+                  props.setCountyPicker(true);
+                }
+              }}
+              activeOpacity={1.0}
+            >
+              <InputField
+                require={true}
+                disableSpecialCharacters={true}
+                placeholderText={"Country"}
+                handleInputBtnPress={() => {}}
+                valueshow={props?.updateForm?.country_code}
+                headingText={"Country"}
+                editable={false}
+                countryCodeInput={true}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={{ width: "60%" }}>
+            <InputField
+              disableSpecialCharacters={true}
+              placeholderText={strings.mobileNo}
+              handleInputBtnPress={() => {}}
+              onChangeText={(text: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  mobile: text,
+                });
+              }}
+              editable={
+                props?.updateForm?.create_by === userId._id ? true : false
+              }
+              valueshow={
+                props?.updateForm?.create_by === userId._id
+                  ? props?.updateForm?.mobile?.toString()
+                  : `${props?.updateForm?.mobile?.slice(
+                      0,
+                      2
+                    )}******${props?.updateForm?.mobile?.slice(-2)}`
+              }
+              headingText={"Mobile No."}
+              keyboardtype={"number-pad"}
+              maxLength={15}
+            />
+          </View>
         </View>
 
         <View style={[styles.inputWrap]}>
@@ -227,7 +252,9 @@ const VisitorUpdateView = (props: any) => {
               if (
                 !(
                   userData?.data?.role_id === ROLE_IDS.closingtl_id ||
-                  userData?.data?.role_id === ROLE_IDS.closingmanager_id
+                  userData?.data?.role_id === ROLE_IDS.closingmanager_id ||
+                  userData?.data?.role_id === ROLE_IDS.clusterhead_id ||
+                  userData?.data?.role_id === ROLE_IDS.sitehead_id
                 )
               ) {
                 props.setAllProperty([]);
@@ -1402,6 +1429,14 @@ const VisitorUpdateView = (props: any) => {
           />
         </View>
       </ScrollView>
+      <CountryPickerModal
+        countyPicker={props.countyPicker}
+        setCountyPicker={props.setCountyPicker}
+        handleCountryCode={props.handleCountryCode}
+        handleCloseCountry={props.handleCloseCountry}
+        countryData={props.countryData}
+        selectCountryData={props.selectCountryData}
+      />
     </View>
   );
 };

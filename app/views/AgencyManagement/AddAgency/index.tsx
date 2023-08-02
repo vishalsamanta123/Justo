@@ -188,10 +188,6 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
       );
       setSelectedPropertyIds(arr);
       setSelectedProperty(response?.data[0]?.property_tag);
-      console.log(
-        "🚀 ~ file: index.tsx:180 ~ response?.data[0]?.property_tag:",
-        response?.data[0]?.property_tag
-      );
     }
   }, [response]);
   useEffect(() => {
@@ -350,7 +346,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
             isError = false;
             errorMessage = strings.agentNameReqVal;
           } else if (
-            Regexs.oneSpaceRegex.test(agencyData.owner_name) === false
+            Regexs.oneSpaceRegex.test(agencyData.owner_name?.trim()) === false
           ) {
             isError = false;
             errorMessage = strings.NameCorrectlyVal;
@@ -442,7 +438,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
             isError = false;
             errorMessage = strings.agentNameReqVal;
           } else if (
-            Regexs.oneSpaceRegex.test(agencyData.owner_name) === false
+            Regexs.oneSpaceRegex.test(agencyData.owner_name?.trim()) === false
           ) {
             isError = false;
             errorMessage = strings.NameCorrectlyVal;
@@ -930,7 +926,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
         );
         formData.append(
           "owner_name",
-          agencyData?.owner_name ? agencyData?.owner_name : ""
+          agencyData?.owner_name ? agencyData?.owner_name?.trim() : ""
         );
         formData.append(
           "cp_type",
