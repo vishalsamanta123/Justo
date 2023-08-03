@@ -190,7 +190,8 @@ const DashboardView = (props: any) => {
                       ) : (
                         <>
                           {roleType === ROLE_IDS.sitehead_id ||
-                            roleType === ROLE_IDS.clusterhead_id ? (
+                            roleType === ROLE_IDS.clusterhead_id ||
+                            roleType === ROLE_IDS.businesshead_id ? (
                             <SiteHeadView
                               dashboardData={props?.dashboardData}
                               onpressBooking={props.onpressBooking}

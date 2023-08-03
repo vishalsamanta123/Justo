@@ -96,21 +96,21 @@ const BookingScreen = ({ navigation, route }: any) => {
   //     }
   // }}
 
-  useFocusEffect(
-    React.useCallback(() => {
-      getDropDownData(0);
-      // if (getBookingData?.cp_id) {
-        dispatch(getAgencyDetail({
-          // cp_id: getBookingData.cp_id,
-          cp_id: "64ae806ddb45a1f0ae72dc9a",
-        })
-        );
-      // }
-      return () => {};
-    }, [navigation])
-  );
-  console.log("🚀 ~ file: index.tsx:115 ~ agencyDetails?.response?.data:", agencyDetails?.response?.data[0])
-  console.log("🚀 ~ file: index.tsx:30 ~ getBookingData:", getBookingData.lead_source[0])
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     getDropDownData(0);
+  //     // if (getBookingData?.cp_id) {
+  //       dispatch(getAgencyDetail({
+  //         // cp_id: getBookingData.cp_id,
+  //         cp_id: "64ae806ddb45a1f0ae72dc9a",
+  //       })
+  //       );
+  //     // }
+  //     return () => {};
+  //   }, [navigation])
+  // );
+  // console.log("🚀 ~ file: index.tsx:115 ~ agencyDetails?.response?.data:", agencyDetails?.response?.data[0])
+  // console.log("🚀 ~ file: index.tsx:30 ~ getBookingData:", getBookingData.lead_source[0])
 
 
   const handleJwCpRegistor = async () => {

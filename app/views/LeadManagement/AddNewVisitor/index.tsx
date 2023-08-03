@@ -286,27 +286,29 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
           })
         );
         getAllPropertyData();
-
-        if (propertyData?.response?.status === 200) {
-          if (propertyData?.response?.data?.length > 0) {
-            const activeData = propertyData?.response?.data.filter(
-              (el: any) => {
-                return el.status == true;
-              }
-            );
-            activeData?.length > 0
-              ? setAllProperty(activeData)
-              : setAllProperty([]);
-          } else {
-            setAllProperty([]);
-          }
-        } else {
-          setAllProperty([]);
-        }
       }
       return () => {};
     }, [navigation])
   );
+
+  useEffect(() => {
+    if (propertyData?.response?.status === 200) {
+      if (propertyData?.response?.data?.length > 0) {
+        const activeData = propertyData?.response?.data.filter(
+          (el: any) => {
+            return el.status == true;
+          }
+        );
+        activeData?.length > 0
+          ? setAllProperty(activeData)
+          : setAllProperty([]);
+      } else {
+        setAllProperty([]);
+      }
+    } else {
+      setAllProperty([]);
+    }
+  }, [propertyData])
 
   // useEffect(() => {
   //   if (

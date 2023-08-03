@@ -128,7 +128,8 @@ const DashboardScreen = ({ navigation }: any) => {
       dispatch(dashboardReceptionistData({}));
     } else if (
       getLoginType?.response?.data?.role_id === ROLE_IDS.sitehead_id ||
-      getLoginType?.response?.data?.role_id === ROLE_IDS.clusterhead_id
+      getLoginType?.response?.data?.role_id === ROLE_IDS.clusterhead_id ||
+      getLoginType?.response?.data?.role_id === ROLE_IDS.businesshead_id
     ) {
       dispatch(dashboardSiteHeadData({}));
     } else {
