@@ -253,9 +253,15 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       if (response?.data?.length > 0) {
         dispatch({ type: STOP_LOADING });
         const list = sourcingPropertyList?.filter((o1: any) =>
-          response?.data?.some((o2: any) => o1?.property_id === o2?.property_id)
+        response?.data?.some((o2: any) => o1?.property_id === o2?.property_id)
         );
         setAllProperty(list);
+        if(list?.length === 0) {
+          ErrorMessage({
+            msg: "No property assigned to this CP",
+            backgroundColor: RED_COLOR,
+          });
+        }
       } else {
         dispatch({ type: STOP_LOADING });
         setAllProperty([]);
@@ -292,7 +298,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   );
 
   useEffect(() => {
-    if (propertyData?.response?.status === 200) {
+    if (!(formData?.lead_source_id === CONST_IDS?.cp_lead_source_id) && propertyData?.response?.status === 200) {
       if (propertyData?.response?.data?.length > 0) {
         const activeData = propertyData?.response?.data.filter(
           (el: any) => {
@@ -308,7 +314,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     } else {
       setAllProperty([]);
     }
-  }, [propertyData])
+  }, [propertyData, formData?.lead_source])
 
   // useEffect(() => {
   //   if (

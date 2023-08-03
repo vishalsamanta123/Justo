@@ -254,7 +254,8 @@ const VisitorUpdateView = (props: any) => {
                   userData?.data?.role_id === ROLE_IDS.closingtl_id ||
                   userData?.data?.role_id === ROLE_IDS.closingmanager_id ||
                   userData?.data?.role_id === ROLE_IDS.clusterhead_id ||
-                  userData?.data?.role_id === ROLE_IDS.sitehead_id
+                  userData?.data?.role_id === ROLE_IDS.sitehead_id ||
+                  userData?.data?.role_id === ROLE_IDS.businesshead_id
                 )
               ) {
                 props.setAllProperty([]);
@@ -906,6 +907,7 @@ const VisitorUpdateView = (props: any) => {
             data={
               Array.isArray(props?.configuration) ? props?.configuration : []
             }
+            onFocus={() => props.handleDropdownPress(2)}
             inputWidth={"100%"}
             paddingLeft={16}
             maxHeight={300}

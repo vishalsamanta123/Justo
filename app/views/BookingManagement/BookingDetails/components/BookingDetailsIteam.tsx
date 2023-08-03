@@ -333,7 +333,7 @@ const BookingDetailsItem = (props: any) => {
                                     item?.flat_no : strings.notfount}</Text>
                         </View>
                     </View>
-                    <View style={styles.Txtview}>
+                    {/* <View style={styles.Txtview}>
                         <View style={styles.projectContainer}>
                             <Text style={styles.projectTxt}>Saleble Area</Text>
                         </View>
@@ -342,6 +342,18 @@ const BookingDetailsItem = (props: any) => {
                             <Text style={styles.nameTxt}>
                                 {item?.saleable_area ?
                                     item?.saleable_area : strings.notfount}</Text>
+                        </View>
+                    </View> */}
+                    <View style={styles.Txtview}>
+                        <View style={styles.projectContainer}>
+                            <Text style={styles.projectTxt}>Carpet Area :</Text>
+                        </View>
+                        <View style={styles.nameContainer}>
+                            <Text style={styles.nameTxt}>
+                            {item.carpet_area
+                                ? item.carpet_area
+                                : strings.notfount}
+                            </Text>
                         </View>
                     </View>
                 </>)

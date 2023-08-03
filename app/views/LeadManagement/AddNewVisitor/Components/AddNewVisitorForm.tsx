@@ -871,7 +871,7 @@ const AddNewVisitorForm = (props: any) => {
                 Array.isArray(props?.configuration) ? props?.configuration : []
               }
               inputWidth={"100%"}
-              // onFocus={() => props.handleDropdownPress(2)}
+              onFocus={() => props.handleDropdownPress(2)}
               paddingLeft={16}
               maxHeight={300}
               labelField={"title"}

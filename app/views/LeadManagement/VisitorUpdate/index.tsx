@@ -148,9 +148,15 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
       if (response?.data?.length > 0) {
         dispatch({ type: STOP_LOADING });
         const list = sourcingPropertyList?.filter((o1: any) =>
-          response?.data?.some((o2: any) => o1?.property_id === o2?.property_id)
+        response?.data?.some((o2: any) => o1?.property_id === o2?.property_id)
         );
         setAllProperty(list);
+        if(list?.length === 0) {
+          ErrorMessage({
+            msg: "No property assigned to this CP",
+            backgroundColor: RED_COLOR,
+          });
+        }
       } else {
         dispatch({ type: STOP_LOADING });
         setAllProperty([]);
@@ -288,16 +294,16 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
     }
   }, [response]);
 
-  useEffect(() => {
-    dispatch(
-      getAllMaster({
-        type: 2,
-      })
-    );
-  }, []);
+  // useEffect(() => {
+  //   dispatch(
+  //     getAllMaster({
+  //       type: 2,
+  //     })
+  //   );
+  // }, []);
 
   useEffect(() => {
-    handleDropdownPress(2);
+    handleDropdownPress(13);
     dispatch(
       getAssignCPList({
         user_id: userData?.data?.user_id,
