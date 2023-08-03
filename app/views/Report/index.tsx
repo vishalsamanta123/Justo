@@ -41,9 +41,9 @@ const ReportScreen = ({ navigation }: any) => {
   var currentYears = currentDate.getFullYear();
   var todayDate = currentYears + "-" + currentMonths + "-" + currentDay;
 
-  useLayoutEffect(() => {
-    getData(firstdDate, todayDate);
-  }, [isFocused]);
+  // useLayoutEffect(() => {
+  //   getData(firstdDate, todayDate);
+  // }, [isFocused]);
   useEffect(() => {
     if (ReportData?.response?.data.length > 0) {
       setReportData(ReportData?.response?.data);
