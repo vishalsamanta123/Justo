@@ -175,5 +175,8 @@ export default {
   CP_REGISTOR_JW: "cp/fetch_channel_partner_id",
   
   // Report
-  GET_CM_REPORT : '/authreport/getCMreport'
+  GET_CM_REPORT : '/authreport/getCMreport',
+  GET_CT_REPORT : '/authreport/getCTreport',
+  GET_SM_REPORT : '/authreport/getSMreport',
+  GET_ST_REPORT : '/authreport/getSTreport',
 };

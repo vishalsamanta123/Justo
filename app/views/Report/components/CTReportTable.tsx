@@ -5,128 +5,129 @@ import {
 } from "app/components/scaleFontSize";
 import {
   BLACK_COLOR,
+  GREEN_COLOR,
   Isios,
   PRIMARY_THEME_COLOR,
+  RED_COLOR,
   WHITE_COLOR,
 } from "app/components/utilities/constant";
 import React from "react";
-import { Dimensions, SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import styles from "./styles";
+import images from "app/assets/images";
+import XLSX from "xlsx";
+import RNFS from "react-native-fs";
+import {
+  handlePermission,
+  openPermissionSetting,
+} from "app/components/utilities/GlobalFuncations";
+import strings from "app/components/utilities/Localization";
+import ErrorMessage from "app/components/ErrorMessage";
 
-const CTReportTable = () => {
+const CTReportTable = (props: any) => {
+  const { data } = props;
   const { width, height } = Dimensions.get("window"),
     vw = width / 100,
     vh = height / 100;
+  console.log("🚀 ~ file: CTReportTable.tsx:37 ~ CTReportTable ~ data:", data);
   const headeData = [
     "CM Name",
-    "Site Visit",
-    "Attended",
-    "No Shows",
+    "Lead Assign",
     "CP (Walk-ins) Appointments",
+    "Direct Walk-ins",
+    "Total Site Visit",
+    "No Shows",
+    "Visitor Attended",
+    "Appointments (Revisit)",
+    "Not Interested",
+    "Visit Cancel",
     "Booking",
     "Ready to Book",
-    "No. of (follow-ups scheduled)",
-    "Total Not Interested",
-    "Conv %",
-    "Total Cancelation",
     "Total Registration",
+    "Cancelation Booking",
+    "Conversion % (Walk-in to Booking)",
+    "No. of (follow-ups scheduled)",
   ];
-  const data = [
-    {
-      name: "satyam",
-      data: [
-        {
-          CMName: "Remi Patidar",
-          SiteVisit: "",
-          Attended: "",
-          NoShows: "",
-          CPAppointments: "",
-          Booking: "",
-          ReadyToBook: "",
-          NoOf: "",
-          NotInterested: "",
-          Conv: "",
-          Cancelation: "",
-          Registration: "",
-        },
-        {
-          CMName: "Abhishar Yadav",
-          SiteVisit: "",
-          Attended: "",
-          NoShows: "",
-          CPAppointments: "",
-          Booking: "",
-          ReadyToBook: "",
-          NoOf: "",
-          NotInterested: "",
-          Conv: "",
-          Cancelation: "",
-          Registration: "",
-        },
-        {
-          CMName: "Mohan Yadav",
-          SiteVisit: "",
-          Attended: "",
-          NoShows: "",
-          CPAppointments: "",
-          Booking: "",
-          ReadyToBook: "",
-          NoOf: "",
-          NotInterested: "",
-          Conv: "",
-          Cancelation: "",
-          Registration: "",
-        },
-      ],
-    },
-    {
-      name: "satyam2",
-      data: [
-        {
-          CMName: "Aman Patidar",
-          SiteVisit: "",
-          Attended: "",
-          NoShows: "",
-          CPAppointments: "",
-          Booking: "",
-          ReadyToBook: "",
-          NoOf: "",
-          NotInterested: "",
-          Conv: "",
-          Cancelation: "",
-          Registration: "",
-        },
-        {
-          CMName: "Raju Yadav",
-          SiteVisit: "",
-          Attended: "",
-          NoShows: "",
-          CPAppointments: "",
-          Booking: "",
-          ReadyToBook: "",
-          NoOf: "",
-          NotInterested: "",
-          Conv: "",
-          Cancelation: "",
-          Registration: "",
-        },
-        {
-          CMName: "Nimish Yadav",
-          SiteVisit: "",
-          Attended: "",
-          NoShows: "",
-          CPAppointments: "",
-          Booking: "",
-          ReadyToBook: "",
-          NoOf: "",
-          NotInterested: "",
-          Conv: "",
-          Cancelation: "",
-          Registration: "",
-        },
-      ],
-    },
-  ];
+
+  const onPressDownload = async () => {
+    let array = data.map((item: any) => {
+      return {
+        "CM Name": item?.user_name,
+        "Lead Assign": item?.total_visit,
+        "CP (Walk-ins) Appointments": item?.CPWalkins,
+        "Direct Walk-ins": item?.DirectWalkins,
+        "Total Site Visit": item?.VisitorAttended,
+        "No Shows": item?.Noshow,
+        "Visitor Attended": item?.TotalAppointments,
+        "Appointments (Revisit)": item?.TotalAppointmentsrevisit,
+        "Not Interested": item?.TotalNotInterested,
+        "Visit Cancel": item?.TotalCancelation,
+        Booking: item?.Booking,
+        "Ready to Book": item?.ReadytoBook,
+        "Total Registration": item?.Registration,
+        "Cancelation Booking": item?.CancelBooking,
+        "Conversion % (Walk-in to Booking)": item?.Conversion,
+        "No. of (follow-ups scheduled)": item?.followschedule,
+      };
+    });
+    const res = await handlePermission(
+      "gallery",
+      strings.txt_setting_heading_media,
+      strings.txt_setting_description_media
+    );
+    if (res == "setting1") {
+      openPermissionSetting(
+        strings.txt_setting_heading_media,
+        strings.txt_setting_description_media
+      );
+    } else if (res) {
+      try {
+        ErrorMessage({
+          msg: strings.startDownload,
+          backgroundColor: BLACK_COLOR,
+        });
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(array);
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+        const excelFile = XLSX.write(workbook, {
+          type: "base64",
+          bookType: "xlsx",
+        });
+
+        // Create a temporary directory to store the file
+        const tempDir = RNFS.DownloadDirectoryPath;
+        const filePath = `${tempDir}/ClosingTLReport.xlsx`;
+
+        // Write the file to the temporary directory
+        await RNFS.writeFile(filePath, excelFile, "base64");
+
+        console.log("File saved:", filePath);
+
+        // Add file scanning to make it visible in device's media library (optional)
+        await RNFS.scanFile(filePath);
+        ErrorMessage({
+          msg: strings.succesfullyDownload,
+          backgroundColor: GREEN_COLOR,
+        });
+
+        console.log("File scanned:", filePath);
+      } catch (error) {
+        ErrorMessage({
+          msg: strings.unSuccesfullyDownload,
+          backgroundColor: RED_COLOR,
+        });
+        console.log("Error generating Excel file:", error);
+      }
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -137,309 +138,240 @@ const CTReportTable = () => {
         }}
         contentContainerStyle={{
           margin: normalize(10),
+          paddingBottom : normalize(15)
         }}
       >
-          <View>
-            {data.map((item: any, index: any) => {
+        <View
+          style={{
+            alignItems: "flex-end",
+            marginBottom: normalize(10),
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => onPressDownload()}
+            style={{
+              backgroundColor: PRIMARY_THEME_COLOR,
+              width: normalizeWidth(50),
+              alignItems: "center",
+              borderRadius: 10,
+            }}
+          >
+            <Image
+              source={images.whiteDownload}
+              resizeMode={"contain"}
+              style={styles.downloadImg}
+            />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "column",
+            }}
+          >
+            {headeData.map((item: any, index: any) => {
               return (
                 <View
+                  key={index}
                   style={{
-                    marginBottom: normalize(20),
+                    width: normalizeWidth(140),
+                    height: normalizeHeight(90),
+                    borderWidth: normalize(Isios ? 1.2 : 2),
+                    padding: normalize(12),
+                    backgroundColor: PRIMARY_THEME_COLOR,
                   }}
                 >
-                  <View
-                    style={{
-                      width: "100%",
-                      borderWidth: normalize(Isios ? 1.2 : 2),
-                      padding: normalize(12),
-                      backgroundColor: PRIMARY_THEME_COLOR,
-                      justifyContent: "center",
-                      alignContent: 'center'
-                    }}
-                  >
-                    <Text style={{ ...styles.boxText, color: WHITE_COLOR , textAlign:'center'}}>
-                      {item.name}
-                    </Text>
-                  </View>
-                  <View
-                    key={index}
-                    style={{
-                      flexDirection: "row",
-                    }}
-                  >
-                    <View
-                      style={{
-                        flexDirection: "column",
-                      }}
-                    >
-                      {headeData.map((item: any, index: any) => {
-                        return (
-                          <View
-                            key={index}
-                            style={{
-                              width: normalizeWidth(140),
-                              height: normalizeHeight(80),
-                              borderWidth: normalize(Isios ? 1.2 : 2),
-                              padding: normalize(12),
-                              backgroundColor: PRIMARY_THEME_COLOR,
-                            }}
-                          >
-                            <Text
-                              style={{ ...styles.boxText, color: WHITE_COLOR }}
-                            >
-                              {item}
-                            </Text>
-                          </View>
-                        );
-                      })}
-                    </View>
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                      }}
-                    >
-                      {item?.data.map((item: any, index: any) => {
-                        return (
-                          <View
-                            style={{
-                              flexDirection: "column",
-                            }}
-                          >
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.CMName}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.SiteVisit}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.Attended}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.NoShows}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.CPAppointments}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.Booking}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.ReadyToBook}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.NoOf}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.NotInterested}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.Conv}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.Cancelation}
-                              </Text>
-                            </View>
-                            <View
-                              style={{
-                                width: normalizeWidth(120),
-                                height: normalizeHeight(80),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item.Registration}
-                              </Text>
-                            </View>
-                          </View>
-                        );
-                      })}
-                    </View>
-                    </ScrollView>
-                    {/* <View style={styles.ThemeColorBox}>
-                      <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
-                        {item.name}
-                      </Text>
-                    </View> */}
-                    {/* {item?.data.map((item: any, index: any) => {
-                      return (
-                        <View key={index} style={styles.box}>
-                          <Text
-                            style={{
-                              ...styles.boxText,
-                              color: BLACK_COLOR,
-                            }}
-                          >
-                            {item}
-                          </Text>
-                        </View>
-                      );
-                    })} */}
-                  </View>
+                  <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
+                    {item}
+                  </Text>
                 </View>
               );
             })}
           </View>
-        </ScrollView>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View
+              style={{
+                flexDirection: "row",
+              }}
+            >
+              {data.map((item: any, index: any) => {
+                return (
+                  <View
+                    style={{
+                      flexDirection: "column",
+                    }}
+                  >
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.user_name}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.total_visit}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.CPWalkins}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.DirectWalkins}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.VisitorAttended}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.Noshow}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.TotalAppointments}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.TotalAppointmentsrevisit}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.TotalNotInterested}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.TotalCancelation}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.Booking}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.ReadytoBook}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.Registration}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.CancelBooking}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.Conversion}
+                      </Text>
+                    </View>
+                    <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.followschedule}
+                      </Text>
+                    </View>
+                  </View>
+                );
+              })}
+            </View>
+          </ScrollView>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

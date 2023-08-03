@@ -176,6 +176,9 @@ const strings = new LocalizedStrings({
     competitorReqVal: "Please Enter competitor property",
     bookingDateReqVal: 'Booking Date is require. Please enter Booking Date',
     followUpSTSReqVal: 'Followup Status is require. Please Choose Followup Status',
+    startDownload : 'Downloading Start',
+    succesfullyDownload : 'Succesfully Downloaded',
+    unSuccesfullyDownload : 'Unsuccesfully Downloaded',
 
     //Select Heads
     selectAgncyTrnsfr: 'Select Agency to Transfer all visitors',
@@ -604,6 +607,8 @@ const strings = new LocalizedStrings({
     // CPChecking
     todaycpcheking: 'Today CP Checking',
     allcpcheking: 'All CP Checking',
+
+    filterData: 'Filter Data',
   },
 });
 

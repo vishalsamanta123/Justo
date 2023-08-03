@@ -47,5 +47,22 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY_SEMIBOLD,
     fontSize: normalize(Isios ? 14 : 16),
   },
+  downloadImg: {
+    width: normalizeWidth(40),
+    height: normalizeHeight(40),
+    tintColor: WHITE_COLOR,
+  },
+
+  cTDataItems: {
+    width: normalizeWidth(120),
+    height: normalizeHeight(90),
+    borderWidth: normalize(Isios ? 1.2 : 2),
+    padding: normalize(12),
+  },
+  dataItems: {
+    width: "100%",
+    borderWidth: normalize(Isios ? 1.2 : 2),
+    padding: normalize(12),
+  },
 });
 export default styles;

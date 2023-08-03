@@ -26,7 +26,7 @@ import permissionReducer, { notificationCountReducer } from "./permissionReducer
 import { UserManagerReducer } from "./UserManagerReducer";
 import { RecoveryReducer } from "./RecoveryReducer";
 import { CompanyReducer, EmployeeReducer } from "./CompanyReducer";
-import { CMReportReducer } from "./ReportReducer";
+import { ReportReducer } from "./ReportReducer";
 
 export default {
     loadingReducer: loadingReducer,
@@ -129,5 +129,5 @@ export default {
     employeeData: EmployeeReducer,
 
    //report
-   cmReportData : CMReportReducer,
+   reportData : ReportReducer,
 }
