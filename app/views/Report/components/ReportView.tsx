@@ -29,7 +29,7 @@ const ReportView = (props: any) => {
     setFilterData,
     filterData,
     handleFilter,
-    onReset
+    onReset,
   } = props;
   return (
     <>
@@ -54,12 +54,13 @@ const ReportView = (props: any) => {
           <STReportTable data={reportData} />
         ) : roleId === ROLE_IDS.closingtl_id ? (
           <CTReportTable data={reportData} />
-        ) : roleId === ROLE_IDS.clusterhead_id ? (
+        ) : roleId === ROLE_IDS.clusterhead_id ||
+          roleId === ROLE_IDS.sitehead_id ? (
           <ClusterHeadReportTable />
-        ) : (
-          <BusinessHeadReportTable/>
-        )}  */}
-          <ComingSoonScreen />
+        ) : roleId === ROLE_IDS.businesshead_id ? (
+          <BusinessHeadReportTable />
+        ) : null} */}
+        <ComingSoonScreen />
       </View>
       <FilterModal
         Visible={FilterModalVisible}

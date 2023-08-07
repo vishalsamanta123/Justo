@@ -25,7 +25,7 @@ const ForgotPassword = ({navigation}: any) => {
                 payload: []
             })
             setIsloading(forgotSelector.loading)
-           navigation.navigate('OtpVerificationScreenView',{email: email});
+           navigation.navigate('OtpVerificationScreenView',{email: email?.trim()});
         } else {
           if(forgotSelector.error){
             setIsloading(forgotSelector.loading)
@@ -49,11 +49,11 @@ const ForgotPassword = ({navigation}: any) => {
     let errorMessage: any = ''
    
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-    if (reg.test(email) === false) {
+    if (reg.test(email?.trim()) === false) {
       isError = false;
       errorMessage = strings.correctemail
     }
-    if (email == undefined || email == '') {
+    if (email == undefined || email?.trim() == '') {
       isError = false;
       errorMessage = strings.emailrequired
   }
@@ -71,7 +71,7 @@ const ForgotPassword = ({navigation}: any) => {
     if(validation()){
       setIsloading(true)
       const params = {
-        email:email
+        email:email?.trim()
       }
       dispatch(forgotemailverify(params))
 

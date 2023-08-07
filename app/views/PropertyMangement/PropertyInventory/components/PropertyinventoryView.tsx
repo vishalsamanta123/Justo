@@ -30,7 +30,7 @@ const PropertyinventoryView = (props: any) => {
           renderItem={({item}: any) => {
             return <InventoryItem item={item} />;
           }}
-          ListEmptyComponent={() => <EmptyListScreen message={strings.availableinventory}/>}
+          ListEmptyComponent={() => <EmptyListScreen message={"Inventory not available in Justoworks"} notShowNA={true}/>}
           onRefresh={() => props.onRefresh()}
           refreshing={props.loadingref}
         />

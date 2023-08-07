@@ -1,4 +1,4 @@
-import { Alert, Image } from 'react-native';
+import { Alert, Image, Platform } from 'react-native';
 import {
   request,
   PERMISSIONS,
@@ -14,6 +14,9 @@ import { createNavigationContainerRef } from '@react-navigation/native';
 import ErrorMessage from '../ErrorMessage';
 import FileViewer from "react-native-file-viewer";
 import RNFS from "react-native-fs";
+
+const OS: any = Platform
+const OsVer = OS.constants['Release'];
 
 export const handlePermission = async (
   permission: any,
@@ -31,7 +34,8 @@ export const handlePermission = async (
       result = await check(
         Isios
           ? PERMISSIONS.IOS.PHOTO_LIBRARY
-          : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+          // : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+          : +OsVer < 13 ? PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE : PERMISSIONS.ANDROID.READ_MEDIA_IMAGES
       );
       break;
     case 'microPhone':
@@ -91,7 +95,8 @@ export const checkPermissions = async (permission: any) => {
       result = await check(
         Isios
           ? PERMISSIONS.IOS.PHOTO_LIBRARY
-          : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+          // : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+          : +OsVer < 13 ? PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE : PERMISSIONS.ANDROID.READ_MEDIA_IMAGES,
       );
       break;
   }
@@ -131,7 +136,8 @@ export const requestPermission = async (permission: any, msgHeading: any, messag
       reqRes = await request(
         Isios
           ? PERMISSIONS.IOS.PHOTO_LIBRARY
-          : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+          // : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+          : +OsVer < 13 ? PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE : PERMISSIONS.ANDROID.READ_MEDIA_IMAGES,
       );
       break;
     case 'microPhone':
@@ -176,7 +182,8 @@ export const requestPermissions = async (permission: any) => {
       reqRes = await request(
         Isios
           ? PERMISSIONS.IOS.PHOTO_LIBRARY
-          : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+          // : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+          : +OsVer < 13 ? PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE : PERMISSIONS.ANDROID.READ_MEDIA_IMAGES,
       );
       break;
     case 'write':
