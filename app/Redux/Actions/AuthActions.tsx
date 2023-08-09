@@ -191,7 +191,7 @@ export const userLogout = () => async (dispatch: any) => {
     try {
         const res = await apiCall("post", apiEndPoints.LOGOUT, {});
         console.log('res: userLogout', res);
-        if (res.data.status === 200) {
+        // if (res.data.status === 200) {
             await AsyncStorage.removeItem("persistantState");
             await AsyncStorage.removeItem("AuthToken");
             await AsyncStorage.removeItem('userData')
@@ -200,7 +200,7 @@ export const userLogout = () => async (dispatch: any) => {
                 type: USER_LOGOUT,
                 payload: null
             })
-        }
+        // }
     }
     catch (e) {
         dispatch({

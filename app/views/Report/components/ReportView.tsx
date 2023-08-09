@@ -46,7 +46,7 @@ const ReportView = (props: any) => {
           statusBarColor={PRIMARY_THEME_COLOR}
           barStyle={"light-content"}
         />
-        {/* {roleId === ROLE_IDS.sourcingmanager_id ? (
+        {roleId === ROLE_IDS.sourcingmanager_id ? (
           <SMReportTable data={reportData} />
         ) : roleId === ROLE_IDS.closingmanager_id ? (
           <CMReportTable data={reportData} userData={userData} />
@@ -56,11 +56,11 @@ const ReportView = (props: any) => {
           <CTReportTable data={reportData} />
         ) : roleId === ROLE_IDS.clusterhead_id ||
           roleId === ROLE_IDS.sitehead_id ? (
-          <ClusterHeadReportTable />
+          <ClusterHeadReportTable data={reportData}/>
         ) : roleId === ROLE_IDS.businesshead_id ? (
-          <BusinessHeadReportTable />
-        ) : null} */}
-        <ComingSoonScreen />
+          <BusinessHeadReportTable data={reportData}/>
+        ) : null}
+        {/* <ComingSoonScreen /> */}
       </View>
       <FilterModal
         Visible={FilterModalVisible}

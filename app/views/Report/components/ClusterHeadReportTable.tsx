@@ -23,225 +23,245 @@ import {
 import styles from "./styles";
 import ClusterHeadtable from "./tableComponents/ClusterHeadtable";
 
-const ClusterHeadReportTable = () => {
+const ClusterHeadReportTable = (props: any) => {
+  const { data } = props;
   const { width, height } = Dimensions.get("window");
+  // const soucingHeaderData = [
+  //   "Sourcing Manager",
+  //   "CP Appointments/ Walk-ins",
+  //   "Visitor No Shows via CPs",
+  //   "Booking",
+  //   "Ready To Book",
+  //   "Conv %",
+  //   "Total Cancelation",
+  //   "Total Registration",
+  // ];
   const soucingHeaderData = [
-    "Sourcing Manager",
-    "CP Appointments/ Walk-ins",
-    "Visitor No Shows via CPs",
-    "Booking",
-    "Ready To Book",
+    "CP Map (Allocated)",
+    "Inactive/Deactive CP",
+    "Lead by Active CP",
+    "Appointment by CP",
+    "Visitor No Shows",
+    "Booking / Transactional CP",
     "Conv %",
-    "Total Cancelation",
-    "Total Registration",
   ];
+
+  // const closingHeaderData = [
+  //   "Closing Manager",
+  //   "Client/ Vistor Attended",
+  //   "Visitor No Shows",
+  //   "Booking",
+  //   "Ready To Book",
+  //   "Total Cancelation",
+  //   "Total Registration",
+  //   "Conv %",
+  //   // "Target Set",
+  //   // "% of Target Achieve",
+  // ];
   const closingHeaderData = [
-    "Closing Manager",
     "Client/ Vistor Attended",
     "Visitor No Shows",
     "Booking",
-    "Ready To Book",
-    "Conv %",
     "Total Cancelation",
     "Total Registration",
-    // "Target Set",
-    // "% of Target Achieve",
+    "Conv %",
   ];
-  const data = [
-    {
-      site_name: "Satyam",
-      clusterDatas: [
-        {
-          name: "Mohan Dixit",
-          role_ID: 1,
-          data: [
-            {
-              closing_manager: "Ashutosh Kumar Gurkha",
-              vistitor_attended: "42",
-              visitor_no: "0",
-              booking: "0",
-              ready_to_book: "",
-              conv: "0.0%",
-              total_cancelation: "",
-              total_registration: "",
-              target_set: "",
-              target_achive: "",
-            },
-            {
-              closing_manager: "Ayush Akhand",
-              vistitor_attended: "30",
-              visitor_no: "2",
-              booking: "3",
-              ready_to_book: "",
-              conv: "10.0%",
-              total_cancelation: "",
-              total_registration: "",
-              target_set: "",
-              target_achive: "",
-            },
-            {
-              closing_manager: "Aura Saikar",
-              vistitor_attended: "16",
-              visitor_no: "0",
-              booking: "0",
-              ready_to_book: "",
-              conv: "0.0%",
-              total_cancelation: "",
-              total_registration: "",
-              target_set: "",
-              target_achive: "",
-            },
-            {
-              closing_manager: "Deepak Kalyani",
-              vistitor_attended: "12",
-              visitor_no: "0",
-              booking: "1",
-              ready_to_book: "",
-              conv: "8.3%",
-              total_cancelation: "",
-              total_registration: "",
-              target_set: "",
-              target_achive: "",
-            },
-            {
-              closing_manager: "Dharmendra Tanwar",
-              vistitor_attended: "42",
-              visitor_no: "5",
-              booking: "2",
-              ready_to_book: "",
-              conv: "4.8%",
-              total_cancelation: "",
-              total_registration: "",
-              target_set: "",
-              target_achive: "",
-            },
-            {
-              closing_manager: "Jitendra Varma",
-              vistitor_attended: "52",
-              visitor_no: "1",
-              booking: "1",
-              ready_to_book: "",
-              conv: "1.9%",
-              total_cancelation: "",
-              total_registration: "",
-              target_set: "",
-              target_achive: "",
-            },
-            {
-              closing_manager: "Sandeep Dhir",
-              vistitor_attended: "35",
-              visitor_no: "2",
-              booking: "0",
-              ready_to_book: "",
-              conv: "0.0%",
-              total_cancelation: "",
-              total_registration: "",
-              target_set: "",
-              target_achive: "",
-            },
-            {
-              closing_manager: "Yashpal Singh",
-              vistitor_attended: "47",
-              visitor_no: "2",
-              booking: "1",
-              ready_to_book: "",
-              conv: "2.1%",
-              total_cancelation: "",
-              total_registration: "",
-              target_set: "",
-              target_achive: "",
-            },
-          ],
-        },
-        {
-          name: "Aman Kumar",
-          role_ID: 2,
-          data: [
-            {
-              sourcing_manager: "Ashutosh Kumar Gurkha",
-              cp_appointment: "42",
-              visitor_no: "",
-              booking: "0",
-              ready_to_book: "",
-              conv: "0.0%",
-              total_cancelation: "",
-              total_registration: "",
-            },
-            {
-              sourcing_manager: "Ayush Akhand",
-              cp_appointment: "30",
-              visitor_no: "",
-              booking: "3",
-              ready_to_book: "",
-              conv: "10.0%",
-              total_cancelation: "",
-              total_registration: "",
-            },
-            {
-              sourcing_manager: "Aura Saikar",
-              cp_appointment: "16",
-              visitor_no: "",
-              booking: "0",
-              ready_to_book: "",
-              conv: "0.0%",
-              total_cancelation: "",
-              total_registration: "",
-            },
-            {
-              sourcing_manager: "Deepak Kalyani",
-              cp_appointment: "12",
-              visitor_no: "",
-              booking: "1",
-              ready_to_book: "",
-              conv: "8.3%",
-              total_cancelation: "",
-              total_registration: "",
-            },
-            {
-              sourcing_manager: "Dharmendra Tanwar",
-              cp_appointment: "42",
-              visitor_no: "",
-              booking: "2",
-              ready_to_book: "",
-              conv: "4.8%",
-              total_cancelation: "",
-              total_registration: "",
-            },
-            {
-              sourcing_manager: "Jitendra Varma",
-              cp_appointment: "52",
-              visitor_no: "",
-              booking: "1",
-              ready_to_book: "",
-              conv: "1.9%",
-              total_cancelation: "",
-              total_registration: "",
-            },
-            {
-              sourcing_manager: "Sandeep Dhir",
-              cp_appointment: "35",
-              visitor_no: "",
-              booking: "0",
-              ready_to_book: "",
-              conv: "0.0%",
-              total_cancelation: "",
-              total_registration: "",
-            },
-            {
-              sourcing_manager: "Yashpal Singh",
-              cp_appointment: "47",
-              visitor_no: "",
-              booking: "1",
-              ready_to_book: "",
-              conv: "2.1%",
-              total_cancelation: "",
-              total_registration: "",
-            },
-          ],
-        },
-      ],
-    },
-  ];
+
+  // const data = [
+  //   {
+  //     site_name: "Satyam",
+  //     clusterDatas: [
+  //       {
+  //         name: "Mohan Dixit",
+  //         role_ID: 1,
+  //         data: [
+  //           {
+  //             closing_manager: "Ashutosh Kumar Gurkha",
+  //             vistitor_attended: "42",
+  //             visitor_no: "0",
+  //             booking: "0",
+  //             ready_to_book: "",
+  //             conv: "0.0%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //             target_set: "",
+  //             target_achive: "",
+  //           },
+  //           {
+  //             closing_manager: "Ayush Akhand",
+  //             vistitor_attended: "30",
+  //             visitor_no: "2",
+  //             booking: "3",
+  //             ready_to_book: "",
+  //             conv: "10.0%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //             target_set: "",
+  //             target_achive: "",
+  //           },
+  //           {
+  //             closing_manager: "Aura Saikar",
+  //             vistitor_attended: "16",
+  //             visitor_no: "0",
+  //             booking: "0",
+  //             ready_to_book: "",
+  //             conv: "0.0%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //             target_set: "",
+  //             target_achive: "",
+  //           },
+  //           {
+  //             closing_manager: "Deepak Kalyani",
+  //             vistitor_attended: "12",
+  //             visitor_no: "0",
+  //             booking: "1",
+  //             ready_to_book: "",
+  //             conv: "8.3%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //             target_set: "",
+  //             target_achive: "",
+  //           },
+  //           {
+  //             closing_manager: "Dharmendra Tanwar",
+  //             vistitor_attended: "42",
+  //             visitor_no: "5",
+  //             booking: "2",
+  //             ready_to_book: "",
+  //             conv: "4.8%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //             target_set: "",
+  //             target_achive: "",
+  //           },
+  //           {
+  //             closing_manager: "Jitendra Varma",
+  //             vistitor_attended: "52",
+  //             visitor_no: "1",
+  //             booking: "1",
+  //             ready_to_book: "",
+  //             conv: "1.9%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //             target_set: "",
+  //             target_achive: "",
+  //           },
+  //           {
+  //             closing_manager: "Sandeep Dhir",
+  //             vistitor_attended: "35",
+  //             visitor_no: "2",
+  //             booking: "0",
+  //             ready_to_book: "",
+  //             conv: "0.0%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //             target_set: "",
+  //             target_achive: "",
+  //           },
+  //           {
+  //             closing_manager: "Yashpal Singh",
+  //             vistitor_attended: "47",
+  //             visitor_no: "2",
+  //             booking: "1",
+  //             ready_to_book: "",
+  //             conv: "2.1%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //             target_set: "",
+  //             target_achive: "",
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         name: "Aman Kumar",
+  //         role_ID: 2,
+  //         data: [
+  //           {
+  //             sourcing_manager: "Ashutosh Kumar Gurkha",
+  //             cp_appointment: "42",
+  //             visitor_no: "",
+  //             booking: "0",
+  //             ready_to_book: "",
+  //             conv: "0.0%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //           },
+  //           {
+  //             sourcing_manager: "Ayush Akhand",
+  //             cp_appointment: "30",
+  //             visitor_no: "",
+  //             booking: "3",
+  //             ready_to_book: "",
+  //             conv: "10.0%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //           },
+  //           {
+  //             sourcing_manager: "Aura Saikar",
+  //             cp_appointment: "16",
+  //             visitor_no: "",
+  //             booking: "0",
+  //             ready_to_book: "",
+  //             conv: "0.0%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //           },
+  //           {
+  //             sourcing_manager: "Deepak Kalyani",
+  //             cp_appointment: "12",
+  //             visitor_no: "",
+  //             booking: "1",
+  //             ready_to_book: "",
+  //             conv: "8.3%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //           },
+  //           {
+  //             sourcing_manager: "Dharmendra Tanwar",
+  //             cp_appointment: "42",
+  //             visitor_no: "",
+  //             booking: "2",
+  //             ready_to_book: "",
+  //             conv: "4.8%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //           },
+  //           {
+  //             sourcing_manager: "Jitendra Varma",
+  //             cp_appointment: "52",
+  //             visitor_no: "",
+  //             booking: "1",
+  //             ready_to_book: "",
+  //             conv: "1.9%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //           },
+  //           {
+  //             sourcing_manager: "Sandeep Dhir",
+  //             cp_appointment: "35",
+  //             visitor_no: "",
+  //             booking: "0",
+  //             ready_to_book: "",
+  //             conv: "0.0%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //           },
+  //           {
+  //             sourcing_manager: "Yashpal Singh",
+  //             cp_appointment: "47",
+  //             visitor_no: "",
+  //             booking: "1",
+  //             ready_to_book: "",
+  //             conv: "2.1%",
+  //             total_cancelation: "",
+  //             total_registration: "",
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // ];
   return (
     <SafeAreaView>
       <ScrollView
@@ -276,9 +296,11 @@ const ClusterHeadReportTable = () => {
           </TouchableOpacity>
         </View> */}
         <View
-          style={{
-            flexDirection: "row",
-          }}
+          style={
+            {
+              // flexDirection: "row",
+            }
+          }
         >
           {data.map((item: any, index: any) => {
             return (
@@ -287,15 +309,15 @@ const ClusterHeadReportTable = () => {
                   style={{
                     ...styles.ThemeColorBox,
                     width: "100%",
-                    marginBottom: normalize(10),
+                    // marginBottom: normalize(10),
                   }}
                 >
                   <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
-                    Site Name : {item?.site_name}
+                    Site Name : {item?.property_title}
                   </Text>
                 </View>
-                <View>
-                  {item?.clusterDatas.map((item: any, index: any) => {
+                {/* <View>
+                  {item?.clusterDatas?.map((item: any, index: any) => {
                     return (
                       <View key={index}>
                         <ClusterHeadtable
@@ -309,6 +331,39 @@ const ClusterHeadReportTable = () => {
                       </View>
                     );
                   })}
+                </View> */}
+                <View>
+                  {item?.smDetails.length == 0 ||
+                  item?.CMDetails.length == 0 ? (
+                    <View>
+                      <Text style={[styles.title, { textAlign: "center" }]}>
+                        Not Found
+                      </Text>
+                    </View>
+                  ) : (
+                    <>
+                      {item?.smDetails?.map((item: any, index: any) => {
+                        return (
+                          <View key={index}>
+                            <ClusterHeadtable
+                              data={{ ...item, role_ID: 2 }}
+                              headerData={soucingHeaderData}
+                            />
+                          </View>
+                        );
+                      })}
+                      {item?.CMDetails?.map((item: any, index: any) => {
+                        return (
+                          <View key={index}>
+                            <ClusterHeadtable
+                              data={{ ...item, role_ID: 1 }}
+                              headerData={closingHeaderData}
+                            />
+                          </View>
+                        );
+                      })}
+                    </>
+                  )}
                 </View>
               </View>
             );

@@ -34,11 +34,6 @@ import RNFS from "react-native-fs";
 
 const STReportTable = (props: any) => {
   const { data } = props;
-  console.log("🚀 ~ file: STReportTable.tsx:37 ~ STReportTable ~ data:", data);
-  console.log(
-    "🚀 ~ file: STReportTable.tsx:37 ~ STReportTable ~ data:",
-    data[0]?.smDetails
-  );
   // const data = [
   //   {
   //     _id: "6406d11bc72657d5bcaffd1a",

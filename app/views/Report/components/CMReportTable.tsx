@@ -50,7 +50,7 @@ const CMReportTable = (props: any) => {
     "No. of (follow-ups scheduled)",
     "Total Not Interested",
     "Conversion %",
-    "Gand Total",
+    "Grand Total",
     "Total Registration",
     "Total Cancelation",
   ];
@@ -67,7 +67,7 @@ const CMReportTable = (props: any) => {
         "No. of": item?.followschedule,
         "Total Not Interested": item?.TotalNotInterested,
         "Conversion %": item?.Conversion,
-        "Gand Total": item?.GrandTotal,
+        "Grand Total": item?.GrandTotal,
         "Total Registration": item?.Registration,
         "Total Cancelation": item?.TotalCancelation,
       };

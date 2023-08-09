@@ -1,7 +1,7 @@
 export default {
   JWTTOKEN: "token/jwtToken",
   LOGIN: "auth/userLogin",
-  LOGOUT: "auth/userLogout",
+  LOGOUT: "userlogout/userLogout",
   // USER REGISTER AND ADD USER API BOTH ARE SAME
   FORGOTPASSWORD: "/auth/forgotPassword",
   OTPVERIFY: "/auth/otpVerify",
@@ -179,4 +179,6 @@ export default {
   GET_CT_REPORT : '/authreport/getCTreport',
   GET_SM_REPORT : '/authreport/getSMreport',
   GET_ST_REPORT : '/authreport/getSTreport',
+  GET_SH_CH_REPORT : '/authreport/getSHCHreport',
+  GET_BM_REPORT : '/authreport/getBMreport',
 };

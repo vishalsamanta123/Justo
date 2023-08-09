@@ -22,6 +22,7 @@ import React, { useEffect, useState } from "react";
 import { Alert, BackHandler } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardView from "./components/DashboardView";
+import { userLogout } from "app/Redux/Actions/AuthActions";
 
 const DashboardScreen = ({ navigation }: any) => {
   const dispatch: any = useDispatch();
@@ -64,9 +65,15 @@ const DashboardScreen = ({ navigation }: any) => {
     }, [navigation])
   )
   useEffect(() => {
+    console.log("🚀 ~ file: index.tsx:68 ~ response:", response)
     if (response?.status === 200) {
       setDashboardData(response?.data);
       setIsEnabled(response?.data?.online_status);
+    } else if (response?.status === 401) {
+      setDashboardData({});
+      setIsEnabled(null);
+      dispatch(userLogout())
+      navigation.navigate('AuthLoading');
     } else {
       setDashboardData({});
       setIsEnabled(null);

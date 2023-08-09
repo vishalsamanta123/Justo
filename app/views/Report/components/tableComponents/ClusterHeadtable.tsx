@@ -13,9 +13,12 @@ import {
   WHITE_COLOR,
 } from "app/components/utilities/constant";
 import { ScrollView } from "react-native-gesture-handler";
+import SourcingForCluster from "./SourcingForCluster";
+import ClosingForCluster from "./ClosingForCluster";
 
 const ClusterHeadtable = (props: any) => {
   const { data, headerData } = props;
+  console.log("🚀 ~ file: ClusterHeadtable.tsx:19 ~ data:", data);
   return (
     <View
       style={{
@@ -25,8 +28,8 @@ const ClusterHeadtable = (props: any) => {
       <View style={{ ...styles.ThemeColorBox, width: "100%" }}>
         <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
           {data?.role_ID == 1
-            ? `Closing Head Name : ${data?.name}`
-            : `Sourcing Head Name : ${data?.name}`}
+            ? `Closing Manager Name : ${data?.username}`
+            : `Sourcing Manager Name : ${data?.username}`}
         </Text>
       </View>
       <View
@@ -70,124 +73,11 @@ const ClusterHeadtable = (props: any) => {
               flexDirection: "row",
             }}
           >
-            {data?.data.map((item: any, index: any) => {
-              return (
-                <View
-                  style={{
-                    flexDirection: "column",
-                  }}
-                >
-                  <View style={styles.cTDataItems}>
-                    <Text
-                      style={{
-                        ...styles.boxText,
-                        color: BLACK_COLOR,
-                      }}
-                    >
-                      {data?.role_ID == 1
-                        ? item?.closing_manager
-                        : item?.sourcing_manager}
-                    </Text>
-                  </View>
-                  <View style={styles.cTDataItems}>
-                    <Text
-                      style={{
-                        ...styles.boxText,
-                        color: BLACK_COLOR,
-                      }}
-                    >
-                      {data?.role_ID == 1
-                        ? item?.vistitor_attended
-                        : item?.cp_appointment}
-                    </Text>
-                  </View>
-                  <View style={styles.cTDataItems}>
-                    <Text
-                      style={{
-                        ...styles.boxText,
-                        color: BLACK_COLOR,
-                      }}
-                    >
-                      {item?.visitor_no}
-                    </Text>
-                  </View>
-                  <View style={styles.cTDataItems}>
-                    <Text
-                      style={{
-                        ...styles.boxText,
-                        color: BLACK_COLOR,
-                      }}
-                    >
-                      {item?.booking}
-                    </Text>
-                  </View>
-                  <View style={styles.cTDataItems}>
-                    <Text
-                      style={{
-                        ...styles.boxText,
-                        color: BLACK_COLOR,
-                      }}
-                    >
-                      {item.ready_to_book}
-                    </Text>
-                  </View>
-                  <View style={styles.cTDataItems}>
-                    <Text
-                      style={{
-                        ...styles.boxText,
-                        color: BLACK_COLOR,
-                      }}
-                    >
-                      {item.conv}
-                    </Text>
-                  </View>
-                  <View style={styles.cTDataItems}>
-                    <Text
-                      style={{
-                        ...styles.boxText,
-                        color: BLACK_COLOR,
-                      }}
-                    >
-                      {item.total_cancelation}
-                    </Text>
-                  </View>
-                  <View style={styles.cTDataItems}>
-                    <Text
-                      style={{
-                        ...styles.boxText,
-                        color: BLACK_COLOR,
-                      }}
-                    >
-                      {item.total_registration}
-                    </Text>
-                  </View>
-                  {/* {data?.role_ID == 1 ? (
-                    <View style={styles.cTDataItems}>
-                      <Text
-                        style={{
-                          ...styles.boxText,
-                          color: BLACK_COLOR,
-                        }}
-                      >
-                        {item.target_set}
-                      </Text>
-                    </View>
-                  ) : null}
-                  {data?.role_ID == 1 ? (
-                    <View style={styles.cTDataItems}>
-                      <Text
-                        style={{
-                          ...styles.boxText,
-                          color: BLACK_COLOR,
-                        }}
-                      >
-                        {item.target_achive}
-                      </Text>
-                    </View>
-                  ) : null} */}
-                </View>
-              );
-            })}
+            {data?.role_ID == 1 ? (
+              <ClosingForCluster data={data} />
+            ) : (
+              <SourcingForCluster data={data} />
+            )}
           </View>
         </ScrollView>
       </View>

@@ -33,108 +33,108 @@ import RNFS from "react-native-fs";
 import ErrorMessage from "app/components/ErrorMessage";
 
 const BusinessHeadReportTable = (props: any) => {
-  // const { data } = props;
+  const { data } = props;
   const { width, height } = Dimensions.get("window");
-  const data = [
-    {
-      property_Name: "EKA Elites",
-      propertyDetails: [
-        {
-          clusterName: "Amit Samgiskar ( Closing Manager )",
-          details: [
-            {
-              ChannelPartner: 175,
-              Digital: 10,
-              Direct: 3,
-              Hoarding: 3,
-              PaperInsertd: 7,
-              GrandTotal: 3,
-              TotalCancelation: 21,
-              TotalRegistration: 0,
-              NotInterested: 10,
-              TotalCP: 0,
-              AddedCP: 47,
-              ActiveCP: 50,
-              Booking: 6,
-              InactiveCP: 10,
-              SiteVisit: 3,
-            },
-          ],
-        },
-        {
-          clusterName: "kusum karta ( Sourcing Manager )",
-          details: [
-            {
-              ChannelPartner: 185,
-              Digital: 16,
-              Direct: 8,
-              Hoarding: 13,
-              PaperInsertd: 6,
-              GrandTotal: 5,
-              TotalCancelation: 1,
-              TotalRegistration: 0,
-              NotInterested: 6,
-              TotalCP: 0,
-              AddedCP: 7,
-              ActiveCP: 5,
-              Booking: 10,
-              InactiveCP: 0,
-              SiteVisit: 6,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      property_Name: "Govardhan Shikhar",
-      propertyDetails: [
-        {
-          clusterName: "lokesh mangeskar ( Closing Manager )",
-          details: [
-            {
-              ChannelPartner: 195,
-              Digital: 11,
-              Direct: 5,
-              Hoarding: 8,
-              PaperInsertd: 3,
-              GrandTotal: 0,
-              TotalCancelation: 41,
-              TotalRegistration: 5,
-              NotInterested: 10,
-              TotalCP: 54,
-              AddedCP: 57,
-              ActiveCP: 5,
-              Booking: 62,
-              InactiveCP: 10,
-              SiteVisit: 3,
-            },
-          ],
-        },
-        {
-          clusterName: "nitu tatya ( Sourcing Manager )",
-          details: [
-            {
-              ChannelPartner: 185,
-              Digital: 16,
-              Direct: 8,
-              Hoarding: 13,
-              PaperInsertd: 6,
-              GrandTotal: 5,
-              TotalCancelation: 1,
-              TotalRegistration: 0,
-              NotInterested: 6,
-              TotalCP: 0,
-              AddedCP: 7,
-              ActiveCP: 5,
-              Booking: 10,
-              InactiveCP: 0,
-              SiteVisit: 6,
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  // const data = [
+  //   {
+  //     property_Name: "EKA Elites",
+  //     propertyDetails: [
+  //       {
+  //         clusterName: "Amit Samgiskar ( Closing Manager )",
+  //         details: [
+  //           {
+  //             ChannelPartner: 175,
+  //             Digital: 10,
+  //             Direct: 3,
+  //             Hoarding: 3,
+  //             PaperInsertd: 7,
+  //             GrandTotal: 3,
+  //             TotalCancelation: 21,
+  //             TotalRegistration: 0,
+  //             NotInterested: 10,
+  //             TotalCP: 0,
+  //             AddedCP: 47,
+  //             ActiveCP: 50,
+  //             Booking: 6,
+  //             InactiveCP: 10,
+  //             SiteVisit: 3,
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         clusterName: "kusum karta ( Sourcing Manager )",
+  //         details: [
+  //           {
+  //             ChannelPartner: 185,
+  //             Digital: 16,
+  //             Direct: 8,
+  //             Hoarding: 13,
+  //             PaperInsertd: 6,
+  //             GrandTotal: 5,
+  //             TotalCancelation: 1,
+  //             TotalRegistration: 0,
+  //             NotInterested: 6,
+  //             TotalCP: 0,
+  //             AddedCP: 7,
+  //             ActiveCP: 5,
+  //             Booking: 10,
+  //             InactiveCP: 0,
+  //             SiteVisit: 6,
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     property_Name: "Govardhan Shikhar",
+  //     propertyDetails: [
+  //       {
+  //         clusterName: "lokesh mangeskar ( Closing Manager )",
+  //         details: [
+  //           {
+  //             ChannelPartner: 195,
+  //             Digital: 11,
+  //             Direct: 5,
+  //             Hoarding: 8,
+  //             PaperInsertd: 3,
+  //             GrandTotal: 0,
+  //             TotalCancelation: 41,
+  //             TotalRegistration: 5,
+  //             NotInterested: 10,
+  //             TotalCP: 54,
+  //             AddedCP: 57,
+  //             ActiveCP: 5,
+  //             Booking: 62,
+  //             InactiveCP: 10,
+  //             SiteVisit: 3,
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         clusterName: "nitu tatya ( Sourcing Manager )",
+  //         details: [
+  //           {
+  //             ChannelPartner: 185,
+  //             Digital: 16,
+  //             Direct: 8,
+  //             Hoarding: 13,
+  //             PaperInsertd: 6,
+  //             GrandTotal: 5,
+  //             TotalCancelation: 1,
+  //             TotalRegistration: 0,
+  //             NotInterested: 6,
+  //             TotalCP: 0,
+  //             AddedCP: 7,
+  //             ActiveCP: 5,
+  //             Booking: 10,
+  //             InactiveCP: 0,
+  //             SiteVisit: 6,
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // ];
   const headerData = [
     "Channel Partner",
     "Digital",
@@ -152,6 +152,8 @@ const BusinessHeadReportTable = (props: any) => {
     "Inactive/Dormat CP",
     "Site Visit",
   ];
+
+  const swipeData = ["Site Visit", "Booking", "Conv %"];
 
   const onPressDownload = async () => {
     const res = await handlePermission(
@@ -280,7 +282,6 @@ const BusinessHeadReportTable = (props: any) => {
                 <View
                   style={{
                     marginBottom: normalize(10),
-                    // width: "100%",
                   }}
                   key={index}
                 >
@@ -292,45 +293,108 @@ const BusinessHeadReportTable = (props: any) => {
                     }}
                   >
                     <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
-                      {item?.property_Name}
+                      {item?.property_title}
                     </Text>
                   </View>
-                  {item?.propertyDetails?.map((itm: any, index: any) => {
+                  {item?.CHDetails?.map((itm: any, index: any) => {
+                    console.log("🚀 ~ file: BusinessHeadReportTable.tsx:280 ~ item:", itm?.leaddetail)
+                    const handleTotalCount = (prop: any) => {
+                     if (itm?.leaddetail?.length > 0) {
+                       return itm?.leaddetail?.reduce(function (a: any, b: any) {
+                         return a + b[prop];
+                       }, 0);
+                     }
+                   };
+                    const handleTotalCountPercentage = (prop: any) => {
+                     if (itm?.leaddetail?.length > 0) {
+                       return itm?.leaddetail?.reduce(function (a: any, b: any) {
+                         return a + +b[prop]?.replace("%", "");
+                       }, 0);
+                     }
+                   };
                     return (
                       <>
                         <View
                           style={{
                             ...styles.ThemeColorBox,
                             width: "100%",
-                            marginBottom: normalize(10),
+                            // marginBottom: normalize(10),
                           }}
                         >
                           <Text
                             style={{ ...styles.boxText, color: WHITE_COLOR }}
                           >
-                            {itm?.clusterName}
+                            {`Cluster head name: ${itm?.username}`}
                           </Text>
                         </View>
-                        <View
-                          style={{
-                            flexDirection: "row",
-                            marginBottom: normalize(10),
-                          }}
+                        <ScrollView
+                          horizontal={true}
+                          showsHorizontalScrollIndicator={false}
                         >
                           <View
                             style={{
-                              flexDirection: "column",
-                              width: "70%",
+                              flexDirection: "row",
+                              marginBottom: normalize(10),
                             }}
                           >
-                            {headerData.map((val: any, index: any) => {
-                              return (
+                            <View
+                              style={{
+                                flexDirection: "column",
+                              }}
+                            >
+                              <>
+                                {itm?.leaddetail?.map(
+                                  (val: any, index: any) => {
+                                    return (
+                                      <>
+                                        {index === 0 ? (
+                                          <View
+                                            style={{
+                                              borderWidth: normalize(
+                                                Isios ? 1.2 : 2
+                                              ),
+                                              padding: normalize(12),
+                                              backgroundColor:
+                                                PRIMARY_THEME_COLOR,
+                                            }}
+                                          >
+                                            <Text
+                                              style={{
+                                                ...styles.boxText,
+                                                color: WHITE_COLOR,
+                                              }}
+                                            >
+                                              Lead Source
+                                            </Text>
+                                          </View>
+                                        ) : null}
+                                        <View
+                                          key={index}
+                                          style={{
+                                            borderWidth: normalize(
+                                              Isios ? 1.2 : 2
+                                            ),
+                                            padding: normalize(12),
+                                            backgroundColor:
+                                              PRIMARY_THEME_COLOR,
+                                          }}
+                                        >
+                                          <Text
+                                            style={{
+                                              ...styles.boxText,
+                                              color: WHITE_COLOR,
+                                            }}
+                                          >
+                                            {val?.title}
+                                          </Text>
+                                        </View>
+                                      </>
+                                    );
+                                  }
+                                )}
                                 <View
                                   key={index}
                                   style={{
-                                    // width: normalizeWidth(140),
-                                    width: "100%",
-                                    // height: normalizeHeight(90),
                                     borderWidth: normalize(Isios ? 1.2 : 2),
                                     padding: normalize(12),
                                     backgroundColor: PRIMARY_THEME_COLOR,
@@ -342,174 +406,120 @@ const BusinessHeadReportTable = (props: any) => {
                                       color: WHITE_COLOR,
                                     }}
                                   >
-                                    {val}
+                                    Grand Total
                                   </Text>
                                 </View>
-                              );
-                            })}
-                          </View>
-                          {itm?.details?.map((item: any, index: any) => {
-                            return (
-                              <View
-                                style={{
-                                  flexDirection: "column",
-                                  width: "30%",
-                                }}
-                              >
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.ChannelPartner}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.Digital}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.Direct}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.Hoarding}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.PaperInsertd}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.GrandTotal}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.TotalCancelation}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.TotalRegistration}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.NotInterested}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.TotalCP}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.AddedCP}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.ActiveCP}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.Booking}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.InactiveCP}
-                                  </Text>
-                                </View>
-                                <View style={styles.dataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.SiteVisit}
-                                  </Text>
+                              </>
+                            </View>
+                            <View style={{ flexDirection: "column" }}>
+                              <View style={{ flexDirection: "row" }}>
+                                {swipeData?.map((item: any, index: any) => {
+                                  return (
+                                    <View
+                                      style={{
+                                        flexDirection: "column",
+                                        width: normalizeWidth(100),
+                                      }}
+                                    >
+                                      <View style={styles.dataItemsForBM}>
+                                        <Text
+                                          style={{
+                                            ...styles.boxText,
+                                            color: BLACK_COLOR,
+                                          }}
+                                        >
+                                          {item}
+                                        </Text>
+                                      </View>
+                                    </View>
+                                  );
+                                })}
+                              </View>
+                              <View style={{ flexDirection: "column" }}>
+                                {itm?.leaddetail?.map(
+                                  (item: any, index: any) => {
+                                    return (
+                                      <View
+                                        style={{
+                                          flexDirection: "row",
+                                          width: normalizeWidth(100),
+                                        }}
+                                      >
+                                        <View style={styles.dataItemsForBM}>
+                                          <Text
+                                            style={{
+                                              ...styles.boxText,
+                                              color: BLACK_COLOR,
+                                            }}
+                                          >
+                                            {item?.sitevisitbysource}
+                                          </Text>
+                                        </View>
+                                        <View style={styles.dataItemsForBM}>
+                                          <Text
+                                            style={{
+                                              ...styles.boxText,
+                                              color: BLACK_COLOR,
+                                            }}
+                                          >
+                                            {item?.confirmBooking}
+                                          </Text>
+                                        </View>
+                                        <View style={styles.dataItemsForBM}>
+                                          <Text
+                                            style={{
+                                              ...styles.boxText,
+                                              color: BLACK_COLOR,
+                                            }}
+                                          >
+                                            {item?.ConversionPercentage}
+                                          </Text>
+                                        </View>
+                                      </View>
+                                    );
+                                  }
+                                )}
+                                <View
+                                  style={{
+                                    flexDirection: "row",
+                                    width: normalizeWidth(100),
+                                  }}
+                                >
+                                  <View style={styles.dataItemsForBM}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {handleTotalCount("sitevisitbysource")}
+                                    </Text>
+                                  </View>
+                                  <View style={styles.dataItemsForBM}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {handleTotalCount("confirmBooking")}
+                                    </Text>
+                                  </View>
+                                  <View style={styles.dataItemsForBM}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {handleTotalCountPercentage("ConversionPercentage")+ "%"}
+                                    </Text>
+                                  </View>
                                 </View>
                               </View>
-                            );
-                          })}
-                        </View>
+                            </View>
+                          </View>
+                        </ScrollView>
                       </>
                     );
                   })}

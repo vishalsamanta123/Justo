@@ -2,8 +2,10 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import ReportView from "./components/ReportView";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  GetBMreport,
   GetCMReport,
   GetCTReport,
+  GetSHCHreport,
   GetSMReport,
   GetSTReport,
 } from "app/Redux/Actions/ReportActions";
@@ -41,9 +43,9 @@ const ReportScreen = ({ navigation }: any) => {
   var currentYears = currentDate.getFullYear();
   var todayDate = currentYears + "-" + currentMonths + "-" + currentDay;
 
-  // useLayoutEffect(() => {
-  //   getData(firstdDate, todayDate);
-  // }, [isFocused]);
+  useLayoutEffect(() => {
+    getData(firstdDate, todayDate);
+  }, [isFocused]);
   useEffect(() => {
     if (ReportData?.response?.data.length > 0) {
       setReportData(ReportData?.response?.data);
@@ -79,6 +81,20 @@ const ReportScreen = ({ navigation }: any) => {
           end_date: endDate.toString(),
         })
       );
+    } else if (roleId === ROLE_IDS.sitehead_id || roleId === ROLE_IDS.clusterhead_id) {
+      dispatch(
+        GetSHCHreport({
+          start_date: startDate.toString(),
+          end_date: endDate.toString(),
+        })
+      );
+    } else if (roleId === ROLE_IDS.businesshead_id) {
+      dispatch(
+        GetBMreport({
+          start_date: startDate.toString(),
+          end_date: endDate.toString(),
+        })
+      );
     }
   };
 
@@ -99,7 +115,6 @@ const ReportScreen = ({ navigation }: any) => {
     setIsFilterModalVisible(false);
     getData(filterData?.startdate, filterData?.enddate);
   };
-  console.log("🚀 ~ file: index.tsx:108 ~ ReportScreen ~ reportData:", ReportData?.response?.data)
   return (
     <>
       <ReportView
