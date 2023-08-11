@@ -15,6 +15,7 @@ import React from "react";
 import {
   Dimensions,
   Image,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   Text,
@@ -33,16 +34,27 @@ import XLSX from "xlsx";
 import RNFS from "react-native-fs";
 
 const SMReportTable = (props: any) => {
-  const { data } = props;
+  const { data, handleCpDetailPress } = props;
   const headerData = [
-    "CP Map (Allocated)",
-    "Inactive/Deactive CP",
-    "Booking / Transactional CP",
-    "Walk-in Active CP",
+    "CP Mapped",
+    "New CP Registered",
+    "Active CP",
+    "Transactional CP",
+    "Dormant CP",
+    "Appointment Done",
     "Visitor No Shows",
-    "Site visit",
+    "Total Bookings",
+    "CP Detail",
   ];
   const cpHeaderData = ["CP Firm name / Individual CP Name", "CP Visit Count"];
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
+    props.onReset();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
   // const data = [
   //   {
   //     _id: "6406d11bc72657d5bcaffd1d",
@@ -281,8 +293,11 @@ const SMReportTable = (props: any) => {
         contentContainerStyle={{
           margin: normalize(10),
         }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
-        <View
+        {/* <View
           style={{
             alignItems: "flex-end",
             marginBottom: normalize(10),
@@ -303,9 +318,9 @@ const SMReportTable = (props: any) => {
               style={styles.downloadImg}
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View>
-          {data.map((item: any, index: any) => {
+          {data?.map((item: any, index: any) => {
             return (
               <>
                 <View
@@ -316,7 +331,13 @@ const SMReportTable = (props: any) => {
                   key={index}
                 >
                   <View style={{ ...styles.ThemeColorBox, width: "100%" }}>
-                    <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
+                    <Text
+                      style={{
+                        ...styles.boxText,
+                        color: WHITE_COLOR,
+                        textAlign: "center",
+                      }}
+                    >
                       {item.property_title}
                     </Text>
                   </View>
@@ -357,6 +378,7 @@ const SMReportTable = (props: any) => {
                       })}
                     </View>
                     {item?.smDetails?.map((item: any, index: any) => {
+                      console.log("🚀 ~ file: SMReportTable.tsx:379 ~ item:", item)
                       return (
                         <View
                           style={{
@@ -381,17 +403,7 @@ const SMReportTable = (props: any) => {
                                 color: BLACK_COLOR,
                               }}
                             >
-                              {item?.inactiveCP}
-                            </Text>
-                          </View>
-                          <View style={styles.dataItems}>
-                            <Text
-                              style={{
-                                ...styles.boxText,
-                                color: BLACK_COLOR,
-                              }}
-                            >
-                              {item?.BookingCountTotal}
+                              {item?.newCpRegistered}
                             </Text>
                           </View>
                           <View style={styles.dataItems}>
@@ -411,7 +423,17 @@ const SMReportTable = (props: any) => {
                                 color: BLACK_COLOR,
                               }}
                             >
-                              {item?.NoshowAppintment}
+                              {item?.BookingCountTotal}
+                            </Text>
+                          </View>
+                          <View style={styles.dataItems}>
+                            <Text
+                              style={{
+                                ...styles.boxText,
+                                color: BLACK_COLOR,
+                              }}
+                            >
+                              {item?.inactiveCP}
                             </Text>
                           </View>
                           <View style={styles.dataItems}>
@@ -424,11 +446,49 @@ const SMReportTable = (props: any) => {
                               {item?.SitevisitCountTotal}
                             </Text>
                           </View>
+                          <View style={styles.dataItems}>
+                            <Text
+                              style={{
+                                ...styles.boxText,
+                                color: BLACK_COLOR,
+                              }}
+                            >
+                              {item?.NoshowAppintment}
+                            </Text>
+                          </View>
+                          <View style={styles.dataItems}>
+                            <Text
+                              style={{
+                                ...styles.boxText,
+                                color: BLACK_COLOR,
+                              }}
+                            >
+                              {item?.confirmBooking}
+                            </Text>
+                          </View>
+                          <TouchableOpacity
+                            onPress={() =>
+                              handleCpDetailPress(
+                                item?.CPInfo,
+                                item?.username
+                              )
+                            }
+                            style={styles.dataItems}
+                          >
+                            <Text
+                              style={{
+                                ...styles.boxText,
+                                color: BLACK_COLOR,
+                              }}
+                            >
+                              View CP
+                            </Text>
+                          </TouchableOpacity>
                         </View>
                       );
                     })}
                   </View>
-                  <View
+                  {/* <View
                     style={{
                       ...styles.ThemeColorBox,
                       width: "100%",
@@ -438,76 +498,7 @@ const SMReportTable = (props: any) => {
                     <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
                       CP Details
                     </Text>
-                  </View>
-                  <ScrollView
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{
-                      flexDirection: "row",
-                    }}
-                  >
-                    <View
-                      style={{
-                        flexDirection: "column",
-                      }}
-                    >
-                      {cpHeaderData.map((item: any, index: any) => {
-                        return (
-                          <View
-                            key={index}
-                            style={{
-                              width: normalizeWidth(140),
-                              height: normalizeHeight(90),
-                              borderWidth: normalize(Isios ? 1.2 : 2),
-                              padding: normalize(12),
-                              backgroundColor: PRIMARY_THEME_COLOR,
-                            }}
-                          >
-                            <Text
-                              style={{
-                                ...styles.boxText,
-                                color: WHITE_COLOR,
-                              }}
-                            >
-                              {item}
-                            </Text>
-                          </View>
-                        );
-                      })}
-                    </View>
-                    {item?.smDetails[0]?.CPInfo?.map(
-                      (item: any, index: any) => {
-                        return (
-                          <View
-                            style={{
-                              flexDirection: "column",
-                            }}
-                          >
-                            <View style={styles.cTDataItems}>
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item?.Cp_name}
-                              </Text>
-                            </View>
-                            <View style={styles.cTDataItems}>
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: BLACK_COLOR,
-                                }}
-                              >
-                                {item?.leadCount}
-                              </Text>
-                            </View>
-                          </View>
-                        );
-                      }
-                    )}
-                  </ScrollView>
+                  </View> */}
                 </View>
               </>
             );

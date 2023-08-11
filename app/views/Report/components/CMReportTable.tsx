@@ -17,6 +17,7 @@ import React from "react";
 import {
   Dimensions,
   Image,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -40,19 +41,27 @@ const CMReportTable = (props: any) => {
   const { width, height } = Dimensions.get("window"),
     vw = width / 100,
     vh = height / 100;
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
+    props.onReset();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
   const headerData = [
-    "Total Site Visitors",
+    "Visitor Attended",
     "Direct Walk-ins",
-    "No Shows",
     "CP(Walk-ins) Appointments",
-    "Total Appointments",
-    "Booking",
-    "No. of (follow-ups scheduled)",
+    "No Shows",
+    "Total Revisit",
     "Total Not Interested",
+    "Total Booking",
+    // "No. of (follow-ups scheduled)",
     "Conversion %",
-    "Grand Total",
-    "Total Registration",
-    "Total Cancelation",
+    // "Grand Total",
+    // "Total Registration",
+    // "Total Cancelation",
   ];
 
   const onPressDownload = async () => {
@@ -125,27 +134,20 @@ const CMReportTable = (props: any) => {
   return (
     <SafeAreaView>
       <ScrollView
-        showsVerticalScrollIndicator={false}
         style={{
           height: height - normalize(55),
         }}
-        contentContainerStyle={{
-          margin: normalize(10),
-        }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
-        <ScrollView
-          horizontal={true}
-          contentContainerStyle={{
+        {/* <View> */}
+        <View
+          style={{
             width: "100%",
           }}
-          showsHorizontalScrollIndicator={false}
         >
-          <View
-            style={{
-              width: "100%",
-            }}
-          >
-            {/* <View
+          {/* <View
               style={{
                 alignItems: "flex-end",
                 marginBottom: normalize(10),
@@ -167,25 +169,25 @@ const CMReportTable = (props: any) => {
                 />
               </TouchableOpacity>
             </View> */}
-            <View
+          <View
+            style={{
+              width: "100%",
+              borderWidth: normalize(Isios ? 1.2 : 2),
+              padding: normalize(12),
+              justifyContent: "center",
+            }}
+          >
+            <Text
               style={{
-                width: "100%",
-                borderWidth: normalize(Isios ? 1.2 : 2),
-                padding: normalize(12),
-                justifyContent: "center",
+                fontFamily: FONT_FAMILY_SEMIBOLD,
+                color: BLACK_COLOR,
+                fontSize: normalize(Isios ? 14 : 16),
               }}
             >
-              <Text
-                style={{
-                  fontFamily: FONT_FAMILY_SEMIBOLD,
-                  color: BLACK_COLOR,
-                  fontSize: normalize(Isios ? 14 : 16),
-                }}
-              >
-                CM : {userData?.data?.user_name}
-              </Text>
-            </View>
-            {/* <View
+              CM Name: {userData?.data?.user_name}
+            </Text>
+          </View>
+          {/* <View
               style={{
                 flexDirection: "row",
               }}
@@ -255,120 +257,131 @@ const CMReportTable = (props: any) => {
                 </Text>
               </View>
             </View> */}
-            <View>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+            <View
+              style={{
+                flexDirection: "row",
+                width: "100%",
+              }}
+            >
               <View
                 style={{
-                  flexDirection: "row",
-                  width: "100%",
+                  flexDirection: "column",
+                  // width: "70%",
                 }}
               >
-                <View
-                  style={{
-                    flexDirection: "column",
-                    width: "70%",
-                  }}
-                >
-                  {headerData.map((item: any, index: any) => {
-                    return (
-                      <View
-                        key={index}
-                        style={{
-                          // width: normalizeWidth(140),
-                          width: "100%",
-                          // height: normalizeHeight(90),
-                          borderWidth: normalize(Isios ? 1.2 : 2),
-                          padding: normalize(12),
-                          backgroundColor: PRIMARY_THEME_COLOR,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: WHITE_COLOR,
-                          }}
-                        >
-                          {item}
-                        </Text>
-                      </View>
-                    );
-                  })}
-                </View>
-                {data?.map((item: any, index: any) => {
+                {headerData.map((item: any, index: any) => {
                   return (
                     <View
+                      key={index}
                       style={{
-                        flexDirection: "column",
-                        width: "30%",
+                        // width: normalizeWidth(140),
+                        // width: "100%",
+                        // height: normalizeHeight(90),
+                        borderWidth: normalize(Isios ? 1.2 : 2),
+                        padding: normalize(12),
+                        backgroundColor: PRIMARY_THEME_COLOR,
                       }}
                     >
-                      <View
+                      <Text
                         style={{
-                          width: "100%",
-                          // height: normalizeHeight(90),
-                          borderWidth: normalize(Isios ? 1.2 : 2),
-                          padding: normalize(12),
+                          ...styles.boxText,
+                          color: WHITE_COLOR,
                         }}
                       >
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.VisitorAttended}
-                        </Text>
-                      </View>
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.DirectWalkins}
-                        </Text>
-                      </View>
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.Noshow}
-                        </Text>
-                      </View>
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.CPWalkins}
-                        </Text>
-                      </View>
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.TotalAppointmentsrevisit}
-                        </Text>
-                      </View>
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.Booking}
-                        </Text>
-                      </View>
-                      {/* <View style={styles.dataItems}>
+                        {item}
+                      </Text>
+                    </View>
+                  );
+                })}
+              </View>
+              {data?.map((item: any, index: any) => {
+                return (
+                  <View
+                    style={{
+                      flexDirection: "column",
+                      // width: "100%",
+                    }}
+                  >
+                    <View
+                      style={{
+                        // width: "100%",
+                        width: normalizeWidth(80),
+                        // height: normalizeHeight(90),
+                        borderWidth: normalize(Isios ? 1.2 : 2),
+                        padding: normalize(12),
+                      }}
+                    >
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.VisitorAttended}
+                      </Text>
+                    </View>
+                    <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.DirectWalkins}
+                      </Text>
+                    </View>
+                    <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.CPWalkins}
+                      </Text>
+                    </View>
+                    <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.Noshow}
+                      </Text>
+                    </View>
+                    <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.TotalAppointmentsrevisit}
+                      </Text>
+                    </View>
+                    <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.TotalNotInterested}
+                      </Text>
+                    </View>
+                    <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.Booking}
+                      </Text>
+                    </View>
+                    {/* <View style={styles.dataItems}>
                         <Text
                           style={{
                             ...styles.boxText,
@@ -378,72 +391,63 @@ const CMReportTable = (props: any) => {
                           {item?.ReadytoBook}
                         </Text>
                       </View> */}
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.followschedule}
-                        </Text>
-                      </View>
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.TotalNotInterested}
-                        </Text>
-                      </View>
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.Conversion}
-                        </Text>
-                      </View>
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.GrandTotal}
-                        </Text>
-                      </View>
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.Registration}
-                        </Text>
-                      </View>
-                      <View style={styles.dataItems}>
-                        <Text
-                          style={{
-                            ...styles.boxText,
-                            color: BLACK_COLOR,
-                          }}
-                        >
-                          {item?.TotalCancelation}
-                        </Text>
-                      </View>
+                    {/* <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.followschedule}
+                      </Text>
+                    </View> */}
+
+                    <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.Conversion}
+                      </Text>
                     </View>
-                  );
-                })}
-              </View>
+                    {/* <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.GrandTotal}
+                      </Text>
+                    </View> */}
+                    {/* <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.Registration}
+                      </Text>
+                    </View>
+                    <View style={styles.dataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item?.TotalCancelation}
+                      </Text>
+                    </View> */}
+                  </View>
+                );
+              })}
             </View>
-            {/* <View
+          </ScrollView>
+          {/* <View
                         style={{
                           width: "50%",
                           borderWidth: normalize(Isios ? 1.2 : 2),
@@ -483,8 +487,8 @@ const CMReportTable = (props: any) => {
                           </View>
                         );
                       })} */}
-          </View>
-          {/* <View
+        </View>
+        {/* <View
               style={{
                 flexDirection: "row",
               }}
@@ -529,7 +533,7 @@ const CMReportTable = (props: any) => {
                 ></Text>
               </View>
             </View> */}
-        </ScrollView>
+        {/* </View> */}
       </ScrollView>
     </SafeAreaView>
   );

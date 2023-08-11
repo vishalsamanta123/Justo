@@ -6,14 +6,17 @@ import {
 } from "app/components/scaleFontSize";
 import {
   BLACK_COLOR,
+  GREEN_COLOR,
   Isios,
   PRIMARY_THEME_COLOR,
+  RED_COLOR,
   WHITE_COLOR,
 } from "app/components/utilities/constant";
 import React from "react";
 import {
   Dimensions,
   Image,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   Text,
@@ -22,10 +25,27 @@ import {
 } from "react-native";
 import styles from "./styles";
 import ClusterHeadtable from "./tableComponents/ClusterHeadtable";
+import ErrorMessage from "app/components/ErrorMessage";
+import {
+  handlePermission,
+  openPermissionSetting,
+} from "app/components/utilities/GlobalFuncations";
+import strings from "app/components/utilities/Localization";
+import RNFS from "react-native-fs";
+import XLSX from "xlsx";
+import SMReportTable from "./SMReportTable";
 
 const ClusterHeadReportTable = (props: any) => {
-  const { data } = props;
+  const { data, onReset, handleCpDetailPress } = props;
   const { width, height } = Dimensions.get("window");
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
+    props.onReset();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
   // const soucingHeaderData = [
   //   "Sourcing Manager",
   //   "CP Appointments/ Walk-ins",
@@ -37,13 +57,16 @@ const ClusterHeadReportTable = (props: any) => {
   //   "Total Registration",
   // ];
   const soucingHeaderData = [
-    "CP Map (Allocated)",
-    "Inactive/Deactive CP",
-    "Lead by Active CP",
-    "Appointment by CP",
+    "SM Name",
+    "CP Mapped",
+    "New CP Registered",
+    "Active CP",
+    "Transactional CP",
+    "Dormant CP",
+    "Appointment Done",
     "Visitor No Shows",
-    "Booking / Transactional CP",
-    "Conv %",
+    "Total Bookings",
+    "CP Detail",
   ];
 
   // const closingHeaderData = [
@@ -59,13 +82,90 @@ const ClusterHeadReportTable = (props: any) => {
   //   // "% of Target Achieve",
   // ];
   const closingHeaderData = [
-    "Client/ Vistor Attended",
-    "Visitor No Shows",
-    "Booking",
-    "Total Cancelation",
-    "Total Registration",
-    "Conv %",
+    "CM Name",
+    // "Lead Assign",
+    "Visitor Attended",
+    "Direct Walk-ins",
+    "CP (Walk-ins) Appointments",
+    // "Total Site Visit",
+    "No Shows",
+    "Total Revisit",
+    "Total Not Interested",
+    // "Visit Cancel",
+    "Total Booking",
+    // "Ready to Book",
+    // "Total Registration",
+    // "Cancelation Booking",
+    "Conversion %",
   ];
+
+  const onPressDownload = async () => {
+    let array = data.map((item: any) => {
+      return {
+        "Total Site Visitors": item?.VisitorAttended,
+        "Direct Walk-ins": item?.DirectWalkins,
+        "No Shows": item?.Noshow,
+        "CP(Walk-ins) Appointments": item?.CPWalkins,
+        "Total Appointments": item?.TotalAppointmentsrevisit,
+        Booking: item?.Booking,
+        "No. of": item?.followschedule,
+        "Total Not Interested": item?.TotalNotInterested,
+        "Conversion %": item?.Conversion,
+        "Grand Total": item?.GrandTotal,
+        "Total Registration": item?.Registration,
+        "Total Cancelation": item?.TotalCancelation,
+      };
+    });
+    const res = await handlePermission(
+      "gallery",
+      strings.txt_setting_heading_media,
+      strings.txt_setting_description_media
+    );
+    if (res == "setting1") {
+      openPermissionSetting(
+        strings.txt_setting_heading_media,
+        strings.txt_setting_description_media
+      );
+    } else if (res) {
+      try {
+        ErrorMessage({
+          msg: strings.startDownload,
+          backgroundColor: BLACK_COLOR,
+        });
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(array);
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+        const excelFile = XLSX.write(workbook, {
+          type: "base64",
+          bookType: "xlsx",
+        });
+
+        // Create a temporary directory to store the file
+        const tempDir = RNFS.DownloadDirectoryPath;
+        const filePath = `${tempDir}/ClosingManagerReport.xlsx`;
+
+        // Write the file to the temporary directory
+        await RNFS.writeFile(filePath, excelFile, "base64");
+
+        console.log("File saved:", filePath);
+
+        // Add file scanning to make it visible in device's media library (optional)
+        await RNFS.scanFile(filePath);
+        ErrorMessage({
+          msg: strings.succesfullyDownload,
+          backgroundColor: GREEN_COLOR,
+        });
+
+        console.log("File scanned:", filePath);
+      } catch (error) {
+        ErrorMessage({
+          msg: strings.unSuccesfullyDownload,
+          backgroundColor: RED_COLOR,
+        });
+        console.log("Error generating Excel file:", error);
+      }
+    }
+  };
 
   // const data = [
   //   {
@@ -272,6 +372,9 @@ const ClusterHeadReportTable = (props: any) => {
         contentContainerStyle={{
           margin: normalize(10),
         }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
         {/* <View
           style={{
@@ -295,13 +398,7 @@ const ClusterHeadReportTable = (props: any) => {
             />
           </TouchableOpacity>
         </View> */}
-        <View
-          style={
-            {
-              // flexDirection: "row",
-            }
-          }
-        >
+        <View>
           {data.map((item: any, index: any) => {
             return (
               <View>
@@ -312,8 +409,14 @@ const ClusterHeadReportTable = (props: any) => {
                     // marginBottom: normalize(10),
                   }}
                 >
-                  <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
-                    Site Name : {item?.property_title}
+                  <Text
+                    style={{
+                      ...styles.boxText,
+                      color: WHITE_COLOR,
+                      textAlign: "center",
+                    }}
+                  >
+                    {item?.property_title}
                   </Text>
                 </View>
                 {/* <View>
@@ -342,26 +445,63 @@ const ClusterHeadReportTable = (props: any) => {
                     </View>
                   ) : (
                     <>
-                      {item?.smDetails?.map((item: any, index: any) => {
-                        return (
-                          <View key={index}>
-                            <ClusterHeadtable
-                              data={{ ...item, role_ID: 2 }}
-                              headerData={soucingHeaderData}
-                            />
-                          </View>
-                        );
-                      })}
-                      {item?.CMDetails?.map((item: any, index: any) => {
-                        return (
-                          <View key={index}>
-                            <ClusterHeadtable
-                              data={{ ...item, role_ID: 1 }}
-                              headerData={closingHeaderData}
-                            />
-                          </View>
-                        );
-                      })}
+                      {/* {item?.smDetails?.map((item: any, index: any) => {
+                        return ( */}
+                      <View key={index}>
+                      <View
+                          style={{
+                            ...styles.ThemeColorBox,
+                            width: "100%",
+                            // marginBottom: normalize(10),
+                          }}
+                        >
+                          <Text
+                            style={{
+                              ...styles.boxText,
+                              color: WHITE_COLOR,
+                              textAlign: "center",
+                            }}
+                          >
+                            Sourcing Team
+                          </Text>
+                        </View>
+                        <ClusterHeadtable
+                          data={item?.smDetails}
+                          role_ID={2}
+                          headerData={soucingHeaderData}
+                          handleCpDetailPress={handleCpDetailPress}
+                        />
+                      </View>
+                      {/* );
+                      })} */}
+                      {/* {item?.CMDetails?.map((item: any, index: any) => {
+                        return ( */}
+                      <View key={index}>
+                        <View
+                          style={{
+                            ...styles.ThemeColorBox,
+                            width: "100%",
+                            // marginBottom: normalize(10),
+                          }}
+                        >
+                          <Text
+                            style={{
+                              ...styles.boxText,
+                              color: WHITE_COLOR,
+                              textAlign: "center",
+                            }}
+                          >
+                            Closing Team
+                          </Text>
+                        </View>
+                        <ClusterHeadtable
+                          data={item?.CMDetails}
+                          role_ID={1}
+                          headerData={closingHeaderData}
+                        />
+                      </View>
+                      {/* );
+                      })} */}
                     </>
                   )}
                 </View>

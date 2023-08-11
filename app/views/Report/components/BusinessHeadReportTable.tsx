@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
   Image,
+  RefreshControl,
 } from "react-native";
 import React from "react";
 import {
@@ -35,6 +36,14 @@ import ErrorMessage from "app/components/ErrorMessage";
 const BusinessHeadReportTable = (props: any) => {
   const { data } = props;
   const { width, height } = Dimensions.get("window");
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
+    props.onReset()
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }
   // const data = [
   //   {
   //     property_Name: "EKA Elites",
@@ -252,8 +261,11 @@ const BusinessHeadReportTable = (props: any) => {
         contentContainerStyle={{
           margin: normalize(10),
         }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
-        <View
+        {/* <View
           style={{
             alignItems: "flex-end",
             marginBottom: normalize(10),
@@ -274,7 +286,7 @@ const BusinessHeadReportTable = (props: any) => {
               style={styles.downloadImg}
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View>
           {data.map((item: any, index: any) => {
             return (
@@ -292,7 +304,7 @@ const BusinessHeadReportTable = (props: any) => {
                       marginBottom: normalize(10),
                     }}
                   >
-                    <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
+                    <Text style={{ ...styles.boxText, color: WHITE_COLOR, textAlign: 'center' }}>
                       {item?.property_title}
                     </Text>
                   </View>

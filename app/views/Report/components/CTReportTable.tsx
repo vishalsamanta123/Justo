@@ -15,6 +15,7 @@ import React from "react";
 import {
   Dimensions,
   Image,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   Text,
@@ -38,25 +39,32 @@ const CTReportTable = (props: any) => {
     vw = width / 100,
     vh = height / 100;
   console.log("🚀 ~ file: CTReportTable.tsx:37 ~ CTReportTable ~ data:", data);
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
+    props.onReset()
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }
   const headeData = [
     "CM Name",
-    "Lead Assign",
-    "CP (Walk-ins) Appointments",
-    "Direct Walk-ins",
-    "Total Site Visit",
-    "No Shows",
+    // "Lead Assign",
     "Visitor Attended",
-    "Appointments (Revisit)",
-    "Not Interested",
-    "Visit Cancel",
-    "Booking",
-    "Ready to Book",
-    "Total Registration",
-    "Cancelation Booking",
-    "Conversion % (Walk-in to Booking)",
-    "No. of (follow-ups scheduled)",
+    "Direct Walk-ins",
+    "CP (Walk-ins) Appointments",
+    // "Total Site Visit",
+    "No Shows",
+    "Total Revisit",
+    "Total Not Interested",
+    // "Visit Cancel",
+    "Total Booking",
+    // "Ready to Book",
+    // "Total Registration",
+    // "Cancelation Booking",
+    "Conversion %",
+    // "No. of (follow-ups scheduled)",
   ];
-
   const onPressDownload = async () => {
     let array = data.map((item: any) => {
       return {
@@ -140,8 +148,11 @@ const CTReportTable = (props: any) => {
           margin: normalize(10),
           paddingBottom : normalize(15)
         }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
-        <View
+        {/* <View
           style={{
             alignItems: "flex-end",
             marginBottom: normalize(10),
@@ -162,7 +173,7 @@ const CTReportTable = (props: any) => {
               style={styles.downloadImg}
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View
           style={{
             flexDirection: "row",
@@ -222,17 +233,7 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item?.total_visit}
-                      </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
-                      <Text
-                        style={{
-                          ...styles.boxText,
-                          color: BLACK_COLOR,
-                        }}
-                      >
-                        {item?.CPWalkins}
+                        {item?.VisitorAttended}
                       </Text>
                     </View>
                     <View style={styles.cTDataItems}>
@@ -252,9 +253,20 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item.VisitorAttended}
+                        {item?.CPWalkins}
                       </Text>
                     </View>
+                    
+                    {/* <View style={styles.cTDataItems}>
+                      <Text
+                        style={{
+                          ...styles.boxText,
+                          color: BLACK_COLOR,
+                        }}
+                      >
+                        {item.VisitorAttended}
+                      </Text>
+                    </View> */}
                     <View style={styles.cTDataItems}>
                       <Text
                         style={{
@@ -265,7 +277,7 @@ const CTReportTable = (props: any) => {
                         {item.Noshow}
                       </Text>
                     </View>
-                    <View style={styles.cTDataItems}>
+                    {/* <View style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -274,7 +286,7 @@ const CTReportTable = (props: any) => {
                       >
                         {item?.TotalAppointments}
                       </Text>
-                    </View>
+                    </View> */}
                     <View style={styles.cTDataItems}>
                       <Text
                         style={{
@@ -295,7 +307,7 @@ const CTReportTable = (props: any) => {
                         {item.TotalNotInterested}
                       </Text>
                     </View>
-                    <View style={styles.cTDataItems}>
+                    {/* <View style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -304,7 +316,7 @@ const CTReportTable = (props: any) => {
                       >
                         {item.TotalCancelation}
                       </Text>
-                    </View>
+                    </View> */}
                     <View style={styles.cTDataItems}>
                       <Text
                         style={{
@@ -315,7 +327,7 @@ const CTReportTable = (props: any) => {
                         {item.Booking}
                       </Text>
                     </View>
-                    <View style={styles.cTDataItems}>
+                    {/* <View style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -324,8 +336,8 @@ const CTReportTable = (props: any) => {
                       >
                         {item.ReadytoBook}
                       </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
+                    </View> */}
+                    {/* <View style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -344,7 +356,7 @@ const CTReportTable = (props: any) => {
                       >
                         {item.CancelBooking}
                       </Text>
-                    </View>
+                    </View> */}
                     <View style={styles.cTDataItems}>
                       <Text
                         style={{
@@ -355,7 +367,7 @@ const CTReportTable = (props: any) => {
                         {item.Conversion}
                       </Text>
                     </View>
-                    <View style={styles.cTDataItems}>
+                    {/* <View style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -364,7 +376,7 @@ const CTReportTable = (props: any) => {
                       >
                         {item.followschedule}
                       </Text>
-                    </View>
+                    </View> */}
                   </View>
                 );
               })}

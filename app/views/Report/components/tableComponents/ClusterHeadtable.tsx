@@ -15,30 +15,33 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import SourcingForCluster from "./SourcingForCluster";
 import ClosingForCluster from "./ClosingForCluster";
+import SMReportTable from "../SMReportTable";
 
 const ClusterHeadtable = (props: any) => {
-  const { data, headerData } = props;
-  console.log("🚀 ~ file: ClusterHeadtable.tsx:19 ~ data:", data);
+  const { data, headerData, onReset, handleCpDetailPress, role_ID } = props;
+  console.log("🚀 ~ file: ClusterHeadtable.tsx:82 ~ data:", data)
+
   return (
     <View
       style={{
         marginBottom: normalize(10),
+        flex: 1,
       }}
     >
-      <View style={{ ...styles.ThemeColorBox, width: "100%" }}>
+      {/* <View style={{ ...styles.ThemeColorBox, width: "100%" }}>
         <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
-          {data?.role_ID == 1
+          {role_ID == 1
             ? `Closing Manager Name : ${data?.username}`
             : `Sourcing Manager Name : ${data?.username}`}
         </Text>
-      </View>
+      </View> */}
       <View
         style={{
           flexDirection: "row",
         }}
       >
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View
+          {/* <View
             style={{
               flexDirection: "column",
             }}
@@ -66,17 +69,17 @@ const ClusterHeadtable = (props: any) => {
                 </View>
               );
             })}
-          </View>
+          </View> */}
 
           <View
             style={{
               flexDirection: "row",
             }}
           >
-            {data?.role_ID == 1 ? (
-              <ClosingForCluster data={data} />
+            {role_ID == 1 ? (
+              <ClosingForCluster data={data} headerData={headerData}/>
             ) : (
-              <SourcingForCluster data={data} />
+              <SourcingForCluster data={data} headerData={headerData} handleCpDetailPress={handleCpDetailPress}/>
             )}
           </View>
         </ScrollView>

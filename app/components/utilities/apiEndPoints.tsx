@@ -2,6 +2,7 @@ export default {
   JWTTOKEN: "token/jwtToken",
   LOGIN: "auth/userLogin",
   LOGOUT: "userlogout/userLogout",
+  // LOGOUT: "auth/userLogout",
   // USER REGISTER AND ADD USER API BOTH ARE SAME
   FORGOTPASSWORD: "/auth/forgotPassword",
   OTPVERIFY: "/auth/otpVerify",

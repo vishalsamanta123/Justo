@@ -80,7 +80,6 @@ const DashboardView = (props: any) => {
 
     );
   };
-  console.log("🚀 ~ file: DashboardView.tsx:159 ~ props?.dashboardData:", props?.dashboardData)
 
   return (
     <>

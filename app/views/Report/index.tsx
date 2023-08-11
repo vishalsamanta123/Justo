@@ -81,7 +81,10 @@ const ReportScreen = ({ navigation }: any) => {
           end_date: endDate.toString(),
         })
       );
-    } else if (roleId === ROLE_IDS.sitehead_id || roleId === ROLE_IDS.clusterhead_id) {
+    } else if (
+      roleId === ROLE_IDS.sitehead_id ||
+      roleId === ROLE_IDS.clusterhead_id
+    ) {
       dispatch(
         GetSHCHreport({
           start_date: startDate.toString(),
@@ -115,6 +118,10 @@ const ReportScreen = ({ navigation }: any) => {
     setIsFilterModalVisible(false);
     getData(filterData?.startdate, filterData?.enddate);
   };
+
+  const handleCpDetailPress = (list: any, name: any) => {
+    navigation.navigate("CpDetailForReport", { cpList: list, smName: name });
+  };
   return (
     <>
       <ReportView
@@ -129,6 +136,7 @@ const ReportScreen = ({ navigation }: any) => {
         setFilterData={setFilterData}
         handleFilter={handleFilter}
         onReset={onReset}
+        handleCpDetailPress={handleCpDetailPress}
       />
     </>
   );

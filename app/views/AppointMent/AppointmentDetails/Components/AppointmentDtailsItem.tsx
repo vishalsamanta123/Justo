@@ -161,7 +161,9 @@ const AppointmentDtailsItem = (props: any) => {
                     : item?.status === 2
                     ? GREEN_COLOR
                     : item?.status == 3
-                    ? bookingStatus === 4 ? "red" : GREEN_COLOR
+                    ? bookingStatus === 4
+                      ? "red"
+                      : GREEN_COLOR
                     : item?.status == 5 || item?.status == 6
                     ? "red"
                     : item?.status === 4
@@ -192,7 +194,7 @@ const AppointmentDtailsItem = (props: any) => {
           </Text>
         </View>
       </View>
-      {/* {item?.checkin_status &&
+      {item?.checkin_status &&
         (<View style={styles.Txtview}>
           <View style={styles.projectContainer}>
             <Text style={styles.projectTxt}>{strings.checkinstatus}</Text>
@@ -201,7 +203,7 @@ const AppointmentDtailsItem = (props: any) => {
           <View style={styles.nameContainer}>
             <Text style={[styles.nameTxt, { color: item?.checkin_status ? GREEN_COLOR : BLACK_COLOR }]}>{item?.checkin_status ? 'Visited' : strings.notfount}</Text>
           </View>
-        </View>)} */}
+        </View>)}
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>Appiontment Complete :</Text>

@@ -250,6 +250,7 @@ const strings = new LocalizedStrings({
     visitorAppointmentHeader: 'Visitor Appointment',
     appointmentVisitHeader: 'Appointment Site Visit',
     reportHeader: 'Report',
+    smCpDetailHeader: 'SM CP Detail',
     chatHeader: 'Chat',
     addChatHeader: 'Add to Chat',
     supportHeader: 'Raise Ticket',

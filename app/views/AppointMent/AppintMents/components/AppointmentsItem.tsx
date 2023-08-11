@@ -50,7 +50,7 @@ const AppointmentItem = (props: any) => {
   });
   const checkinStaus =
     props?.items?.checkin_status?.length > 0
-      ? props?.items?.checkin_status[0]
+      ? props?.items?.checkin_status[0]?.status
       : "";
 
   return (
@@ -140,7 +140,8 @@ const AppointmentItem = (props: any) => {
         </View>
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
-            {props.items.create_by ? props.items.create_by : strings.notfount}{props.items?.created_by_role === "" ||
+            {props.items.create_by ? props.items.create_by : strings.notfount}
+            {props.items?.created_by_role === "" ||
             props.items?.created_by_role === undefined ||
             props.items?.created_by_role === null
               ? ""
@@ -183,10 +184,11 @@ const AppointmentItem = (props: any) => {
           </View>
           <View style={styles.nameContainer}>
             <Text style={styles.nameTxt}>
-              {props.items?.cp_name && props.items.cp_name?.length !== 0 ? `${props.items?.cp_name} ${props.items?.cp_type === 2
-                ? "(Company)"
-                : "(Individual)"
-              }` : strings.notfount}
+              {props.items?.cp_name && props.items.cp_name?.length !== 0
+                ? `${props.items?.cp_name} ${
+                    props.items?.cp_type === 2 ? "(Company)" : "(Individual)"
+                  }`
+                : strings.notfount}
             </Text>
           </View>
         </View>
@@ -214,8 +216,7 @@ const AppointmentItem = (props: any) => {
         </View>
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
-            {props.items.assign_appointment?.[0]?.user_name}
-            (
+            {props.items.assign_appointment?.[0]?.user_name}(
             {props?.items?.assign_appointment[0]?.assign_by_role === "" ||
             props?.items?.assign_appointment[0]?.assign_by_role === undefined ||
             props?.items?.assign_appointment[0]?.assign_by_role === null
@@ -225,7 +226,7 @@ const AppointmentItem = (props: any) => {
           </Text>
         </View>
       </View>
-      
+
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>{strings.closingStatus} :</Text>
@@ -243,7 +244,9 @@ const AppointmentItem = (props: any) => {
                     : props?.items?.status === 2
                     ? GREEN_COLOR
                     : props?.items?.status == 3
-                    ?  bookingStatus === 4 ? "red" : GREEN_COLOR
+                    ? bookingStatus === 4
+                      ? "red"
+                      : GREEN_COLOR
                     : props?.items?.status == 5 || props?.items?.status == 6
                     ? "red"
                     : props?.items?.status === 4
@@ -266,14 +269,15 @@ const AppointmentItem = (props: any) => {
               ? "Not Fit for Sale"
               : props?.items?.status === 3
               ? bookingStatus === 1
-                ? "Ready to Book" 
-                : bookingStatus === 4 ? "Cancel Booking" 
+                ? "Ready to Book"
+                : bookingStatus === 4
+                ? "Cancel Booking"
                 : "Booking"
               : "Completed"}
           </Text>
         </View>
       </View>
-      {/* {checkinStaus === true && (
+      {checkinStaus === true && (
         <View style={styles.Txtview}>
           <View style={styles.projectContainer}>
             <Text style={styles.projectTxt}>{strings.checkinstatus}</Text>
@@ -292,7 +296,7 @@ const AppointmentItem = (props: any) => {
             </Text>
           </View>
         </View>
-      )} */}
+      )}
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>{strings.visitorScore} :</Text>

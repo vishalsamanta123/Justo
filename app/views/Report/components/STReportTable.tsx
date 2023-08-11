@@ -15,6 +15,7 @@ import React from "react";
 import {
   Dimensions,
   Image,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   Text,
@@ -33,7 +34,7 @@ import XLSX from "xlsx";
 import RNFS from "react-native-fs";
 
 const STReportTable = (props: any) => {
-  const { data } = props;
+  const { data, handleCpDetailPress } = props;
   // const data = [
   //   {
   //     _id: "6406d11bc72657d5bcaffd1a",
@@ -286,20 +287,40 @@ const STReportTable = (props: any) => {
   const { width, height } = Dimensions.get("window"),
     vw = width / 100,
     vh = height / 100;
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
+    props.onReset();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
+  // const headerData = [
+  //   "SM Name",
+  //   "CP Map",
+  //   "Walk-in Active CP",
+  //   "Inactive/Deactive CP",
+  //   // "Vistors",
+  //   "Visitor No Shows ",
+  //   "MTD Site Visit",
+  //   // "Cancel Visit",
+  //   // "Revisit",
+  //   // "Reschedule",
+  //   // "Customer Lost",
+  //   "Booking /Transactional",
+  //   // "Cancel Booking",
+  // ];
   const headerData = [
     "SM Name",
-    "CP Map",
-    "Walk-in Active CP",
-    "Inactive/Dormat CP",
-    "Vistors",
-    "Visitor No Shows ",
-    "Site Visit",
-    "Cancel Visit",
-    "Revisit",
-    "Reschedule",
-    "Customer Lost",
-    "Booking /Transactional",
-    "Cancel Booking",
+    "CP Mapped",
+    "New CP Registered",
+    "Active CP",
+    "Transactional CP",
+    "Dormant CP",
+    "Appointment Done",
+    "Visitor No Shows",
+    "Total Bookings",
+    "CP Detail",
   ];
 
   const onPressDownload = async () => {
@@ -326,7 +347,7 @@ const STReportTable = (props: any) => {
               "SM Name": item?.username,
               "CP Map": item?.cpcount,
               "Walk-in Active CP": item?.activeCP,
-              "Inactive/Dormat CP": item?.inactiveCP,
+              "Inactive/Deactive CP": item?.inactiveCP,
               Vistors: item?.leadcount,
               "Visitor No Shows ": item?.NoshowAppintment,
               "Site Visit": item?.SitevisitCountTotal,
@@ -387,8 +408,11 @@ const STReportTable = (props: any) => {
         contentContainerStyle={{
           margin: normalize(10),
         }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
-        <View
+        {/* <View
           style={{
             alignItems: "flex-end",
             marginBottom: normalize(10),
@@ -409,7 +433,7 @@ const STReportTable = (props: any) => {
               style={styles.downloadImg}
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View>
           {data.map((item: any, index: any) => {
             return (
@@ -427,7 +451,13 @@ const STReportTable = (props: any) => {
                       backgroundColor: PRIMARY_THEME_COLOR,
                     }}
                   >
-                    <Text style={{ ...styles.boxText, color: WHITE_COLOR }}>
+                    <Text
+                      style={{
+                        ...styles.boxText,
+                        color: WHITE_COLOR,
+                        textAlign: "center",
+                      }}
+                    >
                       {item?.property_title}
                     </Text>
                   </View>
@@ -511,87 +541,17 @@ const STReportTable = (props: any) => {
                                       color: BLACK_COLOR,
                                     }}
                                   >
+                                    {item?.newCpRegistered}
+                                  </Text>
+                                </View>
+                                <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
                                     {item?.activeCP}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.inactiveCP}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.leadcount}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item.NoshowAppintment}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item.SitevisitCountTotal}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item.CancelAppintment}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item.RevisitAppintment}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item.RescheduleApp}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item.CustomerlostAppintment}
                                   </Text>
                                 </View>
                                 <View style={styles.cTDataItems}>
@@ -611,9 +571,119 @@ const STReportTable = (props: any) => {
                                       color: BLACK_COLOR,
                                     }}
                                   >
-                                    {item?.CancelBooking}
+                                    {item?.inactiveCP}
                                   </Text>
                                 </View>
+
+                                {/* <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item?.leadcount}
+                                  </Text>
+                                </View> */}
+                                <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item.SitevisitCountTotal}
+                                  </Text>
+                                </View>
+                                <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item.NoshowAppintment}
+                                  </Text>
+                                </View>
+                                <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item.confirmBooking}
+                                  </Text>
+                                </View>
+                                {/* <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item.CancelAppintment}
+                                  </Text>
+                                </View> */}
+                                {/* <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item.RevisitAppintment}
+                                  </Text>
+                                </View> */}
+                                {/* <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item.RescheduleApp}
+                                  </Text>
+                                </View> */}
+                                {/* <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item.CustomerlostAppintment}
+                                  </Text>
+                                </View> */}
+
+                                {/* <View style={styles.cTDataItems}>
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {item?.CancelBooking}
+                                  </Text>
+                                </View> */}
+                                <TouchableOpacity
+                                  onPress={() =>
+                                    handleCpDetailPress(
+                                      item.CPInfo,
+                                      item?.username
+                                    )
+                                  }
+                                  style={styles.cTDataItems}
+                                >
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    View CP
+                                  </Text>
+                                </TouchableOpacity>
                               </View>
                             );
                           })}

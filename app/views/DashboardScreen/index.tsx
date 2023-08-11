@@ -65,7 +65,6 @@ const DashboardScreen = ({ navigation }: any) => {
     }, [navigation])
   )
   useEffect(() => {
-    console.log("🚀 ~ file: index.tsx:68 ~ response:", response)
     if (response?.status === 200) {
       setDashboardData(response?.data);
       setIsEnabled(response?.data?.online_status);

@@ -109,6 +109,7 @@ import PropertyInventory from "app/views/PropertyMangement/PropertyInventory";
 import CloseAppointment from "app/views/AppointMent/CloseAppointment";
 import EmployeeListing from "app/views/AgencyManagement/EmployeeListing";
 import AddEmployee from "app/views/AgencyManagement/AddEmployee";
+import CpDetailForReport from "app/views/CpDetailForReport";
 
 const Stack = createNativeStackNavigator();
 const AppStack = createNativeStackNavigator();
@@ -284,6 +285,9 @@ const AppComponent = () => {
       <AppStack.Screen name="ShowReply" component={ShowReply} />
       <AppStack.Screen name="TicketStatusUpdate" component={TicketStatusUpdate} />
       <AppStack.Screen name="Escalate" component={EscalateScreen} />
+
+      {/* Report */}
+      <AppStack.Screen component={CpDetailForReport} name="CpDetailForReport" />
 
     </AppStack.Navigator>
   );

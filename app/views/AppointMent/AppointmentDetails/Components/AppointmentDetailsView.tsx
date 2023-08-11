@@ -48,6 +48,7 @@ const AppointmentDetailsView = (props: any) => {
           item={detailsData?.length > 0 ? detailsData[0] : {}}
           handleViewFollowUp={props.handleViewFollowUp}
           handleVistorUpdate={props.handleVistorUpdate}
+          data={data}
         />
       </View>
       {/* {userData?.data?.role_title === "Closing Manager" ? (
