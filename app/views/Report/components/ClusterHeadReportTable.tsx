@@ -12,7 +12,7 @@ import {
   RED_COLOR,
   WHITE_COLOR,
 } from "app/components/utilities/constant";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Dimensions,
   Image,
@@ -36,7 +36,11 @@ import XLSX from "xlsx";
 import SMReportTable from "./SMReportTable";
 
 const ClusterHeadReportTable = (props: any) => {
-  const { data, onReset, handleCpDetailPress } = props;
+  const {
+    data,
+    onReset,
+    handleCpDetailPress,
+  } = props;
   const { width, height } = Dimensions.get("window");
   const [refreshing, setRefreshing] = React.useState(false);
   const onRefresh = () => {
@@ -422,7 +426,7 @@ const ClusterHeadReportTable = (props: any) => {
                 {/* <View>
                   {item?.clusterDatas?.map((item: any, index: any) => {
                     return (
-                      <View key={index}>
+                      <View >
                         <ClusterHeadtable
                           data={item}
                           headerData={
@@ -447,8 +451,8 @@ const ClusterHeadReportTable = (props: any) => {
                     <>
                       {/* {item?.smDetails?.map((item: any, index: any) => {
                         return ( */}
-                      <View key={index}>
-                      <View
+                      <View>
+                        <View
                           style={{
                             ...styles.ThemeColorBox,
                             width: "100%",
@@ -476,7 +480,7 @@ const ClusterHeadReportTable = (props: any) => {
                       })} */}
                       {/* {item?.CMDetails?.map((item: any, index: any) => {
                         return ( */}
-                      <View key={index}>
+                      <View>
                         <View
                           style={{
                             ...styles.ThemeColorBox,

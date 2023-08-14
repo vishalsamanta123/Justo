@@ -19,6 +19,10 @@ export const CpType: any = [
   { label: `${strings.viaIndividual}`, value: 1 },
   { label: `${strings.viaCompany}`, value: 2 },
 ]
+export const SearchByTeam: any = [
+  { label: `${strings.sourcingTeam}`, value: 1 },
+  { label: `${strings.closingTeam}`, value: 2 },
+]
 
 export const DATA: any = [
   { image: images.buildings },

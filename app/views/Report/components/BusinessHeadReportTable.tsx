@@ -39,11 +39,11 @@ const BusinessHeadReportTable = (props: any) => {
   const [refreshing, setRefreshing] = React.useState(false);
   const onRefresh = () => {
     setRefreshing(true);
-    props.onReset()
+    props.onReset();
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
-  }
+  };
   // const data = [
   //   {
   //     property_Name: "EKA Elites",
@@ -145,21 +145,11 @@ const BusinessHeadReportTable = (props: any) => {
   //   },
   // ];
   const headerData = [
-    "Channel Partner",
-    "Digital",
-    "Direct",
-    "Hoarding",
-    "Paper Inserts",
-    "Grand Total",
-    "Total Cancelation",
-    "Total Registration",
-    "Not Interested",
-    "Total CP",
-    "Newly Added CP",
+    "CP Mapped",
+    "New CP Registered",
     "Active CP",
-    "Transaction / Booking CP",
-    "Inactive/Dormat CP",
-    "Site Visit",
+    "Transacting CP",
+    "Dormant CP",
   ];
 
   const swipeData = ["Site Visit", "Booking", "Conv %"];
@@ -304,26 +294,39 @@ const BusinessHeadReportTable = (props: any) => {
                       marginBottom: normalize(10),
                     }}
                   >
-                    <Text style={{ ...styles.boxText, color: WHITE_COLOR, textAlign: 'center' }}>
+                    <Text
+                      style={{
+                        ...styles.boxText,
+                        color: WHITE_COLOR,
+                        textAlign: "center",
+                      }}
+                    >
                       {item?.property_title}
                     </Text>
                   </View>
                   {item?.CHDetails?.map((itm: any, index: any) => {
-                    console.log("🚀 ~ file: BusinessHeadReportTable.tsx:280 ~ item:", itm?.leaddetail)
                     const handleTotalCount = (prop: any) => {
-                     if (itm?.leaddetail?.length > 0) {
-                       return itm?.leaddetail?.reduce(function (a: any, b: any) {
-                         return a + b[prop];
-                       }, 0);
-                     }
-                   };
+                      if (itm?.leaddetail?.length > 0) {
+                        return itm?.leaddetail?.reduce(function (
+                          a: any,
+                          b: any
+                        ) {
+                          return a + b[prop];
+                        },
+                        0);
+                      }
+                    };
                     const handleTotalCountPercentage = (prop: any) => {
-                     if (itm?.leaddetail?.length > 0) {
-                       return itm?.leaddetail?.reduce(function (a: any, b: any) {
-                         return a + +b[prop]?.replace("%", "");
-                       }, 0);
-                     }
-                   };
+                      if (itm?.leaddetail?.length > 0) {
+                        return itm?.leaddetail?.reduce(function (
+                          a: any,
+                          b: any
+                        ) {
+                          return a + +b[prop]?.replace("%", "");
+                        },
+                        0);
+                      }
+                    };
                     return (
                       <>
                         <View
@@ -342,11 +345,14 @@ const BusinessHeadReportTable = (props: any) => {
                         <ScrollView
                           horizontal={true}
                           showsHorizontalScrollIndicator={false}
+                          contentContainerStyle={{
+                            flexDirection: "column",
+                          }}
                         >
                           <View
                             style={{
                               flexDirection: "row",
-                              marginBottom: normalize(10),
+                              // marginBottom: normalize(10),
                             }}
                           >
                             <View
@@ -524,9 +530,152 @@ const BusinessHeadReportTable = (props: any) => {
                                         color: BLACK_COLOR,
                                       }}
                                     >
-                                      {handleTotalCountPercentage("ConversionPercentage")+ "%"}
+                                      {handleTotalCountPercentage(
+                                        "ConversionPercentage"
+                                      ) + "%"}
                                     </Text>
                                   </View>
+                                </View>
+                              </View>
+                            </View>
+                          </View>
+                          <View>
+                            <View
+                              style={{
+                                ...styles.ThemeColorBox,
+                                width: "100%",
+                                // marginBottom: normalize(10),
+                              }}
+                            >
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: WHITE_COLOR,
+                                  textAlign: "center",
+                                }}
+                              >
+                                CP Details
+                              </Text>
+                            </View>
+                            <View style={{ flexDirection: "row" }}>
+                              {headerData?.map((item: any, index: any) => {
+                                return (
+                                  <View
+                                    style={{
+                                      flexDirection: "column",
+                                    }}
+                                  >
+                                    <View
+                                      style={[
+                                        styles.dataItemsForBM,
+                                        {
+                                          height: normalizeHeight(100),
+                                          width: normalizeWidth(120),
+                                        },
+                                      ]}
+                                    >
+                                      <Text
+                                        style={{
+                                          ...styles.boxText,
+                                          color: BLACK_COLOR,
+                                          textAlign: "center",
+                                        }}
+                                      >
+                                        {item}
+                                      </Text>
+                                    </View>
+                                  </View>
+                                );
+                              })}
+                            </View>
+                            <View style={{ flexDirection: "column" }}>
+                              {/* {itm?.leaddetail?.map((item: any, index: any) => {
+                                return ( */}
+
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  width: normalizeWidth(100),
+                                }}
+                              >
+                                <View
+                                  style={[
+                                    styles.dataItemsForBM,
+                                    { width: normalizeWidth(120) },
+                                  ]}
+                                >
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {itm?.cpcount ? itm?.cpcount : 0}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={[
+                                    styles.dataItemsForBM,
+                                    { width: normalizeWidth(120) },
+                                  ]}
+                                >
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {itm?.newCpRegistered
+                                      ? itm?.newCpRegistered
+                                      : 0}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={[
+                                    styles.dataItemsForBM,
+                                    { width: normalizeWidth(120) },
+                                  ]}
+                                >
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {itm?.activeCP ? itm?.activeCP : 0}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={[
+                                    styles.dataItemsForBM,
+                                    { width: normalizeWidth(120) },
+                                  ]}
+                                >
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {itm?.transacting_cp
+                                      ? itm?.transacting_cp
+                                      : 0}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={[
+                                    styles.dataItemsForBM,
+                                    { width: normalizeWidth(120) },
+                                  ]}
+                                >
+                                  <Text
+                                    style={{
+                                      ...styles.boxText,
+                                      color: BLACK_COLOR,
+                                    }}
+                                  >
+                                    {itm?.inactiveCP ? itm?.inactiveCP : 0}
+                                  </Text>
                                 </View>
                               </View>
                             </View>

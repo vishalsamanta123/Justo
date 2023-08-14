@@ -40,6 +40,8 @@ const AgencyListing = ({ navigation, route }: any) => {
     search_by_name: "",
     search_by_location: "",
     status: "",
+    mobile_no: "",
+    rera_no: "",
   });
   const [changeStatus, setChangeStatus] = useState({});
   const dispatch: any = useDispatch();
@@ -75,6 +77,8 @@ const AgencyListing = ({ navigation, route }: any) => {
         startdate: filterData.startdate,
         enddate: filterData.enddate,
         search_by_name: filterData.search_by_name,
+        mobile_no: filterData.mobile_no,
+        rera_no: filterData.rera_no,
         search_by_location: filterData.search_by_location,
         status:
           filterData?.status || filterData?.status === false
@@ -271,6 +275,8 @@ const AgencyListing = ({ navigation, route }: any) => {
         end_date: filterData.enddate,
         user_type: 2,
         search_by_name: filterData.search_by_name,
+        mobile_no: filterData.mobile_no,
+        rera_no: filterData.rera_no,
         search_by_location: filterData.search_by_location,
         status: filterData.status,
       })

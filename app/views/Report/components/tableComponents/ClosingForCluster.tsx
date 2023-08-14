@@ -12,7 +12,6 @@ import { normalizeWidth, normalizeHeight } from "app/components/scaleFontSize";
 
 const ClosingForCluster = (props: any) => {
   const { data, headerData } = props;
-  console.log("🚀 ~ file: ClosingForCluster.tsx:289 ~ data:", data);
 
   // SitevisitCountTotal
   // NoshowAppintment

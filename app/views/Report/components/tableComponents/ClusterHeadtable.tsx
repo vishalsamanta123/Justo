@@ -19,7 +19,6 @@ import SMReportTable from "../SMReportTable";
 
 const ClusterHeadtable = (props: any) => {
   const { data, headerData, onReset, handleCpDetailPress, role_ID } = props;
-  console.log("🚀 ~ file: ClusterHeadtable.tsx:82 ~ data:", data)
 
   return (
     <View

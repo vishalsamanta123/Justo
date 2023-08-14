@@ -403,7 +403,7 @@ const SMReportTable = (props: any) => {
                                 color: BLACK_COLOR,
                               }}
                             >
-                              {item?.newCpRegistered}
+                              {item?.newCpRegistered ? item?.newCpRegistered : 0}
                             </Text>
                           </View>
                           <View style={styles.dataItems}>

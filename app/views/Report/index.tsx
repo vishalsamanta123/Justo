@@ -10,7 +10,7 @@ import {
   GetSTReport,
 } from "app/Redux/Actions/ReportActions";
 import { ROLE_IDS } from "app/components/utilities/constant";
-import { useIsFocused } from "@react-navigation/native";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import moment from "moment";
 
 const ReportScreen = ({ navigation }: any) => {
@@ -19,7 +19,12 @@ const ReportScreen = ({ navigation }: any) => {
   const [filterData, setFilterData] = useState({
     startdate: "",
     enddate: "",
+    property_id: "",
+    by_team: "",
+    user_id: "",
   });
+  const [propertyListForFilter, setPropertyListForFilter] = useState([]);
+  const [clusterheadListForFilter, setClusterheadListForFilter] = useState([]);
   const dispatch: any = useDispatch();
   const handleDrawerPress = () => {
     navigation.toggleDrawer();
@@ -45,12 +50,50 @@ const ReportScreen = ({ navigation }: any) => {
 
   useLayoutEffect(() => {
     getData(firstdDate, todayDate);
-  }, [isFocused]);
+  }, [isFocused, filterData]);
   useEffect(() => {
     if (ReportData?.response?.data.length > 0) {
       setReportData(ReportData?.response?.data);
     }
   }, [ReportData]);
+  useFocusEffect(
+    React.useCallback(() => {
+      let arrForProperty: any = [];
+      let arrForCluster: any = [];
+      if (
+        roleId === ROLE_IDS.clusterhead_id ||
+        roleId === ROLE_IDS.sitehead_id
+      ) {
+        reportData?.map((item: any, index: any) => {
+          arrForProperty.push({
+            property_id: item?.property_id,
+            property_title: item?.property_title,
+          });
+          setPropertyListForFilter(arrForProperty);
+        });
+      } else if (roleId === ROLE_IDS.businesshead_id) {
+        reportData?.map((item: any, index: any) => {
+          arrForProperty.push({
+            property_id: item?.property_id,
+            property_title: item?.property_title,
+          });
+          arrForCluster.push({
+            user_name: item?.username,
+            user_id: item?.user_id,
+          });
+          setPropertyListForFilter(arrForProperty);
+          const arrayUniqueByKey: any = [
+            ...new Map(
+              arrForCluster.map((item: any) => [item["user_id"], item])
+            ).values(),
+          ];
+          setClusterheadListForFilter(arrayUniqueByKey);
+        });
+      }
+
+      return () => {};
+    }, [navigation, ReportData, reportData])
+  );
 
   const getData = (startDate: any, endDate: any) => {
     if (roleId === ROLE_IDS.closingmanager_id) {
@@ -89,6 +132,9 @@ const ReportScreen = ({ navigation }: any) => {
         GetSHCHreport({
           start_date: startDate.toString(),
           end_date: endDate.toString(),
+          property_id: filterData.property_id,
+          by_team: filterData.by_team,
+          user_id: filterData.user_id,
         })
       );
     } else if (roleId === ROLE_IDS.businesshead_id) {
@@ -96,6 +142,8 @@ const ReportScreen = ({ navigation }: any) => {
         GetBMreport({
           start_date: startDate.toString(),
           end_date: endDate.toString(),
+          property_id: filterData.property_id,
+          user_id: filterData.user_id,
         })
       );
     }
@@ -108,8 +156,12 @@ const ReportScreen = ({ navigation }: any) => {
   const onReset = () => {
     setIsFilterModalVisible(false);
     setFilterData({
+      // ...filterData,
       startdate: "",
       enddate: "",
+      property_id: "",
+      by_team: "",
+      user_id: "",
     });
     getData(firstdDate, todayDate);
   };
@@ -137,6 +189,10 @@ const ReportScreen = ({ navigation }: any) => {
         handleFilter={handleFilter}
         onReset={onReset}
         handleCpDetailPress={handleCpDetailPress}
+        propertyListForFilter={propertyListForFilter}
+        setPropertyListForFilter={setPropertyListForFilter}
+        clusterheadListForFilter={clusterheadListForFilter}
+        setClusterheadListForFilter={setClusterheadListForFilter}
       />
     </>
   );

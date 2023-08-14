@@ -181,7 +181,7 @@ const SourcingForCluster = (props: any) => {
                       color: BLACK_COLOR,
                     }}
                   >
-                    {item?.newCpRegistered}
+                    {item?.newCpRegistered ? item?.newCpRegistered : 0}
                   </Text>
                 </View>
                 <View style={styles.cTDataItems}>

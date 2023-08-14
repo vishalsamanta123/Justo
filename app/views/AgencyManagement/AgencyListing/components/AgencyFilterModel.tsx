@@ -100,7 +100,7 @@ const FilterModal = (props: any) => {
                 handleInputBtnPress={() => { }}
               />
             </View>
-            <View style={styles.inputWrap}>
+            {/* <View style={styles.inputWrap}>
               <InputField
                 valueshow={props?.filterData?.search_by_location}
                 inputType={'location'}
@@ -116,6 +116,34 @@ const FilterModal = (props: any) => {
                     search_by_location: data,
                   })
                 }}
+              />
+            </View> */}
+            <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
+              <InputField
+                disableSpecialCharacters={true}
+                headingText={strings.searchBy + " " + strings.mobileNo}
+                onChangeText={(data: any) => {
+                  props.setFilterData({
+                    ...props.filterData,
+                    mobile_no: data,
+                  });
+                }}
+                valueshow={props?.filterData?.mobile_no}
+                handleInputBtnPress={() => { }}
+              />
+            </View>
+            <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
+              <InputField
+                disableSpecialCharacters={true}
+                headingText={strings.searchBy + " " + strings.RERA + " "+ strings.number}
+                onChangeText={(data: any) => {
+                  props.setFilterData({
+                    ...props.filterData,
+                    rera_no: data,
+                  });
+                }}
+                valueshow={props?.filterData?.rera_no}
+                handleInputBtnPress={() => { }}
               />
             </View>
             <View style={styles.inputWrap}>

@@ -409,6 +409,7 @@ const strings = new LocalizedStrings({
     SMDetails: "SM Details",
     selectSM: "Select SM",
     transferToAllVisitor: 'for transfer to all visitors of',
+    sourcingTeam: "Sourcing Team",
 
     addNewEmpoyee: "Add New Employee",
     empName: "Employee Name",
@@ -426,6 +427,7 @@ const strings = new LocalizedStrings({
     cpAllocationCm: 'CP Allocation',
     CMDetails: "CM Details",
     selectCM: "Select CM",
+    closingTeam: "Closing Team",
 
     /*** User Manager ***/
     addNewUser: 'Add New User',

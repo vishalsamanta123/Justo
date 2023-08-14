@@ -28,7 +28,7 @@ const AgencyView = (props: any) => {
   const [isVisible, setIsVisible] = useState(false);
   const [newVisitor, setNewVisitor] = useState(false);
   const [FilterisVisible, setFilterisVisible] = useState(false);
-  const { userData = {} } = useSelector((state: any) => state.userData)
+  const { userData = {} } = useSelector((state: any) => state.userData);
   const navigation: any = useNavigation();
   const onPressView = () => {
     navigation.navigate("AgencyDetails");
@@ -48,6 +48,8 @@ const AgencyView = (props: any) => {
       enddate: "",
       search_by_name: "",
       search_by_location: "",
+      mobile_no: "",
+      rera_no: "",
       status: "",
     });
     props.getAgencyList(0, {});
@@ -58,16 +60,18 @@ const AgencyView = (props: any) => {
       enddate: "",
       search_by_name: "",
       search_by_location: "",
+      mobile_no: "",
+      rera_no: "",
       status: "",
     });
-    setFilterisVisible(false)
+    setFilterisVisible(false);
     props.getAgencyList(0, {});
   };
 
   const { create, approve, allocate } = usePermission({
     create: "add_channelpartner",
-    approve: 'approve_new_channelpartner',
-    allocate: 'allocate_property_channelpartner',
+    approve: "approve_new_channelpartner",
+    allocate: "allocate_property_channelpartner",
   });
 
   return (
@@ -87,8 +91,8 @@ const AgencyView = (props: any) => {
       <View style={styles.propertyListView}>
         <View style={styles.btnView}>
           {/* Add New Cp */}
-          {create &&
-            (<TouchableOpacity
+          {create && (
+            <TouchableOpacity
               onPress={() => onPressAddnewAgency()}
               style={[
                 styles.button,
@@ -108,10 +112,11 @@ const AgencyView = (props: any) => {
               >
                 {strings.addnewAgency}
               </Text>
-            </TouchableOpacity>)}
+            </TouchableOpacity>
+          )}
 
-          {approve &&
-            (<TouchableOpacity
+          {approve && (
+            <TouchableOpacity
               onPress={() => ShowPendinglist()}
               style={[
                 styles.button,
@@ -131,10 +136,11 @@ const AgencyView = (props: any) => {
               >
                 {strings.pendingconfirm}
               </Text>
-            </TouchableOpacity>)} 
+            </TouchableOpacity>
+          )}
         </View>
-        {allocate &&
-          (<View style={styles.btnView1}>
+        {allocate && (
+          <View style={styles.btnView1}>
             <TouchableOpacity
               onPress={() => onPressAllow()}
               style={[
@@ -157,8 +163,8 @@ const AgencyView = (props: any) => {
                 {strings.AllocateRequest}
               </Text>
             </TouchableOpacity>
-          </View>)
-        }
+          </View>
+        )}
         {/* {userData?.data?.role_title !== 'Sourcing Manager' ?
           (<View style={styles.btnView1}>
             <TouchableOpacity
@@ -220,9 +226,7 @@ const AgencyView = (props: any) => {
         Visible={isVisible}
         setIsVisible={setIsVisible}
         stringshow={strings.confirmation}
-        textshow={
-          `${strings.deactivconfirmation} ${strings.cpCapital}?`
-        }
+        textshow={`${strings.deactivconfirmation} ${strings.cpCapital}?`}
         confirmtype={"CONFIRMATION"}
         setStatusChange={props.setChangeStatus}
         handleYesResponse={() => props.handleStatusChange(props.changeStatus)}
@@ -231,9 +235,7 @@ const AgencyView = (props: any) => {
         Visible={newVisitor}
         setIsVisible={setNewVisitor}
         stringshow={strings.confirmation}
-        textshow={
-          `${strings.deactivconfirmation} ${strings.cpCapital}?`
-        }
+        textshow={`${strings.deactivconfirmation} ${strings.cpCapital}?`}
         confirmtype={"CONFIRMATION"}
         setStatusChange={props.setChangeStatus}
         handleYesResponse={() => props.onPressDeactivates(props.changeStatus)}

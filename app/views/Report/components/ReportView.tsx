@@ -30,7 +30,9 @@ const ReportView = (props: any) => {
     filterData,
     handleFilter,
     onReset,
-    handleCpDetailPress
+    handleCpDetailPress,
+    propertyListForFilter,
+    clusterheadListForFilter,
   } = props;
   return (
     <>
@@ -48,18 +50,34 @@ const ReportView = (props: any) => {
           barStyle={"light-content"}
         />
         {roleId === ROLE_IDS.sourcingmanager_id ? (
-          <SMReportTable data={reportData} onReset={onReset} handleCpDetailPress={handleCpDetailPress}/>
+          <SMReportTable
+            data={reportData}
+            onReset={onReset}
+            handleCpDetailPress={handleCpDetailPress}
+          />
         ) : roleId === ROLE_IDS.closingmanager_id ? (
-          <CMReportTable data={reportData} onReset={onReset} userData={userData}/>
+          <CMReportTable
+            data={reportData}
+            onReset={onReset}
+            userData={userData}
+          />
         ) : roleId === ROLE_IDS.sourcingtl_id ? (
-          <STReportTable data={reportData} onReset={onReset} handleCpDetailPress={handleCpDetailPress}/>
+          <STReportTable
+            data={reportData}
+            onReset={onReset}
+            handleCpDetailPress={handleCpDetailPress}
+          />
         ) : roleId === ROLE_IDS.closingtl_id ? (
           <CTReportTable data={reportData} onReset={onReset} />
         ) : roleId === ROLE_IDS.clusterhead_id ||
           roleId === ROLE_IDS.sitehead_id ? (
-          <ClusterHeadReportTable data={reportData} onReset={onReset} handleCpDetailPress={handleCpDetailPress}/>
+          <ClusterHeadReportTable
+            data={reportData}
+            onReset={onReset}
+            handleCpDetailPress={handleCpDetailPress}
+          />
         ) : roleId === ROLE_IDS.businesshead_id ? (
-          <BusinessHeadReportTable data={reportData} onReset={onReset}/>
+          <BusinessHeadReportTable data={reportData} onReset={onReset} />
         ) : null}
         {/* <ComingSoonScreen /> */}
       </View>
@@ -70,6 +88,8 @@ const ReportView = (props: any) => {
         setFilterData={setFilterData}
         handleFilter={handleFilter}
         onReset={onReset}
+        propertyListForFilter={propertyListForFilter}
+        clusterheadListForFilter={clusterheadListForFilter}
       />
     </>
   );

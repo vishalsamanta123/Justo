@@ -134,6 +134,7 @@ export const GetSHCHreport = (item: any) => async (dispatch: any) => {
 };
 
 export const GetBMreport = (item: any) => async (dispatch: any) => {
+  console.log("🚀 ~ file: ReportActions.tsx:137 ~ item:", item)
   dispatch({ type: START_LOADING });
   try {
     const res = await apiCall("post", apiEndPoints.GET_BM_REPORT, item);
