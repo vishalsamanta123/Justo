@@ -69,25 +69,25 @@ const CTReportTable = (props: any) => {
     let array = data.map((item: any) => {
       return {
         "CM Name": item?.user_name,
-        "Lead Assign": item?.total_visit,
-        "CP (Walk-ins) Appointments": item?.CPWalkins,
+        // "Lead Assign",
+        "Visitor Attended": item?.VisitorAttended,
         "Direct Walk-ins": item?.DirectWalkins,
-        "Total Site Visit": item?.VisitorAttended,
-        "No Shows": item?.Noshow,
-        "Visitor Attended": item?.TotalAppointments,
-        "Appointments (Revisit)": item?.TotalAppointmentsrevisit,
-        "Not Interested": item?.TotalNotInterested,
-        "Visit Cancel": item?.TotalCancelation,
-        Booking: item?.Booking,
-        "Ready to Book": item?.ReadytoBook,
-        "Total Registration": item?.Registration,
-        "Cancelation Booking": item?.CancelBooking,
-        "Conversion % (Walk-in to Booking)": item?.Conversion,
-        "No. of (follow-ups scheduled)": item?.followschedule,
+        "CP (Walk-ins) Appointments": item?.CPWalkins,
+        // "Total Site Visit",
+        "No Shows": item.Noshow,
+        "Total Revisit": item?.TotalAppointmentsrevisit,
+        "Total Not Interested": item.TotalNotInterested,
+        // "Visit Cancel",
+        "Total Booking": item.Booking,
+        // "Ready to Book",
+        // "Total Registration",
+        // "Cancelation Booking",
+        "Conversion %": item.Conversion,
+        // "No. of (follow-ups scheduled)",
       };
     });
     const res = await handlePermission(
-      "gallery",
+      "write",
       strings.txt_setting_heading_media,
       strings.txt_setting_description_media
     );

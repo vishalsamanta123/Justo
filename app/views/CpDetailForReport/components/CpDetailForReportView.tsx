@@ -27,7 +27,7 @@ const CpDetailForReportView = (props: any) => {
           <Text style={styles.dataTxt}>{item?.Cp_name}</Text>
         </View>
         <View style={styles.dataBox}>
-          <Text style={styles.dataTxt}>{item?.leadCount ? item?.leadCount : 0}</Text>
+          <Text style={styles.dataTxt}>{item?.sitevisitCount ? item?.sitevisitCount : 0}</Text>
         </View>
         <View style={styles.dataBox}>
           <Text style={styles.dataTxt}>{item?.bookingCount ? item?.bookingCount : 0}</Text>

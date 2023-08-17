@@ -20,6 +20,7 @@ const AgencyListItem = (props: any) => {
     edit: "edit_channelpartner",
     status: "channelpartner_status_update",
   });
+  console.log("🚀 ~ file: AgencyListItem.tsx:34 ~ props?.items:", props?.items)
   
   return (
     <View style={styles.IteamView}>

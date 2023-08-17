@@ -156,7 +156,7 @@ const BusinessHeadReportTable = (props: any) => {
 
   const onPressDownload = async () => {
     const res = await handlePermission(
-      "gallery",
+      "write",
       strings.txt_setting_heading_media,
       strings.txt_setting_description_media
     );

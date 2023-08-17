@@ -203,7 +203,7 @@ const SMReportTable = (props: any) => {
 
   const onPressDownload = async () => {
     const res = await handlePermission(
-      "gallery",
+      "write",
       strings.txt_setting_heading_media,
       strings.txt_setting_description_media
     );
@@ -223,23 +223,17 @@ const SMReportTable = (props: any) => {
 
           smDetails.map((item: any) => {
             const rowData = {
-              "CP Map (Allocated)": item?.cpcount,
-              "Inactive/Deactive CP": item?.inactiveCP,
-              "Booking / Transactional CP": item?.BookingCountTotal,
-              "Walk-in Active CP": item?.activeCP,
+              "CP Mapped": item?.cpcount,
+              "New CP Registered": item?.newCpRegistered,
+              "Active CP": item?.activeCP,
+              "Transactional CP": item?.BookingCountTotal,
+              "Dormant CP": item?.inactiveCP,
+              "Appointment Done": item?.SitevisitCountTotal,
               "Visitor No Shows": item?.NoshowAppintment,
-              "Site visit": item?.SitevisitCountTotal,
+              "Total Bookings": item?.confirmBooking,
             };
             worksheetData.push(rowData);
-            item?.CPInfo.map((val: any) => {
-              const cpData = {
-                "CP Firm name / Individual CP Name": val?.Cp_name,
-                "CP Visit Count": val?.leadCount,
-              };
-              worksheetData.push(cpData);
-            });
           });
-
           // smDetails.forEach((item: any) => {
           //   const { header, data } = item;
           //   const rowData = [header, ...data];
@@ -264,7 +258,6 @@ const SMReportTable = (props: any) => {
         await RNFS.writeFile(filePath, excelFile, "base64");
 
         console.log("File saved:", filePath);
-
         // Add file scanning to make it visible in device's media library (optional)
         await RNFS.scanFile(filePath);
         ErrorMessage({
@@ -378,7 +371,10 @@ const SMReportTable = (props: any) => {
                       })}
                     </View>
                     {item?.smDetails?.map((item: any, index: any) => {
-                      console.log("🚀 ~ file: SMReportTable.tsx:379 ~ item:", item)
+                      console.log(
+                        "🚀 ~ file: SMReportTable.tsx:379 ~ item:",
+                        item
+                      );
                       return (
                         <View
                           style={{
@@ -403,7 +399,9 @@ const SMReportTable = (props: any) => {
                                 color: BLACK_COLOR,
                               }}
                             >
-                              {item?.newCpRegistered ? item?.newCpRegistered : 0}
+                              {item?.newCpRegistered
+                                ? item?.newCpRegistered
+                                : 0}
                             </Text>
                           </View>
                           <View style={styles.dataItems}>
@@ -468,10 +466,7 @@ const SMReportTable = (props: any) => {
                           </View>
                           <TouchableOpacity
                             onPress={() =>
-                              handleCpDetailPress(
-                                item?.CPInfo,
-                                item?.username
-                              )
+                              handleCpDetailPress(item?.CPInfo, item?.username)
                             }
                             style={styles.dataItems}
                           >

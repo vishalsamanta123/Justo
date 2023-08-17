@@ -52,7 +52,7 @@ const ReportScreen = ({ navigation }: any) => {
     getData(firstdDate, todayDate);
   }, [isFocused, filterData]);
   useEffect(() => {
-    if (ReportData?.response?.data.length > 0) {
+    if (ReportData?.response?.data?.length > 0) {
       setReportData(ReportData?.response?.data);
     }
   }, [ReportData]);

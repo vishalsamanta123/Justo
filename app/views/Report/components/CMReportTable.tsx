@@ -67,22 +67,19 @@ const CMReportTable = (props: any) => {
   const onPressDownload = async () => {
     let array = data.map((item: any) => {
       return {
-        "Total Site Visitors": item?.VisitorAttended,
+        "CM Name":  userData?.data?.user_name,
+        "Visitor Attended": item?.VisitorAttended,
         "Direct Walk-ins": item?.DirectWalkins,
-        "No Shows": item?.Noshow,
         "CP(Walk-ins) Appointments": item?.CPWalkins,
-        "Total Appointments": item?.TotalAppointmentsrevisit,
-        Booking: item?.Booking,
-        "No. of": item?.followschedule,
+        "No Shows": item?.Noshow,
+        "Total Revisit": item?.TotalAppointmentsrevisit,
         "Total Not Interested": item?.TotalNotInterested,
+        "Total Booking": item?.Booking,
         "Conversion %": item?.Conversion,
-        "Grand Total": item?.GrandTotal,
-        "Total Registration": item?.Registration,
-        "Total Cancelation": item?.TotalCancelation,
       };
     });
     const res = await handlePermission(
-      "gallery",
+      "write",
       strings.txt_setting_heading_media,
       strings.txt_setting_description_media
     );

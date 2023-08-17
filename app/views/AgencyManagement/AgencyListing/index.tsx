@@ -77,7 +77,7 @@ const AgencyListing = ({ navigation, route }: any) => {
         startdate: filterData.startdate,
         enddate: filterData.enddate,
         search_by_name: filterData.search_by_name,
-        mobile_no: filterData.mobile_no,
+        mobile_no: +filterData.mobile_no,
         rera_no: filterData.rera_no,
         search_by_location: filterData.search_by_location,
         status:

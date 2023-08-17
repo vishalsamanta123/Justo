@@ -134,9 +134,10 @@ const AllocatePropertyScreen = ({ navigation, route }: any) => {
       const list = searchArray?.filter((item) => {
         return item?.user_name?.toLowerCase()?.match(lowerCased);
       });
-      setCpList(list);
+      // setCpList(list);
+      setSearchcpList(list)
     } else {
-      setCpList(searchcpList);
+      setSearchcpList(cpList);
     }
   };
   const handleAddTarget = () => {
@@ -164,7 +165,7 @@ const AllocatePropertyScreen = ({ navigation, route }: any) => {
       setSelectedLoginIdCp={setSelectedLoginIdCp}
       selectedLoginIdCp={selectedLoginIdCp}
       onPressBack={onPressBack}
-      cpList={cpList}
+      cpList={searchcpList}
       selectedCp={selectedCp}
       allList={allList}
       setAllList={setAllList}

@@ -325,7 +325,7 @@ const STReportTable = (props: any) => {
 
   const onPressDownload = async () => {
     const res = await handlePermission(
-      "gallery",
+      "write",
       strings.txt_setting_heading_media,
       strings.txt_setting_description_media
     );
@@ -341,22 +341,17 @@ const STReportTable = (props: any) => {
         data.forEach((property: any) => {
           const { property_title, smDetails } = property;
           const worksheetData: any = [];
-
           smDetails.map((item: any) => {
             const rowData = {
               "SM Name": item?.username,
-              "CP Map": item?.cpcount,
-              "Walk-in Active CP": item?.activeCP,
-              "Inactive/Deactive CP": item?.inactiveCP,
-              Vistors: item?.leadcount,
-              "Visitor No Shows ": item?.NoshowAppintment,
-              "Site Visit": item?.SitevisitCountTotal,
-              "Cancel Visit": item?.CancelAppintment,
-              Revisit: item?.RevisitAppintment,
-              Reschedule: item?.RescheduleApp,
-              "Customer Lost": item?.CustomerlostAppintment,
-              "Booking /Transactional CP": item?.BookingCountTotal,
-              "Cancel Booking": item?.CancelBooking,
+              "CP Mapped": item?.cpcount,
+              "New CP Registered": item?.newCpRegistered,
+              "Active CP": item?.activeCP,
+              "Transactional CP": item?.BookingCountTotal,
+              "Dormant CP": item?.inactiveCP,
+              "Appointment Done": item.SitevisitCountTotal,
+              "Visitor No Shows": item.NoshowAppintment,
+              "Total Bookings": item.confirmBooking,
             };
             worksheetData.push(rowData);
           });

@@ -10,6 +10,7 @@ import {
   Isios,
   PRIMARY_THEME_COLOR,
   RED_COLOR,
+  ROLE_IDS,
   WHITE_COLOR,
 } from "app/components/utilities/constant";
 import React, { useEffect } from "react";
@@ -34,15 +35,16 @@ import strings from "app/components/utilities/Localization";
 import RNFS from "react-native-fs";
 import XLSX from "xlsx";
 import SMReportTable from "./SMReportTable";
+import { useSelector } from "react-redux";
 
 const ClusterHeadReportTable = (props: any) => {
-  const {
-    data,
-    onReset,
-    handleCpDetailPress,
-  } = props;
+  const { data, onReset, handleCpDetailPress } = props;
+  const { userData = {} } = useSelector((state: any) => state.userData);
+
   const { width, height } = Dimensions.get("window");
   const [refreshing, setRefreshing] = React.useState(false);
+  const roleId = userData?.data?.role_id || "";
+
   const onRefresh = () => {
     setRefreshing(true);
     props.onReset();
@@ -104,24 +106,8 @@ const ClusterHeadReportTable = (props: any) => {
   ];
 
   const onPressDownload = async () => {
-    let array = data.map((item: any) => {
-      return {
-        "Total Site Visitors": item?.VisitorAttended,
-        "Direct Walk-ins": item?.DirectWalkins,
-        "No Shows": item?.Noshow,
-        "CP(Walk-ins) Appointments": item?.CPWalkins,
-        "Total Appointments": item?.TotalAppointmentsrevisit,
-        Booking: item?.Booking,
-        "No. of": item?.followschedule,
-        "Total Not Interested": item?.TotalNotInterested,
-        "Conversion %": item?.Conversion,
-        "Grand Total": item?.GrandTotal,
-        "Total Registration": item?.Registration,
-        "Total Cancelation": item?.TotalCancelation,
-      };
-    });
     const res = await handlePermission(
-      "gallery",
+      "write",
       strings.txt_setting_heading_media,
       strings.txt_setting_description_media
     );
@@ -132,13 +118,49 @@ const ClusterHeadReportTable = (props: any) => {
       );
     } else if (res) {
       try {
-        ErrorMessage({
-          msg: strings.startDownload,
-          backgroundColor: BLACK_COLOR,
-        });
+        // ErrorMessage({
+        //   msg: strings.startDownload,
+        //   backgroundColor: BLACK_COLOR,
+        // });
         const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(array);
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+        data.forEach((property: any) => {
+          console.log("🚀 ~ file: ClusterHeadReportTable.tsx:128 ~ property:", property)
+          const { property_title, smDetails, CMDetails } = property;
+          const worksheetData: any = [];
+          smDetails.map((item: any) => {
+            const rowData = {
+              "SM Name": item?.username,
+              "CP Mapped": item?.cpcount,
+              "New CP Registered": item?.newCpRegistered,
+              "Active CP": item?.activeCP,
+              "Transactional CP": item?.BookingCountTotal,
+              "Dormant CP": item?.inactiveCP,
+              "Appointment Done": item.SitevisitCountTotal,
+              "Visitor No Shows": item.NoshowAppintment,
+              "Total Bookings": item.confirmBooking,
+            };
+            worksheetData.push(rowData);
+          });
+          CMDetails.map((item: any) => {
+            console.log("🚀 ~ file: ClusterHeadReportTable.tsx:146 ~ item:", item)
+            const rowData = {
+              "CM Name":  item?.user_name,
+              "Visitor Attended": item?.VisitorAttended,
+              "Direct Walk-ins": item?.DirectWalkins,
+              "CP(Walk-ins) Appointments": item?.CPWalkins,
+              "No Shows": item?.Noshow,
+              "Total Revisit": item?.TotalAppointmentsrevisit,
+              "Total Not Interested": item?.TotalNotInterested,
+              "Total Booking": item?.Booking,
+              "Conversion %": item?.Conversion,
+            };
+            worksheetData.push(rowData);
+          });
+
+          const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+          XLSX.utils.book_append_sheet(workbook, worksheet, property_title);
+        });
         const excelFile = XLSX.write(workbook, {
           type: "base64",
           bookType: "xlsx",
@@ -146,8 +168,12 @@ const ClusterHeadReportTable = (props: any) => {
 
         // Create a temporary directory to store the file
         const tempDir = RNFS.DownloadDirectoryPath;
-        const filePath = `${tempDir}/ClosingManagerReport.xlsx`;
-
+        let filePath: any;
+        if (roleId === ROLE_IDS.sitehead_id) {
+          filePath = `${tempDir}/SiteHeadReport.xlsx`;
+        } else if (roleId === ROLE_IDS.clusterhead_id) {
+          filePath = `${tempDir}/ClusterHeadReport.xlsx`;
+        }
         // Write the file to the temporary directory
         await RNFS.writeFile(filePath, excelFile, "base64");
 
@@ -387,7 +413,7 @@ const ClusterHeadReportTable = (props: any) => {
           }}
         >
           <TouchableOpacity
-            // onPress={() => onPressDownload()}
+            onPress={() => onPressDownload()}
             style={{
               backgroundColor: PRIMARY_THEME_COLOR,
               width: normalizeWidth(50),
