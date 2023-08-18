@@ -53,14 +53,13 @@ const ReportScreen = ({ navigation }: any) => {
     getData(firstdDate, todayDate);
   }, [isFocused, filterData]);
   useEffect(() => {
-    console.log("🚀 ~ file: index.tsx:56 ~ ReportData?.response:", ReportData?.response)
     if (ReportData?.response?.data?.length > 0) {
       setReportData(ReportData?.response?.data);
     } else {
-      ErrorMessage({
-        msg: ReportData?.response?.message,
-        backgroundColor: BLACK_COLOR
-      })
+      // ErrorMessage({
+      //   msg: ReportData?.response?.message,
+      //   backgroundColor: BLACK_COLOR
+      // })
     }
   }, [ReportData]);
   useFocusEffect(

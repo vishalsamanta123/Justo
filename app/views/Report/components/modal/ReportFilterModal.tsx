@@ -38,8 +38,14 @@ const FilterModal = (props: any) => {
     dispatch(getUsersListForSiteHead({}));
   }, []);
   useEffect(() => {
+    let arr: any
     if (response?.status === 200) {
-      setUsersList(response?.data);
+      arr = response?.data?.filter(
+        (el: any) =>
+          el.role_id === ROLE_IDS.sourcingmanager_id ||
+          el.role_id === ROLE_IDS.closingmanager_id
+      );
+      setUsersList(arr);
     } else {
       setUsersList([]);
     }
