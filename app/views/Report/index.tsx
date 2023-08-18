@@ -9,9 +9,10 @@ import {
   GetSMReport,
   GetSTReport,
 } from "app/Redux/Actions/ReportActions";
-import { ROLE_IDS } from "app/components/utilities/constant";
+import { BLACK_COLOR, RED_COLOR, ROLE_IDS } from "app/components/utilities/constant";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import moment from "moment";
+import ErrorMessage from "app/components/ErrorMessage";
 
 const ReportScreen = ({ navigation }: any) => {
   const [reportData, setReportData] = useState([]);
@@ -52,8 +53,14 @@ const ReportScreen = ({ navigation }: any) => {
     getData(firstdDate, todayDate);
   }, [isFocused, filterData]);
   useEffect(() => {
+    console.log("🚀 ~ file: index.tsx:56 ~ ReportData?.response:", ReportData?.response)
     if (ReportData?.response?.data?.length > 0) {
       setReportData(ReportData?.response?.data);
+    } else {
+      ErrorMessage({
+        msg: ReportData?.response?.message,
+        backgroundColor: BLACK_COLOR
+      })
     }
   }, [ReportData]);
   useFocusEffect(
@@ -73,10 +80,13 @@ const ReportScreen = ({ navigation }: any) => {
         });
       } else if (roleId === ROLE_IDS.businesshead_id) {
         reportData?.map((item: any, index: any) => {
-          arrForProperty.push({
-            property_id: item?.property_id,
-            property_title: item?.property_title,
-          });
+          console.log("🚀 ~ file: index.tsx:76 ~ item:", item)
+          item?.CHDetails?.map((el: any) => {
+            arrForProperty.push({
+              property_id: el?.property_id,
+              property_title: el?.property_title,
+            });
+          })
           arrForCluster.push({
             user_name: item?.username,
             user_id: item?.user_id,

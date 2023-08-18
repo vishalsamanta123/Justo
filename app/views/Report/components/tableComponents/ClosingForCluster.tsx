@@ -7,8 +7,7 @@ import {
   PRIMARY_THEME_COLOR,
   WHITE_COLOR,
 } from "app/components/utilities/constant";
-import { normalize } from "@rneui/themed";
-import { normalizeWidth, normalizeHeight } from "app/components/scaleFontSize";
+import { normalizeWidth, normalizeHeight, normalize } from "app/components/scaleFontSize";
 
 const ClosingForCluster = (props: any) => {
   const { data, headerData } = props;
@@ -97,13 +96,13 @@ const ClosingForCluster = (props: any) => {
             flexDirection: "column",
           }}
         >
-          {headerData.map((item: any, index: any) => {
+          {headerData?.map((item: any, index: any) => {
             return (
               <View
                 key={index}
                 style={{
-                  width: normalizeWidth(140),
-                  height: normalizeHeight(90),
+                  // width: normalizeWidth(140),
+                  // height: normalizeHeight(90),
                   borderWidth: normalize(Isios ? 1.2 : 2),
                   padding: normalize(12),
                   backgroundColor: PRIMARY_THEME_COLOR,
@@ -122,7 +121,7 @@ const ClosingForCluster = (props: any) => {
               flexDirection: "row",
             }}
           >
-            {data.map((item: any, index: any) => {
+            {data?.map((item: any, index: any) => {
               return (
                 <View
                   style={{
@@ -146,7 +145,8 @@ const ClosingForCluster = (props: any) => {
                         color: BLACK_COLOR,
                       }}
                     >
-                      {item?.VisitorAttended}
+                      {/* {item?.VisitorAttended} */}
+                      {item?.TotalAppointments}
                     </Text>
                   </View>
                   <View style={styles.cTDataItems}>

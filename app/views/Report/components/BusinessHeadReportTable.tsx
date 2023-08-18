@@ -240,6 +240,7 @@ const BusinessHeadReportTable = (props: any) => {
       }
     }
   };
+  console.log("🚀 ~ file: BusinessHeadReportTable.tsx:282 ~ data:", data)
 
   return (
     <SafeAreaView>
@@ -278,7 +279,8 @@ const BusinessHeadReportTable = (props: any) => {
           </TouchableOpacity>
         </View> */}
         <View>
-          {data.map((item: any, index: any) => {
+          {data?.map((item: any, index: any) => {
+            console.log("🚀 ~ file: BusinessHeadReportTable.tsx:282 ~ item:", item)
             return (
               <>
                 <View
@@ -301,7 +303,7 @@ const BusinessHeadReportTable = (props: any) => {
                         textAlign: "center",
                       }}
                     >
-                      {item?.property_title}
+                      {item?.username}
                     </Text>
                   </View>
                   {item?.CHDetails?.map((itm: any, index: any) => {
@@ -339,7 +341,7 @@ const BusinessHeadReportTable = (props: any) => {
                           <Text
                             style={{ ...styles.boxText, color: WHITE_COLOR }}
                           >
-                            {`Cluster head name: ${itm?.username}`}
+                            {`Property name: ${itm?.property_title}`}
                           </Text>
                         </View>
                         <ScrollView
@@ -430,13 +432,12 @@ const BusinessHeadReportTable = (props: any) => {
                               </>
                             </View>
                             <View style={{ flexDirection: "column" }}>
-                              <View style={{ flexDirection: "row" }}>
+                              <View style={{ flexDirection: "row",  }}>
                                 {swipeData?.map((item: any, index: any) => {
                                   return (
                                     <View
                                       style={{
                                         flexDirection: "column",
-                                        width: normalizeWidth(100),
                                       }}
                                     >
                                       <View style={styles.dataItemsForBM}>

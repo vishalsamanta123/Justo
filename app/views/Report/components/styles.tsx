@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
   },
 
   cTDataItems: {
-    width: normalizeWidth(130),
-    height: normalizeHeight(90),
+    // width: normalizeWidth(130),
+    // height: normalizeHeight(90),
     borderWidth: normalize(Isios ? 1.2 : 2),
     padding: normalize(12),
   },
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     padding: normalize(12),
   },
   dataItemsForBM: {
-    width: normalizeWidth(100),
+    width: normalizeWidth(140),
     borderWidth: normalize(Isios ? 1.2 : 2),
     padding: normalize(12),
   },

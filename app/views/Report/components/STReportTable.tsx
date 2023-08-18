@@ -429,6 +429,7 @@ const STReportTable = (props: any) => {
             />
           </TouchableOpacity>
         </View> */}
+        <ScrollView horizontal>
         <View>
           {data.map((item: any, index: any) => {
             return (
@@ -474,8 +475,8 @@ const STReportTable = (props: any) => {
                             <View
                               key={index}
                               style={{
-                                width: normalizeWidth(140),
-                                height: normalizeHeight(90),
+                                // width: normalizeWidth(140),
+                                // height: normalizeHeight(90),
                                 borderWidth: normalize(Isios ? 1.2 : 2),
                                 padding: normalize(12),
                                 backgroundColor: PRIMARY_THEME_COLOR,
@@ -691,6 +692,7 @@ const STReportTable = (props: any) => {
             );
           })}
         </View>
+        </ScrollView>
       </ScrollView>
     </SafeAreaView>
   );

@@ -351,7 +351,7 @@ const SMReportTable = (props: any) => {
                             key={index}
                             style={{
                               // width: normalizeWidth(140),
-                              width: "100%",
+                              // width: "100%",
                               // height: normalizeHeight(90),
                               borderWidth: normalize(Isios ? 1.2 : 2),
                               padding: normalize(12),

@@ -7,8 +7,7 @@ import {
   PRIMARY_THEME_COLOR,
   WHITE_COLOR,
 } from "app/components/utilities/constant";
-import { normalize } from "@rneui/themed";
-import { normalizeWidth, normalizeHeight } from "app/components/scaleFontSize";
+import { normalizeWidth, normalizeHeight, normalize } from "app/components/scaleFontSize";
 
 const SourcingForCluster = (props: any) => {
   const { data, headerData, handleCpDetailPress } = props;
@@ -117,13 +116,13 @@ const SourcingForCluster = (props: any) => {
           flexDirection: "column",
         }}
       >
-        {headerData.map((item: any, index: any) => {
+        {headerData?.map((item: any, index: any) => {
           return (
             <View
               key={index}
               style={{
-                width: normalizeWidth(140),
-                height: normalizeHeight(90),
+                // width: normalizeWidth(140),
+                // height: normalizeHeight(90),
                 borderWidth: normalize(Isios ? 1.2 : 2),
                 padding: normalize(12),
                 backgroundColor: PRIMARY_THEME_COLOR,

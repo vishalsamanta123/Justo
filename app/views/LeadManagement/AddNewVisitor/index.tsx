@@ -297,24 +297,25 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
     }, [navigation])
   );
 
-  useEffect(() => {
-    if (!(formData?.lead_source_id === CONST_IDS?.cp_lead_source_id) && propertyData?.response?.status === 200) {
-      if (propertyData?.response?.data?.length > 0) {
-        const activeData = propertyData?.response?.data.filter(
-          (el: any) => {
-            return el.status == true;
-          }
-        );
-        activeData?.length > 0
-          ? setAllProperty(activeData)
-          : setAllProperty([]);
-      } else {
-        setAllProperty([]);
-      }
-    } else {
-      setAllProperty([]);
-    }
-  }, [propertyData, formData?.lead_source])
+  // useEffect(() => {
+  //   if (!(formData?.lead_source_id === CONST_IDS?.cp_lead_source_id) && propertyData?.response?.status === 200) {
+  //     if (propertyData?.response?.data?.length > 0) {
+  //       const activeData = propertyData?.response?.data.filter(
+  //         (el: any) => {
+  //           return el.status == true;
+  //         }
+  //       );
+  //       console.log("🚀 ~ file: index.tsx:311 ~ propertyData?.response?.data:", propertyData?.response?.data)
+  //       activeData?.length > 0
+  //         ? setAllProperty(activeData)
+  //         : setAllProperty([]);
+  //     } else {
+  //       setAllProperty([]);
+  //     }
+  //   } else {
+  //     setAllProperty([]);
+  //   }
+  // }, [propertyData, formData?.lead_source])
 
   // useEffect(() => {
   //   if (
@@ -891,7 +892,6 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
             };
           }
 
-          console.log("🚀 ~ file: index.tsx:836 ~ formData:", formData);
           if (formData?.property_id !== "") {
             dispatch(addVisitor(add_params));
           } else {
@@ -907,7 +907,6 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   };
 
   async function handleCountryCode(search: any) {
-    console.log("🚀 ~ file: index.tsx:861 ~ search:", search);
     // setCountryCode(search)
     if (search) {
       if (isNaN(search)) {

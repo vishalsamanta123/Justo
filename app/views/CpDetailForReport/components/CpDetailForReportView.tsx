@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, TextInput } from "react-native";
 import React from "react";
 import styles from "./styles";
 import images from "app/assets/images";
@@ -16,7 +16,7 @@ import moment from "moment";
 
 const CpDetailForReportView = (props: any) => {
   const renderItem = (item: any) => {
-    console.log("🚀 ~ file: CpDetailForReportView.tsx:19 ~ item:", item)
+    console.log("🚀 ~ file: CpDetailForReportView.tsx:19 ~ item:", item);
     return (
       <View style={styles.dataView}>
         {/* <Text style={styles.dataTxt}>{item?.user_name}</Text>
@@ -27,10 +27,14 @@ const CpDetailForReportView = (props: any) => {
           <Text style={styles.dataTxt}>{item?.Cp_name}</Text>
         </View>
         <View style={styles.dataBox}>
-          <Text style={styles.dataTxt}>{item?.sitevisitCount ? item?.sitevisitCount : 0}</Text>
+          <Text style={styles.dataTxt}>
+            {item?.sitevisitCount ? item?.sitevisitCount : 0}
+          </Text>
         </View>
         <View style={styles.dataBox}>
-          <Text style={styles.dataTxt}>{item?.bookingCount ? item?.bookingCount : 0}</Text>
+          <Text style={styles.dataTxt}>
+            {item?.bookingCount ? item?.bookingCount : 0}
+          </Text>
         </View>
       </View>
     );
@@ -49,14 +53,12 @@ const CpDetailForReportView = (props: any) => {
         barStyle={"light-content"}
       />
 
-      <View style={[styles.Txtview, { borderBottomWidth: 0 }]}>
-        {/* <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>{strings.nameOfCp} :</Text>
-        </View> */}
-        {/* <View style={styles.nameContainer}>
-          <Text style={styles.nameTxt}> SM Name: {props.smName}</Text>
-        </View> */}
-      </View>
+      <TextInput
+        placeholder={strings.searchByName}
+        placeholderTextColor={BLACK_COLOR}
+        style={styles.searchInputVw}
+        onChangeText={(text: any) => props.handleSearch(text)}
+      />
       <View style={styles.bottomSection}>
         <View style={styles.headingView}>
           <View style={styles.heddingBox}>
@@ -74,6 +76,13 @@ const CpDetailForReportView = (props: any) => {
           showsVerticalScrollIndicator={false}
           renderItem={({ item, index }: any) => renderItem(item)}
           style={styles.listView}
+          ListEmptyComponent={() => {
+            return (
+              <Text style={styles.noSelectedTxt}>
+                {strings.noCpFound}
+              </Text>
+            );
+          }}
         />
       </View>
     </View>

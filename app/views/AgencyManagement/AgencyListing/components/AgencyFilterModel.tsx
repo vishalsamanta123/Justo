@@ -118,7 +118,7 @@ const FilterModal = (props: any) => {
                 }}
               />
             </View> */}
-            <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
+            {/* <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
               <InputField
                 disableSpecialCharacters={true}
                 headingText={strings.searchBy + " " + strings.mobileNo}
@@ -131,7 +131,7 @@ const FilterModal = (props: any) => {
                 valueshow={props?.filterData?.mobile_no}
                 handleInputBtnPress={() => { }}
               />
-            </View>
+            </View> */}
             <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
               <InputField
                 disableSpecialCharacters={true}

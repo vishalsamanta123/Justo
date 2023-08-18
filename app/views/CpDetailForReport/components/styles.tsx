@@ -2,6 +2,8 @@ import { normalize, normalizeSpacing } from "app/components/scaleFontSize";
 import {
   BLACK_COLOR,
   FONT_FAMILY_EXTRABOLD,
+  FONT_FAMILY_MEDIUM,
+  FONT_FAMILY_REGULAR,
   FONT_FAMILY_SEMIBOLD,
   GRAY_COLOR,
   GRAY_LIGHT_COLOR,
@@ -102,7 +104,27 @@ const styles = StyleSheet.create({
     marginVertical: normalizeSpacing(5),
     borderBottomColor: PRIMARY_THEME_COLOR,
     borderBottomWidth: 0.5,
-  }
+  },
+  searchInputVw: {
+    marginVertical: normalizeSpacing(8),
+    marginHorizontal: normalizeSpacing(8),
+    height: 40,
+    fontFamily: FONT_FAMILY_MEDIUM,
+    fontSize: 14,
+    color: BLACK_COLOR,
+    backgroundColor: WHITE_COLOR,
+    elevation: 1,
+    paddingLeft: 20,
+    borderRadius: 10,
+  },
+  noSelectedTxt: {
+    fontSize: normalize(14),
+    color: GRAY_COLOR,
+    fontFamily: FONT_FAMILY_REGULAR,
+    paddingHorizontal: 8,
+    textAlign: "center",
+    marginTop: 20
+  },
 });
 
 export default styles;

@@ -68,7 +68,8 @@ const CMReportTable = (props: any) => {
     let array = data.map((item: any) => {
       return {
         "CM Name":  userData?.data?.user_name,
-        "Visitor Attended": item?.VisitorAttended,
+        // "Visitor Attended": item?.VisitorAttended,
+        "Visitor Attended": item?.TotalAppointments,
         "Direct Walk-ins": item?.DirectWalkins,
         "CP(Walk-ins) Appointments": item?.CPWalkins,
         "No Shows": item?.Noshow,
@@ -133,6 +134,7 @@ const CMReportTable = (props: any) => {
       <ScrollView
         style={{
           height: height - normalize(55),
+          margin: normalize(10),
         }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -254,17 +256,19 @@ const CMReportTable = (props: any) => {
                 </Text>
               </View>
             </View> */}
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <ScrollView contentContainerStyle={{flex: 1, }} horizontal={true} showsHorizontalScrollIndicator={false}>
             <View
               style={{
                 flexDirection: "row",
-                width: "100%",
+                // width: "100%",
+                flex: 1, 
               }}
             >
               <View
                 style={{
                   flexDirection: "column",
                   // width: "70%",
+                  flex: 5,
                 }}
               >
                 {headerData.map((item: any, index: any) => {
@@ -298,16 +302,18 @@ const CMReportTable = (props: any) => {
                     style={{
                       flexDirection: "column",
                       // width: "100%",
+                      flex: 2
                     }}
                   >
                     <View
                       style={{
                         // width: "100%",
-                        width: normalizeWidth(80),
+                        // width: normalizeWidth(100),
                         // height: normalizeHeight(90),
                         borderWidth: normalize(Isios ? 1.2 : 2),
                         padding: normalize(12),
                       }}
+                      // style={styles.dataItems}
                     >
                       <Text
                         style={{
@@ -315,7 +321,8 @@ const CMReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item?.VisitorAttended}
+                        {/* {item?.VisitorAttended} */}
+                        {item?.TotalAppointments}
                       </Text>
                     </View>
                     <View style={styles.dataItems}>

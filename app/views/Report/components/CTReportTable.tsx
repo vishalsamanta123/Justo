@@ -70,7 +70,8 @@ const CTReportTable = (props: any) => {
       return {
         "CM Name": item?.user_name,
         // "Lead Assign",
-        "Visitor Attended": item?.VisitorAttended,
+        // "Visitor Attended": item?.VisitorAttended,
+        "Visitor Attended": item?.TotalAppointments,
         "Direct Walk-ins": item?.DirectWalkins,
         "CP (Walk-ins) Appointments": item?.CPWalkins,
         // "Total Site Visit",
@@ -143,11 +144,15 @@ const CTReportTable = (props: any) => {
         showsVerticalScrollIndicator={false}
         style={{
           height: height - normalize(55),
-        }}
-        contentContainerStyle={{
           margin: normalize(10),
+
+        }}
+        horizontal
+        contentContainerStyle={{
+          // margin: normalize(10),
           paddingBottom : normalize(15)
         }}
+        showsHorizontalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
@@ -189,8 +194,8 @@ const CTReportTable = (props: any) => {
                 <View
                   key={index}
                   style={{
-                    width: normalizeWidth(140),
-                    height: normalizeHeight(90),
+                    // width: normalizeWidth(140),
+                    // height: normalizeHeight(90),
                     borderWidth: normalize(Isios ? 1.2 : 2),
                     padding: normalize(12),
                     backgroundColor: PRIMARY_THEME_COLOR,
@@ -214,6 +219,7 @@ const CTReportTable = (props: any) => {
                   <View
                     style={{
                       flexDirection: "column",
+                      minWidth: normalizeWidth(110),
                     }}
                   >
                     <View style={styles.cTDataItems}>
@@ -233,7 +239,8 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {item?.VisitorAttended}
+                        {/* {item?.VisitorAttended} */}
+                        {item?.TotalAppointments}
                       </Text>
                     </View>
                     <View style={styles.cTDataItems}>
