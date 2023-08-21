@@ -400,7 +400,10 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       ) {
         isError = false;
         errorMessage = "Please fill mobile number";
-      } else if (formData?.mobile && formData?.mobile?.length < 10) {
+      } else if (formData?.mobile && countryCode === "+91" && Regexs.mobilenumRegex.test(formData?.mobile) === false) {
+        isError = false;
+        errorMessage = "Please Enter valid mobile number";
+      } else if (formData?.mobile && countryCode !== "+91" && formData?.mobile?.length < 10) {
         isError = false;
         errorMessage = "Please Enter valid mobile number";
       } else if (

@@ -108,15 +108,16 @@ const AllocateCPScreen = ({ navigation, route }: any) => {
     setSelected(arrays);
   };
   const handleSearch = (searchKey: any) => {
-    if (searchKey === "") {
-      setCpList(searchcpList);
-    } else {
-      const lowerCased = searchKey.toLowerCase();
+    if (searchKey !== "") {
+      const lowerCased = searchKey?.toLowerCase();
       const searchArray = [...cpList];
-      const list = searchArray.filter((item) => {
-        return item.user_name.toLowerCase().match(lowerCased);
+      const list = searchArray?.filter((item) => {
+        return item?.user_name?.toLowerCase()?.match(lowerCased);
       });
-      setCpList(list);
+      // setCpList(list);
+      setSearchcpList(list)
+    } else {
+      setSearchcpList(cpList);
     }
   };
   const handleCpAllocatePress = () => {
@@ -148,7 +149,7 @@ const AllocateCPScreen = ({ navigation, route }: any) => {
       setSelectedLoginIdCp={setSelectedLoginIdCp}
       selectedLoginIdCp={selectedLoginIdCp}
       onPressBack={onPressBack}
-      cpList={cpList}
+      cpList={searchcpList}
       selectedCp={selectedCp}
       allList={allList}
       setAllList={setAllList}

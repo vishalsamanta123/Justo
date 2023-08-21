@@ -374,7 +374,6 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
     }
   }
   async function selectCountryData(countryCode: any, flag: any) {
-    console.log("🚀 ~ file: index.tsx:872 ~ countryCode:", countryCode);
     setCountryData(CountryArray);
     setCountryCode(countryCode);
     setUpdateForm({
@@ -582,10 +581,13 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
     ) {
       isError = false;
       errorMessage = "Please fill mobile number";
-    } else if ( updateForm?.mobile && updateForm?.mobile?.length < 10) {
+    } else if (updateForm?.mobile && countryCode === "+91" && Regexs.mobilenumRegex.test(updateForm?.mobile) === false) {
       isError = false;
       errorMessage = "Please enter valid Mobile number";
-    } 
+    } else if (updateForm?.mobile && countryCode !== "+91" && updateForm?.mobile?.length < 10) {
+      isError = false;
+      errorMessage = "Please Enter valid mobile number";
+    }
     // else if (
     //   updateForm?.whatsapp_no &&
     //   Regexs.phoneNumRegex.test(updateForm?.whatsapp_no) === false

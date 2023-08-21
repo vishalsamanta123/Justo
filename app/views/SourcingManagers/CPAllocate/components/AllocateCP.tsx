@@ -67,7 +67,7 @@ const AllocateCPView = (props: any) => {
         barStyle={"light-content"}
         statusBarColor={PRIMARY_THEME_COLOR}
       />
-      <View style={styles.containerVw}>
+      <ScrollView style={styles.containerVw}>
         <Text style={styles.headerTxt}>{strings.newAllocateTxt}</Text>
         <View style={styles.selectedBox}>
           {props?.selectedCp?.length > 0 ? (
@@ -108,9 +108,6 @@ const AllocateCPView = (props: any) => {
           onFocus={() => props.setAllList(true)}
           onChangeText={(text: any) => props.handleSearch(text)}
         />
-        {props.cpList.length === 0 && (
-          <Text style={styles.noSelectedTxt}>{strings.noCpFound}</Text>
-        )}
         {props.allList ? (
           <FlatList
             data={props.cpList}
@@ -144,9 +141,16 @@ const AllocateCPView = (props: any) => {
                 </View>
               );
             }}
+            ListEmptyComponent={() => {
+              return (
+                <View style={{alignItems: 'center', marginTop: 20}}>
+                  <Text style={styles.noSelectedTxt}>{strings.noCpFound}</Text>
+                </View>
+              );
+            }}
           />
         ) : null}
-      </View>
+      </ScrollView>
       <View style={styles.btncontener}>
         <Button
           width={150}

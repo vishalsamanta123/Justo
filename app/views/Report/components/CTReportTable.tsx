@@ -70,8 +70,8 @@ const CTReportTable = (props: any) => {
       return {
         "CM Name": item?.user_name,
         // "Lead Assign",
-        // "Visitor Attended": item?.VisitorAttended,
-        "Visitor Attended": item?.TotalAppointments,
+        "Visitor Attended": item?.VisitorAttended,
+        // "Visitor Attended": item?.TotalAppointments,
         "Direct Walk-ins": item?.DirectWalkins,
         "CP (Walk-ins) Appointments": item?.CPWalkins,
         // "Total Site Visit",
@@ -239,8 +239,8 @@ const CTReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {/* {item?.VisitorAttended} */}
-                        {item?.TotalAppointments}
+                        {item?.VisitorAttended}
+                        {/* {item?.TotalAppointments} */}
                       </Text>
                     </View>
                     <View style={styles.cTDataItems}>
@@ -263,17 +263,6 @@ const CTReportTable = (props: any) => {
                         {item?.CPWalkins}
                       </Text>
                     </View>
-                    
-                    {/* <View style={styles.cTDataItems}>
-                      <Text
-                        style={{
-                          ...styles.boxText,
-                          color: BLACK_COLOR,
-                        }}
-                      >
-                        {item.VisitorAttended}
-                      </Text>
-                    </View> */}
                     <View style={styles.cTDataItems}>
                       <Text
                         style={{
@@ -284,16 +273,6 @@ const CTReportTable = (props: any) => {
                         {item.Noshow}
                       </Text>
                     </View>
-                    {/* <View style={styles.cTDataItems}>
-                      <Text
-                        style={{
-                          ...styles.boxText,
-                          color: BLACK_COLOR,
-                        }}
-                      >
-                        {item?.TotalAppointments}
-                      </Text>
-                    </View> */}
                     <View style={styles.cTDataItems}>
                       <Text
                         style={{

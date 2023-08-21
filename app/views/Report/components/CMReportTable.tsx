@@ -68,8 +68,8 @@ const CMReportTable = (props: any) => {
     let array = data.map((item: any) => {
       return {
         "CM Name":  userData?.data?.user_name,
-        // "Visitor Attended": item?.VisitorAttended,
-        "Visitor Attended": item?.TotalAppointments,
+        "Visitor Attended": item?.VisitorAttended,
+        // "Visitor Attended": item?.TotalAppointments,
         "Direct Walk-ins": item?.DirectWalkins,
         "CP(Walk-ins) Appointments": item?.CPWalkins,
         "No Shows": item?.Noshow,
@@ -321,8 +321,8 @@ const CMReportTable = (props: any) => {
                           color: BLACK_COLOR,
                         }}
                       >
-                        {/* {item?.VisitorAttended} */}
-                        {item?.TotalAppointments}
+                        {item?.VisitorAttended}
+                        {/* {item?.TotalAppointments} */}
                       </Text>
                     </View>
                     <View style={styles.dataItems}>

@@ -125,10 +125,6 @@ const ClusterHeadReportTable = (props: any) => {
         const workbook = XLSX.utils.book_new();
 
         data.forEach((property: any) => {
-          console.log(
-            "🚀 ~ file: ClusterHeadReportTable.tsx:128 ~ property:",
-            property
-          );
           const { property_title, smDetails, CMDetails } = property;
           const worksheetData: any = [];
           smDetails.map((item: any) => {
@@ -146,14 +142,10 @@ const ClusterHeadReportTable = (props: any) => {
             worksheetData.push(rowData);
           });
           CMDetails.map((item: any) => {
-            console.log(
-              "🚀 ~ file: ClusterHeadReportTable.tsx:146 ~ item:",
-              item
-            );
             const rowData = {
               "CM Name": item?.user_name,
-              // "Visitor Attended": item?.VisitorAttended,
-              "Visitor Attended": item?.TotalAppointments,
+              "Visitor Attended": item?.VisitorAttended,
+              // "Visitor Attended": item?.TotalAppointments,
               "Direct Walk-ins": item?.DirectWalkins,
               "CP(Walk-ins) Appointments": item?.CPWalkins,
               "No Shows": item?.Noshow,
@@ -439,25 +431,27 @@ const ClusterHeadReportTable = (props: any) => {
           {data.map((item: any, index: any) => {
             return (
               <View>
-                {!(item?.smDetails?.length == 0 &&
-                  item?.CMDetails?.length == 0 )? (
-                <View
-                  style={{
-                    ...styles.ThemeColorBox,
-                    width: "100%",
-                    // marginBottom: normalize(10),
-                  }}
-                >
-                  <Text
+                {!(
+                  item?.smDetails?.length == 0 && item?.CMDetails?.length == 0
+                ) ? (
+                  <View
                     style={{
-                      ...styles.boxText,
-                      color: WHITE_COLOR,
-                      textAlign: "center",
+                      ...styles.ThemeColorBox,
+                      width: "100%",
+                      // marginBottom: normalize(10),
                     }}
                   >
-                    {item?.property_title}
-                  </Text>
-                </View>) : null}
+                    <Text
+                      style={{
+                        ...styles.boxText,
+                        color: WHITE_COLOR,
+                        textAlign: "center",
+                      }}
+                    >
+                      {item?.property_title}
+                    </Text>
+                  </View>
+                ) : null}
                 {/* <View>
                   {item?.clusterDatas?.map((item: any, index: any) => {
                     return (
@@ -483,70 +477,70 @@ const ClusterHeadReportTable = (props: any) => {
                       </Text>
                     </View>
                   ) : ( */}
-                    <>
-                      {/* {item?.smDetails?.map((item: any, index: any) => {
+                  <>
+                    {/* {item?.smDetails?.map((item: any, index: any) => {
                         return ( */}
-                      {item?.smDetails?.length > 0 ? (
-                        <View>
-                          <View
+                    {item?.smDetails?.length > 0 ? (
+                      <View>
+                        <View
+                          style={{
+                            ...styles.ThemeColorBox,
+                            width: "100%",
+                            // marginBottom: normalize(10),
+                          }}
+                        >
+                          <Text
                             style={{
-                              ...styles.ThemeColorBox,
-                              width: "100%",
-                              // marginBottom: normalize(10),
+                              ...styles.boxText,
+                              color: WHITE_COLOR,
+                              textAlign: "center",
                             }}
                           >
-                            <Text
-                              style={{
-                                ...styles.boxText,
-                                color: WHITE_COLOR,
-                                textAlign: "center",
-                              }}
-                            >
-                              Sourcing Team
-                            </Text>
-                          </View>
-                          <ClusterHeadtable
-                            data={item?.smDetails}
-                            role_ID={2}
-                            headerData={soucingHeaderData}
-                            handleCpDetailPress={handleCpDetailPress}
-                          />
+                            Sourcing Team
+                          </Text>
                         </View>
-                      ) : null}
-                      {/* );
+                        <ClusterHeadtable
+                          data={item?.smDetails}
+                          role_ID={2}
+                          headerData={soucingHeaderData}
+                          handleCpDetailPress={handleCpDetailPress}
+                        />
+                      </View>
+                    ) : null}
+                    {/* );
                       })} */}
-                      {/* {item?.CMDetails?.map((item: any, index: any) => {
+                    {/* {item?.CMDetails?.map((item: any, index: any) => {
                         return ( */}
-                      {item?.CMDetails?.length > 0 ? (
-                        <View>
-                          <View
+                    {item?.CMDetails?.length > 0 ? (
+                      <View>
+                        <View
+                          style={{
+                            ...styles.ThemeColorBox,
+                            width: "100%",
+                            // marginBottom: normalize(10),
+                          }}
+                        >
+                          <Text
                             style={{
-                              ...styles.ThemeColorBox,
-                              width: "100%",
-                              // marginBottom: normalize(10),
+                              ...styles.boxText,
+                              color: WHITE_COLOR,
+                              textAlign: "center",
                             }}
                           >
-                            <Text
-                              style={{
-                                ...styles.boxText,
-                                color: WHITE_COLOR,
-                                textAlign: "center",
-                              }}
-                            >
-                              Closing Team
-                            </Text>
-                          </View>
-                          <ClusterHeadtable
-                            data={item?.CMDetails}
-                            role_ID={1}
-                            headerData={closingHeaderData}
-                          />
+                            Closing Team
+                          </Text>
                         </View>
-                      ) : null}
-                      {/* );
+                        <ClusterHeadtable
+                          data={item?.CMDetails}
+                          role_ID={1}
+                          headerData={closingHeaderData}
+                        />
+                      </View>
+                    ) : null}
+                    {/* );
                       })} */}
-                    </>
-                   {/* )} */}
+                  </>
+                  {/* )} */}
                 </View>
               </View>
             );

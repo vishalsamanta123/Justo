@@ -145,8 +145,8 @@ const ClosingForCluster = (props: any) => {
                         color: BLACK_COLOR,
                       }}
                     >
-                      {/* {item?.VisitorAttended} */}
-                      {item?.TotalAppointments}
+                      {item?.VisitorAttended}
+                      {/* {item?.TotalAppointments} */}
                     </Text>
                   </View>
                   <View style={styles.cTDataItems}>

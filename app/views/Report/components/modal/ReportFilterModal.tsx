@@ -51,7 +51,6 @@ const FilterModal = (props: any) => {
     }
   }, [response]);
   const handleOnChangeByTeam = (value: any) => {
-    console.log("🚀 ~ file: ReportFilterModal.tsx:49 ~ value:", value);
     let arr = [];
     if (value === 1) {
       arr = response?.data?.filter(

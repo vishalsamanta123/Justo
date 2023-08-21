@@ -9,10 +9,16 @@ import {
   GetSMReport,
   GetSTReport,
 } from "app/Redux/Actions/ReportActions";
-import { BLACK_COLOR, RED_COLOR, ROLE_IDS } from "app/components/utilities/constant";
+import {
+  BLACK_COLOR,
+  RED_COLOR,
+  ROLE_IDS,
+} from "app/components/utilities/constant";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import moment from "moment";
 import ErrorMessage from "app/components/ErrorMessage";
+import strings from "app/components/utilities/Localization";
+import { Keyboard } from "react-native";
 
 const ReportScreen = ({ navigation }: any) => {
   const [reportData, setReportData] = useState([]);
@@ -65,6 +71,37 @@ const ReportScreen = ({ navigation }: any) => {
   useFocusEffect(
     React.useCallback(() => {
       let arrForProperty: any = [];
+      if (propertyListForFilter.length === 0) {
+        if (
+          roleId === ROLE_IDS.clusterhead_id ||
+          roleId === ROLE_IDS.sitehead_id
+        ) {
+          reportData?.map((item: any, index: any) => {
+            arrForProperty.push({
+              property_id: item?.property_id,
+              property_title: item?.property_title,
+            });
+            setPropertyListForFilter(arrForProperty);
+          });
+        } else if (roleId === ROLE_IDS.businesshead_id) {
+          reportData?.map((item: any, index: any) => {
+            console.log("🚀 ~ file: index.tsx:89 ~ item:", item);
+            item?.CHDetails?.map((el: any) => {
+              arrForProperty.push({
+                property_id: el?.property_id,
+                property_title: el?.property_title,
+              });
+            });
+          });
+          setPropertyListForFilter(arrForProperty);
+        }
+      }
+      return () => {};
+    }, [navigation, reportData])
+  );
+  useFocusEffect(
+    React.useCallback(() => {
+      let arrForProperty: any = [];
       let arrForCluster: any = [];
       if (
         roleId === ROLE_IDS.clusterhead_id ||
@@ -75,22 +112,21 @@ const ReportScreen = ({ navigation }: any) => {
             property_id: item?.property_id,
             property_title: item?.property_title,
           });
-          setPropertyListForFilter(arrForProperty);
+          // setPropertyListForFilter(arrForProperty);
         });
       } else if (roleId === ROLE_IDS.businesshead_id) {
         reportData?.map((item: any, index: any) => {
-          console.log("🚀 ~ file: index.tsx:76 ~ item:", item)
           item?.CHDetails?.map((el: any) => {
             arrForProperty.push({
               property_id: el?.property_id,
               property_title: el?.property_title,
             });
-          })
+          });
           arrForCluster.push({
             user_name: item?.username,
             user_id: item?.user_id,
           });
-          setPropertyListForFilter(arrForProperty);
+          // setPropertyListForFilter(arrForProperty);
           const arrayUniqueByKey: any = [
             ...new Map(
               arrForCluster.map((item: any) => [item["user_id"], item])
@@ -104,10 +140,43 @@ const ReportScreen = ({ navigation }: any) => {
     }, [navigation, ReportData, reportData])
   );
 
+  const validation = () => {
+    let isError = true;
+    let errorMessage: any = "";
+    console.log("🚀 ~ =====", filterData?.startdate < filterData?.enddate);
+
+    if (filterData?.startdate !== "" && filterData?.enddate === "") {
+      isError = false;
+      errorMessage = "Please enter end date";
+    } else if (filterData?.enddate !== "" && filterData?.startdate === "") {
+      isError = false;
+      errorMessage = "Please enter start date";
+    } else if (!(filterData?.startdate <= filterData?.enddate)) {
+      isError = false;
+      errorMessage = "End date should not be less than start date ";
+    }
+    if (errorMessage !== "") {
+      ErrorMessage({
+        msg: errorMessage,
+        backgroundColor: RED_COLOR,
+      });
+    }
+    if (!isError) {
+      Keyboard.dismiss();
+    }
+    return isError;
+  };
+
   const getData = (startDate: any, endDate: any) => {
     if (roleId === ROLE_IDS.closingmanager_id) {
+      // dispatch(
+      //   GetCMReport({
+      //     start_date: startDate.toString(),
+      //     end_date: endDate.toString(),
+      //   })
+      // );
       dispatch(
-        GetCMReport({
+        GetCTReport({
           start_date: startDate.toString(),
           end_date: endDate.toString(),
         })
@@ -165,7 +234,7 @@ const ReportScreen = ({ navigation }: any) => {
   const onReset = () => {
     setIsFilterModalVisible(false);
     setFilterData({
-      // ...filterData,
+      ...filterData,
       startdate: "",
       enddate: "",
       property_id: "",
@@ -176,8 +245,10 @@ const ReportScreen = ({ navigation }: any) => {
   };
 
   const handleFilter = () => {
-    setIsFilterModalVisible(false);
-    getData(filterData?.startdate, filterData?.enddate);
+    if (validation()) {
+      setIsFilterModalVisible(false);
+      getData(filterData?.startdate, filterData?.enddate);
+    }
   };
 
   const handleCpDetailPress = (list: any, name: any) => {
@@ -199,7 +270,6 @@ const ReportScreen = ({ navigation }: any) => {
         onReset={onReset}
         handleCpDetailPress={handleCpDetailPress}
         propertyListForFilter={propertyListForFilter}
-        setPropertyListForFilter={setPropertyListForFilter}
         clusterheadListForFilter={clusterheadListForFilter}
         setClusterheadListForFilter={setClusterheadListForFilter}
       />
