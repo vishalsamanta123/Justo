@@ -257,6 +257,7 @@ const styles = StyleSheet.create({
   },
   selectedBox: {
     paddingVertical: normalize(10),
+    paddingHorizontal: normalize(10),
     borderWidth: 1,
     borderColor: PRIMARY_THEME_COLOR,
     marginVertical: normalize(8),
@@ -271,6 +272,7 @@ const styles = StyleSheet.create({
     padding: 5,
     //paddingHorizontal: 15,
     marginVertical: 5,
+    marginHorizontal: 2,
     minWidth: 50,
     justifyContent: "space-between",
     //backgroundColor:'red',
@@ -280,6 +282,7 @@ const styles = StyleSheet.create({
   },
   userNameTxt: {
     fontFamily: FONT_FAMILY_SEMIBOLD,
+    maxWidth: '90%'
   },
   crossVw: {
     width: normalizeWidth(15),
@@ -314,6 +317,7 @@ const styles = StyleSheet.create({
   innerBoxVwlistfont: {
     fontSize: 15,
     fontFamily: FONT_FAMILY_SEMIBOLD,
+    width: "90%",
   },
   checkBoxVw: {
     backgroundColor: WHITE_COLOR,

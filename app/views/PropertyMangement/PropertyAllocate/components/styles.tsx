@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   },
   selectedBox: {
     paddingVertical: normalize(10),
+    paddingHorizontal: normalizeSpacing(10),
     borderWidth: 1,
     borderColor: PRIMARY_THEME_COLOR,
     marginVertical: normalize(8),
@@ -88,10 +89,12 @@ const styles = StyleSheet.create({
   },
   userNameTxt: {
     fontFamily: FONT_FAMILY_SEMIBOLD,
+    maxWidth: '90%'
   },
   innerBoxVwlistfont: {
     fontSize: 15,
     fontFamily: FONT_FAMILY_SEMIBOLD,
+    width: "90%"
   },
   searchInputVw: {
     marginVertical: normalizeSpacing(8),

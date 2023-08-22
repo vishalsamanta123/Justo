@@ -20,8 +20,6 @@ const AgencyListItem = (props: any) => {
     edit: "edit_channelpartner",
     status: "channelpartner_status_update",
   });
-  console.log("🚀 ~ file: AgencyListItem.tsx:34 ~ props?.items:", props?.items)
-  
   return (
     <View style={styles.IteamView}>
       <View style={styles.Txtview}>
@@ -181,7 +179,7 @@ const AgencyListItem = (props: any) => {
       </View>
       <View style={{alignItems: 'flex-start', marginBottom: 10, flexDirection: 'row'}}>
         <Button
-          width={130}
+          width={160}
           height={30}
           bgcolor={WHITE_COLOR}
           bordercolor={PURPLE_COLOR}
@@ -193,7 +191,7 @@ const AgencyListItem = (props: any) => {
           handleBtnPress={() => props.openAllocatePropertyModal(props.items?._id)}
         />
         {props?.items?.cp_type === 2 ? <Button
-          width={120}
+          width={140}
           height={30}
           bgcolor={WHITE_COLOR}
           bordercolor={PURPLE_COLOR}

@@ -12,6 +12,7 @@ export default {
   REGISTERANDADDUSER: "/auth/userRegister",
   GETUSERLIST: "userManage/getUserList",
   GETUSERDETAIL: "/userManage/getUserDetail",
+  CREATEUSERACTIVITY: "/usermanage/createuserActivity",
   GETUSERFILTERDATA: "/userManage/getUserFilterData",
   EDITUSER: "/auth/editUserProfile",
   USERSTATUSUPDATE: "/userManage/userStatusUpdate",

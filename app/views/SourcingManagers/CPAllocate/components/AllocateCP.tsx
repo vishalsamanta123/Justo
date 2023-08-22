@@ -87,7 +87,7 @@ const AllocateCPView = (props: any) => {
                       { justifyContent: "flex-start" },
                     ]}
                   >
-                    <Text>{item.user_name}</Text>
+                    <Text style={{maxWidth: '90%'}}>{item.user_name}</Text>
                     <TouchableOpacity
                       onPress={() => props.handleDelete(item, index)}
                     >

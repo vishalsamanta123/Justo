@@ -243,7 +243,7 @@ const BusinessHeadReportTable = (props: any) => {
   console.log("🚀 ~ file: BusinessHeadReportTable.tsx:282 ~ data:", data)
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{

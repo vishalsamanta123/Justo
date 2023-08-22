@@ -394,7 +394,7 @@ const ClusterHeadReportTable = (props: any) => {
   //   },
   // ];
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{

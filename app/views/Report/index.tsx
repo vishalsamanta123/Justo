@@ -247,7 +247,7 @@ const ReportScreen = ({ navigation }: any) => {
   const handleFilter = () => {
     if (validation()) {
       setIsFilterModalVisible(false);
-      getData(filterData?.startdate, filterData?.enddate);
+      getData(filterData?.startdate ? filterData?.startdate : firstdDate, filterData?.enddate ? filterData?.enddate : todayDate);
     }
   };
 
