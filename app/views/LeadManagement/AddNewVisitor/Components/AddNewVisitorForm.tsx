@@ -325,6 +325,8 @@ const AddNewVisitorForm = (props: any) => {
                   <DropdownInput
                     headingText={"CP Name"}
                     placeholder={"Select CP"}
+                    search={true}
+                    searchPlaceholder={strings.search + " " + strings.cp}
                     data={props?.dropdownAgentList}
                     inputWidth={"100%"}
                     require
@@ -359,6 +361,8 @@ const AddNewVisitorForm = (props: any) => {
                     <DropdownInput
                       headingText={"CP Company Name"}
                       placeholder={"Select CP Company Name"}
+                      search={true}
+                      searchPlaceholder={strings.search + " " + strings.company}
                       data={props.companyList}
                       require
                       inputWidth={"100%"}
@@ -395,6 +399,8 @@ const AddNewVisitorForm = (props: any) => {
                       <DropdownInput
                         headingText={"Company Employee name"}
                         placeholder={"Select Employee name"}
+                        search={true}
+                        searchPlaceholder={strings.search + " " + strings.employee}
                         data={props.employeeList}
                         inputWidth={"100%"}
                         paddingLeft={Isios ? 6 : 10}

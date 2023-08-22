@@ -291,6 +291,7 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
         cp_emp_id: response?.data[0]?.cp_emp_id,
         cp_name: response?.data[0]?.cp_name,
       });
+      setCountryCode(response?.data[0]?.customer_detail?.country_code)
     }
   }, [response]);
 

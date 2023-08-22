@@ -9,6 +9,7 @@ import strings from '../../../components/utilities/Localization';
 import ErrorMessage from '../../../components/ErrorMessage';
 import { setDefaultHeader } from '../../../components/utilities/httpClient';
 import { userLogin } from '../../../Redux/Actions/AuthActions';
+import { Platform } from 'react-native';
 
 const LoginScreen = ({ navigation }: any) => {
   // const [validEmail, setIsValidEmail] = useState(false);
@@ -97,7 +98,7 @@ const LoginScreen = ({ navigation }: any) => {
   const handleLoginPress = async () => {
     const localFCM = await AsyncStorage.getItem('fcm');
     if (validation()) {
-      const respon = dispatch(userLogin({...loginData, device_id: localFCM}))
+      const respon = dispatch(userLogin({...loginData, device_id: localFCM, device_type: Platform.OS}))
     }
   };
   const handleSingupPress = () => {

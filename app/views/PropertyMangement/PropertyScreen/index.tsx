@@ -39,6 +39,8 @@ const PropertyScreen = ({ navigation }: any) => {
 
   const getallproperty = (offset: any, data: any) => {
     setOffset(offset)
+    console.log("🚀 ~ file: index.tsx:49 ~ data?.property_name:", data?.property_name)
+
     dispatch(getAllProperty({
       offset: offset,
       limit: 3,

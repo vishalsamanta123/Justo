@@ -62,6 +62,7 @@ export const getAllPropertyCompetitor = (params: any) => async (dispatch: any) =
     }
 };
 export const getFilterProperty = (params: any) => async (dispatch: any) => {
+    console.log("🚀 ~ file: propertyActions.tsx:65 ~ params:", params)
     dispatch({ type: START_LOADING })
     try {
         const res = await apiCall("post", apiEndPoints.PROPERTYFILTER, params);

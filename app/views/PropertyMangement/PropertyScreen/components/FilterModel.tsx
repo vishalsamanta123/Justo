@@ -32,8 +32,8 @@ const FilterModal = (props: any) => {
     );
   };
 
-
   const ApplyFilter = () => {
+    console.log("🚀 ~ file: FilterModel.tsx:44 ~ props.filterform.property_name:", props.filterform.property_name)
     dispatch(
       getFilterProperty({
         offset: 0,
@@ -45,7 +45,7 @@ const FilterModal = (props: any) => {
         property_type: props.filterform.property_type,
       })
     );
-    props.setPropertyList([])
+    props.setPropertyList([]);
     props.setIsVisible(false);
   };
   const ResetFilter = () => {
@@ -69,8 +69,10 @@ const FilterModal = (props: any) => {
 
   return (
     <Modal isVisible={props.Visible}>
-      <ScrollView keyboardShouldPersistTaps={'handled'}
-        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
+      <ScrollView
+        keyboardShouldPersistTaps={"handled"}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      >
         <View style={styles.mainContainer}>
           <View style={styles.topContainer}>
             <Text style={styles.topTxt}>{strings.searchProperty}</Text>
@@ -134,7 +136,7 @@ const FilterModal = (props: any) => {
                 }}
               />
             </View> */}
-            <View style={[styles.inputWrap, { top: normalizeSpacing(8) }]}>
+            {/* <View style={[styles.inputWrap, { top: normalizeSpacing(8) }]}>
               <InputField
                 // placeholderText={strings.searchBy + " "  + strings.name}
                 // headingText={strings.searchBy + " "  + strings.name}
@@ -150,6 +152,37 @@ const FilterModal = (props: any) => {
                 valueshow={props?.filterform?.property_name}
               //name={'property_name'}
               />
+            </View> */}
+            <View style={[styles.inputWrap]}>
+              <DropdownInput
+                headingText={"Search by Property"}
+                placeholder={"Search by Property"}
+                data={props?.propertyListForFilter}
+                inputWidth={"100%"}
+                paddingLeft={16}
+                maxHeight={300}
+                labelField="property_title"
+                valueField={"property_id"}
+                value={props?.filterform?.property_id}
+                onChange={(item: any) => {
+                  props.setFilterform({
+                    ...props?.filterform,
+                    property_id: item.property_id,
+                    property_name: item.property_title,
+                  });
+                }}
+                newRenderItem={(item: any) => {
+                  return (
+                    <>
+                      <View style={styles.item}>
+                        <Text style={styles.textItem}>
+                          {item.property_title}
+                        </Text>
+                      </View>
+                    </>
+                  );
+                }}
+              />
             </View>
             <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
               <InputField
@@ -161,7 +194,7 @@ const FilterModal = (props: any) => {
                   props.setFilterform({
                     ...props?.filterform,
                     location: data,
-                  })
+                  });
                 }}
                 onPressSelect={(data: any, detail: any) => {
                   props.setFilterform({
@@ -191,7 +224,7 @@ const FilterModal = (props: any) => {
             </View>
           </View>
           <View style={{ marginVertical: 20 }}>
-            <View style={{ flexDirection: "row", justifyContent: 'center' }}>
+            <View style={{ flexDirection: "row", justifyContent: "center" }}>
               <Button
                 width={135}
                 buttonText={strings.reset}

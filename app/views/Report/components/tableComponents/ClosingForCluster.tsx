@@ -12,79 +12,8 @@ import { normalizeWidth, normalizeHeight, normalize } from "app/components/scale
 const ClosingForCluster = (props: any) => {
   const { data, headerData } = props;
 
-  // SitevisitCountTotal
-  // NoshowAppintment
-  // confirmBooking
-  // CancelBooking
-  // RegisterBooking
-  // ConversionPercentage
+ 
   return (
-    // <View
-    //   style={{
-    //     flexDirection: "column",
-    //   }}
-    // >
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data?.SitevisitCountTotal}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data?.NoshowAppintment}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data?.confirmBooking}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data.CancelBooking}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data.RegisterBooking}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data.ConversionPercentage}
-    //     </Text>
-    //   </View>
-    // </View>
     <>
       <View
         style={{

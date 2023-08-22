@@ -189,8 +189,9 @@ export const changePassword = (params: any) => async (dispatch: any) => {
 export const userLogout = () => async (dispatch: any) => {
     dispatch({ type: START_LOADING })
     try {
-        const res = await apiCall("post", apiEndPoints.LOGOUT, {});
-        console.log('res: userLogout', res);
+        const userData: any = await AsyncStorage.getItem("loginData");
+        const loginData = JSON.parse(userData)?.data
+        const res = await apiCall("post", apiEndPoints.LOGOUT, {login_id: loginData?._id});
         // if (res.data.status === 200) {
             await AsyncStorage.removeItem("persistantState");
             await AsyncStorage.removeItem("AuthToken");

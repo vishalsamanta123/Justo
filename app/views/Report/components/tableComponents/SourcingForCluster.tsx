@@ -11,100 +11,7 @@ import { normalizeWidth, normalizeHeight, normalize } from "app/components/scale
 
 const SourcingForCluster = (props: any) => {
   const { data, headerData, handleCpDetailPress } = props;
-  // activeCP
-  // inactiveCP
-  // leadcount
-  // SitevisitCountTotal
-  // NoshowAppintment
-  // confirmBooking
-  // ConversionPercentage
   return (
-    // <View
-    //   style={{
-    //     flexDirection: "column",
-    //   }}
-    // >
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data?.activeCP}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data?.newCpRegistered}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data?.inactiveCP}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data?.leadcount}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data.SitevisitCountTotal}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data.NoshowAppintment}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data.confirmBooking}
-    //     </Text>
-    //   </View>
-    //   <View style={styles.cTDataItems}>
-    //     <Text
-    //       style={{
-    //         ...styles.boxText,
-    //         color: BLACK_COLOR,
-    //       }}
-    //     >
-    //       {data.ConversionPercentage}
-    //     </Text>
-    //   </View>
-    // </View>
     <View
       // key={index}
       style={{
@@ -200,7 +107,8 @@ const SourcingForCluster = (props: any) => {
                       color: BLACK_COLOR,
                     }}
                   >
-                    {item?.BookingCountTotal}
+                    {/* {item?.BookingCountTotal} */}
+                    {item?.TransactionalCPtotal}
                   </Text>
                 </View>
                 <View style={styles.cTDataItems}>
@@ -220,7 +128,8 @@ const SourcingForCluster = (props: any) => {
                       color: BLACK_COLOR,
                     }}
                   >
-                    {item.SitevisitCountTotal}
+                    {/* {item.SitevisitCountTotal} */}
+                    {item.Appdonecounttotal}
                   </Text>
                 </View>
                 <View style={styles.cTDataItems}>

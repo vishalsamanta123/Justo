@@ -133,9 +133,11 @@ const ClusterHeadReportTable = (props: any) => {
               "CP Mapped": item?.cpcount,
               "New CP Registered": item?.newCpRegistered,
               "Active CP": item?.activeCP,
-              "Transactional CP": item?.BookingCountTotal,
+              // "Transactional CP": item?.BookingCountTotal,
+              "Transactional CP": item?.TransactionalCPtotal,
               "Dormant CP": item?.inactiveCP,
-              "Appointment Done": item.SitevisitCountTotal,
+              // "Appointment Done": item.SitevisitCountTotal,
+              "Appointment Done": item.Appdonecounttotal,
               "Visitor No Shows": item.NoshowAppintment,
               "Total Bookings": item.confirmBooking,
             };
