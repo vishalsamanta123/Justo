@@ -35,7 +35,7 @@ const AgencyListItem = (props: any) => {
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>
-            {strings.cpCapital + " " + strings.name} :
+            {strings.cpType} :
           </Text>
         </View>
         <View style={styles.nameContainer}>

@@ -8,7 +8,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import { Checkbox } from "react-native-paper";
-import { BLACK_COLOR } from "app/components/utilities/constant";
+import { BLACK_COLOR, Isios } from "app/components/utilities/constant";
 import styles from "./styles";
 import { ScrollView } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
@@ -44,101 +44,108 @@ const AddPropertyModel = (props: any) => {
   }
   return (
     <Modal isVisible={props.isVisible}>
-      {/* <ScrollView
-        keyboardShouldPersistTaps={"handled"}
-        automaticallyAdjustKeyboardInsets={Isios ? true : false}
-        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-      > */}
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.propMainContainer}>
-          <View style={styles.topContainer}>
-            <Text style={styles.topTxt}>{strings.alloProperty}</Text>
-            <View>
-              <TouchableOpacity onPress={() => props.setIsVisible(false)}>
-                <Image source={images.close} style={styles.closeIcon} />
-              </TouchableOpacity>
+          <ScrollView
+            keyboardShouldPersistTaps={"handled"}
+            automaticallyAdjustKeyboardInsets={Isios ? true : false}
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={styles.topContainer}>
+              <Text style={styles.topTxt}>{strings.alloProperty}</Text>
+              <View>
+                <TouchableOpacity onPress={() => props.setIsVisible(false)}>
+                  <Image source={images.close} style={styles.closeIcon} />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-          <View style={styles.borderView} />
-          <View style={styles.selectedBox}>
-            {props?.selectedProperty?.length > 0 ? (
-              <>
-                {props?.selectedProperty?.map((item: any, index: any) => {
-                  const getSelectedbycp = checkCpproperty(item?.property_id);
-                  return item.active_status && getSelectedbycp ? (
-                    <>
-                      <View
-                        style={[
-                          styles.innerBoxVw,
-                          { justifyContent: "flex-start" },
-                        ]}
-                      >
-                        <Text style={styles.userNameTxt}>
-                          {item.property_title}
-                        </Text>
-                        <TouchableOpacity
-                          onPress={() => props.handleDelete(item, index)}
+            <View style={styles.borderView} />
+            <View style={styles.selectedBox}>
+              {props?.selectedProperty?.length > 0 ? (
+                <>
+                  {props?.selectedProperty?.map((item: any, index: any) => {
+                    const getSelectedbycp = checkCpproperty(item?.property_id);
+                    return item.active_status && getSelectedbycp ? (
+                      <>
+                        <View
+                          style={[
+                            styles.innerBoxVw,
+                            { justifyContent: "flex-start" },
+                          ]}
                         >
-                          <Image source={images.close} style={styles.crossVw} />
-                        </TouchableOpacity>
-                      </View>
-                    </>
-                  ) : null;
-                })}
-              </>
-            ) : (
-              <Text style={styles.noSelectedTxt}>
-                {strings.noPropertySelected}
-              </Text>
-            )}
-          </View>
-          <TextInput
-            placeholder={strings.searchByName}
-            placeholderTextColor={BLACK_COLOR}
-            style={styles.searchInputVw}
-            // onFocus={() => props.setAllList(true)}
-            onChangeText={(text: any) => props.handleSearch(text)}
-          />
+                          <Text style={styles.userNameTxt}>
+                            {item.property_title}
+                          </Text>
+                          <TouchableOpacity
+                            onPress={() => props.handleDelete(item, index)}
+                          >
+                            <Image
+                              source={images.close}
+                              style={styles.crossVw}
+                            />
+                          </TouchableOpacity>
+                        </View>
+                      </>
+                    ) : null;
+                  })}
+                </>
+              ) : (
+                <Text style={styles.noSelectedTxt}>
+                  {strings.noPropertySelected}
+                </Text>
+              )}
+            </View>
+            <TextInput
+              placeholder={strings.searchByName}
+              placeholderTextColor={BLACK_COLOR}
+              style={styles.searchInputVw}
+              // onFocus={() => props.setAllList(true)}
+              onChangeText={(text: any) => props.handleSearch(text)}
+            />
 
-          <FlatList
-            contentContainerStyle={{}}
-            data={props.finalPropertyList}
-            // data={response?.data}
-            renderItem={({ item, index }: any) => {
-              /* const getSelected =
+            <FlatList
+              contentContainerStyle={{}}
+              data={props.finalPropertyList}
+              // data={response?.data}
+              renderItem={({ item, index }: any) => {
+                /* const getSelected =
                 props?.selectedProperty?.length === 0
                   ? ""
                   : props?.selectedProperty?.map(
                       ({ property_title }: any) => property_title
                     ); */
-              const getSelected = checkActiveStatus(item?.property_id);
-              return (
-                <View style={styles.innerBoxVwlist}>
-                  <Text style={styles.innerBoxVwlistfont}>
-                    {item.property_title}
+                const getSelected = checkActiveStatus(item?.property_id);
+                return (
+                  <View style={styles.innerBoxVwlist}>
+                    <Text style={styles.innerBoxVwlistfont}>
+                      {item.property_title}
+                    </Text>
+                    <TouchableOpacity
+                      onPress={() =>
+                        !getSelected
+                          ? props.handleSelects(item)
+                          : console.log("")
+                      }
+                      style={styles.checkBoxVw}
+                    >
+                      <Image
+                        style={styles.checksVw}
+                        source={getSelected ? images.check : null}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                );
+              }}
+              ListEmptyComponent={() => {
+                return (
+                  <Text style={[styles.noSelectedTxt, { textAlign: "center" }]}>
+                    {strings.propertyNotFount}
                   </Text>
-                  <TouchableOpacity
-                    onPress={() =>
-                      !getSelected ? props.handleSelects(item) : console.log("")
-                    }
-                    style={styles.checkBoxVw}
-                  >
-                    <Image
-                      style={styles.checksVw}
-                      source={getSelected ? images.check : null}
-                    />
-                  </TouchableOpacity>
-                </View>
-              );
-            }}
-            ListEmptyComponent={() => {
-              return (
-                <Text style={[styles.noSelectedTxt, { textAlign: "center" }]}>
-                  {strings.propertyNotFount}
-                </Text>
-              );
-            }}
-          />
+                );
+              }}
+            />
+          </ScrollView>
           <View style={{ marginVertical: 20 }}>
             <View style={{ flexDirection: "row", justifyContent: "center" }}>
               <Button
@@ -150,7 +157,6 @@ const AddPropertyModel = (props: any) => {
           </View>
         </View>
       </SafeAreaView>
-      {/* </ScrollView> */}
     </Modal>
   );
 };

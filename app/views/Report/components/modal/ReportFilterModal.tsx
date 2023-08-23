@@ -55,14 +55,12 @@ const FilterModal = (props: any) => {
     if (value === 1) {
       arr = response?.data?.filter(
         (el: any) =>
-          el.role_id === ROLE_IDS.sourcingmanager_id ||
-          el.role_id === ROLE_IDS.sourcingtl_id
+          el.role_id === ROLE_IDS.sourcingmanager_id
       );
     } else if (value === 2) {
       arr = response?.data?.filter(
         (el: any) =>
-          el.role_id === ROLE_IDS.closingmanager_id ||
-          el.role_id === ROLE_IDS.closingtl_id
+          el.role_id === ROLE_IDS.closingmanager_id
       );
     }
     setUsersList(arr);
@@ -182,6 +180,7 @@ const FilterModal = (props: any) => {
                       ...props?.filterData,
                       property_id: item.property_id,
                       property_title: item.property_title,
+                      user_id: ''
                     });
                   }}
                   newRenderItem={(item: any) => {
@@ -215,6 +214,7 @@ const FilterModal = (props: any) => {
                     props.setFilterData({
                       ...props?.filterData,
                       by_team: item.value,
+                      user_id: ''
                     });
                     handleOnChangeByTeam(item.value);
                   }}

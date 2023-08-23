@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView, Keyboard } from "react-native";
 import React, { useState } from "react";
 import Modal from "react-native-modal";
 import styles from "../../../../components/Modals/styles";
@@ -9,8 +9,9 @@ import InputField from "../../../../components/InputField";
 import DropdownInput from "../../../../components/DropDown";
 import InputCalender from "app/components/InputCalender";
 import moment from "moment";
-import { DATE_FORMAT, Isios } from "app/components/utilities/constant";
+import { DATE_FORMAT, Isios, RED_COLOR } from "app/components/utilities/constant";
 import { normalizeSpacing } from "app/components/scaleFontSize";
+import ErrorMessage from "app/components/ErrorMessage";
 const FilterModal = (props: any) => {
   const data = [
     { label: strings.active, value: 2 },
@@ -23,9 +24,36 @@ const FilterModal = (props: any) => {
       </View>
     );
   };
+  const validation = () => {
+    let isError = true;
+    let errorMessage: any = "";
+
+    if (props.filterData?.startdate !== "" && props.filterData?.enddate === "") {
+      isError = false;
+      errorMessage = "Please enter end date";
+    } else if (props.filterData?.enddate !== "" && props.filterData?.startdate === "") {
+      isError = false;
+      errorMessage = "Please enter start date";
+    } else if (!(props.filterData?.startdate <= props.filterData?.enddate)) {
+      isError = false;
+      errorMessage = "End date should not be less than start date ";
+    }
+    if (errorMessage !== "") {
+      ErrorMessage({
+        msg: errorMessage,
+        backgroundColor: RED_COLOR,
+      });
+    }
+    if (!isError) {
+      Keyboard.dismiss();
+    }
+    return isError;
+  };
   const handleFilter = () => {
-    props.setIsVisible(false)
-    props.getAgencyList(0, props.filterData)
+    if(validation()) {
+      props.setIsVisible(false)
+      props.getAgencyList(0, props.filterData)
+    }
   }
   return (
     <Modal isVisible={props.Visible}>
@@ -49,6 +77,7 @@ const FilterModal = (props: any) => {
                 leftIcon={images.event}
                 placeholderText={strings.startDate}
                 editable={false}
+                headingText={strings.startDate}
                 dateData={(data: any) => {
                   props.setFilterData({
                     ...props.filterData,
@@ -71,6 +100,7 @@ const FilterModal = (props: any) => {
                 placeholderText={strings.endDate}
                 editable={false}
                 // minimumDate={new Date()}
+                headingText={strings.endDate}
                 dateData={(data: any) => {
                   props.setFilterData({
                     ...props.filterData,
