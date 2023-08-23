@@ -26,6 +26,7 @@ import {
   ROLE_IDS,
   Regexs,
   CONST_IDS,
+  WHITE_COLOR,
 } from "../../../../components/utilities/constant";
 import strings from "../../../../components/utilities/Localization";
 import styles from "./Styles";
@@ -154,27 +155,33 @@ const AddNewVisitorForm = (props: any) => {
               { flexDirection: "row", justifyContent: "space-between" },
             ]}
           >
-            <View style={{ width: "35%" }}>
-              <TouchableOpacity
-                accessible={false}
-                style={{}}
-                onPress={() => {
-                  props.setCountyPicker(true);
-                }}
-                activeOpacity={1.0}
-              >
-                <InputField
-                  require={true}
-                  disableSpecialCharacters={true}
-                  placeholderText={"Country"}
-                  handleInputBtnPress={() => {}}
-                  valueshow={props?.formData?.country_code}
-                  headingText={"Country"}
-                  editable={false}
-                  countryCodeInput={true}
-                />
-              </TouchableOpacity>
-            </View>
+            {/* <View style={{ width: "35%" }}> */}
+            <TouchableOpacity
+              accessible={false}
+              style={{ width: "35%" }}
+              onPress={() => {
+                props.setCountyPicker(true);
+              }}
+              activeOpacity={1.0}
+            >
+              <InputField
+                require={true}
+                disableSpecialCharacters={true}
+                placeholderText={"Country"}
+                valueshow={props?.formData?.country_code}
+                headingText={"Country"}
+                editable={false}
+                countryCodeInput={true}
+                rightImgSrc={images.downErrow}
+                handleInputBtnPress={() => {props.setCountyPicker(true);}}
+                rightImageVw={[
+                  styles.tickImgVw,
+                  { backgroundColor: WHITE_COLOR },
+                ]}
+                rightImageSty={[styles.tickImg, { tintColor: BLACK_COLOR }]}
+              />
+            </TouchableOpacity>
+            {/* </View> */}
             <View style={{ width: "60%" }}>
               <InputField
                 require={true}
@@ -265,8 +272,10 @@ const AddNewVisitorForm = (props: any) => {
                       ROLE_IDS.closingmanager_id ||
                     userData?.userData?.data?.role_id ===
                       ROLE_IDS.clusterhead_id ||
-                    userData?.userData?.data?.role_id === ROLE_IDS.sitehead_id ||
-                    userData?.userData?.data?.role_id === ROLE_IDS.businesshead_id
+                    userData?.userData?.data?.role_id ===
+                      ROLE_IDS.sitehead_id ||
+                    userData?.userData?.data?.role_id ===
+                      ROLE_IDS.businesshead_id
                   )
                 ) {
                   props.setAllProperty([]);
@@ -400,7 +409,9 @@ const AddNewVisitorForm = (props: any) => {
                         headingText={"Company Employee name"}
                         placeholder={"Select Employee name"}
                         search={true}
-                        searchPlaceholder={strings.search + " " + strings.employee}
+                        searchPlaceholder={
+                          strings.search + " " + strings.employee
+                        }
                         data={props.employeeList}
                         inputWidth={"100%"}
                         paddingLeft={Isios ? 6 : 10}

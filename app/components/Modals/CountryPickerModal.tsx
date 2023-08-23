@@ -10,6 +10,8 @@ import React from "react";
 import Modal from "react-native-modal";
 import styles from "./styles";
 import images from "app/assets/images";
+import { normalizeSpacing } from "../scaleFontSize";
+import { Isios } from "../utilities/constant";
 
 const CountryPickerModal = (props: any) => {
   return (
@@ -46,7 +48,9 @@ const CountryPickerModal = (props: any) => {
               }
               // value={props.countryCode}
               placeholder="Search..."
-              style={styles.serchInput}
+              style={[styles.serchInput, Isios ? {
+                marginTop: normalizeSpacing(8),
+              }: {}]}
               placeholderTextColor={"#a9a9a9"}
             />
           </View>
@@ -60,11 +64,11 @@ const CountryPickerModal = (props: any) => {
               onPress={() => props.selectCountryData(item.dial_code, item.flag)}
               style={styles.countryCodeSelect}
             >
-              <Text style={{ textAlign: "left", width: 30 }}>{item.flag}</Text>
-              <Text style={{ textAlign: "left", width: 40 }}>
+              <Text style={{ textAlign: "left", width: normalizeSpacing(30) }}>{item.flag}</Text>
+              <Text style={{ textAlign: "left", width: normalizeSpacing(50) }}>
                 {item.dial_code}
               </Text>
-              <Text style={{ marginLeft: 10, textAlign: "left" }}>
+              <Text style={{ marginLeft: 10, textAlign: "left", width: '70%' }}>
                 {item.name}
               </Text>
             </TouchableOpacity>

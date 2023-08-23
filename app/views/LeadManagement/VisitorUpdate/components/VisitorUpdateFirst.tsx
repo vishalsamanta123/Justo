@@ -20,6 +20,7 @@ import {
   Isios,
   PRIMARY_THEME_COLOR,
   ROLE_IDS,
+  WHITE_COLOR,
 } from "../../../../components/utilities/constant";
 import InputField from "../../../../components/InputField";
 import { RadioButton } from "react-native-paper";
@@ -173,11 +174,21 @@ const VisitorUpdateView = (props: any) => {
                 require={true}
                 disableSpecialCharacters={true}
                 placeholderText={"Country"}
-                handleInputBtnPress={() => {}}
+                // handleInputBtnPress={() => {}}
                 valueshow={props?.updateForm?.country_code}
                 headingText={"Country"}
                 editable={false}
                 countryCodeInput={true}
+                rightImgSrc={images.downErrow}
+                handleInputBtnPress={() => {
+                  if(props?.updateForm?.create_by === userId._id ? true : false) {
+                  props.setCountyPicker(true)}}}
+                rightImageVw={[
+                  styles.tickImgVw,
+                  { backgroundColor: WHITE_COLOR },
+                ]}
+                rightImageSty={[styles.tickImg, { tintColor: BLACK_COLOR }]}
+
               />
             </TouchableOpacity>
           </View>

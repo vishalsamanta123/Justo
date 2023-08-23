@@ -97,7 +97,7 @@ const SiteHeadView = (props: any) => {
           onPress={() => props.onpressBooking('cancel', 'cancelBooking')}
           style={[
             styles.thirdPortioncardView,
-            { height: normalizeHeight(120) },
+            // { height: normalizeHeight(130) },
           ]}
         >
           <View style={styles.thirdPortionCardTextView}>

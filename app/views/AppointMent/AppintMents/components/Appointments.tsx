@@ -229,6 +229,7 @@ const AppointmentListView = (props: any) => {
                 setFilterData={props.setFilterData}
                 getAppointmentList={props.getAppointmentList}
                 setAppointmentList={props.setAppointmentList}
+                onPressApply={() => {}}
             />
             <AllocateModal
                 Visible={allocateModel}

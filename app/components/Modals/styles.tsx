@@ -378,6 +378,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderTopWidth: 0.4,
     borderTopColor: "#a9a9a9",
+    marginBottom: 2
   },
   countrycloseIcon: {
     tintColor: "red",
