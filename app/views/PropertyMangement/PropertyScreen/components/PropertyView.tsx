@@ -90,6 +90,7 @@ const PropertyView = (props: any) => {
       location: "",
       property_name: "",
       property_type: "",
+      property_id: ""
     });
     props.getallproperty(0);
     setPropertyList([]);

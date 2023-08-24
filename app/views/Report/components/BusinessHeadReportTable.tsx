@@ -240,7 +240,6 @@ const BusinessHeadReportTable = (props: any) => {
       }
     }
   };
-  console.log("🚀 ~ file: BusinessHeadReportTable.tsx:282 ~ data:", data)
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -280,7 +279,6 @@ const BusinessHeadReportTable = (props: any) => {
         </View> */}
         <View>
           {data?.map((item: any, index: any) => {
-            console.log("🚀 ~ file: BusinessHeadReportTable.tsx:282 ~ item:", item)
             return (
               <>
                 <View

@@ -52,16 +52,6 @@ const ClusterHeadReportTable = (props: any) => {
       setRefreshing(false);
     }, 2000);
   };
-  // const soucingHeaderData = [
-  //   "Sourcing Manager",
-  //   "CP Appointments/ Walk-ins",
-  //   "Visitor No Shows via CPs",
-  //   "Booking",
-  //   "Ready To Book",
-  //   "Conv %",
-  //   "Total Cancelation",
-  //   "Total Registration",
-  // ];
   const soucingHeaderData = [
     "SM Name",
     "CP Mapped",
@@ -75,33 +65,15 @@ const ClusterHeadReportTable = (props: any) => {
     "CP Detail",
   ];
 
-  // const closingHeaderData = [
-  //   "Closing Manager",
-  //   "Client/ Vistor Attended",
-  //   "Visitor No Shows",
-  //   "Booking",
-  //   "Ready To Book",
-  //   "Total Cancelation",
-  //   "Total Registration",
-  //   "Conv %",
-  //   // "Target Set",
-  //   // "% of Target Achieve",
-  // ];
   const closingHeaderData = [
     "CM Name",
-    // "Lead Assign",
     "Visitor Attended",
     "Direct Walk-ins",
     "CP (Walk-ins) Appointments",
-    // "Total Site Visit",
     "No Shows",
     "Total Revisit",
     "Total Not Interested",
-    // "Visit Cancel",
     "Total Booking",
-    // "Ready to Book",
-    // "Total Registration",
-    // "Cancelation Booking",
     "Conversion %",
   ];
 
@@ -118,10 +90,6 @@ const ClusterHeadReportTable = (props: any) => {
       );
     } else if (res) {
       try {
-        // ErrorMessage({
-        //   msg: strings.startDownload,
-        //   backgroundColor: BLACK_COLOR,
-        // });
         const workbook = XLSX.utils.book_new();
 
         data.forEach((property: any) => {
@@ -198,203 +166,8 @@ const ClusterHeadReportTable = (props: any) => {
     }
   };
 
-  // const data = [
-  //   {
-  //     site_name: "Satyam",
-  //     clusterDatas: [
-  //       {
-  //         name: "Mohan Dixit",
-  //         role_ID: 1,
-  //         data: [
-  //           {
-  //             closing_manager: "Ashutosh Kumar Gurkha",
-  //             vistitor_attended: "42",
-  //             visitor_no: "0",
-  //             booking: "0",
-  //             ready_to_book: "",
-  //             conv: "0.0%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //             target_set: "",
-  //             target_achive: "",
-  //           },
-  //           {
-  //             closing_manager: "Ayush Akhand",
-  //             vistitor_attended: "30",
-  //             visitor_no: "2",
-  //             booking: "3",
-  //             ready_to_book: "",
-  //             conv: "10.0%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //             target_set: "",
-  //             target_achive: "",
-  //           },
-  //           {
-  //             closing_manager: "Aura Saikar",
-  //             vistitor_attended: "16",
-  //             visitor_no: "0",
-  //             booking: "0",
-  //             ready_to_book: "",
-  //             conv: "0.0%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //             target_set: "",
-  //             target_achive: "",
-  //           },
-  //           {
-  //             closing_manager: "Deepak Kalyani",
-  //             vistitor_attended: "12",
-  //             visitor_no: "0",
-  //             booking: "1",
-  //             ready_to_book: "",
-  //             conv: "8.3%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //             target_set: "",
-  //             target_achive: "",
-  //           },
-  //           {
-  //             closing_manager: "Dharmendra Tanwar",
-  //             vistitor_attended: "42",
-  //             visitor_no: "5",
-  //             booking: "2",
-  //             ready_to_book: "",
-  //             conv: "4.8%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //             target_set: "",
-  //             target_achive: "",
-  //           },
-  //           {
-  //             closing_manager: "Jitendra Varma",
-  //             vistitor_attended: "52",
-  //             visitor_no: "1",
-  //             booking: "1",
-  //             ready_to_book: "",
-  //             conv: "1.9%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //             target_set: "",
-  //             target_achive: "",
-  //           },
-  //           {
-  //             closing_manager: "Sandeep Dhir",
-  //             vistitor_attended: "35",
-  //             visitor_no: "2",
-  //             booking: "0",
-  //             ready_to_book: "",
-  //             conv: "0.0%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //             target_set: "",
-  //             target_achive: "",
-  //           },
-  //           {
-  //             closing_manager: "Yashpal Singh",
-  //             vistitor_attended: "47",
-  //             visitor_no: "2",
-  //             booking: "1",
-  //             ready_to_book: "",
-  //             conv: "2.1%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //             target_set: "",
-  //             target_achive: "",
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         name: "Aman Kumar",
-  //         role_ID: 2,
-  //         data: [
-  //           {
-  //             sourcing_manager: "Ashutosh Kumar Gurkha",
-  //             cp_appointment: "42",
-  //             visitor_no: "",
-  //             booking: "0",
-  //             ready_to_book: "",
-  //             conv: "0.0%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //           },
-  //           {
-  //             sourcing_manager: "Ayush Akhand",
-  //             cp_appointment: "30",
-  //             visitor_no: "",
-  //             booking: "3",
-  //             ready_to_book: "",
-  //             conv: "10.0%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //           },
-  //           {
-  //             sourcing_manager: "Aura Saikar",
-  //             cp_appointment: "16",
-  //             visitor_no: "",
-  //             booking: "0",
-  //             ready_to_book: "",
-  //             conv: "0.0%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //           },
-  //           {
-  //             sourcing_manager: "Deepak Kalyani",
-  //             cp_appointment: "12",
-  //             visitor_no: "",
-  //             booking: "1",
-  //             ready_to_book: "",
-  //             conv: "8.3%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //           },
-  //           {
-  //             sourcing_manager: "Dharmendra Tanwar",
-  //             cp_appointment: "42",
-  //             visitor_no: "",
-  //             booking: "2",
-  //             ready_to_book: "",
-  //             conv: "4.8%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //           },
-  //           {
-  //             sourcing_manager: "Jitendra Varma",
-  //             cp_appointment: "52",
-  //             visitor_no: "",
-  //             booking: "1",
-  //             ready_to_book: "",
-  //             conv: "1.9%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //           },
-  //           {
-  //             sourcing_manager: "Sandeep Dhir",
-  //             cp_appointment: "35",
-  //             visitor_no: "",
-  //             booking: "0",
-  //             ready_to_book: "",
-  //             conv: "0.0%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //           },
-  //           {
-  //             sourcing_manager: "Yashpal Singh",
-  //             cp_appointment: "47",
-  //             visitor_no: "",
-  //             booking: "1",
-  //             ready_to_book: "",
-  //             conv: "2.1%",
-  //             total_cancelation: "",
-  //             total_registration: "",
-  //           },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  // ];
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{
@@ -434,13 +207,12 @@ const ClusterHeadReportTable = (props: any) => {
             return (
               <View>
                 {!(
-                  item?.smDetails?.length == 0 && item?.CMDetails?.length == 0
+                  item?.CTLDetails?.length == 0 && item?.StlDetails?.length == 0
                 ) ? (
                   <View
                     style={{
                       ...styles.ThemeColorBox,
                       width: "100%",
-                      // marginBottom: normalize(10),
                     }}
                   >
                     <Text
@@ -453,96 +225,109 @@ const ClusterHeadReportTable = (props: any) => {
                       {item?.property_title}
                     </Text>
                   </View>
-                ) : null}
-                {/* <View>
-                  {item?.clusterDatas?.map((item: any, index: any) => {
+                ) : <View>
+                    <Text style={{textAlign: 'center'}}>Data Not Found</Text>
+                  </View>}
+                <View>
+                  {item?.StlDetails?.map((item: any, index: any) => {
                     return (
-                      <View >
-                        <ClusterHeadtable
-                          data={item}
-                          headerData={
-                            item?.role_ID == 1
-                              ? closingHeaderData
-                              : soucingHeaderData
-                          }
-                        />
-                      </View>
+                      <>
+                        {item?.smDetails?.length > 0 ? (
+                          <View>
+                            {index === 0 && (
+                              <View
+                                style={{
+                                  ...styles.ThemeColorBox,
+                                  width: "100%",
+                                }}
+                              >
+                                <Text
+                                  style={{
+                                    ...styles.boxText,
+                                    color: WHITE_COLOR,
+                                    textAlign: "center",
+                                  }}
+                                >
+                                  Sourcing Team
+                                </Text>
+                              </View>
+                            )}
+                            <View
+                              style={{
+                                ...styles.ThemeColorBox,
+                                width: "100%",
+                              }}
+                            >
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: WHITE_COLOR,
+                                  textAlign: "center",
+                                }}
+                              >
+                                Sourcing TL : {item?.username}
+                              </Text>
+                            </View>
+                            <ClusterHeadtable
+                              data={item?.smDetails}
+                              role_ID={2}
+                              headerData={soucingHeaderData}
+                              handleCpDetailPress={handleCpDetailPress}
+                            />
+                          </View>
+                        ) : null}
+                      </>
                     );
                   })}
-                </View> */}
-                <View>
-                  {/* {item?.smDetails?.length == 0 &&
-                  item?.CMDetails?.length == 0 ? (
-                    <View>
-                      <Text style={[styles.title, { textAlign: "center" }]}>
-                        Not Found
-                      </Text>
-                    </View>
-                  ) : ( */}
-                  <>
-                    {/* {item?.smDetails?.map((item: any, index: any) => {
-                        return ( */}
-                    {item?.smDetails?.length > 0 ? (
-                      <View>
-                        <View
-                          style={{
-                            ...styles.ThemeColorBox,
-                            width: "100%",
-                            // marginBottom: normalize(10),
-                          }}
-                        >
-                          <Text
-                            style={{
-                              ...styles.boxText,
-                              color: WHITE_COLOR,
-                              textAlign: "center",
-                            }}
-                          >
-                            Sourcing Team
-                          </Text>
-                        </View>
-                        <ClusterHeadtable
-                          data={item?.smDetails}
-                          role_ID={2}
-                          headerData={soucingHeaderData}
-                          handleCpDetailPress={handleCpDetailPress}
-                        />
-                      </View>
-                    ) : null}
-                    {/* );
-                      })} */}
-                    {/* {item?.CMDetails?.map((item: any, index: any) => {
-                        return ( */}
-                    {item?.CMDetails?.length > 0 ? (
-                      <View>
-                        <View
-                          style={{
-                            ...styles.ThemeColorBox,
-                            width: "100%",
-                            // marginBottom: normalize(10),
-                          }}
-                        >
-                          <Text
-                            style={{
-                              ...styles.boxText,
-                              color: WHITE_COLOR,
-                              textAlign: "center",
-                            }}
-                          >
-                            Closing Team
-                          </Text>
-                        </View>
-                        <ClusterHeadtable
-                          data={item?.CMDetails}
-                          role_ID={1}
-                          headerData={closingHeaderData}
-                        />
-                      </View>
-                    ) : null}
-                    {/* );
-                      })} */}
-                  </>
-                  {/* )} */}
+                  {item?.CTLDetails?.map((item: any, index: any) => {
+                    return (
+                      <>
+                        {item?.CMDetails?.length > 0 ? (
+                          <View>
+                            {index === 0 && (
+                              <View
+                                style={{
+                                  ...styles.ThemeColorBox,
+                                  width: "100%",
+                                }}
+                              >
+                                <Text
+                                  style={{
+                                    ...styles.boxText,
+                                    color: WHITE_COLOR,
+                                    textAlign: "center",
+                                  }}
+                                >
+                                  Closing Team
+                                </Text>
+                              </View>
+                            )}
+                            <View
+                              style={{
+                                ...styles.ThemeColorBox,
+                                width: "100%",
+                              }}
+                            >
+                              <Text
+                                style={{
+                                  ...styles.boxText,
+                                  color: WHITE_COLOR,
+                                  textAlign: "center",
+                                }}
+                              >
+                                Closing TL : {item?.username}
+                              </Text>
+                            </View>
+                            <ClusterHeadtable
+                              data={item?.CMDetails}
+                              role_ID={1}
+                              headerData={closingHeaderData}
+                            />
+                          </View>
+                        ) : null}
+                      </>
+                    );
+                  })}
                 </View>
               </View>
             );

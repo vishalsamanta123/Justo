@@ -19,6 +19,7 @@ import moment from "moment";
 import ErrorMessage from "app/components/ErrorMessage";
 import strings from "app/components/utilities/Localization";
 import { Keyboard } from "react-native";
+import { START_LOADING, STOP_LOADING } from "app/Redux/types";
 
 const ReportScreen = ({ navigation }: any) => {
   const [reportData, setReportData] = useState([]);
@@ -29,6 +30,7 @@ const ReportScreen = ({ navigation }: any) => {
     property_id: "",
     by_team: "",
     user_id: "",
+    parent_id: "",
   });
   const [propertyListForFilter, setPropertyListForFilter] = useState([]);
   const [clusterheadListForFilter, setClusterheadListForFilter] = useState([]);
@@ -56,8 +58,10 @@ const ReportScreen = ({ navigation }: any) => {
   var todayDate = currentYears + "-" + currentMonths + "-" + currentDay;
 
   useLayoutEffect(() => {
-    getData(firstdDate, todayDate);
-  }, [isFocused, filterData]);
+    if (!filterModalVisible) {
+      getData(firstdDate, todayDate);
+    }
+  }, [isFocused, filterData, navigation]);
   useEffect(() => {
     if (ReportData?.response?.data?.length > 0) {
       setReportData(ReportData?.response?.data);
@@ -68,6 +72,19 @@ const ReportScreen = ({ navigation }: any) => {
       // })
     }
   }, [ReportData]);
+  useFocusEffect(
+    React.useCallback(() => {
+      setFilterData({
+        startdate: "",
+        enddate: "",
+        property_id: "",
+        by_team: "",
+        user_id: "",
+        parent_id: "",
+      });
+      return () => {};
+    }, [navigation])
+  );
   useFocusEffect(
     React.useCallback(() => {
       let arrForProperty: any = [];
@@ -85,7 +102,6 @@ const ReportScreen = ({ navigation }: any) => {
           });
         } else if (roleId === ROLE_IDS.businesshead_id) {
           reportData?.map((item: any, index: any) => {
-            console.log("🚀 ~ file: index.tsx:89 ~ item:", item);
             item?.CHDetails?.map((el: any) => {
               arrForProperty.push({
                 property_id: el?.property_id,
@@ -93,7 +109,12 @@ const ReportScreen = ({ navigation }: any) => {
               });
             });
           });
-          setPropertyListForFilter(arrForProperty);
+          const arrayUniqueByKey: any = [
+            ...new Map(
+              arrForProperty.map((item: any) => [item["property_id"], item])
+            ).values(),
+          ];
+          setPropertyListForFilter(arrayUniqueByKey);
         }
       }
       return () => {};
@@ -107,6 +128,13 @@ const ReportScreen = ({ navigation }: any) => {
         roleId === ROLE_IDS.clusterhead_id ||
         roleId === ROLE_IDS.sitehead_id
       ) {
+        // reportData?.map((item: any, index: any) => {
+        //   arrForProperty.push({
+        //     property_id: item?.property_id,
+        //     property_title: item?.property_title,
+        //   });
+        //   // setPropertyListForFilter(arrForProperty);
+        // });
         reportData?.map((item: any, index: any) => {
           arrForProperty.push({
             property_id: item?.property_id,
@@ -116,23 +144,27 @@ const ReportScreen = ({ navigation }: any) => {
         });
       } else if (roleId === ROLE_IDS.businesshead_id) {
         reportData?.map((item: any, index: any) => {
-          item?.CHDetails?.map((el: any) => {
-            arrForProperty.push({
-              property_id: el?.property_id,
-              property_title: el?.property_title,
+          if (propertyListForFilter.length === 0) {
+            // item?.CHDetails?.map((el: any) => {
+            //   arrForProperty.push({
+            //     property_id: el?.property_id,
+            //     property_title: el?.property_title,
+            //   });
+            // });
+            // setPropertyListForFilter(arrForProperty);
+          }
+          if (clusterheadListForFilter.length === 0) {
+            arrForCluster.push({
+              user_name: item?.username,
+              user_id: item?.user_id,
             });
-          });
-          arrForCluster.push({
-            user_name: item?.username,
-            user_id: item?.user_id,
-          });
-          // setPropertyListForFilter(arrForProperty);
-          const arrayUniqueByKey: any = [
-            ...new Map(
-              arrForCluster.map((item: any) => [item["user_id"], item])
-            ).values(),
-          ];
-          setClusterheadListForFilter(arrayUniqueByKey);
+            const arrayUniqueByKey: any = [
+              ...new Map(
+                arrForCluster.map((item: any) => [item["user_id"], item])
+              ).values(),
+            ];
+            setClusterheadListForFilter(arrayUniqueByKey);
+          }
         });
       }
 
@@ -143,8 +175,6 @@ const ReportScreen = ({ navigation }: any) => {
   const validation = () => {
     let isError = true;
     let errorMessage: any = "";
-    console.log("🚀 ~ =====", filterData?.startdate < filterData?.enddate);
-
     if (filterData?.startdate !== "" && filterData?.enddate === "") {
       isError = false;
       errorMessage = "Please enter end date";
@@ -213,6 +243,7 @@ const ReportScreen = ({ navigation }: any) => {
           property_id: filterData.property_id,
           by_team: filterData.by_team,
           user_id: filterData.user_id,
+          parent_id: filterData.parent_id,
         })
       );
     } else if (roleId === ROLE_IDS.businesshead_id) {
@@ -240,6 +271,7 @@ const ReportScreen = ({ navigation }: any) => {
       property_id: "",
       by_team: "",
       user_id: "",
+      parent_id: "",
     });
     getData(firstdDate, todayDate);
   };
@@ -247,7 +279,10 @@ const ReportScreen = ({ navigation }: any) => {
   const handleFilter = () => {
     if (validation()) {
       setIsFilterModalVisible(false);
-      getData(filterData?.startdate ? filterData?.startdate : firstdDate, filterData?.enddate ? filterData?.enddate : todayDate);
+      getData(
+        filterData?.startdate ? filterData?.startdate : firstdDate,
+        filterData?.enddate ? filterData?.enddate : todayDate
+      );
     }
   };
 

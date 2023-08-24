@@ -18,6 +18,7 @@ const PropertyScreen = ({ navigation }: any) => {
     location: "",
     property_name: "",
     property_type: "",
+    property_id: ""
   });
   const propertyData = useSelector((state: any) => state.propertydetailData) || []
   const { response, loading, updateStatus, list } = propertyData;
@@ -27,6 +28,18 @@ const PropertyScreen = ({ navigation }: any) => {
       getallproperty(0, {})
       return () => { };
     }, [navigation, list]))
+  useFocusEffect(
+    React.useCallback(() => {
+      setFilterform({
+        start_date: "",
+        end_date: "",
+        location: "",
+        property_name: "",
+        property_type: "",
+        property_id: ""
+      })
+      return () => { };
+    }, [navigation]))
 
   const handleStatusChange = () => {
     dispatch(statusUpdate({

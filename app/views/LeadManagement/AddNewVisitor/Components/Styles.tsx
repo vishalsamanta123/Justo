@@ -204,7 +204,10 @@ const styles = StyleSheet.create({
   tickImg: {
     height: normalizeHeight(18),
     width: normalizeWidth(18),
-    tintColor: WHITE_COLOR,
+    // tintColor: WHITE_COLOR,
+    margin: 0,
+    // backgroundColor: 'red',
+    marginLeft: 0
   },
   borderView: {
     borderBottomColor: GRAY_COLOR,

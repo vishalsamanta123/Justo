@@ -32,10 +32,10 @@ const InventoryItem = (props: any) => {
       </View>
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>Saleable Area :</Text>
+          <Text style={styles.projectTxt}>Carpet Area :</Text>
         </View>
         <View style={styles.nameContainer}>
-          <Text style={styles.nameTxt}>{item["Saleable Area"]}</Text>
+          <Text style={styles.nameTxt}>{item["Carpet Area"]}</Text>
         </View>
       </View>
       <View style={styles.Txtview}>

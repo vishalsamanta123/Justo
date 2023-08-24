@@ -205,7 +205,7 @@ const DashboardScreen = ({ navigation }: any) => {
     } else if (type === "register") {
       navigation.navigate("BookingList", { type: "register", onpressType });
     } else if (type === "cancel") {
-      navigation.navigate("CancelBooking");
+      navigation.navigate("CancelBooking", onpressType);
     }
     else {
       navigation.navigate("BookingList", { type: "readyToBook", onpressType });

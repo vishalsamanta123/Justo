@@ -81,7 +81,7 @@ const ClosingDashboardView = (props: any) => {
                     </View>
                 </TouchableOpacity> */}
                 <TouchableOpacity
-                    onPress={() => props.onpressBooking('cancel', 'cancelBooking')}
+                    onPress={() => props.onpressBooking('cancel', 'today')}
                     style={styles.thirdPortioncardView}>
                     <View style={styles.thirdPortionCardTextView}>
                         <Text style={styles.thirdPortionCardText}>{'Cancel Booking'}</Text>

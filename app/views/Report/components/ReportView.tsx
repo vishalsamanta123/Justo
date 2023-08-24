@@ -34,6 +34,7 @@ const ReportView = (props: any) => {
     propertyListForFilter,
     clusterheadListForFilter,
   } = props;
+  console.log("🚀 ~ file: ReportView.tsx:39 ~ reportData:", reportData)
   return (
     <>
       <View style={styles.mainContainer}>

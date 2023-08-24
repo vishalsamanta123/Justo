@@ -3,8 +3,11 @@ import { getBookingList } from "app/Redux/Actions/BookingActions";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CancelBookingView from "./components/CancelBookingView";
+import moment from "moment";
+import { DATE_FORMAT } from "app/components/utilities/constant";
 
-const CancelBookingScreen = ({ navigation }: any) => {
+const CancelBookingScreen = ({ navigation, route }: any) => {
+  const parmas = route.params;
   const [BookingList, setBookingList] = useState<any>([]);
   const [offSET, setOffset] = useState(0);
   const dispatch: any = useDispatch();
@@ -20,7 +23,11 @@ const CancelBookingScreen = ({ navigation }: any) => {
   const moreData = response?.total_data;
   useFocusEffect(
     React.useCallback(() => {
-      getBookingLits(0, []);
+      if (parmas === "today") {
+        getBookingLits(0, todayDate);
+      } else {
+        getBookingLits(0, []);
+      }
       setBookingList([]);
       return () => {};
     }, [navigation, list])
@@ -33,13 +40,18 @@ const CancelBookingScreen = ({ navigation }: any) => {
         } else {
           setBookingList([...BookingList, ...response?.data]);
         }
-      }else {
-        setBookingList([])
-    }
-    }else {
-        setBookingList([])
+      } else {
+        setBookingList([]);
+      }
+    } else {
+      setBookingList([]);
     }
   }, [response]);
+
+  const todayDate = {
+    start_date: moment(new Date()).format(DATE_FORMAT),
+    end_date: moment(new Date()).format(DATE_FORMAT),
+  };
 
   const getBookingLits = (offset: any, array: any) => {
     setOffset(offset);

@@ -139,6 +139,7 @@ export const GetBMreport = (item: any) => async (dispatch: any) => {
   dispatch({ type: START_LOADING });
   try {
     const res = await apiCall("post", apiEndPoints.GET_BM_REPORT, item);
+    console.log("🚀 ~ file: ReportActions.tsx:142 ~ res:", res)
     if (res?.data?.status == 200) {
       dispatch({
         type: GET_REPORT_DETAILS,

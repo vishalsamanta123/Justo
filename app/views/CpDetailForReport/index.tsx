@@ -10,7 +10,7 @@ const CpDetailForReport = ({ navigation, route }: any) => {
   };
   const handleSearch = (searchKey: any) => {
     if (searchKey !== "") {
-      const lowerCased = searchKey?.toLowerCase();
+      const lowerCased = searchKey?.toLowerCase().trim();
       const searchArray = [...cpList];
       const list = searchArray?.filter((item) => {
         return item?.Cp_name?.toLowerCase()?.match(lowerCased);

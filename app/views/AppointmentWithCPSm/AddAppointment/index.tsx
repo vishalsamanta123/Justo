@@ -42,11 +42,11 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
 
   useEffect(() => {
 
-    if (getLoginType?.response?.data?.role_title === 'Sourcing TL') {
+    if (getLoginType?.response?.data?.role_title === 'Sourcing TL' || getLoginType?.response?.data?.role_title === 'Cluster Head') {
       setRole('TL')
       dispatch(getSourcingManagerList({}))
     } else {
-      if (getLoginType?.response?.data?.role_title === 'Sourcing Manager') {
+      if (getLoginType?.response?.data?.role_title === 'Sourcing Manager' || getLoginType?.response?.data?.role_title === 'Cluster Head') {
         setRole('SM')
         dispatch(
           getAssignCPList({
@@ -68,7 +68,9 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
   }, [masterData])
 
   useEffect(() => {
-    if (getLoginType?.response?.data?.role_title === 'Sourcing TL' || getLoginType?.response?.data?.role_title === 'Sourcing Manager') {
+
+    console.log("----",getLoginType?.response?.data?.role_title)
+    if (getLoginType?.response?.data?.role_title === 'Cluster Head' || getLoginType?.response?.data?.role_title === 'Sourcing TL' || getLoginType?.response?.data?.role_title === 'Sourcing Manager') {
       if (SMListData?.response?.status === 200) {
         if (SMListData?.response?.data?.length > 0) {
           setListData(SMListData?.response?.data)

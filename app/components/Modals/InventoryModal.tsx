@@ -21,9 +21,9 @@ import DropdownInput from "../DropDown";
 
 const InventoryModal = (props: any) => {
   const dispatch: any = useDispatch();
-  const { setcofigdata } = props
+  const { setcofigdata } = props;
   const [configuration, setConfiguration] = useState<any>([]);
-  
+
   const handleGetConfigurations = () => {
     dispatch(
       getAllMaster({
@@ -31,6 +31,8 @@ const InventoryModal = (props: any) => {
       })
     );
   };
+  console.log("🚀 ~ file: InventoryModal.tsx:93 ~ props.floors:", props.floors)
+  console.log("🚀 ~ file: InventoryModal.tsx:71 ~ props.formData?.flatType:", props.formData?.flatType)
 
   return (
     <Modal isVisible={props.Visible}>
@@ -39,7 +41,7 @@ const InventoryModal = (props: any) => {
         automaticallyAdjustKeyboardInsets={Isios ? true : false}
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
       >
-        <View style={[styles.mainContainer, {paddingHorizontal: 10}]}>
+        <View style={[styles.mainContainer, { paddingHorizontal: 10 }]}>
           <View style={styles.topContainer}>
             <Text style={styles.topTxt}>Search Inventory</Text>
             <View>
@@ -51,28 +53,24 @@ const InventoryModal = (props: any) => {
             </View>
           </View>
           <View style={styles.borderView} />
-          <View style={[styles.inputWrap, {marginVertical: 20}]}>
+          <View style={[styles.inputWrap, { marginVertical: 20 }]}>
             <DropdownInput
               headingText={strings.configurations}
               placeholder={
-                props.formData?.flatType? props.formData?.flatType :
-                strings.configurations}
+                props.formData?.flatType
+                  ? props.formData?.flatType
+                  : strings.configurations
+              }
               data={Array.isArray(props.flatTypes) ? props.flatTypes : []}
               inputWidth={"100%"}
               // onFocus={() => handleGetConfigurations()}
               paddingLeft={16}
               maxHeight={300}
-              // labelField={"type"}
-              // valueField={"type"}
+              labelField={"type"}
+              valueField={"type"}
               value={props.formData?.flatType}
               onChange={(item: any) => {
-
-                setcofigdata(item)
-             /*  console.log('item: ', item);
-                props.setFormData({
-                  ...props.formData,
-                  flatType: item,
-                }); */
+                setcofigdata(item);
               }}
               newRenderItem={(item: any) => {
                 return (
@@ -87,12 +85,12 @@ const InventoryModal = (props: any) => {
               }}
             />
           </View>
-          <View style={[styles.inputWrap, {marginVertical: 20}]}>
+          <View style={[styles.inputWrap, { marginVertical: 20 }]}>
             <DropdownInput
               headingText={strings.floor}
               placeholder={
-                props.formData?.floor? props.formData?.floor :
-                strings.floor}
+                props.formData?.floor ? props.formData?.floor : strings.floor
+              }
               data={Array.isArray(props.floors) ? props.floors : []}
               inputWidth={"100%"}
               // onFocus={() => handleGetConfigurations()}
@@ -102,6 +100,7 @@ const InventoryModal = (props: any) => {
               // valueField={"type"}
               value={props.formData?.floor}
               onChange={(item: any) => {
+                console.log("🚀 ~ file: InventoryModal.tsx:101 ~ item:", item)
                 props.setFormData({
                   ...props.formData,
                   floor: item,
@@ -132,7 +131,7 @@ const InventoryModal = (props: any) => {
                 width={120}
                 buttonText={"Reset"}
                 handleBtnPress={() => {
-                  props.handleReset()
+                  props.handleReset();
                 }}
               />
             </View>

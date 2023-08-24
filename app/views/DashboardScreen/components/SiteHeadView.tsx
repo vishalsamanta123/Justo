@@ -94,7 +94,7 @@ const SiteHeadView = (props: any) => {
           </View>
         </TouchableOpacity> */}
         <TouchableOpacity
-          onPress={() => props.onpressBooking('cancel', 'cancelBooking')}
+          onPress={() => props.onpressBooking('cancel', 'today')}
           style={[
             styles.thirdPortioncardView,
             // { height: normalizeHeight(130) },

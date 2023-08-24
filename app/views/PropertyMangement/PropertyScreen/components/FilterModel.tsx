@@ -33,14 +33,13 @@ const FilterModal = (props: any) => {
   };
 
   const ApplyFilter = () => {
-    console.log("🚀 ~ file: FilterModel.tsx:44 ~ props.filterform.property_name:", props.filterform.property_name)
     dispatch(
       getFilterProperty({
         offset: 0,
         limit: 3,
         start_date: props.filterform.start_date,
         end_date: props.filterform.end_date,
-        location: props.filterform.location,
+        location: props.filterform.location.trim(),
         property_name: props.filterform.property_name,
         property_type: props.filterform.property_type,
       })
@@ -56,6 +55,7 @@ const FilterModal = (props: any) => {
       location: "",
       property_name: "",
       property_type: "",
+      property_id: ""
     });
 
     dispatch(
