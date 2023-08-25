@@ -111,9 +111,9 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
   }, [editAppointmentData])
   useEffect(() => {
     if (leadData?.response?.status === 200) {
-      if (leadData?.response?.data?.lenght > 0) {
+      if (leadData?.response?.data?.length > 0) {
         const activeLead = leadData?.response?.data.filter((el: any) => {
-          return el.property_status == true;
+          return el.status == true;
         });
         activeLead?.length > 0 ? setLeadList(activeLead) : setLeadList([]);
       } else {

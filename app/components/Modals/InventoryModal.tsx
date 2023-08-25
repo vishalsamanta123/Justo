@@ -31,8 +31,8 @@ const InventoryModal = (props: any) => {
       })
     );
   };
-  console.log("🚀 ~ file: InventoryModal.tsx:93 ~ props.floors:", props.floors)
-  console.log("🚀 ~ file: InventoryModal.tsx:71 ~ props.formData?.flatType:", props.formData?.flatType)
+  // console.log("🚀 ~ file: InventoryModal.tsx:93 ~ props.floors:", props.floors)
+  // console.log("🚀 ~ file: InventoryModal.tsx:71 ~ props.formData?.flatType:", props.formData?.flatType)
 
   return (
     <Modal isVisible={props.Visible}>

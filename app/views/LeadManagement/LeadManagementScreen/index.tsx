@@ -37,6 +37,18 @@ const LeadManagementScreen = ({ navigation, route }: any) => {
 
   useFocusEffect(
     React.useCallback(() => {
+      setFilterData({
+        startdate: "",
+        enddate: "",
+        search_by_visisor_name: "",
+        search_configuration: "",
+        visit_score: "",
+        property_id: '',
+        property_type_title: '',
+        property_title: '',
+        visit_status: strings.warm,
+        lead_status: ''
+      })
       if (route?.params === 'today') {
         getVisitorsList(0, todayDate);
       } else {
@@ -47,7 +59,9 @@ const LeadManagementScreen = ({ navigation, route }: any) => {
   );
 
   useEffect(() => {
+    console.log("🚀 ~ file: index.tsx:63 ~ response?.status:", response?.status)
     if (response?.status === 200) {
+      console.log("🚀 ~ file: index.tsx:65 ~ offSET:", offSET)
       if (offSET === 0) {
         setVisiitorList(response?.data);
       } else {
@@ -63,7 +77,7 @@ const LeadManagementScreen = ({ navigation, route }: any) => {
     dispatch(
       getAllLeadsList({
         offset: offset,
-        limit: 10,
+        limit: 3,
         start_date: data?.startdate ? data?.startdate : "",
         end_date: data?.enddate ? data?.enddate : "",
         search_by_visisor_name: data?.search_by_visisor_name

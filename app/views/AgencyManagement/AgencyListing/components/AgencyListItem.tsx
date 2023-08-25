@@ -5,6 +5,7 @@ import strings from "../../../../components/utilities/Localization";
 import {
   BLACK_COLOR,
   GREEN_COLOR,
+  Isios,
   PURPLE_COLOR,
   RED_COLOR,
   WHITE_COLOR,
@@ -179,7 +180,7 @@ const AgencyListItem = (props: any) => {
       </View>
       <View style={{alignItems: 'flex-start', marginBottom: 10, flexDirection: 'row'}}>
         <Button
-          width={160}
+          width={Isios ? 160 : 120}
           height={30}
           bgcolor={WHITE_COLOR}
           bordercolor={PURPLE_COLOR}
@@ -191,7 +192,7 @@ const AgencyListItem = (props: any) => {
           handleBtnPress={() => props.openAllocatePropertyModal(props.items?._id)}
         />
         {props?.items?.cp_type === 2 ? <Button
-          width={140}
+          width={Isios ? 140 : 110}
           height={30}
           bgcolor={WHITE_COLOR}
           bordercolor={PURPLE_COLOR}

@@ -208,7 +208,7 @@ const AddNewVisitorForm = (props: any) => {
                 valueshow={props?.formData?.mobile}
                 headingText={strings.mobileNo}
                 keyboardtype={"number-pad"}
-                maxLength={15}
+                maxLength={props?.formData?.country_code === "+91" ? 10 : 15}
                 rightImageVw={styles.tickImgVw}
                 rightImageSty={styles.tickImg}
                 rightImgSrc={
@@ -454,7 +454,7 @@ const AddNewVisitorForm = (props: any) => {
               }
               data={props?.allProperty}
               disable={
-                props.type == "edit" || props.type == "propertySelect"
+                props.type == "edit" || (props.type == "propertySelect" && props?.formData?.lead_source !== CONST_IDS?.cp_lead_source_id)
                   ? true
                   : false
               }

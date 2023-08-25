@@ -121,6 +121,12 @@ const AppointmentListView = (props: any) => {
                 { key: "second", title: strings.allAppointmenr },
             ],
         })
+        props.setFilterData({
+            start_date: "",
+            end_date: "",
+            customer_name: "",
+            status: "",
+          });
     }
 
     const handleResetFilter = () => {

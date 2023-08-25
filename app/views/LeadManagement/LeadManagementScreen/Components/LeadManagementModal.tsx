@@ -13,19 +13,18 @@ import InputCalender from "app/components/InputCalender";
 import moment from "moment";
 import { DATE_FORMAT, Isios } from "app/components/utilities/constant";
 import { normalizeSpacing } from "app/components/scaleFontSize";
-import Styles from '../../../../components/Modals/styles'
+import Styles from "../../../../components/Modals/styles";
 import { getAllProperty } from "app/Redux/Actions/propertyActions";
 import { VisitStatus, leadTypes } from "app/components/utilities/DemoData";
 
-
 const FilterModal = (props: any) => {
-  const dispatch: any = useDispatch()
+  const dispatch: any = useDispatch();
   const [allProperty, setAllProperty] = useState<any>([]);
-  
+
   useEffect(() => {
     // dispatch(getAllMaster({
-      //   type: 2
-      // }))
+    //   type: 2
+    // }))
     dispatch(
       getAllProperty({
         offset: 0,
@@ -33,28 +32,29 @@ const FilterModal = (props: any) => {
       })
     );
     getAllPropertyData();
-  }, [props?.Visible])
-  const { response = { data: [] } } = useSelector((state: any) => state.masterData) || {}
+  }, [props?.Visible]);
+  const { response = { data: [] } } =
+    useSelector((state: any) => state.masterData) || {};
   const propertyData = useSelector((state: any) => state.propertyData) || {};
 
   const datavisitingscore = [
     { label: "High to low", value: 2 },
-    { label: "Low to high", value: 1 }
+    { label: "Low to high", value: 1 },
   ];
   const dataconfiguration = response?.data?.length > 0 ? response?.data : [];
   const resetFilter = () => {
     props.setFilterData({
-      startdate: '',
-      enddate: '',
-      search_by_visisor_name: '',
-      search_configuration: '',
-      visit_score: '',
-      visit_status: ''
-    })
-    props.setIsVisible(false)
-    props.getVisitorsListApi(0, [])
-    props.setVisiitorList([])
-  }
+      startdate: "",
+      enddate: "",
+      search_by_visisor_name: "",
+      search_configuration: "",
+      visit_score: "",
+      visit_status: "",
+    });
+    props.setIsVisible(false);
+    props.getVisitorsListApi(0, []);
+    // props.setVisiitorList([]);
+  };
 
   const getAllPropertyData = () => {
     if (propertyData?.response?.status === 200) {
@@ -68,7 +68,7 @@ const FilterModal = (props: any) => {
       } else {
         setAllProperty([]);
       }
-    }else {
+    } else {
       setAllProperty([]);
     }
   };
@@ -91,10 +91,11 @@ const FilterModal = (props: any) => {
 
   return (
     <Modal isVisible={props.Visible}>
-      <ScrollView 
-      keyboardShouldPersistTaps={'handled'}
-      automaticallyAdjustKeyboardInsets={Isios ? true : false}
-        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
+      <ScrollView
+        keyboardShouldPersistTaps={"handled"}
+        automaticallyAdjustKeyboardInsets={Isios ? true : false}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      >
         <View style={styles.mainContainer}>
           <View style={styles.topContainer}>
             <Text style={styles.topTxt}>{strings.searchvisitor}</Text>
@@ -108,28 +109,28 @@ const FilterModal = (props: any) => {
           <View style={{ marginHorizontal: 10 }}>
             <View style={styles.inputWrap}>
               <InputCalender
-                mode={'date'}
+                mode={"date"}
                 leftIcon={images.event}
                 placeholderText={strings.startDate}
                 editable={false}
                 dateData={(data: any) => {
                   props.setFilterData({
                     ...props.filterData,
-                    startdate: moment(data).format(DATE_FORMAT)
-                  })
+                    startdate: moment(data).format(DATE_FORMAT),
+                  });
                 }}
                 setDateshow={(data: any) => {
                   props.setFilterData({
                     ...props.filterData,
-                    startdate: moment(data).format(DATE_FORMAT)
-                  })
+                    startdate: moment(data).format(DATE_FORMAT),
+                  });
                 }}
                 value={props.filterData.startdate}
               />
             </View>
             <View style={styles.inputWrap}>
               <InputCalender
-                mode={'date'}
+                mode={"date"}
                 leftIcon={images.event}
                 placeholderText={strings.endDate}
                 editable={false}
@@ -137,40 +138,40 @@ const FilterModal = (props: any) => {
                 dateData={(data: any) => {
                   props.setFilterData({
                     ...props.filterData,
-                    enddate: moment(data).format(DATE_FORMAT)
-                  })
+                    enddate: moment(data).format(DATE_FORMAT),
+                  });
                 }}
                 setDateshow={(data: any) => {
                   props.setFilterData({
                     ...props.filterData,
-                    enddate: moment(data).format(DATE_FORMAT)
-                  })
+                    enddate: moment(data).format(DATE_FORMAT),
+                  });
                 }}
               />
             </View>
             <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
               <InputField
                 headingText={"Search by Visitor Name"}
-                handleInputBtnPress={() => { }}
+                handleInputBtnPress={() => {}}
                 onChangeText={(data: any) => {
                   props.setFilterData({
                     ...props.filterData,
-                    search_by_visisor_name: data
-                  })
+                    search_by_visisor_name: data,
+                  });
                 }}
                 valueshow={props.filterData.search_by_visisor_name}
               />
             </View>
             <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
               <DropdownInput
-                headingText={'Search by Property'}
-                placeholder={'Select Property'}
+                headingText={"Search by Property"}
+                placeholder={"Select Property"}
                 data={allProperty}
-                inputWidth={'100%'}
+                inputWidth={"100%"}
                 paddingLeft={16}
                 maxHeight={300}
                 labelField="property_title"
-                valueField={'_id'}
+                valueField={"_id"}
                 value={props?.filterData?.property_id}
                 onChange={(item: any) => {
                   props.setFilterData({
@@ -178,13 +179,15 @@ const FilterModal = (props: any) => {
                     property_id: item.property_id,
                     property_type_title: item.property_type,
                     property_title: item.property_title,
-                  })
+                  });
                 }}
                 newRenderItem={(item: any) => {
                   return (
                     <>
                       <View style={Styles.item}>
-                        <Text style={Styles.textItem}>{item.property_title}</Text>
+                        <Text style={Styles.textItem}>
+                          {item.property_title}
+                        </Text>
                       </View>
                     </>
                   );
@@ -219,20 +222,20 @@ const FilterModal = (props: any) => {
             </View> */}
             <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
               <DropdownInput
-                headingText={'Search by status'}
-                placeholder={'Search by status'}
+                headingText={"Search by status"}
+                placeholder={"Search by status"}
                 data={VisitStatus}
-                inputWidth={'100%'}
+                inputWidth={"100%"}
                 paddingLeft={16}
                 maxHeight={300}
                 labelField="label"
-                valueField={'value'}
+                valueField={"value"}
                 value={props?.filterData?.lead_status}
                 onChange={(item: any) => {
                   props.setFilterData({
                     ...props.filterData,
                     lead_status: item.value,
-                  })
+                  });
                 }}
                 newRenderItem={(item: any) => {
                   return (
@@ -281,15 +284,15 @@ const FilterModal = (props: any) => {
                 onChange={(item: any) => {
                   props.setFilterData({
                     ...props.filterData,
-                    visit_score: item.value
-                  })
+                    visit_score: item.value,
+                  });
                 }}
                 renderItem={visitorRender}
               />
             </View>
           </View>
           <View style={{ marginVertical: 20 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={{ flexDirection: "row", justifyContent: "center" }}>
               <Button
                 width={135}
                 buttonText={strings.reset}
@@ -298,10 +301,11 @@ const FilterModal = (props: any) => {
               <Button
                 width={135}
                 handleBtnPress={() => {
-                  props.setVisiitorList([])
-                  props.setIsVisible(false)
-                  props.getVisitorsList(0, props.filterData)
-                }} buttonText={strings.apply}
+                  // props.setVisiitorList([]);
+                  props.setIsVisible(false);
+                  props.getVisitorsList(0, props.filterData);
+                }}
+                buttonText={strings.apply}
               />
             </View>
           </View>

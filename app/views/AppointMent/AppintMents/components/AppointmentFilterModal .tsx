@@ -16,20 +16,21 @@ import { Dropdown } from "react-native-element-dropdown";
 const AppointmentFilterModal = (props: any) => {
   const appointmentWith = [
     { type_name: strings.STSSiteLeadVisit, value: 1 },
-    { type_name: strings.STSClientVisit, value: 2 }]
+    { type_name: strings.STSClientVisit, value: 2 },
+  ];
   const statusData = [
-    { type_name: 'Upcoming', value: 1 },
-    { type_name: 'Revisit', value: 2 },
-    { type_name: 'Complete', value: 3 },
-    { type_name: 'Visit Cancelled', value: 4 },
-    { type_name: 'Reschedule', value: 5 },
-    { type_name: 'Not Fit for Sale', value: 6 },
-  ]
+    { type_name: "Not Visted", value: 1 },
+    { type_name: "Revisit", value: 2 },
+    { type_name: "Appointment Done", value: 3 },
+    { type_name: "Visit Cancelled", value: 4 },
+    { type_name: "Reschedule", value: 5 },
+    { type_name: "Not Fit for Sale", value: 6 },
+  ];
   const handleApply = () => {
-    props.setIsVisible(false)
-    props?.getAppointmentList(0, props.filterData)
-    props.setAppointmentList([])
-  }
+    props.setIsVisible(false);
+    props?.getAppointmentList(0, props.filterData);
+    // props.setAppointmentList([]);
+  };
   const renderItem = (item: any) => {
     return (
       <View style={styles.item}>
@@ -42,7 +43,8 @@ const AppointmentFilterModal = (props: any) => {
       <ScrollView
         keyboardShouldPersistTaps={"handled"}
         automaticallyAdjustKeyboardInsets={Isios ? true : false}
-        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}>
+        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+      >
         <View style={styles.mainContainer}>
           <View style={styles.topContainer}>
             <Text style={styles.topTxt}>{strings.searchappointment}</Text>
@@ -58,6 +60,7 @@ const AppointmentFilterModal = (props: any) => {
               <InputCalender
                 mode={"date"}
                 leftIcon={images.event}
+                headingText={strings.startDate}
                 placeholderText={strings.startDate}
                 editable={false}
                 dateData={(data: any) => {
@@ -79,6 +82,7 @@ const AppointmentFilterModal = (props: any) => {
               <InputCalender
                 mode={"date"}
                 leftIcon={images.event}
+                headingText={strings.endDate}
                 placeholderText={strings.endDate}
                 editable={false}
                 dateData={(data: any) => {
@@ -99,7 +103,8 @@ const AppointmentFilterModal = (props: any) => {
             <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
               <InputField
                 headingText={strings.searchBy + " " + strings.name}
-                handleInputBtnPress={() => { }}
+                placeholderText={strings.searchBy + " " + strings.name}
+                handleInputBtnPress={() => {}}
                 valueshow={props.filterData?.customer_name}
                 onChangeText={(data: any) => {
                   props.setFilterData({
@@ -114,17 +119,17 @@ const AppointmentFilterModal = (props: any) => {
                 headingText={strings.searchBy + " " + strings.status}
                 placeholder={strings.selectStatus}
                 data={
-                  props.type === 'appWith' ?
-                    [
-                      // 1= Pending, 2 = Confirm, 3= Compleat
-                      { type_name: strings.STSPending, value: 1 },
-                      { type_name: strings.STSConfirm, value: 2 },
-                      { type_name: strings.STSComplete, value: 3 },
-                      { type_name: strings.STSAppointMentCancl, value: 4 },
-                    ]
-                    :
-                    statusData}
-                inputWidth={'100%'}
+                  props.type === "appWith"
+                    ? [
+                        // 1= Pending, 2 = Confirm, 3= Compleat
+                        { type_name: strings.STSPending, value: 1 },
+                        { type_name: strings.STSConfirm, value: 2 },
+                        { type_name: strings.STSComplete, value: 3 },
+                        { type_name: strings.STSAppointMentCancl, value: 4 },
+                      ]
+                    : statusData
+                }
+                inputWidth={"100%"}
                 paddingLeft={16}
                 maxHeight={300}
                 labelField="type_name"
@@ -148,30 +153,34 @@ const AppointmentFilterModal = (props: any) => {
               />
             </View>
           </View>
-          <View style={{
-            flexDirection: 'row',
-            justifyContent: 'center', marginVertical: 30
-          }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              marginVertical: 30,
+            }}
+          >
             <Button
               handleBtnPress={() => {
-                props.setIsVisible(false)
-                props.onPressApply('reset')
+                props.setIsVisible(false);
+                props.onPressApply("reset");
                 props.setFilterData({
-                  start_date: '',
-                  end_date: '',
-                  customer_name: '',
-                })
+                  start_date: "",
+                  end_date: "",
+                  customer_name: "",
+                  status: "",
+                });
               }}
               buttonText={strings.reset}
               width={150}
             />
             <Button
               handleBtnPress={() => {
-                if (props.type === 'appWith') {
-                  props.onPressApply()
-                  props.setIsVisible(false)
+                if (props.type === "appWith") {
+                  props.onPressApply();
+                  props.setIsVisible(false);
                 } else {
-                  handleApply()
+                  handleApply();
                 }
               }}
               buttonText={strings.apply}

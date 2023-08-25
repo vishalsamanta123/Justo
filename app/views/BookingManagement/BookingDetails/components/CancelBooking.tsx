@@ -148,10 +148,11 @@ const CancelModal = (props: any) => {
             </View>
           </View>
           <View style={styles.borderView} />
-          <View style={{ marginHorizontal: 10 }}>
+          <View style={{ marginHorizontal: 10, marginVertical: 10 }}>
               <View style={styles.inputWrap}>
-                <Text style={styles.titleTxt}>{strings.selectReason} <RequiredStart /></Text>
                 <DropdownInput
+                  require
+                  headingText={strings.selectReason}
                   placeholder={strings.selectReason}
                   data={Array.isArray(masterDatas) ? masterDatas : []}
                   inputWidth={"100%"}
@@ -256,9 +257,10 @@ const CancelModal = (props: any) => {
               </View>
             ) : null}
             <View style={styles.inputWrap}>
-              <Text style={styles.titleTxt}>{"Comment"}</Text>
+              {/* <Text style={styles.titleTxt}>{"Comment"}</Text> */}
               <InputField
                 placeholderText={"Comment"}
+                headingText={"Comment"}
                 multiline={true}
                 handleInputBtnPress={() => { }}
                 inputheight={80}

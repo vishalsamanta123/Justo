@@ -10,6 +10,7 @@ export const getAllLeadsList = (params: any) => async (dispatch: any) => {
     dispatch({ type: START_LOADING })
     try {
         const res = await apiCall("post", apiEndPoints.VISITORLIST, params);
+        console.log("🚀 ~ file: LeadsActions.tsx:14 ~ res?.data:", res?.data)
         if (res?.data?.status == 200) {
             dispatch({
                 type: VISITOR_LIST,

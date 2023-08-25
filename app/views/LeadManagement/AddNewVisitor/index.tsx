@@ -136,6 +136,19 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       });
     }
   }, [detail, type]);
+  useEffect(() => {
+    if (
+      type == "propertySelect" &&
+      formData?.lead_source !== CONST_IDS?.cp_lead_source_id
+    ) {
+      setFormData({
+        ...formData,
+        property_id: data?._id,
+        property_type_title: data?.property_type_title,
+        property_title: data?.property_title,
+      });
+    }
+  }, [formData?.lead_source]);
 
   // useEffect(() => {
   //   if (companyData?.response?.status === 200) {
@@ -253,10 +266,10 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       if (response?.data?.length > 0) {
         dispatch({ type: STOP_LOADING });
         const list = sourcingPropertyList?.filter((o1: any) =>
-        response?.data?.some((o2: any) => o1?.property_id === o2?.property_id)
+          response?.data?.some((o2: any) => o1?.property_id === o2?.property_id)
         );
         setAllProperty(list);
-        if(list?.length === 0) {
+        if (list?.length === 0) {
           ErrorMessage({
             msg: "No property assigned to this CP",
             backgroundColor: RED_COLOR,
@@ -400,10 +413,18 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       ) {
         isError = false;
         errorMessage = "Please fill mobile number";
-      } else if (formData?.mobile && countryCode === "+91" && Regexs.mobilenumRegex.test(formData?.mobile) === false) {
+      } else if (
+        formData?.mobile &&
+        countryCode === "+91" &&
+        Regexs.mobilenumRegex.test(formData?.mobile) === false
+      ) {
         isError = false;
         errorMessage = "Please Enter valid mobile number";
-      } else if (formData?.mobile && countryCode !== "+91" && formData?.mobile?.length < 10) {
+      } else if (
+        formData?.mobile &&
+        countryCode !== "+91" &&
+        formData?.mobile?.length < 10
+      ) {
         isError = false;
         errorMessage = "Please Enter valid mobile number";
       } else if (

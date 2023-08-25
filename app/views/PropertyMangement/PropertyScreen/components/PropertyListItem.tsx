@@ -80,7 +80,7 @@ const PropertyListItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={[styles.nameTxt, {
             color: props.items.status ? GREEN_COLOR : RED_COLOR
-          }]}>{(props.items.status) ? 'Active' : 'Inactive'}</Text>
+          }]}>{(props.items.status) ? 'Active' : 'Deactive'}</Text>
         </View>
       </View>
       <View style={[styles.Txtview, { borderBottomWidth: 0 }]} >

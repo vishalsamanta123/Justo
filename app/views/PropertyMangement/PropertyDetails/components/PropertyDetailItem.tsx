@@ -59,7 +59,7 @@ const PropertyDetailItem = (props: any) => {
         </View>
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
-            {props.items.status ? "Active" : "Inactive"}
+            {props.items.status ? "Active" : "Deactive"}
           </Text>
         </View>
       </View>
