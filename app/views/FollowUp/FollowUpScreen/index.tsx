@@ -29,6 +29,17 @@ const FollowUpScreen = ({ navigation }: any) => {
       return () => { };
     }, [navigation, list])
   );
+  useFocusEffect(
+    React.useCallback(() => {
+      setFilterData({
+        startdate: "",
+        enddate: "",
+        followup_for: '',
+        lead_id: ''
+      })
+      return () => { };
+    }, [navigation])
+  );
   useEffect(() => {
     if (response?.status === 200) {
       if (response?.data?.length > 0) {

@@ -41,7 +41,11 @@ import usePermission from "app/components/utilities/UserPermissions";
 import CheckBox from "@react-native-community/checkbox";
 import VisitConfirmModal from "./VisitConfirmModal";
 import { CpType } from "app/components/utilities/DemoData";
-import { normalizeHeight, normalizeSpacing, normalizeWidth } from "app/components/scaleFontSize";
+import {
+  normalizeHeight,
+  normalizeSpacing,
+  normalizeWidth,
+} from "app/components/scaleFontSize";
 import { RequiredStart } from "app/components/utilities/GlobalFuncations";
 import JustForOkModal from "app/components/Modals/JustForOkModal";
 import CountryPickerModal from "app/components/Modals/CountryPickerModal";
@@ -360,7 +364,7 @@ const AddNewVisitorForm = (props: any) => {
             </>
           ) : null}
 
-<View
+          <View
             style={[
               styles.inputWrap,
               { flexDirection: "row", justifyContent: "space-between" },
@@ -384,16 +388,21 @@ const AddNewVisitorForm = (props: any) => {
                 editable={false}
                 countryCodeInput={true}
                 rightImgSrc={images.downErrow}
-                handleInputBtnPress={() => {props.setCountyPicker(true);}}
+                handleInputBtnPress={() => {
+                  props.setCountyPicker(true);
+                }}
                 rightImageVw={[
                   styles.tickImgVw,
                   { backgroundColor: WHITE_COLOR },
                 ]}
-                rightImageSty={[styles.tickImg, { 
-                  tintColor: BLACK_COLOR,
-                  height: normalizeHeight(15),
-                  width: normalizeWidth(15),
-                }]}
+                rightImageSty={[
+                  styles.tickImg,
+                  {
+                    tintColor: BLACK_COLOR,
+                    height: normalizeHeight(15),
+                    width: normalizeWidth(15),
+                  },
+                ]}
               />
             </TouchableOpacity>
             {/* </View> */}
@@ -459,7 +468,9 @@ const AddNewVisitorForm = (props: any) => {
               }
               data={props?.allProperty}
               disable={
-                props.type == "edit" || (props.type == "propertySelect" && props?.formData?.lead_source !== CONST_IDS?.cp_lead_source_id)
+                props.type == "edit" ||
+                (props.type == "propertySelect" &&
+                  props?.formData?.lead_source !== CONST_IDS?.cp_lead_source_id)
                   ? true
                   : false
               }

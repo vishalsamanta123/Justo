@@ -35,6 +35,7 @@ const SuportForumFilter = (props: any) => {
                 mode={'date'}
                 leftIcon={images.event}
                 placeholderText={strings.startDate}
+                headingText={strings.startDate}
                 editable={false}
                 // onChangeText={() => { }}
                 dateData={(data: any) => {
@@ -56,7 +57,8 @@ const SuportForumFilter = (props: any) => {
               <InputCalender
                 mode={'date'}
                 leftIcon={images.event}
-                placeholderText={" End Date"}
+                placeholderText={strings.endDate}
+                headingText={strings.endDate}
                 editable={false}
                 // onChangeText={() => { }}
                 dateData={(data: any) => {

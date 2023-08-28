@@ -26,6 +26,16 @@ const SupportForumScreen = ({ navigation }: any) => {
       return () => {};
     }, [navigation, list])
   );
+  useFocusEffect(
+    React.useCallback(() => {
+      setFilterData({
+        search_title: "",
+        start_date: "",
+        end_date: "",
+      })
+      return () => {};
+    }, [navigation])
+  );
   useEffect(() => {
     if (response?.status === 200) {
       if (offSET === 0) {

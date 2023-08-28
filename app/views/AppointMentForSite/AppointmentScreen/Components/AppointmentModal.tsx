@@ -21,7 +21,7 @@ const FilterModal = (props: any) => {
     { type_name: 'Site lead visit', value: 1 },
     { type_name: 'Client visit', value: 2 }]
   const statusData = [
-    { type_name: 'Upcoming', value: 1 },
+    { type_name: 'No Show', value: 1 },
     { type_name: 'Revisit', value: 2 },
     { type_name: 'Complete', value: 3 },
     { type_name: 'Visit Cancelled', value: 4 },
@@ -88,6 +88,7 @@ const FilterModal = (props: any) => {
               <InputCalender
                 mode={"date"}
                 leftIcon={images.event}
+                headingText={strings.startDate}
                 placeholderText={strings.startDate}
                 editable={false}
                 dateData={(data: any) => {
@@ -109,6 +110,7 @@ const FilterModal = (props: any) => {
               <InputCalender
                 mode={"date"} DATE_FORMAT
                 leftIcon={images.event}
+                headingText={strings.endDate}
                 placeholderText={strings.endDate}
                 editable={false}
                 dateData={(data: any) => {
@@ -129,6 +131,7 @@ const FilterModal = (props: any) => {
             <View style={[styles.inputWrap, { top: normalizeSpacing(8) }]}>
               <InputField
                 headingText={"Search by Name"}
+                placeholderText={"Search by Name"}
                 handleInputBtnPress={() => { }}
                 valueshow={props.filterData?.customer_name}
                 onChangeText={(data: any) => {
@@ -162,7 +165,7 @@ const FilterModal = (props: any) => {
                 maxHeight={300}
                 labelField="property_title"
                 valueField={'_id'}
-                value={props?.formData?.property_id}
+                value={props?.filterData?.property_id}
                 onChange={(item: any) => {
                   props.setFilterData({
                     ...props.filterData,

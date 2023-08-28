@@ -27,15 +27,14 @@ const AppointmentView = (props: any) => {
 
     useFocusEffect(
         React.useCallback(() => {
-            // if (props.type === 'today') {
-            //     props.getAppointmentList(0, props.todayAppointment)
-            // } else {
-            //     if (indexData.index === 0) {
-            //         props.getAppointmentList(0, props.todayAppointment)
-            //     } else {
-            //         props.getAppointmentList(0, {})
-            //     }
-            // }
+            props.setFilterData({
+                appointment_with: '',
+                status: '',
+                start_date: '',
+                end_date: '',
+                customer_name: '',
+                property_name: ''
+            })
             if (indexData?.index === 0) {
                 // Nested coditions for filter data with types
                 if (props.type === 'today') {

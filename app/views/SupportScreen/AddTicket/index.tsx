@@ -58,11 +58,11 @@ const AddTicketScreen = ({ navigation, route }: any) => {
             isError = false;
             errorMessage = "Issue is require. Please Choose the Issue"
         }
-        else if (addTicketData.title == undefined || addTicketData.title == '') {
+        else if (addTicketData.title == undefined || addTicketData.title?.trim() == '') {
             isError = false;
             errorMessage = "Title is require. Please Enter the Title"
         }
-        else if (addTicketData.remark == undefined || addTicketData.remark == '') {
+        else if (addTicketData.remark == undefined || addTicketData.remark?.trim() == '') {
             isError = false;
             errorMessage = "Description is require. Please Enter the Description"
         }
@@ -86,8 +86,8 @@ const AddTicketScreen = ({ navigation, route }: any) => {
                 formData.append("ticket_id", addTicketData?.ticket_id)
             }
             formData.append("reason", addTicketData?.reason)
-            formData.append("title", addTicketData?.title)
-            formData.append("remark", addTicketData?.remark)
+            formData.append("title", addTicketData?.title?.trim())
+            formData.append("remark", addTicketData?.remark?.trim())
             formData.append("image", addTicketData?.image)
             if (type === strings.edit) {
                 dispatch(EditTicket(formData))

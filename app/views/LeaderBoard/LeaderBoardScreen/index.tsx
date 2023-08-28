@@ -17,6 +17,9 @@ const LeaderBoardScreen = ({ navigation }: any) => {
     })
     useFocusEffect(
         React.useCallback(() => {
+            setFilterData({
+                property_name: '',
+            })
             getLeaderBoard(0, {})
             return () => { };
         }, [navigation])
