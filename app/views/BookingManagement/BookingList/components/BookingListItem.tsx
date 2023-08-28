@@ -4,6 +4,7 @@ import styles from "./styles";
 import strings from "../../../../components/utilities/Localization";
 import {
   BLACK_COLOR,
+  CONST_IDS,
   DATE_TIME_FORMAT,
   GREEN_COLOR,
   PURPLE_COLOR,
@@ -40,12 +41,16 @@ const BookingListItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props?.type === "register"
-              ? moment.utc(props.items.registration_date).format(DATE_TIME_FORMAT)
-              : moment.utc(
-                  props.items.booking_date
-                    ? props.items.booking_date
-                    : props.items.createdDate
-                ).format(DATE_TIME_FORMAT)}
+              ? moment
+                  .utc(props.items.registration_date)
+                  .format(DATE_TIME_FORMAT)
+              : moment
+                  .utc(
+                    props.items.booking_date
+                      ? props.items.booking_date
+                      : props.items.createdDate
+                  )
+                  .format(DATE_TIME_FORMAT)}
           </Text>
         </View>
       </View>
@@ -238,6 +243,42 @@ const BookingListItem = (props: any) => {
             </Text>
           </View>
         </View>
+        <View style={styles.Txtview}>
+          <View style={styles.projectContainer}>
+            <Text style={styles.projectTxt}>Lead Source</Text>
+          </View>
+          <View style={styles.nameContainer}>
+            <Text style={styles.nameTxt}>
+              {props.items.lead_source_name
+                ? props.items.lead_source_name
+                : strings.notfount}
+            </Text>
+          </View>
+        </View>
+        {props.items.lead_source === CONST_IDS.cp_lead_source_id ? <>
+          <View style={styles.Txtview}>
+            <View style={styles.projectContainer}>
+              <Text style={styles.projectTxt}>CP Name :</Text>
+            </View>
+            <View style={styles.nameContainer}>
+              <Text style={styles.nameTxt}>
+                {props.items.cp_name ? props.items.cp_name : strings.notfount}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.Txtview}>
+            <View style={styles.projectContainer}>
+              <Text style={styles.projectTxt}>CP Employee Name </Text>
+            </View>
+            <View style={styles.nameContainer}>
+              <Text style={styles.nameTxt}>
+                {props.items.cp_emp_name && props.items.cp_emp_name.length > 0
+                  ?  props.items.cp_emp_name
+                  : strings.notfount}
+              </Text>
+            </View>
+          </View>
+        </> : null}
       </>
 
       <View style={styles.buttonContainer}>

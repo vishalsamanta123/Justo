@@ -23,6 +23,18 @@ const AppointmentScreenCPSM = ({ navigation }: any) => {
     customer_name: "",
     status: "",
   });
+  var tabType;
+  useFocusEffect(
+    React.useCallback(() => {
+      setFilterData({
+        start_date: "",
+        end_date: "",
+        customer_name: "",
+        status: "",
+      });
+      return () => {};
+    }, [navigation, tabType])
+  );
   useEffect(() => {
     if (response?.status === 200) {
       if (response?.data?.length > 0) {
@@ -42,10 +54,11 @@ const AppointmentScreenCPSM = ({ navigation }: any) => {
     }
   }, [getLoginType]);
   const getAppointmentList = (type: any, data: any) => {
+    tabType = type
     dispatch(
       getUserAppointmentList({
         appoiment: type ? type : 1,
-        start_date: data?.start_date ? data?.start_date : "" ,
+        start_date: data?.start_date ? data?.start_date : "",
         end_date: data?.end_date ? data?.end_date : "",
         customer_name: data?.customer_name ? data?.customer_name : "",
         status: data?.status ? data?.status : "",

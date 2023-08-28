@@ -104,6 +104,12 @@ const AppointmentView = (props: any) => {
 
   useFocusEffect(
     React.useCallback(() => {
+      props.setFilterData({
+        start_date: "",
+        end_date: "",
+        customer_name: "",
+        status: "",
+      });
       if (indexData?.index == 1) {
         props.getAppointmentList(roleId === ROLE_IDS.sourcingtl_id ? 3 : 1, {});
       } else {

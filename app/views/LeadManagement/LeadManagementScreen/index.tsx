@@ -21,19 +21,19 @@ const LeadManagementScreen = ({ navigation, route }: any) => {
     search_by_visisor_name: "",
     search_configuration: "",
     visit_score: "",
-    property_id: '',
-    property_type_title: '',
-    property_title: '',
+    property_id: "",
+    property_type_title: "",
+    property_title: "",
     visit_status: strings.warm,
-    lead_status: ''
+    lead_status: "",
   });
   const [visitorList, setVisiitorList] = useState<any>([]);
   const [offSET, setOffset] = useState(0);
 
   const todayDate = {
-    startdate: moment(new Date).format(DATE_FORMAT),
-    enddate: moment(new Date).format(DATE_FORMAT)
-  }
+    startdate: moment(new Date()).format(DATE_FORMAT),
+    enddate: moment(new Date()).format(DATE_FORMAT),
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -43,25 +43,28 @@ const LeadManagementScreen = ({ navigation, route }: any) => {
         search_by_visisor_name: "",
         search_configuration: "",
         visit_score: "",
-        property_id: '',
-        property_type_title: '',
-        property_title: '',
+        property_id: "",
+        property_type_title: "",
+        property_title: "",
         visit_status: strings.warm,
-        lead_status: ''
-      })
-      if (route?.params === 'today') {
+        lead_status: "",
+      });
+      if (route?.params === "today") {
         getVisitorsList(0, todayDate);
       } else {
         getVisitorsList(0, {});
       }
-      return () => { };
+      return () => {};
     }, [navigation, route])
   );
 
   useEffect(() => {
-    console.log("🚀 ~ file: index.tsx:63 ~ response?.status:", response?.status)
+    console.log(
+      "🚀 ~ file: index.tsx:63 ~ response?.status:",
+      response?.status
+    );
     if (response?.status === 200) {
-      console.log("🚀 ~ file: index.tsx:65 ~ offSET:", offSET)
+      console.log("🚀 ~ file: index.tsx:65 ~ offSET:", offSET);
       if (offSET === 0) {
         setVisiitorList(response?.data);
       } else {

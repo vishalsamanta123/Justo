@@ -51,7 +51,7 @@ const FollowUpAddView = (props: any) => {
               onFocus={() => props.handleMasterDatas(5)}
               labelField="title"
               valueField={"_id"}
-              value={props?.formData?.property_id}
+              value={props?.formData?.followup_status}
               onChange={(item: any) => {
                 props.setFormData({
                   ...props.formData,

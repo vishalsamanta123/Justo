@@ -59,6 +59,19 @@ const AgencyListing = ({ navigation, route }: any) => {
       return () => {};
     }, [navigation, statusUpdate, type])
   );
+  useFocusEffect(
+    React.useCallback(() => {
+      setFilterData({
+        startdate: "",
+        enddate: "",
+        search_by_name: "",
+        search_by_location: "",
+        status: "",
+        mobile_no: "",
+        rera_no: "",
+      })
+    }, [navigation])
+  );
 
   useEffect(() => {
     if (SmCpList?.response?.status === 200) {

@@ -41,7 +41,7 @@ import usePermission from "app/components/utilities/UserPermissions";
 import CheckBox from "@react-native-community/checkbox";
 import VisitConfirmModal from "./VisitConfirmModal";
 import { CpType } from "app/components/utilities/DemoData";
-import { normalizeSpacing } from "app/components/scaleFontSize";
+import { normalizeHeight, normalizeSpacing, normalizeWidth } from "app/components/scaleFontSize";
 import { RequiredStart } from "app/components/utilities/GlobalFuncations";
 import JustForOkModal from "app/components/Modals/JustForOkModal";
 import CountryPickerModal from "app/components/Modals/CountryPickerModal";
@@ -148,89 +148,6 @@ const AddNewVisitorForm = (props: any) => {
               valueshow={props?.formData?.first_name}
               headingText={"Visitor Name"}
             />
-          </View>
-          <View
-            style={[
-              styles.inputWrap,
-              { flexDirection: "row", justifyContent: "space-between" },
-            ]}
-          >
-            {/* <View style={{ width: "35%" }}> */}
-            <TouchableOpacity
-              accessible={false}
-              style={{ width: "35%" }}
-              onPress={() => {
-                props.setCountyPicker(true);
-              }}
-              activeOpacity={1.0}
-            >
-              <InputField
-                require={true}
-                disableSpecialCharacters={true}
-                placeholderText={"Country"}
-                valueshow={props?.formData?.country_code}
-                headingText={"Country"}
-                editable={false}
-                countryCodeInput={true}
-                rightImgSrc={images.downErrow}
-                handleInputBtnPress={() => {props.setCountyPicker(true);}}
-                rightImageVw={[
-                  styles.tickImgVw,
-                  { backgroundColor: WHITE_COLOR },
-                ]}
-                rightImageSty={[styles.tickImg, { tintColor: BLACK_COLOR }]}
-              />
-            </TouchableOpacity>
-            {/* </View> */}
-            <View style={{ width: "60%" }}>
-              <InputField
-                require={true}
-                disableSpecialCharacters={true}
-                placeholderText={strings.mobileNo}
-                handleInputBtnPress={() => {}}
-                onChangeText={(data: any) => {
-                  props.setFormData({
-                    ...props.formData,
-                    mobile: data,
-                  });
-                  // if (Regexs.mobilenumRegex.test(data)) {
-                  //   props.setEmailMobValidation({
-                  //     ...props.emailMobvalidation,
-                  //     mobile: null,
-                  //   });
-                  // } else {
-                  props.setEmailMobValidation({
-                    ...props.emailMobvalidation,
-                    mobile: null,
-                  });
-                  // }
-                }}
-                valueshow={props?.formData?.mobile}
-                headingText={strings.mobileNo}
-                keyboardtype={"number-pad"}
-                maxLength={props?.formData?.country_code === "+91" ? 10 : 15}
-                rightImageVw={styles.tickImgVw}
-                rightImageSty={styles.tickImg}
-                rightImgSrc={
-                  props?.emailMobvalidation?.mobile === "mobile"
-                    ? images.check
-                    : null
-                }
-                onFocus={() => {
-                  if (props?.formData?.mobile !== props?.formData?.mobile) {
-                    props.setEmailMobValidation({
-                      ...props.emailMobvalidation,
-                      mobile: null,
-                    });
-                  }
-                }}
-                onBlur={(val: any) => {
-                  // if (Regexs.mobilenumRegex.test(props?.formData?.mobile)) {
-                  //   props.handleCheckEmailMobile();
-                  // }
-                }}
-              />
-            </View>
           </View>
 
           <View style={[styles.inputWrap]}>
@@ -442,6 +359,94 @@ const AddNewVisitorForm = (props: any) => {
               ) : null}
             </>
           ) : null}
+
+<View
+            style={[
+              styles.inputWrap,
+              { flexDirection: "row", justifyContent: "space-between" },
+            ]}
+          >
+            {/* <View style={{ width: "35%" }}> */}
+            <TouchableOpacity
+              accessible={false}
+              style={{ width: "35%" }}
+              onPress={() => {
+                props.setCountyPicker(true);
+              }}
+              activeOpacity={1.0}
+            >
+              <InputField
+                require={true}
+                disableSpecialCharacters={true}
+                placeholderText={"Country"}
+                valueshow={props?.formData?.country_code}
+                headingText={"Country"}
+                editable={false}
+                countryCodeInput={true}
+                rightImgSrc={images.downErrow}
+                handleInputBtnPress={() => {props.setCountyPicker(true);}}
+                rightImageVw={[
+                  styles.tickImgVw,
+                  { backgroundColor: WHITE_COLOR },
+                ]}
+                rightImageSty={[styles.tickImg, { 
+                  tintColor: BLACK_COLOR,
+                  height: normalizeHeight(15),
+                  width: normalizeWidth(15),
+                }]}
+              />
+            </TouchableOpacity>
+            {/* </View> */}
+            <View style={{ width: "60%" }}>
+              <InputField
+                require={true}
+                disableSpecialCharacters={true}
+                placeholderText={strings.mobileNo}
+                handleInputBtnPress={() => {}}
+                onChangeText={(data: any) => {
+                  props.setFormData({
+                    ...props.formData,
+                    mobile: data,
+                  });
+                  // if (Regexs.mobilenumRegex.test(data)) {
+                  //   props.setEmailMobValidation({
+                  //     ...props.emailMobvalidation,
+                  //     mobile: null,
+                  //   });
+                  // } else {
+                  props.setEmailMobValidation({
+                    ...props.emailMobvalidation,
+                    mobile: null,
+                  });
+                  // }
+                }}
+                valueshow={props?.formData?.mobile}
+                headingText={strings.mobileNo}
+                keyboardtype={"number-pad"}
+                maxLength={props?.formData?.country_code === "+91" ? 10 : 15}
+                rightImageVw={styles.tickImgVw}
+                rightImageSty={styles.tickImg}
+                rightImgSrc={
+                  props?.emailMobvalidation?.mobile === "mobile"
+                    ? images.check
+                    : null
+                }
+                onFocus={() => {
+                  if (props?.formData?.mobile !== props?.formData?.mobile) {
+                    props.setEmailMobValidation({
+                      ...props.emailMobvalidation,
+                      mobile: null,
+                    });
+                  }
+                }}
+                onBlur={(val: any) => {
+                  // if (Regexs.mobilenumRegex.test(props?.formData?.mobile)) {
+                  //   props.handleCheckEmailMobile();
+                  // }
+                }}
+              />
+            </View>
+          </View>
 
           <View style={[styles.inputWrap]}>
             <DropdownInput

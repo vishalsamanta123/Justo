@@ -120,6 +120,7 @@ const FilterModal = (props: any) => {
               <InputField
                 disableSpecialCharacters={true}
                 headingText={strings.searchBy + " " + strings.name}
+                placeholderText={strings.searchBy + " " + strings.name}
                 onChangeText={(data: any) => {
                   props.setFilterData({
                     ...props.filterData,
@@ -166,6 +167,7 @@ const FilterModal = (props: any) => {
               <InputField
                 disableSpecialCharacters={true}
                 headingText={strings.searchBy + " " + strings.RERA + " "+ strings.number}
+                placeholderText={strings.searchBy + " " + strings.RERA + " "+ strings.number}
                 onChangeText={(data: any) => {
                   props.setFilterData({
                     ...props.filterData,
@@ -176,7 +178,7 @@ const FilterModal = (props: any) => {
                 handleInputBtnPress={() => { }}
               />
             </View>
-            <View style={styles.inputWrap}>
+            <View style={[styles.inputWrap , { top: normalizeSpacing(10) }]}>
               <DropdownInput
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}
@@ -187,6 +189,8 @@ const FilterModal = (props: any) => {
                 labelField="label"
                 valueField="value"
                 placeholder={strings.selectStatus}
+                headingText={"Search by status"}
+                paddingLeft={16}
                 value={props?.filterData?.status}
                 onChange={(item: any) => {
                   props.setFilterData({

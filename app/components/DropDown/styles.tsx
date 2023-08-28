@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     backgroundColor: WHITE_COLOR,
-    elevation: 5,
+    // elevation: 5,
     borderRadius: normalize(5),
     paddingHorizontal: 0,
     paddingLeft: normalizeSpacing(5)

@@ -111,6 +111,7 @@ const FilterModal = (props: any) => {
               <InputCalender
                 mode={"date"}
                 leftIcon={images.event}
+                headingText={strings.startDate}
                 placeholderText={strings.startDate}
                 editable={false}
                 dateData={(data: any) => {
@@ -132,6 +133,7 @@ const FilterModal = (props: any) => {
               <InputCalender
                 mode={"date"}
                 leftIcon={images.event}
+                headingText={strings.endDate}
                 placeholderText={strings.endDate}
                 editable={false}
                 value={props.filterData.enddate}
@@ -152,6 +154,7 @@ const FilterModal = (props: any) => {
             <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
               <InputField
                 headingText={"Search by Visitor Name"}
+                placeholderText={"Search by Visitor Name"}
                 handleInputBtnPress={() => {}}
                 onChangeText={(data: any) => {
                   props.setFilterData({
@@ -268,7 +271,7 @@ const FilterModal = (props: any) => {
                 newRenderItem={configRender}
               />
             </View> */}
-            <View style={styles.inputWrap}>
+            <View style={[styles.inputWrap, { top: normalizeSpacing(10) }]}>
               <DropdownInput
                 style={styles.dropdown}
                 placeholderStyle={styles.placeholderStyle}
@@ -280,6 +283,7 @@ const FilterModal = (props: any) => {
                 labelField="label"
                 valueField="value"
                 placeholder={strings.byvisitorscore}
+                headingText={strings.byvisitorscore}
                 value={props.filterData.visit_score}
                 onChange={(item: any) => {
                   props.setFilterData({
