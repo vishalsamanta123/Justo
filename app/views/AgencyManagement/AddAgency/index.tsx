@@ -442,7 +442,7 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           ) {
             isError = false;
             errorMessage = strings.NameCorrectlyVal;
-          }else if (
+          } else if (
             agencyData.primary_mobile == undefined ||
             agencyData.primary_mobile == ""
           ) {
@@ -496,11 +496,19 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
       } else if (formType === 1) {
         if (agencyData?.cp_type === 1) {
           if (
-            agencyData.gst !== "" &&
+            agencyData.gstApplicable == 1 &&
             Regexs.gstRegex.test(agencyData.gst) === false
           ) {
             isError = false;
             errorMessage = strings.gstReqVal;
+          } else if (
+            agencyData.gstApplicable == 2 &&
+            (agencyData?.propidership_declaration_letter == null ||
+              agencyData?.propidership_declaration_letter == undefined ||
+              agencyData?.propidership_declaration_letter == "")
+          ) {
+            isError = false;
+            errorMessage = strings.DeclrLttrImgReqVal;
           } else if (selectedProperty?.length === 0) {
             isError = false;
             errorMessage = strings.propertyReqVal;
@@ -519,15 +527,6 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           //   isError = false;
           //   errorMessage = strings.reraCertImgReqVal;
           // }
-          //  else
-          // if (
-          //   agencyData?.propidership_declaration_letter == null ||
-          //   agencyData?.propidership_declaration_letter == undefined ||
-          //   agencyData?.propidership_declaration_letter == ''
-          // ) {
-          //   isError = false;
-          //   errorMessage = strings.propDeclrLttrImgReqVal;
-          // } else
           //  if (agencyData.norera_register === null) {
           //   isError = false;
           //   errorMessage = strings.noReraRegReqVal;

@@ -148,6 +148,7 @@ const strings = new LocalizedStrings({
     reraCertImgReqVal: 'RERA Certificate is require. Please Choose RERA Certificate',
     noReraRegReqVal: 'If you have not RERA certificate. Please click on no registerd for RERA',
     propDeclrLttrImgReqVal: 'Proprietorship Declaration Letter is require. Please Choose Proprietorship Declaration Letter',
+    DeclrLttrImgReqVal: 'Declaration Letter is require. Please Choose Declaration Letter',
     cancelChqImgReqVal: 'Cancel Cheaque is require. Please Choose Cancel Cheaque',
     bankNameReqVal: 'Bank Name is require. Please enter Bank Name',
     branchNameReqVal: 'Branch Name is require. Please enter Branch Name',

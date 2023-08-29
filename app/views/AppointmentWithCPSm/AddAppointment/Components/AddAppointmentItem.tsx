@@ -133,6 +133,7 @@ const AddAppointmentItem = (props: any) => {
         <View style={styles.inputWrap}>
           <DropdownInput
             require={true}
+            disable={props.type === strings.edit}
             headingText={strings.appointmentWith}
             placeholder={
               props?.addAppointmentForm?.appointment_with

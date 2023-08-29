@@ -266,7 +266,7 @@ const BookingDetailsItem = (props: any) => {
           </Text>
         </View>
       </View>
-      {item?.leads.lead_source === CONST_IDS.cp_lead_source_id ? (
+      {item?.leads?.lead_source === CONST_IDS.cp_lead_source_id ? (
         <>
           <View style={styles.Txtview}>
             <View style={styles.projectContainer}>
@@ -290,7 +290,7 @@ const BookingDetailsItem = (props: any) => {
             </View>
             <View style={styles.nameContainer}>
               <Text style={styles.nameTxt}>
-                {item?.cp_emp_name && item?.cp_emp_name.length > 0
+                {item?.cp_emp_name && item?.cp_emp_name?.length > 0
                   ? item?.cp_emp_name
                   : strings.notfount}
               </Text>

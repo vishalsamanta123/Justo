@@ -12,16 +12,19 @@ import {
   RED_COLOR,
   BLACK_COLOR,
   DATE_FORMAT,
+  CONST_IDS,
 } from "../../../../components/utilities/constant";
 import strings from "../../../../components/utilities/Localization";
 import moment from "moment";
 import usePermission from "app/components/utilities/UserPermissions";
+import { useSelector } from "react-redux";
 
 const FollowUpItem = (props: any) => {
   const { edit, view } = usePermission({
-    edit: 'edit_follow',
-    view: 'view_follow'
-  })
+    edit: "edit_follow",
+    view: "view_follow",
+  });
+  const { userData = {} } = useSelector((state: any) => state.userData);
   return (
     <View style={styles.IteamView}>
       <View style={styles.Txtview}>
@@ -43,7 +46,7 @@ const FollowUpItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props.items.visit_score === "" ||
-              props.items.visit_score === undefined
+            props.items.visit_score === undefined
               ? strings.notfount
               : props.items.visit_score}
           </Text>
@@ -56,25 +59,30 @@ const FollowUpItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props.items.followup_status === "" ||
-              props.items.followup_status === undefined
+            props.items.followup_status === undefined
               ? strings.notfount
               : props.items.followup_status}
           </Text>
         </View>
       </View>
-      <View style={styles.Txtview}>
-        <View style={styles.projectContainer}>
-          <Text style={styles.projectTxt}>Follow-Up Date :</Text>
+      {props?.items?.next_followup_date && (
+        <View style={styles.Txtview}>
+          <View style={styles.projectContainer}>
+            <Text style={styles.projectTxt}>Follow-Up Date :</Text>
+          </View>
+          <View style={styles.nameContainer}>
+            <Text style={styles.nameTxt}>
+              {props.items.next_followup_date === "" ||
+              props.items.next_followup_date === undefined ||
+              props.items.next_followup_date === null
+                ? strings.notfount
+                : `${moment(props.items.next_followup_date).format(
+                    DATE_FORMAT
+                  )}, ${props.items.followup_time}`}
+            </Text>
+          </View>
         </View>
-        <View style={styles.nameContainer}>
-          <Text style={styles.nameTxt}>
-            {props.items.next_followup_date === "" ||
-              props.items.next_followup_date === undefined || props.items.next_followup_date === null
-              ? strings.notfount
-              : `${moment(props.items.next_followup_date).format(DATE_FORMAT)}, ${props.items.followup_time}`}
-          </Text>
-        </View>
-      </View>
+      )}
       <View style={styles.Txtview}>
         <View style={styles.projectContainer}>
           <Text style={styles.projectTxt}>Customer Name :</Text>
@@ -82,7 +90,7 @@ const FollowUpItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props.items.customer_first_name === "" ||
-              props.items.customer_first_name === undefined
+            props.items.customer_first_name === undefined
               ? strings.notfount
               : props.items.customer_first_name}
           </Text>
@@ -95,8 +103,8 @@ const FollowUpItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props.items.configuration === "" ||
-              props.items.configuration === undefined ||
-              props.items.configuration === null
+            props.items.configuration === undefined ||
+            props.items.configuration === null
               ? strings.notfount
               : props.items.configuration}
           </Text>
@@ -124,12 +132,12 @@ const FollowUpItem = (props: any) => {
             {props.items.followup_for == 1
               ? "Lead"
               : props.items.followup_for == 2
-                ? "Site visit"
-                : props.items.followup_for == 3
-                  ? "Booking"
-                  : props.items.followup_for === 4
-                    ? "regstration"
-                    : strings.notfount}
+              ? "Site visit"
+              : props.items.followup_for == 3
+              ? "Booking"
+              : props.items.followup_for === 4
+              ? "regstration"
+              : strings.notfount}
           </Text>
         </View>
       </View>
@@ -154,23 +162,29 @@ const FollowUpItem = (props: any) => {
         <View style={styles.nameContainer}>
           <Text style={styles.nameTxt}>
             {props.items.createdDate === "" ||
-              props.items.createdDate === undefined
+            props.items.createdDate === undefined
               ? strings.notfount
               : moment(props.items.createdDate).format(DATE_TIME_FORMAT)}
           </Text>
         </View>
       </View>
-
+      {/* && props.items.create_by ===  */}
       <View style={styles.buttonContainer}>
-        {edit && props.items.followup_for !== 4 &&
-          (<TouchableOpacity
-            style={[styles.button, { borderColor: PURPLE_COLOR }]}
-            onPress={() => props.onPressEdit(props.items)}
-          >
-            <Text style={[styles.buttonTxt, { color: PURPLE_COLOR }]}>
-              {strings.edit}
-            </Text>
-          </TouchableOpacity>)}
+        {edit &&
+          props.items.followup_for !== 4 &&
+          (props.items?.check_status?.[0] ||
+            props.items?.followup_status_id?.[0] !==
+              CONST_IDS.followup_status_site_visit_id) &&
+          props.items.create_by === userData?.data?._id && (
+            <TouchableOpacity
+              style={[styles.button, { borderColor: PURPLE_COLOR }]}
+              onPress={() => props.onPressEdit(props.items)}
+            >
+              <Text style={[styles.buttonTxt, { color: PURPLE_COLOR }]}>
+                {strings.edit}
+              </Text>
+            </TouchableOpacity>
+          )}
         <TouchableOpacity
           style={[styles.button, { borderColor: PRIMARY_THEME_COLOR }]}
           onPress={() => props.onPressAllFollowUp(props.items)}
@@ -179,13 +193,14 @@ const FollowUpItem = (props: any) => {
             {strings.allfollowup}
           </Text>
         </TouchableOpacity>
-        {view &&
-          (<TouchableOpacity
+        {view && (
+          <TouchableOpacity
             style={styles.Viewbutton}
             onPress={() => props.onPressView(props.items)}
           >
             <Image source={images.forwardArrow} style={styles.arrow} />
-          </TouchableOpacity>)}
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

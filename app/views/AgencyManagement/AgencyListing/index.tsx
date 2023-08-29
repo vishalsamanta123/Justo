@@ -89,10 +89,10 @@ const AgencyListing = ({ navigation, route }: any) => {
         user_id: userData?.data?.user_id,
         startdate: filterData.startdate,
         enddate: filterData.enddate,
-        search_by_name: filterData.search_by_name,
+        search_by_name: filterData?.search_by_name?.trim(),
         mobile_no: +filterData.mobile_no,
-        rera_no: filterData.rera_no,
-        search_by_location: filterData.search_by_location,
+        rera_no: filterData?.rera_no?.trim(),
+        search_by_location: filterData?.search_by_location?.trim(),
         status:
           filterData?.status || filterData?.status === false
             ? filterData?.status
