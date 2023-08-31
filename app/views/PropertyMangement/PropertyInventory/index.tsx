@@ -8,6 +8,7 @@ import { JW_LOGIN, JW_PASSWORD } from "app/components/utilities/constant";
 import InventoryModal from "app/components/Modals/InventoryModal";
 import { useDispatch } from "react-redux";
 import { START_LOADING, STOP_LOADING } from "app/Redux/types";
+import { useFocusEffect } from "@react-navigation/native";
 
 const PropertyInventory = ({ navigation, route }: any) => {
   const { propName } = route.params;
@@ -33,7 +34,8 @@ const PropertyInventory = ({ navigation, route }: any) => {
         password: JW_PASSWORD,
         // project : "MP/0001",
         project: propName,
-        type: type === 'clear' ? "" : formData.flatType ? formData.flatType : "",
+        type:
+          type === "clear" ? "" : formData.flatType ? formData.flatType : "",
       },
     };
     dispatch({ type: START_LOADING });
@@ -55,7 +57,7 @@ const PropertyInventory = ({ navigation, route }: any) => {
         const tempFloors = new Set(temp.map((el: any) => el["Floor"]));
         setFloors(Array.from(tempFloors));
 
-        if (type !== "clear" &&  formData.floor) {
+        if (type !== "clear" && formData.floor) {
           filteredData = temp.filter(
             (item: any) => item["Floor"] == formData.floor
           );
@@ -71,9 +73,16 @@ const PropertyInventory = ({ navigation, route }: any) => {
       dispatch({ type: STOP_LOADING });
     }
   };
-  useEffect(() => {
-    handleGetDropdownData("");
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      setFormData({
+        floor: "",
+        flatType: "",
+      })
+      handleGetDropdownData("");
+      return () => {};
+    }, [navigation])
+  );
 
   const setcofigdata = (item: any) => {
     setFormData({

@@ -16,6 +16,7 @@ import PicturePickerModal from "../../../../components/Modals/PicturePicker";
 import { normalize } from "../../../../components/scaleFontSize";
 import Styles from "app/components/Modals/styles";
 import {
+  CONST_IDS,
   Isios,
   PRIMARY_THEME_COLOR,
 } from "../../../../components/utilities/constant";
@@ -26,6 +27,11 @@ import EmptyListScreen from "app/components/CommonScreen/EmptyListScreen";
 import JustForOkModal from "app/components/Modals/JustForOkModal";
 
 const BookingView = (props: any) => {
+  console.log(
+    "🚀 ~ file: Booking.tsx:417 ~ props?.getBookingData:",
+    props?.getBookingData
+  );
+
   return (
     <View style={styles.mainContainer}>
       <Header
@@ -122,7 +128,7 @@ const BookingView = (props: any) => {
                 />
               </View> */}
           <View style={styles.straightVw}>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: "row" }}>
               <Text
                 style={[
                   styles.titleTxt,
@@ -404,7 +410,6 @@ const BookingView = (props: any) => {
           </View>
           <View style={styles.inputWrap}>
             <InputField
-              require={true}
               headingText={"CRM Person Email"}
               placeholderText={"CRM Person Email"}
               onChangeText={(data: any) => {
@@ -417,6 +422,55 @@ const BookingView = (props: any) => {
               editable={false}
             />
           </View>
+          <View style={styles.inputWrap}>
+            <InputField
+              headingText={"Lead Source"}
+              placeholderText={"Lead Source"}
+              onChangeText={(data: any) => {
+                props.setBookingData({
+                  ...props.bookingData,
+                  description: data,
+                });
+              }}
+              valueshow={props?.getBookingData?.lead_source?.[0]}
+              editable={false}
+            />
+          </View>
+          {props?.getBookingData?.lead_source_id?.[0] ===
+            CONST_IDS.cp_lead_source_id && (
+            <>
+              <View style={styles.inputWrap}>
+                <InputField
+                  headingText={"CP Name"}
+                  placeholderText={"CP Name"}
+                  onChangeText={(data: any) => {
+                    props.setBookingData({
+                      ...props.bookingData,
+                      description: data,
+                    });
+                  }}
+                  valueshow={props?.getBookingData.cp_name?.[0]}
+                  editable={false}
+                />
+              </View>
+              {props?.getBookingData.cp_emp_name?.length > 0 && (
+                <View style={styles.inputWrap}>
+                  <InputField
+                    headingText={"CP Employee name"}
+                    placeholderText={"CP Employee name"}
+                    onChangeText={(data: any) => {
+                      props.setBookingData({
+                        ...props.bookingData,
+                        description: data,
+                      });
+                    }}
+                    valueshow={props?.getBookingData.cp_emp_name?.[0]}
+                    editable={false}
+                  />
+                </View>
+              )}
+            </>
+          )}
           <View style={{ marginVertical: normalize(30) }}>
             <Button
               buttonText={strings.bookNow}

@@ -31,9 +31,8 @@ const InventoryModal = (props: any) => {
       })
     );
   };
-  // console.log("🚀 ~ file: InventoryModal.tsx:93 ~ props.floors:", props.floors)
-  // console.log("🚀 ~ file: InventoryModal.tsx:71 ~ props.formData?.flatType:", props.formData?.flatType)
-
+  const newArrayTypes = props.flatTypes.map((item: any, index: any) => ({ type: item, key: index }));
+  const newArrayFloors = props.floors.map((item: any, index: any) => ({ type: item, key: index }));
   return (
     <Modal isVisible={props.Visible}>
       <ScrollView
@@ -61,23 +60,24 @@ const InventoryModal = (props: any) => {
                   ? props.formData?.flatType
                   : strings.configurations
               }
-              data={Array.isArray(props.flatTypes) ? props.flatTypes : []}
+              // data={Array.isArray(props.flatTypes) ? props.flatTypes : []}
+              data={Array.isArray(newArrayTypes) ? newArrayTypes : []}
               inputWidth={"100%"}
               // onFocus={() => handleGetConfigurations()}
               paddingLeft={16}
               maxHeight={300}
               labelField={"type"}
-              valueField={"type"}
+              valueField={"key"}
               value={props.formData?.flatType}
               onChange={(item: any) => {
-                setcofigdata(item);
+                setcofigdata(item?.type);
               }}
               newRenderItem={(item: any) => {
                 return (
                   item.type !== "" && (
                     <>
                       <View style={styles.item}>
-                        <Text style={styles.textItem}>{item}</Text>
+                        <Text style={styles.textItem}>{item?.type}</Text>
                       </View>
                     </>
                   )
@@ -91,30 +91,28 @@ const InventoryModal = (props: any) => {
               placeholder={
                 props.formData?.floor ? props.formData?.floor : strings.floor
               }
-              data={Array.isArray(props.floors) ? props.floors : []}
+              // data={Array.isArray(props.floors) ? props.floors : []}
+              data={Array.isArray(newArrayFloors) ? newArrayFloors : []}
               inputWidth={"100%"}
               // onFocus={() => handleGetConfigurations()}
               paddingLeft={16}
               maxHeight={300}
               // labelField={"type"}
-              // valueField={"type"}
+              // valueField={"key"}
               value={props.formData?.floor}
               onChange={(item: any) => {
-                console.log("🚀 ~ file: InventoryModal.tsx:101 ~ item:", item)
                 props.setFormData({
                   ...props.formData,
-                  floor: item,
+                  floor: item?.type,
                 });
               }}
               newRenderItem={(item: any) => {
                 return (
-                  item.type !== "" && (
                     <>
                       <View style={styles.item}>
-                        <Text style={styles.textItem}>{item}</Text>
+                        <Text style={styles.textItem}>{item?.type?.toString()}</Text>
                       </View>
                     </>
-                  )
                 );
               }}
             />
