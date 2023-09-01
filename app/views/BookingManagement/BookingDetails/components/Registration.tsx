@@ -185,7 +185,7 @@ const RegistrationModal = ({ navigation, route }: any) => {
                         />
                     </View>
                     <View style={[styles.inputWrap, Styles.straightVw]}>
-                        <Text style={Styles.inputHeadingText}>{strings.document} <RequiredStart /> </Text>
+                        <Text style={Styles.inputHeadingText}>{strings.document} <Text style={styles.redStar}>*</Text> </Text>
                         <Button
                             width={110}
                             height={32}

@@ -350,13 +350,13 @@ const ChatScreen = ({ navigation, route }: any) => {
     return (
       <View style={styles.attachIconView}>
         <Composer {...props} />
-        <TouchableOpacity onPress={() => handleAttachPress()}>
+        {/* <TouchableOpacity onPress={() => handleAttachPress()}>
           <Image
             source={images.attach}
             // resizeMode={"contain"}
             style={styles.attachIconImage}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   };

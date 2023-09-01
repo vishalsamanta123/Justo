@@ -53,7 +53,7 @@ const AppointmentScreen = ({ navigation, route }: any) => {
       limit: 10,
       start_date: data?.start_date ? data?.start_date : '',
       end_date: data?.end_date ? data?.end_date : '',
-      customer_name: data?.customer_name ? data?.customer_name : '',
+      customer_name: data?.customer_name?.trim() ? data?.customer_name?.trim() : '',
       property_name: data?.property_name ? data?.property_name : '',
       status: data?.status ? data?.status : '',
       appointment_type: 2,

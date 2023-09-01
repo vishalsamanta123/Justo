@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     width: normalizeWidth(18),
     tintColor: WHITE_COLOR,
   },
+  redStar:{color: 'red', fontSize: normalize(18)},
   descTxt: {
     color: BLACK_COLOR,
     fontSize: normalize(18),

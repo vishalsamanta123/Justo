@@ -27,11 +27,6 @@ const ProfileView = (props: any) => {
     }
   };
 
-  console.log(
-    "🚀 ~ file: ProfileView.tsx:139 ~ allDetails?.dateofbirth:",
-    typeof allDetails?.dateofbirth
-  );
-
   return (
     <View style={styles.mainContainer}>
       <Header
@@ -66,12 +61,12 @@ const ProfileView = (props: any) => {
                 allDetails?.lastname?.toUpperCase()}
             </Text>
           </View>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.editImageWrap}
             onPress={handleEditProfilePress}
           >
             <Image style={styles.editIconImage} source={images.editIcon} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View style={styles.InformationView}>
           <View style={styles.fieldView}>
