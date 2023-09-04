@@ -10,10 +10,11 @@ export const VisitStatus: any = [
   { label: `${strings.newLead}`, value: 1 },
   // { label: `${strings.createLead}`, value: 1 },
   { label: `${strings.readytoVisit}`, value: 3 },
+  { label: `${strings.STSNotFitForSale}`, value: 6 },
   { label: `${strings.booking}`, value: 4 },
-  { label: `${strings.registration}`, value: 5 },
-  { label: `${strings.close}`, value: 6 },
-  { label: `${strings.readytoBookHeader}`, value: 7 },
+  { label: `${strings.cancelVisit}`, value: 8 },
+  // { label: `${strings.registration}`, value: 5 },
+  // { label: `${strings.readytoBookHeader}`, value: 7 },
 ]
 export const CpType: any = [
   { label: `${strings.viaIndividual}`, value: 1 },

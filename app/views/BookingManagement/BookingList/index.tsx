@@ -26,12 +26,17 @@ const BookingListScreen = ({ navigation, route }: any) => {
     customer_name: ""
   });
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     setDatatype(onpressType);
-  //     return () => {};
-  //   }, [onpressType])
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      setFilterData({
+        start_date: "",
+        end_date: "",
+        status: "",
+        customer_name: ""
+      })
+      return () => {};
+    }, [navigation])
+  );
   useFocusEffect(
     React.useCallback(() => {
       // getBookingLits(0, []);
@@ -73,7 +78,7 @@ const BookingListScreen = ({ navigation, route }: any) => {
           limit: 10,
           start_date: array?.start_date ? array?.start_date : "",
           end_date: array?.end_date ? array?.end_date : "",
-          customer_name: array?.customer_name ? array?.customer_name : "",
+          customer_name: array?.customer_name?.trim() ? array?.customer_name?.trim() : "",
         })
       );
     } else {
@@ -88,7 +93,7 @@ const BookingListScreen = ({ navigation, route }: any) => {
               : 5,
           start_date: array?.start_date ? array?.start_date : "",
           end_date: array?.end_date ? array?.end_date : "",
-          customer_name: array?.customer_name ? array?.customer_name : "",
+          customer_name: array?.customer_name?.trim() ? array?.customer_name?.trim() : "",
         })
       );
     }

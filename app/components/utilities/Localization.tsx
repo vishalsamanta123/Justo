@@ -499,6 +499,7 @@ const strings = new LocalizedStrings({
     readytoVisit: 'Ready to Visit',
     booking: 'Booking',
     close: 'Close',
+    cancelVisit: 'Cancel Visit',
 
     // Follow-Up
     followupHeader: 'Follow-up',

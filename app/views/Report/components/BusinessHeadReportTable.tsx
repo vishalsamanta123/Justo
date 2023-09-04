@@ -44,6 +44,106 @@ const BusinessHeadReportTable = (props: any) => {
       setRefreshing(false);
     }, 2000);
   };
+  // const data = [
+  //   {
+  //     property_Name: "EKA Elites",
+  //     propertyDetails: [
+  //       {
+  //         clusterName: "Amit Samgiskar ( Closing Manager )",
+  //         details: [
+  //           {
+  //             ChannelPartner: 175,
+  //             Digital: 10,
+  //             Direct: 3,
+  //             Hoarding: 3,
+  //             PaperInsertd: 7,
+  //             GrandTotal: 3,
+  //             TotalCancelation: 21,
+  //             TotalRegistration: 0,
+  //             NotInterested: 10,
+  //             TotalCP: 0,
+  //             AddedCP: 47,
+  //             ActiveCP: 50,
+  //             Booking: 6,
+  //             InactiveCP: 10,
+  //             SiteVisit: 3,
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         clusterName: "kusum karta ( Sourcing Manager )",
+  //         details: [
+  //           {
+  //             ChannelPartner: 185,
+  //             Digital: 16,
+  //             Direct: 8,
+  //             Hoarding: 13,
+  //             PaperInsertd: 6,
+  //             GrandTotal: 5,
+  //             TotalCancelation: 1,
+  //             TotalRegistration: 0,
+  //             NotInterested: 6,
+  //             TotalCP: 0,
+  //             AddedCP: 7,
+  //             ActiveCP: 5,
+  //             Booking: 10,
+  //             InactiveCP: 0,
+  //             SiteVisit: 6,
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     property_Name: "Govardhan Shikhar",
+  //     propertyDetails: [
+  //       {
+  //         clusterName: "lokesh mangeskar ( Closing Manager )",
+  //         details: [
+  //           {
+  //             ChannelPartner: 195,
+  //             Digital: 11,
+  //             Direct: 5,
+  //             Hoarding: 8,
+  //             PaperInsertd: 3,
+  //             GrandTotal: 0,
+  //             TotalCancelation: 41,
+  //             TotalRegistration: 5,
+  //             NotInterested: 10,
+  //             TotalCP: 54,
+  //             AddedCP: 57,
+  //             ActiveCP: 5,
+  //             Booking: 62,
+  //             InactiveCP: 10,
+  //             SiteVisit: 3,
+  //           },
+  //         ],
+  //       },
+  //       {
+  //         clusterName: "nitu tatya ( Sourcing Manager )",
+  //         details: [
+  //           {
+  //             ChannelPartner: 185,
+  //             Digital: 16,
+  //             Direct: 8,
+  //             Hoarding: 13,
+  //             PaperInsertd: 6,
+  //             GrandTotal: 5,
+  //             TotalCancelation: 1,
+  //             TotalRegistration: 0,
+  //             NotInterested: 6,
+  //             TotalCP: 0,
+  //             AddedCP: 7,
+  //             ActiveCP: 5,
+  //             Booking: 10,
+  //             InactiveCP: 0,
+  //             SiteVisit: 6,
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // ];
   const headerData = [
     "CP Mapped",
     "New CP Registered",

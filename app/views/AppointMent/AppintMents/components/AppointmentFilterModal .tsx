@@ -19,7 +19,7 @@ const AppointmentFilterModal = (props: any) => {
     { type_name: strings.STSClientVisit, value: 2 },
   ];
   const statusData = [
-    { type_name: "Not Visted", value: 1 },
+    { type_name: "No Show", value: 1 },
     { type_name: "Revisit", value: 2 },
     { type_name: "Appointment Done", value: 3 },
     { type_name: "Visit Cancelled", value: 4 },

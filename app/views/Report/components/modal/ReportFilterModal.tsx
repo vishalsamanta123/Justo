@@ -126,7 +126,7 @@ const FilterModal = (props: any) => {
                 placeholderText={strings.startDate}
                 headingText={strings.startDate}
                 editable={false}
-                maximumDate={yesterday}
+                maximumDate={new Date()}
                 dateData={(data: any) => {
                   props.setFilterData({
                     ...props.filterData,

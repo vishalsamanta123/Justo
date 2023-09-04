@@ -601,12 +601,20 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           // }
         } else if (agencyData?.cp_type === 2) {
           if (
-            agencyData.gst !== "" &&
+            agencyData.gstApplicable == 1  &&
             Regexs.gstRegex.test(agencyData.gst) === false
           ) {
             isError = false;
             errorMessage = strings.gstReqVal;
-          } else if (selectedProperty?.length === 0) {
+          }  else if (
+            agencyData.gstApplicable == 2 &&
+            (agencyData?.propidership_declaration_letter == null ||
+              agencyData?.propidership_declaration_letter == undefined ||
+              agencyData?.propidership_declaration_letter == "")
+          ) {
+            isError = false;
+            errorMessage = strings.DeclrLttrImgReqVal;
+          }  else if (selectedProperty?.length === 0) {
             isError = false;
             errorMessage = strings.propertyReqVal;
           }

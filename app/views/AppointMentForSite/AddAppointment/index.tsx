@@ -177,19 +177,19 @@ const AddAppointmentScreen = ({ navigation, route }: any) => {
         errorMessage = "Time is require. Please Select the Time"
       }
 
-      else if (appointMentForm.pickup === 'Yes') {
-        if (appointMentForm.pickup_location == undefined || appointMentForm.pickup_location == '') {
-          isError = false;
-          errorMessage = "Location is require. Please Enter the Location"
-        }
-        else if (appointMentForm.number_of_guest == undefined || appointMentForm.number_of_guest == '') {
-          isError = false;
-          errorMessage = "Number of guest is require. Please Enter the Number of guest"
-        } else if (appointMentForm.pickup_address == undefined || appointMentForm.pickup_address == '') {
-          isError = false;
-          errorMessage = "pickup address is require. Please Enter the pickup address"
-        }
-      }
+      // else if (appointMentForm.pickup === 'Yes') {
+      //   if (appointMentForm.pickup_location == undefined || appointMentForm.pickup_location == '') {
+      //     isError = false;
+      //     errorMessage = "Location is require. Please Enter the Location"
+      //   }
+      //   else if (appointMentForm.number_of_guest == undefined || appointMentForm.number_of_guest == '') {
+      //     isError = false;
+      //     errorMessage = "Number of guest is require. Please Enter the Number of guest"
+      //   } else if (appointMentForm.pickup_address == undefined || appointMentForm.pickup_address == '') {
+      //     isError = false;
+      //     errorMessage = "pickup address is require. Please Enter the pickup address"
+      //   }
+      // }
     // }
     if (errorMessage !== '') {
       ErrorMessage({

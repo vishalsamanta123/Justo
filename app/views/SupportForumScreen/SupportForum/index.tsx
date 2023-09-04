@@ -51,7 +51,7 @@ const SupportForumScreen = ({ navigation }: any) => {
     setOffset(offset);
     dispatch(
       supportForumListData({
-        search_title: data?.search_title ? data?.search_title : "",
+        search_title: data?.search_title?.trim() ? data?.search_title?.trim() : "",
         start_date: data?.start_date ? data?.start_date : "",
         end_date: data?.end_date ? data?.end_date : "",
         limit: 4,

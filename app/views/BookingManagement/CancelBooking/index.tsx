@@ -32,6 +32,17 @@ const CancelBookingScreen = ({ navigation, route }: any) => {
       return () => {};
     }, [navigation, list])
   );
+  useFocusEffect(
+    React.useCallback(() => {
+      setFilterData({
+        start_date: "",
+        end_date: "",
+        status: "",
+        customer_name: "",
+      })
+      return () => {};
+    }, [navigation])
+  );
   useEffect(() => {
     if (response?.status === 200) {
       if (response?.data?.length > 0) {
@@ -62,7 +73,7 @@ const CancelBookingScreen = ({ navigation, route }: any) => {
         booking_status: 4,
         start_date: array?.start_date ? array?.start_date : "",
         end_date: array?.end_date ? array?.end_date : "",
-        customer_name: array?.customer_name ? array?.customer_name : "",
+        customer_name: array?.customer_name?.trim() ? array?.customer_name?.trim() : "",
       })
     );
   };

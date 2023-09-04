@@ -60,7 +60,7 @@ const AppointmentScreenCPSM = ({ navigation }: any) => {
         appoiment: type ? type : 1,
         start_date: data?.start_date ? data?.start_date : "",
         end_date: data?.end_date ? data?.end_date : "",
-        customer_name: data?.customer_name ? data?.customer_name : "",
+        customer_name: data?.customer_name?.trim() ? data?.customer_name?.trim() : "",
         status: data?.status ? data?.status : "",
       })
     );

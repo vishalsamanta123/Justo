@@ -25,6 +25,7 @@ import { apiCall } from "app/components/utilities/httpClient";
 import apiEndPoints from "app/components/utilities/apiEndPoints";
 import { CountryArray } from "app/components/utilities/countryData";
 import { useFocusEffect } from "@react-navigation/native";
+import { Keyboard } from "react-native";
 
 const VisitorUpdateScreen = ({ navigation, route }: any) => {
   const data = route?.params || 0;
@@ -554,6 +555,7 @@ const VisitorUpdateScreen = ({ navigation, route }: any) => {
   //   return isError;
   // }
   const validation = () => {
+    Keyboard.dismiss();
     let isError = true;
     let errorMessage: any = "";
     if (

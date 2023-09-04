@@ -60,6 +60,7 @@ const BookingFilterModal = (props: any) => {
                 mode={"date"}
                 leftIcon={images.event}
                 placeholderText={strings.startDate}
+                headingText={strings.startDate}
                 editable={false}
                 dateData={(data: any) => {
                   props.setFilterData({
@@ -82,6 +83,7 @@ const BookingFilterModal = (props: any) => {
                 DATE_FORMAT
                 leftIcon={images.event}
                 placeholderText={strings.endDate}
+                headingText={strings.endDate}
                 editable={false}
                 dateData={(data: any) => {
                   props.setFilterData({
@@ -101,6 +103,7 @@ const BookingFilterModal = (props: any) => {
             <View style={[styles.inputWrap, { top: normalizeSpacing(8) }]}>
               <InputField
                 headingText={"Search by Name"}
+                placeholderText={"Search by Name"}
                 handleInputBtnPress={() => {}}
                 valueshow={props.filterData?.customer_name}
                 onChangeText={(data: any) => {
