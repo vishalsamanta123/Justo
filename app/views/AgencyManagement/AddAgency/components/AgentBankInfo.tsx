@@ -137,7 +137,7 @@ const AgentBankInfo = (props: any) => {
           <View style={styles.inputWrap}>
             <InputField
               disableSpecialCharacters={true}
-              require={true}
+              // require={true}
               placeholderText={
                 "22AAAAA0000A1Z5"
               }
@@ -175,7 +175,7 @@ const AgentBankInfo = (props: any) => {
                   ? strings.DeclarLttr
                   : strings.declrLttrCom}
               </Text>
-              <RequiredStart />
+              {/* <RequiredStart /> */}
             </View>
             <View style={{ flex: 0.5 }}>
               <TouchableOpacity

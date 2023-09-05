@@ -50,7 +50,7 @@ const ReportView = (props: any) => {
           statusBarColor={PRIMARY_THEME_COLOR}
           barStyle={"light-content"}
         />
-        {roleId === ROLE_IDS.sourcingmanager_id ? (
+        {/* {roleId === ROLE_IDS.sourcingmanager_id ? (
           <SMReportTable
             data={reportData}
             onReset={onReset}
@@ -79,8 +79,8 @@ const ReportView = (props: any) => {
           />
         ) : roleId === ROLE_IDS.businesshead_id ? (
           <BusinessHeadReportTable data={reportData} onReset={onReset} />
-        ) : null}
-        {/* <ComingSoonScreen /> */}
+        ) : null} */}
+        <ComingSoonScreen />
       </View>
       <FilterModal
         Visible={FilterModalVisible}

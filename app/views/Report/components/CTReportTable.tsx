@@ -42,11 +42,11 @@ const CTReportTable = (props: any) => {
   const [refreshing, setRefreshing] = React.useState(false);
   const onRefresh = () => {
     setRefreshing(true);
-    props.onReset()
+    props.onReset();
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);
-  }
+  };
   const headeData = [
     "CM Name",
     // "Lead Assign",
@@ -140,45 +140,44 @@ const CTReportTable = (props: any) => {
 
   return (
     <SafeAreaView>
+      {/* <View
+        style={{
+          alignItems: "flex-end",
+          margin: normalize(10),
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => onPressDownload()}
+          style={{
+            backgroundColor: PRIMARY_THEME_COLOR,
+            width: normalizeWidth(50),
+            alignItems: "center",
+            borderRadius: 10,
+          }}
+        >
+          <Image
+            source={images.whiteDownload}
+            resizeMode={"contain"}
+            style={styles.downloadImg}
+          />
+        </TouchableOpacity>
+      </View> */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{
           height: height - normalize(55),
           margin: normalize(10),
-
         }}
         horizontal
         contentContainerStyle={{
           // margin: normalize(10),
-          paddingBottom : normalize(15)
+          paddingBottom: normalize(15),
         }}
         showsHorizontalScrollIndicator={false}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {/* <View
-          style={{
-            alignItems: "flex-end",
-            marginBottom: normalize(10),
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => onPressDownload()}
-            style={{
-              backgroundColor: PRIMARY_THEME_COLOR,
-              width: normalizeWidth(50),
-              alignItems: "center",
-              borderRadius: 10,
-            }}
-          >
-            <Image
-              source={images.whiteDownload}
-              resizeMode={"contain"}
-              style={styles.downloadImg}
-            />
-          </TouchableOpacity>
-        </View> */}
         <View
           style={{
             flexDirection: "row",

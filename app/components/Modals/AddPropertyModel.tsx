@@ -129,10 +129,15 @@ const AddPropertyModel = (props: any) => {
                       }
                       style={styles.checkBoxVw}
                     >
-                      <Image
+                      {/* <Image
                         style={styles.checksVw}
                         source={getSelected ? images.check : null}
-                      />
+                      /> */}
+                      {getSelected ? <Image
+                        style={styles.checksVw}
+                        source={images.check}
+                      /> :
+                       <View style={styles.checksVw}></View>}
                     </TouchableOpacity>
                   </View>
                 );

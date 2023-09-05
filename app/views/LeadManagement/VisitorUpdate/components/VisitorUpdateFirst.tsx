@@ -153,7 +153,78 @@ const VisitorUpdateView = (props: any) => {
             headingText={"Visitor Name"}
           />
         </View>
-
+        <View
+          style={[
+            styles.inputWrap,
+            { flexDirection: "row", justifyContent: "space-between" },
+          ]}
+        >
+          <View style={{ width: "35%" }}>
+            <TouchableOpacity
+              accessible={false}
+              style={{}}
+              onPress={() => {
+                if (
+                  props?.updateForm?.create_by === userId._id ? true : false
+                ) {
+                  props.setCountyPicker(true);
+                }
+              }}
+              activeOpacity={1.0}
+            >
+              <InputField
+                require={true}
+                disableSpecialCharacters={true}
+                placeholderText={"Country"}
+                // handleInputBtnPress={() => {}}
+                valueshow={props?.updateForm?.country_code}
+                headingText={"Country"}
+                editable={false}
+                countryCodeInput={true}
+                rightImgSrc={images.downErrow}
+                handleInputBtnPress={() => {
+                  if (
+                    props?.updateForm?.create_by === userId._id ? true : false
+                  ) {
+                    props.setCountyPicker(true);
+                  }
+                }}
+                rightImageVw={[
+                  styles.tickImgVw,
+                  { backgroundColor: WHITE_COLOR },
+                ]}
+                rightImageSty={[styles.tickImg, { tintColor: BLACK_COLOR }]}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={{ width: "60%" }}>
+            <InputField
+              disableSpecialCharacters={true}
+              placeholderText={strings.mobileNo}
+              handleInputBtnPress={() => {}}
+              onChangeText={(text: any) => {
+                props.setUpdateForm({
+                  ...props.updateForm,
+                  mobile: text,
+                });
+              }}
+              editable={
+                props?.updateForm?.create_by === userId._id ? true : false
+              }
+              valueshow={
+                props?.updateForm?.create_by === userId._id
+                  ? props?.updateForm?.mobile?.toString()
+                  : `${props?.updateForm?.mobile?.slice(
+                      0,
+                      2
+                    )}******${props?.updateForm?.mobile?.slice(-2)}`
+              }
+              headingText={"Mobile No."}
+              keyboardtype={"number-pad"}
+              maxLength={props?.updateForm?.country_code === "+91" ? 10 : 15}
+            />
+          </View>
+        </View>
         <View style={[styles.inputWrap]}>
           <DropdownInput
             headingText={"Lead Source"}
@@ -391,78 +462,6 @@ const VisitorUpdateView = (props: any) => {
             ) : null}
           </>
         ) : null}
-        <View
-          style={[
-            styles.inputWrap,
-            { flexDirection: "row", justifyContent: "space-between" },
-          ]}
-        >
-          <View style={{ width: "35%" }}>
-            <TouchableOpacity
-              accessible={false}
-              style={{}}
-              onPress={() => {
-                if (
-                  props?.updateForm?.create_by === userId._id ? true : false
-                ) {
-                  props.setCountyPicker(true);
-                }
-              }}
-              activeOpacity={1.0}
-            >
-              <InputField
-                require={true}
-                disableSpecialCharacters={true}
-                placeholderText={"Country"}
-                // handleInputBtnPress={() => {}}
-                valueshow={props?.updateForm?.country_code}
-                headingText={"Country"}
-                editable={false}
-                countryCodeInput={true}
-                rightImgSrc={images.downErrow}
-                handleInputBtnPress={() => {
-                  if (
-                    props?.updateForm?.create_by === userId._id ? true : false
-                  ) {
-                    props.setCountyPicker(true);
-                  }
-                }}
-                rightImageVw={[
-                  styles.tickImgVw,
-                  { backgroundColor: WHITE_COLOR },
-                ]}
-                rightImageSty={[styles.tickImg, { tintColor: BLACK_COLOR }]}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={{ width: "60%" }}>
-            <InputField
-              disableSpecialCharacters={true}
-              placeholderText={strings.mobileNo}
-              handleInputBtnPress={() => {}}
-              onChangeText={(text: any) => {
-                props.setUpdateForm({
-                  ...props.updateForm,
-                  mobile: text,
-                });
-              }}
-              editable={
-                props?.updateForm?.create_by === userId._id ? true : false
-              }
-              valueshow={
-                props?.updateForm?.create_by === userId._id
-                  ? props?.updateForm?.mobile?.toString()
-                  : `${props?.updateForm?.mobile?.slice(
-                      0,
-                      2
-                    )}******${props?.updateForm?.mobile?.slice(-2)}`
-              }
-              headingText={"Mobile No."}
-              keyboardtype={"number-pad"}
-              maxLength={props?.updateForm?.country_code === "+91" ? 10 : 15}
-            />
-          </View>
-        </View>
         <View style={styles.inputWrap}>
           <DropdownInput
             require={true}

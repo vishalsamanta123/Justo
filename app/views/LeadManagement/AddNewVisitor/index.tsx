@@ -400,12 +400,6 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         isError = false;
         errorMessage = strings.NameCorrectlyVal;
       } else if (
-        formData?.lead_source === "" ||
-        formData.lead_source === undefined
-      ) {
-        isError = false;
-        errorMessage = "Please enter Lead Source";
-      } else if (
         formData?.country_code === "" ||
         formData?.country_code === undefined ||
         formData?.country_code === null
@@ -440,6 +434,12 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
         isError = false;
         errorMessage = "Please check entered mobile number";
       } else if (
+        formData?.lead_source === "" ||
+        formData.lead_source === undefined
+      ) {
+        isError = false;
+        errorMessage = "Please enter Lead Source";
+      }  else if (
         type != "edit" &&
         formData?.property_id === "" &&
         formData?.property_type_title === ""

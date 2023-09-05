@@ -30,7 +30,7 @@ const CancelBookingScreen = ({ navigation, route }: any) => {
       }
       setBookingList([]);
       return () => {};
-    }, [navigation, list])
+    }, [navigation, list, parmas])
   );
   useFocusEffect(
     React.useCallback(() => {

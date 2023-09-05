@@ -496,20 +496,22 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
       } else if (formType === 1) {
         if (agencyData?.cp_type === 1) {
           if (
-            agencyData.gstApplicable == 1 &&
+            agencyData.gst !== "" &&
             Regexs.gstRegex.test(agencyData.gst) === false
           ) {
             isError = false;
             errorMessage = strings.gstReqVal;
-          } else if (
-            agencyData.gstApplicable == 2 &&
-            (agencyData?.propidership_declaration_letter == null ||
-              agencyData?.propidership_declaration_letter == undefined ||
-              agencyData?.propidership_declaration_letter == "")
-          ) {
-            isError = false;
-            errorMessage = strings.DeclrLttrImgReqVal;
-          } else if (selectedProperty?.length === 0) {
+          } 
+          // else if (
+          //   agencyData.gstApplicable == 2 &&
+          //   (agencyData?.propidership_declaration_letter == null ||
+          //     agencyData?.propidership_declaration_letter == undefined ||
+          //     agencyData?.propidership_declaration_letter == "")
+          // ) {
+          //   isError = false;
+          //   errorMessage = strings.DeclrLttrImgReqVal;
+          // } 
+          else if (selectedProperty?.length === 0) {
             isError = false;
             errorMessage = strings.propertyReqVal;
           }
@@ -601,20 +603,22 @@ const AgentBasicInfo = ({ navigation, route }: any) => {
           // }
         } else if (agencyData?.cp_type === 2) {
           if (
-            agencyData.gstApplicable == 1  &&
+            agencyData.gst !== ""  &&
             Regexs.gstRegex.test(agencyData.gst) === false
           ) {
             isError = false;
             errorMessage = strings.gstReqVal;
-          }  else if (
-            agencyData.gstApplicable == 2 &&
-            (agencyData?.propidership_declaration_letter == null ||
-              agencyData?.propidership_declaration_letter == undefined ||
-              agencyData?.propidership_declaration_letter == "")
-          ) {
-            isError = false;
-            errorMessage = strings.DeclrLttrImgReqVal;
-          }  else if (selectedProperty?.length === 0) {
+          }  
+          // else if (
+          //   agencyData.gstApplicable == 2 &&
+          //   (agencyData?.propidership_declaration_letter == null ||
+          //     agencyData?.propidership_declaration_letter == undefined ||
+          //     agencyData?.propidership_declaration_letter == "")
+          // ) {
+          //   isError = false;
+          //   errorMessage = strings.DeclrLttrImgReqVal;
+          // }  
+          else if (selectedProperty?.length === 0) {
             isError = false;
             errorMessage = strings.propertyReqVal;
           }

@@ -93,38 +93,54 @@ const ClusterHeadReportTable = (props: any) => {
         const workbook = XLSX.utils.book_new();
 
         data.forEach((property: any) => {
-          const { property_title, smDetails, CMDetails } = property;
+          const {
+            property_title,
+            smDetails,
+            CMDetails,
+            CTLDetails,
+            StlDetails,
+          } = property;
           const worksheetData: any = [];
-          smDetails.map((item: any) => {
-            const rowData = {
+          StlDetails?.map((item: any) => {
+            let rowData: any = {
               "SM Name": item?.username,
-              "CP Mapped": item?.cpcount,
-              "New CP Registered": item?.newCpRegistered,
-              "Active CP": item?.activeCP,
-              // "Transactional CP": item?.BookingCountTotal,
-              "Transactional CP": item?.TransactionalCPtotal,
-              "Dormant CP": item?.inactiveCP,
-              // "Appointment Done": item.SitevisitCountTotal,
-              "Appointment Done": item.Appdonecounttotal,
-              "Visitor No Shows": item.NoshowAppintment,
-              "Total Bookings": item.confirmBooking,
             };
-            worksheetData.push(rowData);
+            item?.smDetails.map((item: any) => {
+              rowData = {
+                ...rowData,
+                "CP Mapped": item?.cpcount,
+                "New CP Registered": item?.newCpRegistered,
+                "Active CP": item?.activeCP,
+                // "Transactional CP": item?.BookingCountTotal,
+                "Transactional CP": item?.TransactionalCPtotal,
+                "Dormant CP": item?.inactiveCP,
+                // "Appointment Done": item.SitevisitCountTotal,
+                "Appointment Done": item.Appdonecounttotal,
+                "Visitor No Shows": item.NoshowAppintment,
+                "Total Bookings": item.confirmBooking,
+              };
+              worksheetData.push(rowData);
+            });
           });
-          CMDetails.map((item: any) => {
-            const rowData = {
-              "CM Name": item?.user_name,
-              "Visitor Attended": item?.VisitorAttended,
-              // "Visitor Attended": item?.TotalAppointments,
-              "Direct Walk-ins": item?.DirectWalkins,
-              "CP(Walk-ins) Appointments": item?.CPWalkins,
-              "No Shows": item?.Noshow,
-              "Total Revisit": item?.TotalAppointmentsrevisit,
-              "Total Not Interested": item?.TotalNotInterested,
-              "Total Booking": item?.Booking,
-              "Conversion %": item?.Conversion,
+          CTLDetails?.map((item: any) => {
+            let rowData: any = {
+              "CM Name": item?.username,
             };
-            worksheetData.push(rowData);
+            item?.CMDetails.map((item: any) => {
+              rowData = {
+                ...rowData,
+                "Visitor Attended": item?.VisitorAttended,
+                // "Visitor Attended": item?.TotalAppointments,
+                "Direct Walk-ins": item?.DirectWalkins,
+                "CP(Walk-ins) Appointments": item?.CPWalkins,
+                "No Shows": item?.Noshow,
+                "Total Revisit": item?.TotalAppointmentsrevisit,
+                "Total Not Interested": item?.TotalNotInterested,
+                "Total Booking": item?.Booking,
+                "Conversion %": item?.Conversion,
+              };
+              worksheetData.push(rowData);
+            });
           });
 
           const worksheet = XLSX.utils.json_to_sheet(worksheetData);
@@ -225,9 +241,11 @@ const ClusterHeadReportTable = (props: any) => {
                       {item?.property_title}
                     </Text>
                   </View>
-                ) : <View>
-                    <Text style={{textAlign: 'center'}}>Data Not Found</Text>
-                  </View>}
+                ) : (
+                  <View>
+                    <Text style={{ textAlign: "center" }}>Data Not Found</Text>
+                  </View>
+                )}
                 <View>
                   {item?.StlDetails?.map((item: any, index: any) => {
                     return (

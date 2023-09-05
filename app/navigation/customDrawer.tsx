@@ -446,7 +446,7 @@ const customDrawer = ({ navigation }: any) => {
       <View style={styles.versionView}>
         <View style={[styles.drawerTouch, { justifyContent: 'center' }]}>
           <Text style={styles.drawerText}>
-            {strings.versionText} + {"ST"}
+            {strings.versionText}
             {DeviceInfo.getVersion()}
           </Text>
         </View>

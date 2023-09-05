@@ -35,9 +35,9 @@ const FilterModal = (props: any) => {
   const { response = {}, list = "" } =
     useSelector((state: any) => state.UserManager) || {};
 
-  useEffect(() => {
-    dispatch(getUsersListForSiteHead({}));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getUsersListForSiteHead({}));
+  // }, []);
   useEffect(() => {
     let arr: any;
     let TLarr: any;
