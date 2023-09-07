@@ -38,7 +38,7 @@ import SMReportTable from "./SMReportTable";
 import { useSelector } from "react-redux";
 
 const ClusterHeadReportTable = (props: any) => {
-  const { data, onReset, handleCpDetailPress } = props;
+  const { data, onReset, handleCpDetailPress, handleCTANavigation } = props;
   const { userData = {} } = useSelector((state: any) => state.userData);
 
   const { width, height } = Dimensions.get("window");
@@ -291,6 +291,7 @@ const ClusterHeadReportTable = (props: any) => {
                               role_ID={2}
                               headerData={soucingHeaderData}
                               handleCpDetailPress={handleCpDetailPress}
+                              handleCTANavigation={handleCTANavigation}
                             />
                           </View>
                         ) : null}
@@ -340,6 +341,7 @@ const ClusterHeadReportTable = (props: any) => {
                               data={item?.CMDetails}
                               role_ID={1}
                               headerData={closingHeaderData}
+                              handleCTANavigation={handleCTANavigation}
                             />
                           </View>
                         ) : null}

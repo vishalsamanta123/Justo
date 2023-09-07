@@ -57,120 +57,120 @@ const ReportScreen = ({ navigation }: any) => {
   var currentYears = currentDate.getFullYear();
   var todayDate = currentYears + "-" + currentMonths + "-" + currentDay;
 
-  // useLayoutEffect(() => {
-  //   if (!filterModalVisible) {
-  //     getData(firstdDate, todayDate);
-  //   }
-  // }, [isFocused, filterData, navigation]);
-  // useEffect(() => {
-  //   if (ReportData?.response?.data?.length > 0) {
-  //     setReportData(ReportData?.response?.data);
-  //   } else {
-  //     // ErrorMessage({
-  //     //   msg: ReportData?.response?.message,
-  //     //   backgroundColor: BLACK_COLOR
-  //     // })
-  //   }
-  // }, [ReportData]);
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     setFilterData({
-  //       startdate: "",
-  //       enddate: "",
-  //       property_id: "",
-  //       by_team: "",
-  //       user_id: "",
-  //       parent_id: "",
-  //     });
-  //     return () => {};
-  //   }, [navigation])
-  // );
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     let arrForProperty: any = [];
-  //     if (propertyListForFilter.length === 0) {
-  //       if (
-  //         roleId === ROLE_IDS.clusterhead_id ||
-  //         roleId === ROLE_IDS.sitehead_id
-  //       ) {
-  //         reportData?.map((item: any, index: any) => {
-  //           arrForProperty.push({
-  //             property_id: item?.property_id,
-  //             property_title: item?.property_title,
-  //           });
-  //           setPropertyListForFilter(arrForProperty);
-  //         });
-  //       } else if (roleId === ROLE_IDS.businesshead_id) {
-  //         reportData?.map((item: any, index: any) => {
-  //           item?.CHDetails?.map((el: any) => {
-  //             arrForProperty.push({
-  //               property_id: el?.property_id,
-  //               property_title: el?.property_title,
-  //             });
-  //           });
-  //         });
-  //         const arrayUniqueByKey: any = [
-  //           ...new Map(
-  //             arrForProperty.map((item: any) => [item["property_id"], item])
-  //           ).values(),
-  //         ];
-  //         setPropertyListForFilter(arrayUniqueByKey);
-  //       }
-  //     }
-  //     return () => {};
-  //   }, [navigation, reportData])
-  // );
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     let arrForProperty: any = [];
-  //     let arrForCluster: any = [];
-  //     if (
-  //       roleId === ROLE_IDS.clusterhead_id ||
-  //       roleId === ROLE_IDS.sitehead_id
-  //     ) {
-  //       // reportData?.map((item: any, index: any) => {
-  //       //   arrForProperty.push({
-  //       //     property_id: item?.property_id,
-  //       //     property_title: item?.property_title,
-  //       //   });
-  //       //   // setPropertyListForFilter(arrForProperty);
-  //       // });
-  //       reportData?.map((item: any, index: any) => {
-  //         arrForProperty.push({
-  //           property_id: item?.property_id,
-  //           property_title: item?.property_title,
-  //         });
-  //         // setPropertyListForFilter(arrForProperty);
-  //       });
-  //     } else if (roleId === ROLE_IDS.businesshead_id) {
-  //       reportData?.map((item: any, index: any) => {
-  //         if (propertyListForFilter.length === 0) {
-  //           // item?.CHDetails?.map((el: any) => {
-  //           //   arrForProperty.push({
-  //           //     property_id: el?.property_id,
-  //           //     property_title: el?.property_title,
-  //           //   });
-  //           // });
-  //           // setPropertyListForFilter(arrForProperty);
-  //         }
-  //         if (clusterheadListForFilter.length === 0) {
-  //           arrForCluster.push({
-  //             user_name: item?.username,
-  //             user_id: item?.user_id,
-  //           });
-  //           const arrayUniqueByKey: any = [
-  //             ...new Map(
-  //               arrForCluster.map((item: any) => [item["user_id"], item])
-  //             ).values(),
-  //           ];
-  //           setClusterheadListForFilter(arrayUniqueByKey);
-  //         }
-  //       });
-  //     }
+  useLayoutEffect(() => {
+    if (!filterModalVisible) {
+      getData(firstdDate, todayDate);
+    }
+  }, [isFocused, filterData, navigation]);
+  useEffect(() => {
+    if (ReportData?.response?.data?.length > 0) {
+      setReportData(ReportData?.response?.data);
+    } else {
+      // ErrorMessage({
+      //   msg: ReportData?.response?.message,
+      //   backgroundColor: BLACK_COLOR
+      // })
+    }
+  }, [ReportData]);
+  useFocusEffect(
+    React.useCallback(() => {
+      setFilterData({
+        startdate: "",
+        enddate: "",
+        property_id: "",
+        by_team: "",
+        user_id: "",
+        parent_id: "",
+      });
+      return () => {};
+    }, [navigation])
+  );
+  useFocusEffect(
+    React.useCallback(() => {
+      let arrForProperty: any = [];
+      if (propertyListForFilter.length === 0) {
+        if (
+          roleId === ROLE_IDS.clusterhead_id ||
+          roleId === ROLE_IDS.sitehead_id
+        ) {
+          reportData?.map((item: any, index: any) => {
+            arrForProperty.push({
+              property_id: item?.property_id,
+              property_title: item?.property_title,
+            });
+            setPropertyListForFilter(arrForProperty);
+          });
+        } else if (roleId === ROLE_IDS.businesshead_id) {
+          reportData?.map((item: any, index: any) => {
+            item?.CHDetails?.map((el: any) => {
+              arrForProperty.push({
+                property_id: el?.property_id,
+                property_title: el?.property_title,
+              });
+            });
+          });
+          const arrayUniqueByKey: any = [
+            ...new Map(
+              arrForProperty.map((item: any) => [item["property_id"], item])
+            ).values(),
+          ];
+          setPropertyListForFilter(arrayUniqueByKey);
+        }
+      }
+      return () => {};
+    }, [navigation, reportData])
+  );
+  useFocusEffect(
+    React.useCallback(() => {
+      let arrForProperty: any = [];
+      let arrForCluster: any = [];
+      if (
+        roleId === ROLE_IDS.clusterhead_id ||
+        roleId === ROLE_IDS.sitehead_id
+      ) {
+        // reportData?.map((item: any, index: any) => {
+        //   arrForProperty.push({
+        //     property_id: item?.property_id,
+        //     property_title: item?.property_title,
+        //   });
+        //   // setPropertyListForFilter(arrForProperty);
+        // });
+        reportData?.map((item: any, index: any) => {
+          arrForProperty.push({
+            property_id: item?.property_id,
+            property_title: item?.property_title,
+          });
+          // setPropertyListForFilter(arrForProperty);
+        });
+      } else if (roleId === ROLE_IDS.businesshead_id) {
+        reportData?.map((item: any, index: any) => {
+          if (propertyListForFilter.length === 0) {
+            // item?.CHDetails?.map((el: any) => {
+            //   arrForProperty.push({
+            //     property_id: el?.property_id,
+            //     property_title: el?.property_title,
+            //   });
+            // });
+            // setPropertyListForFilter(arrForProperty);
+          }
+          if (clusterheadListForFilter.length === 0) {
+            arrForCluster.push({
+              user_name: item?.username,
+              user_id: item?.user_id,
+            });
+            const arrayUniqueByKey: any = [
+              ...new Map(
+                arrForCluster.map((item: any) => [item["user_id"], item])
+              ).values(),
+            ];
+            setClusterheadListForFilter(arrayUniqueByKey);
+          }
+        });
+      }
 
-  //     return () => {};
-  //   }, [navigation, ReportData, reportData])
-  // );
+      return () => {};
+    }, [navigation, ReportData, reportData])
+  );
 
   const validation = () => {
     let isError = true;
@@ -196,6 +196,10 @@ const ReportScreen = ({ navigation }: any) => {
     }
     return isError;
   };
+
+  const handleCTANavigation = (navigateTo: any) => {
+    navigation.navigate(navigateTo)
+  }
 
   const getData = (startDate: any, endDate: any) => {
     if (roleId === ROLE_IDS.closingmanager_id) {
@@ -307,6 +311,7 @@ const ReportScreen = ({ navigation }: any) => {
         propertyListForFilter={propertyListForFilter}
         clusterheadListForFilter={clusterheadListForFilter}
         setClusterheadListForFilter={setClusterheadListForFilter}
+        handleCTANavigation={handleCTANavigation}
       />
     </>
   );

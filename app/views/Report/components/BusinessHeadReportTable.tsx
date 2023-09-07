@@ -34,7 +34,7 @@ import RNFS from "react-native-fs";
 import ErrorMessage from "app/components/ErrorMessage";
 
 const BusinessHeadReportTable = (props: any) => {
-  const { data } = props;
+  const { data, handleCpDetailPress } = props;
   const { width, height } = Dimensions.get("window");
   const [refreshing, setRefreshing] = React.useState(false);
   const onRefresh = () => {
@@ -330,7 +330,7 @@ const BusinessHeadReportTable = (props: any) => {
                               </>
                             </View>
                             <View style={{ flexDirection: "column" }}>
-                              <View style={{ flexDirection: "row",  }}>
+                              <View style={{ flexDirection: "row" }}>
                                 {swipeData?.map((item: any, index: any) => {
                                   return (
                                     <View
@@ -362,7 +362,14 @@ const BusinessHeadReportTable = (props: any) => {
                                           width: normalizeWidth(100),
                                         }}
                                       >
-                                        <View style={styles.dataItemsForBM}>
+                                        <TouchableOpacity
+                                          onPress={() =>
+                                            props.handleCTANavigation(
+                                              "AppointmentCTA"
+                                            )
+                                          }
+                                          style={styles.dataItemsForBM}
+                                        >
                                           <Text
                                             style={{
                                               ...styles.boxText,
@@ -371,8 +378,15 @@ const BusinessHeadReportTable = (props: any) => {
                                           >
                                             {item?.sitevisitbysource}
                                           </Text>
-                                        </View>
-                                        <View style={styles.dataItemsForBM}>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                          onPress={() =>
+                                            props.handleCTANavigation(
+                                              "BookingCTA"
+                                            )
+                                          }
+                                          style={styles.dataItemsForBM}
+                                        >
                                           <Text
                                             style={{
                                               ...styles.boxText,
@@ -381,8 +395,10 @@ const BusinessHeadReportTable = (props: any) => {
                                           >
                                             {item?.confirmBooking}
                                           </Text>
-                                        </View>
-                                        <View style={styles.dataItemsForBM}>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity
+                                          style={styles.dataItemsForBM}
+                                        >
                                           <Text
                                             style={{
                                               ...styles.boxText,
@@ -391,7 +407,7 @@ const BusinessHeadReportTable = (props: any) => {
                                           >
                                             {item?.ConversionPercentage}
                                           </Text>
-                                        </View>
+                                        </TouchableOpacity>
                                       </View>
                                     );
                                   }
@@ -497,7 +513,10 @@ const BusinessHeadReportTable = (props: any) => {
                                   width: normalizeWidth(100),
                                 }}
                               >
-                                <View
+                                <TouchableOpacity
+                                  onPress={() =>
+                                    handleCpDetailPress(item?.CPInfo, "Demo")
+                                  }
                                   style={[
                                     styles.dataItemsForBM,
                                     { width: normalizeWidth(120) },
@@ -511,8 +530,11 @@ const BusinessHeadReportTable = (props: any) => {
                                   >
                                     {itm?.cpcount ? itm?.cpcount : 0}
                                   </Text>
-                                </View>
-                                <View
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                  onPress={() =>
+                                    handleCpDetailPress(item?.CPInfo, "Demo")
+                                  }
                                   style={[
                                     styles.dataItemsForBM,
                                     { width: normalizeWidth(120) },
@@ -528,8 +550,11 @@ const BusinessHeadReportTable = (props: any) => {
                                       ? itm?.newCpRegistered
                                       : 0}
                                   </Text>
-                                </View>
-                                <View
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                  onPress={() =>
+                                    handleCpDetailPress(item?.CPInfo, "Demo")
+                                  }
                                   style={[
                                     styles.dataItemsForBM,
                                     { width: normalizeWidth(120) },
@@ -543,8 +568,11 @@ const BusinessHeadReportTable = (props: any) => {
                                   >
                                     {itm?.activeCP ? itm?.activeCP : 0}
                                   </Text>
-                                </View>
-                                <View
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                  onPress={() =>
+                                    handleCpDetailPress(item?.CPInfo, "Demo")
+                                  }
                                   style={[
                                     styles.dataItemsForBM,
                                     { width: normalizeWidth(120) },
@@ -560,8 +588,11 @@ const BusinessHeadReportTable = (props: any) => {
                                       ? itm?.transacting_cp
                                       : 0}
                                   </Text>
-                                </View>
-                                <View
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                  onPress={() =>
+                                    handleCpDetailPress(item?.CPInfo, "Demo")
+                                  }
                                   style={[
                                     styles.dataItemsForBM,
                                     { width: normalizeWidth(120) },
@@ -575,7 +606,7 @@ const BusinessHeadReportTable = (props: any) => {
                                   >
                                     {itm?.inactiveCP ? itm?.inactiveCP : 0}
                                   </Text>
-                                </View>
+                                </TouchableOpacity>
                               </View>
                             </View>
                           </View>

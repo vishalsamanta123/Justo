@@ -41,11 +41,11 @@ export const ONE_MONTH_DATES = new Date(new Date().setDate(new Date().getDate() 
 
 // export const  GLOBAL_URL = 'http://192.168.43.177:3000' // virendra 
 // export const  GLOBAL_URL = 'http://192.168.1.5:3000' // remi
-export const  GLOBAL_URL = 'http://192.168.1.5:3001' // remi
+// export const  GLOBAL_URL = 'http://192.168.1.5:3001' // remi
 
 // export const  GLOBAL_URL = 'https://prodapi.justoverse.com:3002' //prod
 // export const GLOBAL_URL = 'https://api.justoverse.com:3000'
-// export const GLOBAL_URL = 'https://itinformatix.org:3044'
+export const GLOBAL_URL = 'https://itinformatix.org:3044'
 // export const  MAP_KEY = 'AIzaSyDdLk5tb75SiJvRk9F2B4almu-sBAi1-EM'
 export const MAP_KEY = 'AIzaSyCbDx7Lk4eTMzptrQKXZvOPYgEMggrq8o4'
 export const JW_LOGIN = 'api'

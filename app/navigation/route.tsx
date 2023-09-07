@@ -110,6 +110,8 @@ import CloseAppointment from "app/views/AppointMent/CloseAppointment";
 import EmployeeListing from "app/views/AgencyManagement/EmployeeListing";
 import AddEmployee from "app/views/AgencyManagement/AddEmployee";
 import CpDetailForReport from "app/views/CpDetailForReport";
+import AppointmentCTA from "app/views/ReportCTAManagement/AppointmentCTA";
+import BookingCTA from "app/views/ReportCTAManagement/BookingCTA";
 
 const Stack = createNativeStackNavigator();
 const AppStack = createNativeStackNavigator();
@@ -288,6 +290,8 @@ const AppComponent = () => {
 
       {/* Report */}
       <AppStack.Screen component={CpDetailForReport} name="CpDetailForReport" />
+      <AppStack.Screen component={AppointmentCTA} name="AppointmentCTA" />
+      <AppStack.Screen component={BookingCTA} name="BookingCTA" />
 
     </AppStack.Navigator>
   );

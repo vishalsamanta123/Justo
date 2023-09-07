@@ -7,7 +7,11 @@ import {
   PRIMARY_THEME_COLOR,
   WHITE_COLOR,
 } from "app/components/utilities/constant";
-import { normalizeWidth, normalizeHeight, normalize } from "app/components/scaleFontSize";
+import {
+  normalizeWidth,
+  normalizeHeight,
+  normalize,
+} from "app/components/scaleFontSize";
 
 const SourcingForCluster = (props: any) => {
   const { data, headerData, handleCpDetailPress } = props;
@@ -70,7 +74,7 @@ const SourcingForCluster = (props: any) => {
                     {item?.username}
                   </Text>
                 </View>
-                <View style={styles.cTDataItems}>
+                <TouchableOpacity onPress={() => handleCpDetailPress(item?.CPInfo, "Demo")} style={styles.cTDataItems}>
                   <Text
                     style={{
                       ...styles.boxText,
@@ -79,8 +83,8 @@ const SourcingForCluster = (props: any) => {
                   >
                     {item?.cpcount}
                   </Text>
-                </View>
-                <View style={styles.cTDataItems}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleCpDetailPress(item?.CPInfo, "Demo")} style={styles.cTDataItems}>
                   <Text
                     style={{
                       ...styles.boxText,
@@ -89,8 +93,8 @@ const SourcingForCluster = (props: any) => {
                   >
                     {item?.newCpRegistered ? item?.newCpRegistered : 0}
                   </Text>
-                </View>
-                <View style={styles.cTDataItems}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleCpDetailPress(item?.CPInfo, "Demo")} style={styles.cTDataItems}>
                   <Text
                     style={{
                       ...styles.boxText,
@@ -99,8 +103,8 @@ const SourcingForCluster = (props: any) => {
                   >
                     {item?.activeCP}
                   </Text>
-                </View>
-                <View style={styles.cTDataItems}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleCpDetailPress(item?.CPInfo, "Demo")} style={styles.cTDataItems}>
                   <Text
                     style={{
                       ...styles.boxText,
@@ -110,8 +114,8 @@ const SourcingForCluster = (props: any) => {
                     {/* {item?.BookingCountTotal} */}
                     {item?.TransactionalCPtotal}
                   </Text>
-                </View>
-                <View style={styles.cTDataItems}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleCpDetailPress(item?.CPInfo, "Demo")} style={styles.cTDataItems}>
                   <Text
                     style={{
                       ...styles.boxText,
@@ -120,8 +124,8 @@ const SourcingForCluster = (props: any) => {
                   >
                     {item?.inactiveCP}
                   </Text>
-                </View>
-                <View style={styles.cTDataItems}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.handleCTANavigation("AppointmentCTA")} style={styles.cTDataItems}>
                   <Text
                     style={{
                       ...styles.boxText,
@@ -131,8 +135,8 @@ const SourcingForCluster = (props: any) => {
                     {/* {item.SitevisitCountTotal} */}
                     {item.Appdonecounttotal}
                   </Text>
-                </View>
-                <View style={styles.cTDataItems}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.handleCTANavigation("AppointmentCTA")} style={styles.cTDataItems}>
                   <Text
                     style={{
                       ...styles.boxText,
@@ -141,8 +145,8 @@ const SourcingForCluster = (props: any) => {
                   >
                     {item.NoshowAppintment}
                   </Text>
-                </View>
-                <View style={styles.cTDataItems}>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => props.handleCTANavigation("BookingCTA")} style={styles.cTDataItems}>
                   <Text
                     style={{
                       ...styles.boxText,
@@ -151,14 +155,11 @@ const SourcingForCluster = (props: any) => {
                   >
                     {item.confirmBooking}
                   </Text>
-                </View>
+                </TouchableOpacity>
 
                 <TouchableOpacity
                   onPress={() =>
-                    handleCpDetailPress(
-                      item.CPInfo,
-                      item?.username
-                    )
+                    handleCpDetailPress(item.CPInfo, item?.username)
                   }
                   style={styles.cTDataItems}
                 >

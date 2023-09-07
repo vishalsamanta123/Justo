@@ -33,8 +33,9 @@ const ReportView = (props: any) => {
     handleCpDetailPress,
     propertyListForFilter,
     clusterheadListForFilter,
+    handleCTANavigation,
   } = props;
-  console.log("🚀 ~ file: ReportView.tsx:39 ~ reportData:", reportData)
+  console.log("🚀 ~ file: ReportView.tsx:39 ~ reportData:", reportData);
   return (
     <>
       <View style={styles.mainContainer}>
@@ -50,37 +51,50 @@ const ReportView = (props: any) => {
           statusBarColor={PRIMARY_THEME_COLOR}
           barStyle={"light-content"}
         />
-        {/* {roleId === ROLE_IDS.sourcingmanager_id ? (
+        {roleId === ROLE_IDS.sourcingmanager_id ? (
           <SMReportTable
             data={reportData}
             onReset={onReset}
             handleCpDetailPress={handleCpDetailPress}
+            handleCTANavigation={handleCTANavigation}
           />
         ) : roleId === ROLE_IDS.closingmanager_id ? (
           <CMReportTable
             data={reportData}
             onReset={onReset}
             userData={userData}
+            handleCTANavigation={handleCTANavigation}
           />
         ) : roleId === ROLE_IDS.sourcingtl_id ? (
           <STReportTable
             data={reportData}
             onReset={onReset}
             handleCpDetailPress={handleCpDetailPress}
+            handleCTANavigation={handleCTANavigation}
           />
         ) : roleId === ROLE_IDS.closingtl_id ? (
-          <CTReportTable data={reportData} onReset={onReset} />
+          <CTReportTable
+            data={reportData}
+            onReset={onReset}
+            handleCTANavigation={handleCTANavigation}
+          />
         ) : roleId === ROLE_IDS.clusterhead_id ||
           roleId === ROLE_IDS.sitehead_id ? (
           <ClusterHeadReportTable
             data={reportData}
             onReset={onReset}
             handleCpDetailPress={handleCpDetailPress}
+            handleCTANavigation={handleCTANavigation}
           />
         ) : roleId === ROLE_IDS.businesshead_id ? (
-          <BusinessHeadReportTable data={reportData} onReset={onReset} />
-        ) : null} */}
-        <ComingSoonScreen />
+          <BusinessHeadReportTable
+            data={reportData}
+            onReset={onReset}
+            handleCpDetailPress={handleCpDetailPress}
+            handleCTANavigation={handleCTANavigation}
+          />
+        ) : null}
+        {/* <ComingSoonScreen /> */}
       </View>
       <FilterModal
         Visible={FilterModalVisible}

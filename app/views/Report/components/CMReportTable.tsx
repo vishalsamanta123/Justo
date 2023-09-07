@@ -67,7 +67,7 @@ const CMReportTable = (props: any) => {
   const onPressDownload = async () => {
     let array = data.map((item: any) => {
       return {
-        "CM Name":  userData?.data?.user_name,
+        "CM Name": userData?.data?.user_name,
         "Visitor Attended": item?.VisitorAttended,
         // "Visitor Attended": item?.TotalAppointments,
         "Direct Walk-ins": item?.DirectWalkins,
@@ -256,12 +256,16 @@ const CMReportTable = (props: any) => {
                 </Text>
               </View>
             </View> */}
-          <ScrollView contentContainerStyle={{flex: 1, }} horizontal={true} showsHorizontalScrollIndicator={false}>
+          <ScrollView
+            contentContainerStyle={{ flex: 1 }}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
             <View
               style={{
                 flexDirection: "row",
                 // width: "100%",
-                flex: 1, 
+                flex: 1,
               }}
             >
               <View
@@ -302,18 +306,14 @@ const CMReportTable = (props: any) => {
                     style={{
                       flexDirection: "column",
                       // width: "100%",
-                      flex: 2
+                      flex: 2,
                     }}
                   >
-                    <View
-                      style={{
-                        // width: "100%",
-                        // width: normalizeWidth(100),
-                        // height: normalizeHeight(90),
-                        borderWidth: normalize(Isios ? 1.2 : 2),
-                        padding: normalize(12),
-                      }}
-                      // style={styles.dataItems}
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.dataItems}
                     >
                       <Text
                         style={{
@@ -324,8 +324,13 @@ const CMReportTable = (props: any) => {
                         {item?.VisitorAttended}
                         {/* {item?.TotalAppointments} */}
                       </Text>
-                    </View>
-                    <View style={styles.dataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.dataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -334,8 +339,13 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.DirectWalkins}
                       </Text>
-                    </View>
-                    <View style={styles.dataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.dataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -344,8 +354,13 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.CPWalkins}
                       </Text>
-                    </View>
-                    <View style={styles.dataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.dataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -354,8 +369,13 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.Noshow}
                       </Text>
-                    </View>
-                    <View style={styles.dataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.dataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -364,8 +384,13 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.TotalAppointmentsrevisit}
                       </Text>
-                    </View>
-                    <View style={styles.dataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.dataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -374,8 +399,13 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.TotalNotInterested}
                       </Text>
-                    </View>
-                    <View style={styles.dataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("BookingCTA")
+                      }
+                      style={styles.dataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -384,8 +414,8 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.Booking}
                       </Text>
-                    </View>
-                    {/* <View style={styles.dataItems}>
+                    </TouchableOpacity>
+                    {/* <TouchableOpacity style={styles.dataItems}>
                         <Text
                           style={{
                             ...styles.boxText,
@@ -394,8 +424,8 @@ const CMReportTable = (props: any) => {
                         >
                           {item?.ReadytoBook}
                         </Text>
-                      </View> */}
-                    {/* <View style={styles.dataItems}>
+                      </TouchableOpacity> */}
+                    {/* <TouchableOpacity style={styles.dataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -404,9 +434,9 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.followschedule}
                       </Text>
-                    </View> */}
+                    </TouchableOpacity> */}
 
-                    <View style={styles.dataItems}>
+                    <TouchableOpacity style={styles.dataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -415,8 +445,8 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.Conversion}
                       </Text>
-                    </View>
-                    {/* <View style={styles.dataItems}>
+                    </TouchableOpacity>
+                    {/* <TouchableOpacity style={styles.dataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -425,8 +455,8 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.GrandTotal}
                       </Text>
-                    </View> */}
-                    {/* <View style={styles.dataItems}>
+                    </TouchableOpacity> */}
+                    {/* <TouchableOpacity style={styles.dataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -435,8 +465,8 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.Registration}
                       </Text>
-                    </View>
-                    <View style={styles.dataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.dataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -445,7 +475,7 @@ const CMReportTable = (props: any) => {
                       >
                         {item?.TotalCancelation}
                       </Text>
-                    </View> */}
+                    </TouchableOpacity> */}
                   </View>
                 );
               })}

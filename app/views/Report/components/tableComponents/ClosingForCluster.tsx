@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import styles from "../styles";
 import {
@@ -7,12 +7,15 @@ import {
   PRIMARY_THEME_COLOR,
   WHITE_COLOR,
 } from "app/components/utilities/constant";
-import { normalizeWidth, normalizeHeight, normalize } from "app/components/scaleFontSize";
+import {
+  normalizeWidth,
+  normalizeHeight,
+  normalize,
+} from "app/components/scaleFontSize";
 
 const ClosingForCluster = (props: any) => {
   const { data, headerData } = props;
 
- 
   return (
     <>
       <View
@@ -67,7 +70,10 @@ const ClosingForCluster = (props: any) => {
                       {item?.user_name}
                     </Text>
                   </View>
-                  <View style={styles.cTDataItems}>
+                  <TouchableOpacity
+                    onPress={() => props.handleCTANavigation("AppointmentCTA")}
+                    style={styles.cTDataItems}
+                  >
                     <Text
                       style={{
                         ...styles.boxText,
@@ -77,8 +83,11 @@ const ClosingForCluster = (props: any) => {
                       {item?.VisitorAttended}
                       {/* {item?.TotalAppointments} */}
                     </Text>
-                  </View>
-                  <View style={styles.cTDataItems}>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => props.handleCTANavigation("AppointmentCTA")}
+                    style={styles.cTDataItems}
+                  >
                     <Text
                       style={{
                         ...styles.boxText,
@@ -87,8 +96,11 @@ const ClosingForCluster = (props: any) => {
                     >
                       {item?.DirectWalkins}
                     </Text>
-                  </View>
-                  <View style={styles.cTDataItems}>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => props.handleCTANavigation("AppointmentCTA")}
+                    style={styles.cTDataItems}
+                  >
                     <Text
                       style={{
                         ...styles.boxText,
@@ -97,9 +109,9 @@ const ClosingForCluster = (props: any) => {
                     >
                       {item?.CPWalkins}
                     </Text>
-                  </View>
+                  </TouchableOpacity>
 
-                  {/* <View style={styles.cTDataItems}>
+                  {/* <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -108,8 +120,11 @@ const ClosingForCluster = (props: any) => {
                       >
                         {item.VisitorAttended}
                       </Text>
-                    </View> */}
-                  <View style={styles.cTDataItems}>
+                    </TouchableOpacity> */}
+                  <TouchableOpacity
+                    onPress={() => props.handleCTANavigation("AppointmentCTA")}
+                    style={styles.cTDataItems}
+                  >
                     <Text
                       style={{
                         ...styles.boxText,
@@ -118,8 +133,8 @@ const ClosingForCluster = (props: any) => {
                     >
                       {item.Noshow}
                     </Text>
-                  </View>
-                  {/* <View style={styles.cTDataItems}>
+                  </TouchableOpacity>
+                  {/* <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -128,8 +143,11 @@ const ClosingForCluster = (props: any) => {
                       >
                         {item?.TotalAppointments}
                       </Text>
-                    </View> */}
-                  <View style={styles.cTDataItems}>
+                    </TouchableOpacity> */}
+                  <TouchableOpacity
+                    onPress={() => props.handleCTANavigation("AppointmentCTA")}
+                    style={styles.cTDataItems}
+                  >
                     <Text
                       style={{
                         ...styles.boxText,
@@ -138,8 +156,11 @@ const ClosingForCluster = (props: any) => {
                     >
                       {item?.TotalAppointmentsrevisit}
                     </Text>
-                  </View>
-                  <View style={styles.cTDataItems}>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => props.handleCTANavigation("AppointmentCTA")}
+                    style={styles.cTDataItems}
+                  >
                     <Text
                       style={{
                         ...styles.boxText,
@@ -148,8 +169,8 @@ const ClosingForCluster = (props: any) => {
                     >
                       {item.TotalNotInterested}
                     </Text>
-                  </View>
-                  {/* <View style={styles.cTDataItems}>
+                  </TouchableOpacity>
+                  {/* <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -158,8 +179,11 @@ const ClosingForCluster = (props: any) => {
                       >
                         {item.TotalCancelation}
                       </Text>
-                    </View> */}
-                  <View style={styles.cTDataItems}>
+                    </TouchableOpacity> */}
+                  <TouchableOpacity
+                    onPress={() => props.handleCTANavigation("BookingCTA")}
+                    style={styles.cTDataItems}
+                  >
                     <Text
                       style={{
                         ...styles.boxText,
@@ -168,8 +192,8 @@ const ClosingForCluster = (props: any) => {
                     >
                       {item.Booking}
                     </Text>
-                  </View>
-                  {/* <View style={styles.cTDataItems}>
+                  </TouchableOpacity>
+                  {/* <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -178,8 +202,8 @@ const ClosingForCluster = (props: any) => {
                       >
                         {item.ReadytoBook}
                       </Text>
-                    </View> */}
-                  {/* <View style={styles.cTDataItems}>
+                    </TouchableOpacity> */}
+                  {/* <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -188,8 +212,8 @@ const ClosingForCluster = (props: any) => {
                       >
                         {item.Registration}
                       </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -198,8 +222,8 @@ const ClosingForCluster = (props: any) => {
                       >
                         {item.CancelBooking}
                       </Text>
-                    </View> */}
-                  <View style={styles.cTDataItems}>
+                    </TouchableOpacity> */}
+                  <TouchableOpacity style={styles.cTDataItems}>
                     <Text
                       style={{
                         ...styles.boxText,
@@ -208,8 +232,8 @@ const ClosingForCluster = (props: any) => {
                     >
                       {item.Conversion}
                     </Text>
-                  </View>
-                  {/* <View style={styles.cTDataItems}>
+                  </TouchableOpacity>
+                  {/* <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -218,7 +242,7 @@ const ClosingForCluster = (props: any) => {
                       >
                         {item.followschedule}
                       </Text>
-                    </View> */}
+                    </TouchableOpacity> */}
                 </View>
               );
             })}

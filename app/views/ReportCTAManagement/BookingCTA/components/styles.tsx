@@ -1,10 +1,4 @@
-import { StyleSheet } from "react-native";
-import {
-  normalize,
-  normalizeHeight,
-  normalizeSpacing,
-  normalizeWidth,
-} from "../../../../components/scaleFontSize";
+import { normalize, normalizeSpacing } from "app/components/scaleFontSize";
 import {
   BLACK_COLOR,
   FONT_FAMILY_EXTRABOLD,
@@ -12,10 +6,9 @@ import {
   GRAY_COLOR,
   GRAY_LIGHT_COLOR,
   PRIMARY_THEME_COLOR,
-  PRIMARY_THEME_COLOR_DARK,
-  RED_COLOR,
   WHITE_COLOR,
-} from "../../../../components/utilities/constant";
+} from "app/components/utilities/constant";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -25,9 +18,8 @@ const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: PRIMARY_THEME_COLOR,
   },
-  listView: {
-    flex: 1,
-    margin: normalizeSpacing(10),
+  RightFirstIconStyle: {
+    tintColor: WHITE_COLOR,
   },
   IteamView: {
     backgroundColor: WHITE_COLOR,
@@ -62,23 +54,10 @@ const styles = StyleSheet.create({
     color: BLACK_COLOR,
     marginHorizontal: normalizeSpacing(10),
   },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: normalizeSpacing(10),
-    alignItems: "flex-end",
-  },
-  Viewbutton: {
-    top: 10,
-    backgroundColor: PRIMARY_THEME_COLOR,
-    borderBottomEndRadius: 10,
-    borderTopLeftRadius: 10,
-    padding: normalizeSpacing(5),
-  },
-  arrow: {
-    tintColor: WHITE_COLOR,
-    width: normalizeWidth(30),
-    height: normalizeHeight(30),
+  listView: {
+    flex: 1,
+    margin: normalizeSpacing(10),
   },
 });
+
 export default styles;

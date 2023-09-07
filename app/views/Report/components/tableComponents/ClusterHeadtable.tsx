@@ -18,7 +18,7 @@ import ClosingForCluster from "./ClosingForCluster";
 import SMReportTable from "../SMReportTable";
 
 const ClusterHeadtable = (props: any) => {
-  const { data, headerData, onReset, handleCpDetailPress, role_ID } = props;
+  const { data, headerData, onReset, handleCpDetailPress, role_ID, handleCTANavigation } = props;
 
   return (
     <View
@@ -76,9 +76,9 @@ const ClusterHeadtable = (props: any) => {
             }}
           >
             {role_ID == 1 ? (
-              <ClosingForCluster data={data} headerData={headerData}/>
+              <ClosingForCluster data={data} headerData={headerData} handleCTANavigation={handleCTANavigation}/>
             ) : (
-              <SourcingForCluster data={data} headerData={headerData} handleCpDetailPress={handleCpDetailPress}/>
+              <SourcingForCluster data={data} headerData={headerData} handleCpDetailPress={handleCpDetailPress} handleCTANavigation={handleCTANavigation}/>
             )}
           </View>
         </ScrollView>

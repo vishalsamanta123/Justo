@@ -147,7 +147,7 @@ const STReportTable = (props: any) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{
@@ -183,149 +183,151 @@ const STReportTable = (props: any) => {
           </TouchableOpacity>
         </View> */}
         <ScrollView horizontal>
-        <View>
-          {data.map((item: any, index: any) => {
-            return (
-              <>
-                <View
-                  style={{
-                    marginBottom: normalize(12),
-                  }}
-                  key={index}
-                >
+          <View>
+            {data.map((item: any, index: any) => {
+              return (
+                <>
                   <View
                     style={{
-                      borderWidth: normalize(Isios ? 1.2 : 2),
-                      padding: normalize(12),
-                      backgroundColor: PRIMARY_THEME_COLOR,
+                      marginBottom: normalize(12),
                     }}
+                    key={index}
                   >
-                    <Text
-                      style={{
-                        ...styles.boxText,
-                        color: WHITE_COLOR,
-                        textAlign: "center",
-                      }}
-                    >
-                      {item?.property_title}
-                    </Text>
-                  </View>
-
-                  <View>
                     <View
-                      key={index}
                       style={{
-                        flexDirection: "row",
+                        borderWidth: normalize(Isios ? 1.2 : 2),
+                        padding: normalize(12),
+                        backgroundColor: PRIMARY_THEME_COLOR,
                       }}
                     >
-                      <View
+                      <Text
                         style={{
-                          flexDirection: "column",
+                          ...styles.boxText,
+                          color: WHITE_COLOR,
+                          textAlign: "center",
                         }}
                       >
-                        {headerData.map((item: any, index: any) => {
-                          return (
-                            <View
-                              key={index}
-                              style={{
-                                // width: normalizeWidth(140),
-                                // height: normalizeHeight(90),
-                                borderWidth: normalize(Isios ? 1.2 : 2),
-                                padding: normalize(12),
-                                backgroundColor: PRIMARY_THEME_COLOR,
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  ...styles.boxText,
-                                  color: WHITE_COLOR,
-                                }}
-                              >
-                                {item}
-                              </Text>
-                            </View>
-                          );
-                        })}
-                      </View>
-                      <ScrollView
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
+                        {item?.property_title}
+                      </Text>
+                    </View>
+
+                    <View>
+                      <View
+                        key={index}
+                        style={{
+                          flexDirection: "row",
+                        }}
                       >
                         <View
                           style={{
-                            flexDirection: "row",
+                            flexDirection: "column",
                           }}
                         >
-                          {item?.smDetails.map((item: any, index: any) => {
+                          {headerData.map((item: any, index: any) => {
                             return (
                               <View
+                                key={index}
                                 style={{
-                                  flexDirection: "column",
+                                  // width: normalizeWidth(140),
+                                  // height: normalizeHeight(90),
+                                  borderWidth: normalize(Isios ? 1.2 : 2),
+                                  padding: normalize(12),
+                                  backgroundColor: PRIMARY_THEME_COLOR,
                                 }}
                               >
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.username}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.cpcount}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.newCpRegistered ? item?.newCpRegistered : 0}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.activeCP}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {/* {item?.BookingCountTotal} */}
-                                    {item?.TransactionalCPtotal}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item?.inactiveCP}
-                                  </Text>
-                                </View>
+                                <Text
+                                  style={{
+                                    ...styles.boxText,
+                                    color: WHITE_COLOR,
+                                  }}
+                                >
+                                  {item}
+                                </Text>
+                              </View>
+                            );
+                          })}
+                        </View>
+                        <ScrollView
+                          horizontal={true}
+                          showsHorizontalScrollIndicator={false}
+                        >
+                          <View
+                            style={{
+                              flexDirection: "row",
+                            }}
+                          >
+                            {item?.smDetails.map((item: any, index: any) => {
+                              return (
+                                <View
+                                  style={{
+                                    flexDirection: "column",
+                                  }}
+                                >
+                                  <View style={styles.cTDataItems}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {item?.username}
+                                    </Text>
+                                  </View>
+                                  <TouchableOpacity onPress={() => handleCpDetailPress(item?.CPInfo, "Demo")}  style={styles.cTDataItems}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {item?.cpcount}
+                                    </Text>
+                                  </TouchableOpacity>
+                                  <TouchableOpacity onPress={() => handleCpDetailPress(item?.CPInfo, "Demo")} style={styles.cTDataItems}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {item?.newCpRegistered
+                                        ? item?.newCpRegistered
+                                        : 0}
+                                    </Text>
+                                  </TouchableOpacity>
+                                  <TouchableOpacity onPress={() => handleCpDetailPress(item?.CPInfo, "Demo")} style={styles.cTDataItems}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {item?.activeCP}
+                                    </Text>
+                                  </TouchableOpacity>
+                                  <TouchableOpacity onPress={() => handleCpDetailPress(item?.CPInfo, "Demo")} style={styles.cTDataItems}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {/* {item?.BookingCountTotal} */}
+                                      {item?.TransactionalCPtotal}
+                                    </Text>
+                                  </TouchableOpacity>
+                                  <TouchableOpacity onPress={() => handleCpDetailPress(item?.CPInfo, "Demo")} style={styles.cTDataItems}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {item?.inactiveCP}
+                                    </Text>
+                                  </TouchableOpacity>
 
-                                {/* <View style={styles.cTDataItems}>
+                                  {/* <TouchableOpacity style={styles.cTDataItems}>
                                   <Text
                                     style={{
                                       ...styles.boxText,
@@ -334,39 +336,39 @@ const STReportTable = (props: any) => {
                                   >
                                     {item?.leadcount}
                                   </Text>
-                                </View> */}
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {/* {item.SitevisitCountTotal} */}
-                                    {item.Appdonecounttotal}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item.NoshowAppintment}
-                                  </Text>
-                                </View>
-                                <View style={styles.cTDataItems}>
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
-                                  >
-                                    {item.confirmBooking}
-                                  </Text>
-                                </View>
-                                {/* <View style={styles.cTDataItems}>
+                                </TouchableOpacity> */}
+                                  <TouchableOpacity onPress={() => props.handleCTANavigation("AppointmentCTA")} style={styles.cTDataItems}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {/* {item.SitevisitCountTotal} */}
+                                      {item.Appdonecounttotal}
+                                    </Text>
+                                  </TouchableOpacity>
+                                  <TouchableOpacity onPress={() => props.handleCTANavigation("AppointmentCTA")} style={styles.cTDataItems}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {item.NoshowAppintment}
+                                    </Text>
+                                  </TouchableOpacity>
+                                  <TouchableOpacity  onPress={() => props.handleCTANavigation("BookingCTA")}  style={styles.cTDataItems}>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      {item.confirmBooking}
+                                    </Text>
+                                  </TouchableOpacity>
+                                  {/* <View style={styles.cTDataItems}>
                                   <Text
                                     style={{
                                       ...styles.boxText,
@@ -376,7 +378,7 @@ const STReportTable = (props: any) => {
                                     {item.CancelAppintment}
                                   </Text>
                                 </View> */}
-                                {/* <View style={styles.cTDataItems}>
+                                  {/* <View style={styles.cTDataItems}>
                                   <Text
                                     style={{
                                       ...styles.boxText,
@@ -386,7 +388,7 @@ const STReportTable = (props: any) => {
                                     {item.RevisitAppintment}
                                   </Text>
                                 </View> */}
-                                {/* <View style={styles.cTDataItems}>
+                                  {/* <View style={styles.cTDataItems}>
                                   <Text
                                     style={{
                                       ...styles.boxText,
@@ -396,7 +398,7 @@ const STReportTable = (props: any) => {
                                     {item.RescheduleApp}
                                   </Text>
                                 </View> */}
-                                {/* <View style={styles.cTDataItems}>
+                                  {/* <View style={styles.cTDataItems}>
                                   <Text
                                     style={{
                                       ...styles.boxText,
@@ -407,7 +409,7 @@ const STReportTable = (props: any) => {
                                   </Text>
                                 </View> */}
 
-                                {/* <View style={styles.cTDataItems}>
+                                  {/* <View style={styles.cTDataItems}>
                                   <Text
                                     style={{
                                       ...styles.boxText,
@@ -417,36 +419,36 @@ const STReportTable = (props: any) => {
                                     {item?.CancelBooking}
                                   </Text>
                                 </View> */}
-                                <TouchableOpacity
-                                  onPress={() =>
-                                    handleCpDetailPress(
-                                      item.CPInfo,
-                                      item?.username
-                                    )
-                                  }
-                                  style={styles.cTDataItems}
-                                >
-                                  <Text
-                                    style={{
-                                      ...styles.boxText,
-                                      color: BLACK_COLOR,
-                                    }}
+                                  <TouchableOpacity
+                                    onPress={() =>
+                                      handleCpDetailPress(
+                                        item.CPInfo,
+                                        item?.username
+                                      )
+                                    }
+                                    style={styles.cTDataItems}
                                   >
-                                    View CP
-                                  </Text>
-                                </TouchableOpacity>
-                              </View>
-                            );
-                          })}
-                        </View>
-                      </ScrollView>
+                                    <Text
+                                      style={{
+                                        ...styles.boxText,
+                                        color: BLACK_COLOR,
+                                      }}
+                                    >
+                                      View CP
+                                    </Text>
+                                  </TouchableOpacity>
+                                </View>
+                              );
+                            })}
+                          </View>
+                        </ScrollView>
+                      </View>
                     </View>
                   </View>
-                </View>
-              </>
-            );
-          })}
-        </View>
+                </>
+              );
+            })}
+          </View>
         </ScrollView>
       </ScrollView>
     </SafeAreaView>

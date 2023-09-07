@@ -231,7 +231,12 @@ const CTReportTable = (props: any) => {
                         {item?.user_name}
                       </Text>
                     </View>
-                    <View style={styles.cTDataItems}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.cTDataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -241,8 +246,13 @@ const CTReportTable = (props: any) => {
                         {item?.VisitorAttended}
                         {/* {item?.TotalAppointments} */}
                       </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.cTDataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -251,8 +261,13 @@ const CTReportTable = (props: any) => {
                       >
                         {item?.DirectWalkins}
                       </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.cTDataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -261,8 +276,13 @@ const CTReportTable = (props: any) => {
                       >
                         {item?.CPWalkins}
                       </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.cTDataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -271,8 +291,13 @@ const CTReportTable = (props: any) => {
                       >
                         {item.Noshow}
                       </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.cTDataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -281,8 +306,13 @@ const CTReportTable = (props: any) => {
                       >
                         {item?.TotalAppointmentsrevisit}
                       </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.handleCTANavigation("AppointmentCTA")
+                      }
+                      style={styles.cTDataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -291,8 +321,8 @@ const CTReportTable = (props: any) => {
                       >
                         {item.TotalNotInterested}
                       </Text>
-                    </View>
-                    {/* <View style={styles.cTDataItems}>
+                    </TouchableOpacity>
+                    {/* <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -301,8 +331,11 @@ const CTReportTable = (props: any) => {
                       >
                         {item.TotalCancelation}
                       </Text>
-                    </View> */}
-                    <View style={styles.cTDataItems}>
+                    </TouchableOpacity> */}
+                    <TouchableOpacity
+                      onPress={() => props.handleCTANavigation("BookingCTA")}
+                      style={styles.cTDataItems}
+                    >
                       <Text
                         style={{
                           ...styles.boxText,
@@ -311,8 +344,8 @@ const CTReportTable = (props: any) => {
                       >
                         {item.Booking}
                       </Text>
-                    </View>
-                    {/* <View style={styles.cTDataItems}>
+                    </TouchableOpacity>
+                    {/* <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -321,8 +354,8 @@ const CTReportTable = (props: any) => {
                       >
                         {item.ReadytoBook}
                       </Text>
-                    </View> */}
-                    {/* <View style={styles.cTDataItems}>
+                    </TouchableOpacity> */}
+                    {/* <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -331,8 +364,8 @@ const CTReportTable = (props: any) => {
                       >
                         {item.Registration}
                       </Text>
-                    </View>
-                    <View style={styles.cTDataItems}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -341,8 +374,8 @@ const CTReportTable = (props: any) => {
                       >
                         {item.CancelBooking}
                       </Text>
-                    </View> */}
-                    <View style={styles.cTDataItems}>
+                    </TouchableOpacity> */}
+                    <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -351,8 +384,8 @@ const CTReportTable = (props: any) => {
                       >
                         {item.Conversion}
                       </Text>
-                    </View>
-                    {/* <View style={styles.cTDataItems}>
+                    </TouchableOpacity>
+                    {/* <TouchableOpacity style={styles.cTDataItems}>
                       <Text
                         style={{
                           ...styles.boxText,
@@ -361,7 +394,7 @@ const CTReportTable = (props: any) => {
                       >
                         {item.followschedule}
                       </Text>
-                    </View> */}
+                    </TouchableOpacity> */}
                   </View>
                 );
               })}
