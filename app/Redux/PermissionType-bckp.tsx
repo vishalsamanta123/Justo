@@ -26,7 +26,7 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'sourcing_manager',
-        sort: 3
+        sort: 4
     },
     {
         title: strings.UserManagerHeader,
@@ -35,7 +35,6 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'user_management',
-        sort: 3
     },
     {
         title: strings.propertyManagementHeader,
@@ -56,24 +55,6 @@ export const MENUITEMS = [
         sort: 4
     },
     {
-        title: strings.appointmentForVisitHeader,
-        icon: images.event,
-        path: "AppointmentForSite",
-        permission: true,
-        deploy: true,
-        slug: 'appointment_ site_visit',
-        sort: 3
-    },
-    {
-        title: strings.cancelBooking,
-        icon: images.property,
-        path: "CancelBooking",
-        permission: true,
-        deploy: true,
-        slug: 'cancel_booking',
-        sort: 5
-    },
-    {
         title: strings.readytoBookHeader,
         icon: images.lead,
         path: "BookingList",
@@ -81,7 +62,6 @@ export const MENUITEMS = [
         deploy: true,
         type: 'readyToBook',
         slug: 'ready_to_book',
-        sort: 5
     },
     {
         title: strings.bookingRequestHead,
@@ -91,7 +71,6 @@ export const MENUITEMS = [
         deploy: true,
         type: 'request',
         slug: 'booking_management',
-        sort: 5
     },
     {
         title: strings.registrationReqHead,
@@ -101,17 +80,6 @@ export const MENUITEMS = [
         deploy: true,
         type: 'register',
         slug: 'registration_management',
-        sort: 5
-    },
-   
-    {
-        title: strings.recoveryHeader,
-        icon: images.property,
-        path: "Recovery",
-        permission: true,
-        deploy: true,
-        slug: 'recovery',
-        sort: 5
     },
     {
         title: strings.agencyHeader,
@@ -120,7 +88,7 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'channel_management',
-        sort: 3
+        sort: 5
     },
     {
         title: strings.leadManagementHeader,
@@ -129,7 +97,7 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'visitor_management',
-        sort: 2
+        sort: 6
     },
     {
         title: strings.followupHeader,
@@ -138,7 +106,7 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'followup_management',
-        sort: 6
+        sort: 7
     },
     {
         title: strings.appointmentWithSMHeader,
@@ -147,7 +115,7 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'appointment_with_sm',
-        sort: 7
+        sort: 8
     },
     {
         title: strings.appointmentWithCPHeader,
@@ -156,9 +124,17 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'appointment_with_cp',
-        sort: 7
+        sort: 8
     },
-   
+    {
+        title: strings.appointmentForVisitHeader,
+        icon: images.event,
+        path: "AppointmentForSite",
+        permission: true,
+        deploy: true,
+        slug: 'appointment_ site_visit',
+        sort: 9
+    },
     {
         title: strings.cpChecking,
         icon: images.lead,
@@ -166,7 +142,6 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'cp_checking',
-        sort: 9
     },
     {
         title: strings.leaderBoardHeader,
@@ -175,7 +150,6 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'leader_Board',
-        sort: 8
     },
     {
         title: strings.PickuprequestHeader,
@@ -193,7 +167,6 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'support_forum',
-        sort: 8
     },
     {
         title: strings.supportHeader,
@@ -202,7 +175,22 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'support',
-        sort: 6
+    },
+    {
+        title: strings.cancelBooking,
+        icon: images.property,
+        path: "CancelBooking",
+        permission: true,
+        deploy: true,
+        slug: 'cancel_booking',
+    },
+    {
+        title: strings.recoveryHeader,
+        icon: images.property,
+        path: "Recovery",
+        permission: true,
+        deploy: true,
+        slug: 'recovery',
     },
     {
         title: strings.reportHeader,
@@ -211,7 +199,6 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'report',
-        sort: 4
     },
     {
         title: strings.chatHeader,
@@ -220,7 +207,7 @@ export const MENUITEMS = [
         permission: true,
         deploy: true,
         slug: 'chat',
-        sort: 6
+        sort: 11
     },
     // {
     //     title: strings.saleToolHeader,

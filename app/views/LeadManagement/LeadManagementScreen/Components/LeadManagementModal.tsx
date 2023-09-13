@@ -54,6 +54,10 @@ const FilterModal = (props: any) => {
     props.setIsVisible(false);
     props.getVisitorsListApi(0, []);
     // props.setVisiitorList([]);
+    props.flatListRef?.current?.scrollToOffset({
+      animated: true,
+      offset: 0,
+    });
   };
 
   const getAllPropertyData = () => {

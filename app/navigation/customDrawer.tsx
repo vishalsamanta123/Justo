@@ -38,7 +38,6 @@ const customDrawer = ({ navigation }: any) => {
   const insets = useSafeAreaInsets();
   const [userData, setUserData] = useState<any>({});
   useEffect(() => {
-    console.log("🚀 ~ file: customDrawer.tsx:43 ~ useEffect ~ response:", response)
     if (response?.status === 200) {
       setUserData(response?.data);
     } else {
@@ -447,6 +446,7 @@ const customDrawer = ({ navigation }: any) => {
         <View style={[styles.drawerTouch, { justifyContent: 'center' }]}>
           <Text style={styles.drawerText}>
             {strings.versionText}
+            {"ST-"}
             {DeviceInfo.getVersion()}
           </Text>
         </View>

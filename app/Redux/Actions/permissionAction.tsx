@@ -30,7 +30,7 @@ const checkPermission = (data: any, isAdmin: any) => {
     }
     return item;
   });
-  // console.log('finalList: ', finalList);
+  const final =  finalList.sort((a: any, b: any) => a.sort - b.sort);
   return finalList.sort((a: any, b: any) => a.sort - b.sort);
   // return finalList.sort(function (a: any, b: any) {
   //   if (a.title) {
@@ -59,7 +59,6 @@ export const getPermission = (item: any) => async (dispatch: any) => {
     const res = await axios
       .get(`${GLOBAL_URL}/api/userManage/getUsermodels`, options)
       .then(async (res: any) => {
-        
         // return res;
         if (res.data.status === 200) {
           let payload = {

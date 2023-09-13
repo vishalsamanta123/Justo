@@ -1529,6 +1529,7 @@ const AddNewVisitorForm = (props: any) => {
                 height={45}
                 buttonText={strings.editVisitor}
                 btnTxtsize={16}
+                disabled={props.disabled}
                 handleBtnPress={() => {
                   Isios && Keyboard.dismiss();
                   props.setNavigationType(1);
@@ -1539,6 +1540,7 @@ const AddNewVisitorForm = (props: any) => {
               <>
                 <Button
                   width={Cmteam ? 300 : 150}
+                  disabled={props.disabled}
                   handleBtnPress={() => {
                     Isios && Keyboard.dismiss();
                     props.setNavigationType(1);
@@ -1552,6 +1554,7 @@ const AddNewVisitorForm = (props: any) => {
                   ? create && (
                       <Button
                         width={150}
+                        disabled={props.disabled}
                         handleBtnPress={() => {
                           Isios && Keyboard.dismiss();
                           props.setNavigationType(2);

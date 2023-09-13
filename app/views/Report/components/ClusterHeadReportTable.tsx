@@ -77,6 +77,110 @@ const ClusterHeadReportTable = (props: any) => {
     "Conversion %",
   ];
 
+  // const onPressDownload = async () => {
+  //   const res = await handlePermission(
+  //     "write",
+  //     strings.txt_setting_heading_media,
+  //     strings.txt_setting_description_media
+  //   );
+  //   if (res == "setting1") {
+  //     openPermissionSetting(
+  //       strings.txt_setting_heading_media,
+  //       strings.txt_setting_description_media
+  //     );
+  //   } else if (res) {
+  //     try {
+  //       const workbook = XLSX.utils.book_new();
+
+  //       data.forEach((property: any) => {
+  //         const {
+  //           property_title,
+  //           smDetails,
+  //           CMDetails,
+  //           CTLDetails,
+  //           StlDetails,
+  //         } = property;
+  //         const worksheetData: any = [];
+  //         StlDetails?.map((item: any) => {
+  //           let rowData: any = {
+  //             "SM Name": item?.username,
+  //           };
+  //           item?.smDetails.map((item: any) => {
+  //             rowData = {
+  //               ...rowData,
+  //               "CP Mapped": item?.cpcount,
+  //               "New CP Registered": item?.newCpRegistered,
+  //               "Active CP": item?.activeCP,
+  //               // "Transactional CP": item?.BookingCountTotal,
+  //               "Transactional CP": item?.TransactionalCPtotal,
+  //               "Dormant CP": item?.inactiveCP,
+  //               // "Appointment Done": item.SitevisitCountTotal,
+  //               "Appointment Done": item.Appdonecounttotal,
+  //               "Visitor No Shows": item.NoshowAppintment,
+  //               "Total Bookings": item.confirmBooking,
+  //             };
+  //             worksheetData.push(rowData);
+  //           });
+  //         });
+  //         CTLDetails?.map((item: any) => {
+  //           let rowData: any = {
+  //             "CM Name": item?.username,
+  //           };
+  //           item?.CMDetails.map((item: any) => {
+  //             rowData = {
+  //               ...rowData,
+  //               "Visitor Attended": item?.VisitorAttended,
+  //               // "Visitor Attended": item?.TotalAppointments,
+  //               "Direct Walk-ins": item?.DirectWalkins,
+  //               "CP(Walk-ins) Appointments": item?.CPWalkins,
+  //               "No Shows": item?.Noshow,
+  //               "Total Revisit": item?.TotalAppointmentsrevisit,
+  //               "Total Not Interested": item?.TotalNotInterested,
+  //               "Total Booking": item?.Booking,
+  //               "Conversion %": item?.Conversion,
+  //             };
+  //             worksheetData.push(rowData);
+  //           });
+  //         });
+
+  //         const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+  //         XLSX.utils.book_append_sheet(workbook, worksheet, property_title);
+  //       });
+  //       const excelFile = XLSX.write(workbook, {
+  //         type: "base64",
+  //         bookType: "xlsx",
+  //       });
+
+  //       // Create a temporary directory to store the file
+  //       const tempDir = RNFS.DownloadDirectoryPath;
+  //       let filePath: any;
+  //       if (roleId === ROLE_IDS.sitehead_id) {
+  //         filePath = `${tempDir}/SiteHeadReport.xlsx`;
+  //       } else if (roleId === ROLE_IDS.clusterhead_id) {
+  //         filePath = `${tempDir}/ClusterHeadReport.xlsx`;
+  //       }
+  //       // Write the file to the temporary directory
+  //       await RNFS.writeFile(filePath, excelFile, "base64");
+
+  //       console.log("File saved:", filePath);
+
+  //       // Add file scanning to make it visible in device's media library (optional)
+  //       await RNFS.scanFile(filePath);
+  //       ErrorMessage({
+  //         msg: strings.succesfullyDownload,
+  //         backgroundColor: GREEN_COLOR,
+  //       });
+
+  //       console.log("File scanned:", filePath);
+  //     } catch (error) {
+  //       ErrorMessage({
+  //         msg: strings.unSuccesfullyDownload,
+  //         backgroundColor: RED_COLOR,
+  //       });
+  //       console.log("Error generating Excel file:", error);
+  //     }
+  //   }
+  // };
   const onPressDownload = async () => {
     const res = await handlePermission(
       "write",
@@ -100,52 +204,84 @@ const ClusterHeadReportTable = (props: any) => {
             CTLDetails,
             StlDetails,
           } = property;
-          const worksheetData: any = [];
-          StlDetails?.map((item: any) => {
-            let rowData: any = {
-              "SM Name": item?.username,
-            };
-            item?.smDetails.map((item: any) => {
-              rowData = {
-                ...rowData,
-                "CP Mapped": item?.cpcount,
-                "New CP Registered": item?.newCpRegistered,
-                "Active CP": item?.activeCP,
-                // "Transactional CP": item?.BookingCountTotal,
-                "Transactional CP": item?.TransactionalCPtotal,
-                "Dormant CP": item?.inactiveCP,
-                // "Appointment Done": item.SitevisitCountTotal,
-                "Appointment Done": item.Appdonecounttotal,
-                "Visitor No Shows": item.NoshowAppintment,
-                "Total Bookings": item.confirmBooking,
-              };
-              worksheetData.push(rowData);
+
+          const worksheet = XLSX.utils.aoa_to_sheet([[]]); // Create an empty worksheet
+          let currentRow : any;
+
+          // Add "CM Name" from CTLDetails in cell A3
+          let ClosingrowData: any = [];
+          CTLDetails?.forEach((item: any) => {
+            ClosingrowData.push(["CTL Name", item?.username]);
+            item?.CMDetails.forEach((cmItem: any) => {
+              ClosingrowData.push([
+                "CM Name",
+                "Visitor Attended",
+                "Direct Walk-ins",
+                "CP (Walk-ins) Appointments",
+                "No Shows",
+                "Total Revisit",
+                "Total Not Interested",
+                "Total Booking",
+                "Conversion %",
+              ]);
+              ClosingrowData.push([
+                cmItem?.user_name,
+                cmItem?.VisitorAttended,
+                cmItem?.DirectWalkins,
+                cmItem?.CPWalkins,
+                cmItem?.Noshow,
+                cmItem?.TotalAppointmentsrevisit,
+                cmItem?.TotalNotInterested,
+                cmItem?.Booking,
+                cmItem?.Conversion,
+              ]);
             });
+            currentRow = item?.CMDetails?.length + 3
           });
-          CTLDetails?.map((item: any) => {
-            let rowData: any = {
-              "CM Name": item?.username,
-            };
-            item?.CMDetails.map((item: any) => {
-              rowData = {
-                ...rowData,
-                "Visitor Attended": item?.VisitorAttended,
-                // "Visitor Attended": item?.TotalAppointments,
-                "Direct Walk-ins": item?.DirectWalkins,
-                "CP(Walk-ins) Appointments": item?.CPWalkins,
-                "No Shows": item?.Noshow,
-                "Total Revisit": item?.TotalAppointmentsrevisit,
-                "Total Not Interested": item?.TotalNotInterested,
-                "Total Booking": item?.Booking,
-                "Conversion %": item?.Conversion,
-              };
-              worksheetData.push(rowData);
+          XLSX.utils.sheet_add_aoa(worksheet, ClosingrowData, { origin: "A1" });
+
+          // Start adding StlDetails data from the fifth row (A5)
+          StlDetails?.forEach((item: any) => {
+            let rowData: any = [];
+            rowData.push(["STL Name", item?.username]);
+
+            item?.smDetails.forEach((smItem: any) => {
+              rowData.push([
+                "SM Name",
+                "CP Mapped",
+                "New CP Registered",
+                "Active CP",
+                "Transactional CP",
+                "Dormant CP",
+                "Appointment Done",
+                "Visitor No Shows",
+                "Total Bookings",
+              ]);
+              rowData.push([
+                smItem?.username,
+                smItem?.cpcount,
+                smItem?.newCpRegistered,
+                smItem?.activeCP,
+                smItem?.TransactionalCPtotal,
+                smItem?.inactiveCP,
+                smItem?.Appdonecounttotal,
+                smItem?.NoshowAppintment,
+                smItem?.confirmBooking,
+              ]);
             });
+
+            XLSX.utils.sheet_add_aoa(worksheet, rowData, {
+              origin: { r: currentRow, c: 0 },
+            });
+
+            currentRow += rowData.length + 1; // Add 1 for an empty row separator
           });
 
-          const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+          // Add the worksheet to the workbook
           XLSX.utils.book_append_sheet(workbook, worksheet, property_title);
         });
+
+        // Generate the Excel file
         const excelFile = XLSX.write(workbook, {
           type: "base64",
           bookType: "xlsx",
@@ -164,7 +300,7 @@ const ClusterHeadReportTable = (props: any) => {
 
         console.log("File saved:", filePath);
 
-        // Add file scanning to make it visible in device's media library (optional)
+        // Add file scanning to make it visible in the device's media library (optional)
         await RNFS.scanFile(filePath);
         ErrorMessage({
           msg: strings.succesfullyDownload,
@@ -181,7 +317,6 @@ const ClusterHeadReportTable = (props: any) => {
       }
     }
   };
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView

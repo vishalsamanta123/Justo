@@ -477,6 +477,7 @@ const BookingView = (props: any) => {
               bgcolor={PRIMARY_THEME_COLOR}
               border={14}
               handleBtnPress={() => props.handleBookPress()}
+              disabled={props.disabled}
             />
           </View>
         </View>

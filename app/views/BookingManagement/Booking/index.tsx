@@ -68,6 +68,8 @@ const BookingScreen = ({ navigation, route }: any) => {
   const [dropDownType, setDropDownType] = useState<any>(null);
   const [quantity, setQuantity] = useState<any>(false);
   const [maininventory, setMainInventory] = useState<any>([]);
+  const [disabled, setDisabled] = useState(false);
+
 
   //   https://demoapi.justoworks.co.in/cp/fetch_channel_partner_id
   // {"params": {
@@ -295,6 +297,10 @@ const BookingScreen = ({ navigation, route }: any) => {
     setOkIsVisible(false);
   };
   const validation = () => {
+    setDisabled(true)
+    setTimeout(() => {
+      setDisabled(false);
+    }, 3000);
     let isError = true;
     let errorMessage: any = "";
     if (
@@ -454,6 +460,7 @@ const BookingScreen = ({ navigation, route }: any) => {
         okIsVisible={okIsVisible}
         setOkIsVisible={setOkIsVisible}
         onPressRightButton={onPressRightButton}
+        disabled={disabled}
       />
     </>
   );

@@ -198,7 +198,7 @@ const ReportScreen = ({ navigation }: any) => {
   };
 
   const handleCTANavigation = (navigateTo: any) => {
-    navigation.navigate(navigateTo)
+    // navigation.navigate(navigateTo)
   }
 
   const getData = (startDate: any, endDate: any) => {
@@ -291,7 +291,9 @@ const ReportScreen = ({ navigation }: any) => {
   };
 
   const handleCpDetailPress = (list: any, name: any) => {
-    navigation.navigate("CpDetailForReport", { cpList: list, smName: name });
+    if(name !== "Demo"){
+      navigation.navigate("CpDetailForReport", { cpList: list, smName: name });
+    }
   };
   return (
     <>

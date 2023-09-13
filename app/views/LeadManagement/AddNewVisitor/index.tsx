@@ -117,6 +117,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   const [countryData, setCountryData] = useState(CountryArray);
   const [countryCode, setCountryCode] = useState("+91");
   const [countyPicker, setCountyPicker] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   useEffect(() => {
     if (type === "edit") {
       if (data?._id) {
@@ -381,6 +382,10 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
   };
 
   const validation = () => {
+    setDisabled(true)
+    setTimeout(() => {
+      setDisabled(false);
+    }, 3000);
     if (emailMobvalidation?.mobile === "start") {
       Keyboard.dismiss();
     }
@@ -1002,6 +1007,7 @@ const AddNewVisitorScreen = ({ navigation, route }: any) => {
       handleCountryCode={handleCountryCode}
       selectCountryData={selectCountryData}
       handleCloseCountry={handleCloseCountry}
+      disabled={disabled}
     />
   );
 };

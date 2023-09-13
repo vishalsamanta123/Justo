@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text } from "react-native";
 import LeadManagementView from "./Components/LeadManagementView";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import { DATE_FORMAT } from "react-native-gifted-chat";
 
 const LeadManagementScreen = ({ navigation, route }: any) => {
   const dispatch: any = useDispatch();
+  const flatListRef: any = useRef(null);
   const { response = {}, list = "" } = useSelector(
     (state: any) => state.visitorDataList
   );
@@ -109,6 +110,7 @@ const LeadManagementScreen = ({ navigation, route }: any) => {
       setFilterData={setFilterData}
       setVisiitorList={setVisiitorList}
       offSET={offSET}
+      flatListRef={flatListRef}
     />
   );
 };

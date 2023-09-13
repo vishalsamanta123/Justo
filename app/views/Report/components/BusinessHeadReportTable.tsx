@@ -155,7 +155,7 @@ const BusinessHeadReportTable = (props: any) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <View
+        {/* <View
           style={{
             alignItems: "flex-end",
             marginBottom: normalize(10),
@@ -176,7 +176,7 @@ const BusinessHeadReportTable = (props: any) => {
               style={styles.downloadImg}
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View>
           {data?.map((item: any, index: any) => {
             return (
