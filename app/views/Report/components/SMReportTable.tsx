@@ -34,7 +34,7 @@ import XLSX from "xlsx";
 import RNFS from "react-native-fs";
 
 const SMReportTable = (props: any) => {
-  const { data, handleCpDetailPress } = props;
+  const { data, handleCpDetailPress, fileName } = props;
   const headerData = [
     "CP Mapped",
     "New CP Registered",
@@ -112,7 +112,7 @@ const SMReportTable = (props: any) => {
 
         // Create a temporary directory to store the file
         const tempDir = RNFS.DownloadDirectoryPath;
-        const filePath = `${tempDir}/SourcingManagerReport.xlsx`;
+        const filePath = `${tempDir}/SourcingManagerReport${fileName}.xlsx`;
 
         // Write the file to the temporary directory
         await RNFS.writeFile(filePath, excelFile, "base64");

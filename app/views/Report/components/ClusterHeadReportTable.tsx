@@ -38,7 +38,7 @@ import SMReportTable from "./SMReportTable";
 import { useSelector } from "react-redux";
 
 const ClusterHeadReportTable = (props: any) => {
-  const { data, onReset, handleCpDetailPress, handleCTANavigation } = props;
+  const { data, onReset, handleCpDetailPress, handleCTANavigation, fileName } = props;
   const { userData = {} } = useSelector((state: any) => state.userData);
 
   const { width, height } = Dimensions.get("window");
@@ -77,110 +77,6 @@ const ClusterHeadReportTable = (props: any) => {
     "Conversion %",
   ];
 
-  // const onPressDownload = async () => {
-  //   const res = await handlePermission(
-  //     "write",
-  //     strings.txt_setting_heading_media,
-  //     strings.txt_setting_description_media
-  //   );
-  //   if (res == "setting1") {
-  //     openPermissionSetting(
-  //       strings.txt_setting_heading_media,
-  //       strings.txt_setting_description_media
-  //     );
-  //   } else if (res) {
-  //     try {
-  //       const workbook = XLSX.utils.book_new();
-
-  //       data.forEach((property: any) => {
-  //         const {
-  //           property_title,
-  //           smDetails,
-  //           CMDetails,
-  //           CTLDetails,
-  //           StlDetails,
-  //         } = property;
-  //         const worksheetData: any = [];
-  //         StlDetails?.map((item: any) => {
-  //           let rowData: any = {
-  //             "SM Name": item?.username,
-  //           };
-  //           item?.smDetails.map((item: any) => {
-  //             rowData = {
-  //               ...rowData,
-  //               "CP Mapped": item?.cpcount,
-  //               "New CP Registered": item?.newCpRegistered,
-  //               "Active CP": item?.activeCP,
-  //               // "Transactional CP": item?.BookingCountTotal,
-  //               "Transactional CP": item?.TransactionalCPtotal,
-  //               "Dormant CP": item?.inactiveCP,
-  //               // "Appointment Done": item.SitevisitCountTotal,
-  //               "Appointment Done": item.Appdonecounttotal,
-  //               "Visitor No Shows": item.NoshowAppintment,
-  //               "Total Bookings": item.confirmBooking,
-  //             };
-  //             worksheetData.push(rowData);
-  //           });
-  //         });
-  //         CTLDetails?.map((item: any) => {
-  //           let rowData: any = {
-  //             "CM Name": item?.username,
-  //           };
-  //           item?.CMDetails.map((item: any) => {
-  //             rowData = {
-  //               ...rowData,
-  //               "Visitor Attended": item?.VisitorAttended,
-  //               // "Visitor Attended": item?.TotalAppointments,
-  //               "Direct Walk-ins": item?.DirectWalkins,
-  //               "CP(Walk-ins) Appointments": item?.CPWalkins,
-  //               "No Shows": item?.Noshow,
-  //               "Total Revisit": item?.TotalAppointmentsrevisit,
-  //               "Total Not Interested": item?.TotalNotInterested,
-  //               "Total Booking": item?.Booking,
-  //               "Conversion %": item?.Conversion,
-  //             };
-  //             worksheetData.push(rowData);
-  //           });
-  //         });
-
-  //         const worksheet = XLSX.utils.json_to_sheet(worksheetData);
-  //         XLSX.utils.book_append_sheet(workbook, worksheet, property_title);
-  //       });
-  //       const excelFile = XLSX.write(workbook, {
-  //         type: "base64",
-  //         bookType: "xlsx",
-  //       });
-
-  //       // Create a temporary directory to store the file
-  //       const tempDir = RNFS.DownloadDirectoryPath;
-  //       let filePath: any;
-  //       if (roleId === ROLE_IDS.sitehead_id) {
-  //         filePath = `${tempDir}/SiteHeadReport.xlsx`;
-  //       } else if (roleId === ROLE_IDS.clusterhead_id) {
-  //         filePath = `${tempDir}/ClusterHeadReport.xlsx`;
-  //       }
-  //       // Write the file to the temporary directory
-  //       await RNFS.writeFile(filePath, excelFile, "base64");
-
-  //       console.log("File saved:", filePath);
-
-  //       // Add file scanning to make it visible in device's media library (optional)
-  //       await RNFS.scanFile(filePath);
-  //       ErrorMessage({
-  //         msg: strings.succesfullyDownload,
-  //         backgroundColor: GREEN_COLOR,
-  //       });
-
-  //       console.log("File scanned:", filePath);
-  //     } catch (error) {
-  //       ErrorMessage({
-  //         msg: strings.unSuccesfullyDownload,
-  //         backgroundColor: RED_COLOR,
-  //       });
-  //       console.log("Error generating Excel file:", error);
-  //     }
-  //   }
-  // };
   const onPressDownload = async () => {
     const res = await handlePermission(
       "write",
@@ -206,24 +102,24 @@ const ClusterHeadReportTable = (props: any) => {
           } = property;
 
           const worksheet = XLSX.utils.aoa_to_sheet([[]]); // Create an empty worksheet
-          let currentRow : any;
+          let currentRow: any;
 
           // Add "CM Name" from CTLDetails in cell A3
           let ClosingrowData: any = [];
           CTLDetails?.forEach((item: any) => {
             ClosingrowData.push(["CTL Name", item?.username]);
+            ClosingrowData.push([
+              "CM Name",
+              "Visitor Attended",
+              "Direct Walk-ins",
+              "CP (Walk-ins) Appointments",
+              "No Shows",
+              "Total Revisit",
+              "Total Not Interested",
+              "Total Booking",
+              "Conversion %",
+            ]);
             item?.CMDetails.forEach((cmItem: any) => {
-              ClosingrowData.push([
-                "CM Name",
-                "Visitor Attended",
-                "Direct Walk-ins",
-                "CP (Walk-ins) Appointments",
-                "No Shows",
-                "Total Revisit",
-                "Total Not Interested",
-                "Total Booking",
-                "Conversion %",
-              ]);
               ClosingrowData.push([
                 cmItem?.user_name,
                 cmItem?.VisitorAttended,
@@ -236,7 +132,7 @@ const ClusterHeadReportTable = (props: any) => {
                 cmItem?.Conversion,
               ]);
             });
-            currentRow = item?.CMDetails?.length + 3
+            currentRow = item?.CMDetails?.length + 5;
           });
           XLSX.utils.sheet_add_aoa(worksheet, ClosingrowData, { origin: "A1" });
 
@@ -245,18 +141,18 @@ const ClusterHeadReportTable = (props: any) => {
             let rowData: any = [];
             rowData.push(["STL Name", item?.username]);
 
+            rowData.push([
+              "SM Name",
+              "CP Mapped",
+              "New CP Registered",
+              "Active CP",
+              "Transactional CP",
+              "Dormant CP",
+              "Appointment Done",
+              "Visitor No Shows",
+              "Total Bookings",
+            ]);
             item?.smDetails.forEach((smItem: any) => {
-              rowData.push([
-                "SM Name",
-                "CP Mapped",
-                "New CP Registered",
-                "Active CP",
-                "Transactional CP",
-                "Dormant CP",
-                "Appointment Done",
-                "Visitor No Shows",
-                "Total Bookings",
-              ]);
               rowData.push([
                 smItem?.username,
                 smItem?.cpcount,
@@ -270,11 +166,8 @@ const ClusterHeadReportTable = (props: any) => {
               ]);
             });
 
-            XLSX.utils.sheet_add_aoa(worksheet, rowData, {
-              origin: { r: currentRow, c: 0 },
-            });
+            XLSX.utils.sheet_add_aoa(worksheet, rowData, { origin: `A${currentRow}` });
 
-            currentRow += rowData.length + 1; // Add 1 for an empty row separator
           });
 
           // Add the worksheet to the workbook
@@ -291,7 +184,7 @@ const ClusterHeadReportTable = (props: any) => {
         const tempDir = RNFS.DownloadDirectoryPath;
         let filePath: any;
         if (roleId === ROLE_IDS.sitehead_id) {
-          filePath = `${tempDir}/SiteHeadReport.xlsx`;
+          filePath = `${tempDir}/SiteHeadReport${fileName}.xlsx`;
         } else if (roleId === ROLE_IDS.clusterhead_id) {
           filePath = `${tempDir}/ClusterHeadReport.xlsx`;
         }

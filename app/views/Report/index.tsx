@@ -57,6 +57,16 @@ const ReportScreen = ({ navigation }: any) => {
   var currentYears = currentDate.getFullYear();
   var todayDate = currentYears + "-" + currentMonths + "-" + currentDay;
 
+  const today_Date = filterData?.startdate
+    ? moment(filterData?.startdate).format("DD-MM-YYYY")
+    : moment(new Date(date.getFullYear(), date.getMonth(), 1)).format(
+      "DD-MM-YYYY"
+    );
+  const lastDate = filterData?.enddate
+    ? moment(filterData?.enddate).format("DD-MM-YYYY")
+    : moment(new Date()).format("DD-MM-YYYY");
+  const fileName = today_Date + "_to_" + lastDate;
+
   useLayoutEffect(() => {
     if (!filterModalVisible) {
       getData(firstdDate, todayDate);
@@ -314,6 +324,7 @@ const ReportScreen = ({ navigation }: any) => {
         clusterheadListForFilter={clusterheadListForFilter}
         setClusterheadListForFilter={setClusterheadListForFilter}
         handleCTANavigation={handleCTANavigation}
+        fileName={fileName}
       />
     </>
   );

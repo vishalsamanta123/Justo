@@ -34,7 +34,7 @@ import XLSX from "xlsx";
 import RNFS from "react-native-fs";
 
 const STReportTable = (props: any) => {
-  const { data, handleCpDetailPress } = props;
+  const { data, handleCpDetailPress, fileName } = props;
   const { width, height } = Dimensions.get("window"),
     vw = width / 100,
     vh = height / 100;
@@ -121,7 +121,7 @@ const STReportTable = (props: any) => {
 
         // Create a temporary directory to store the file
         const tempDir = RNFS.DownloadDirectoryPath;
-        const filePath = `${tempDir}/SourcingTLReport.xlsx`;
+        const filePath = `${tempDir}/SourcingTLReport${fileName}.xlsx`;
 
         // Write the file to the temporary directory
         await RNFS.writeFile(filePath, excelFile, "base64");

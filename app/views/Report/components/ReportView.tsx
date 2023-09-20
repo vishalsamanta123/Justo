@@ -34,6 +34,7 @@ const ReportView = (props: any) => {
     propertyListForFilter,
     clusterheadListForFilter,
     handleCTANavigation,
+    fileName
   } = props;
   console.log("🚀 ~ file: ReportView.tsx:39 ~ reportData:", reportData);
   return (
@@ -57,6 +58,7 @@ const ReportView = (props: any) => {
             onReset={onReset}
             handleCpDetailPress={handleCpDetailPress}
             handleCTANavigation={handleCTANavigation}
+            fileName={fileName}
           />
         ) : roleId === ROLE_IDS.closingmanager_id ? (
           <CMReportTable
@@ -64,6 +66,7 @@ const ReportView = (props: any) => {
             onReset={onReset}
             userData={userData}
             handleCTANavigation={handleCTANavigation}
+            fileName={fileName}
           />
         ) : roleId === ROLE_IDS.sourcingtl_id ? (
           <STReportTable
@@ -71,12 +74,14 @@ const ReportView = (props: any) => {
             onReset={onReset}
             handleCpDetailPress={handleCpDetailPress}
             handleCTANavigation={handleCTANavigation}
+            fileName={fileName}
           />
         ) : roleId === ROLE_IDS.closingtl_id ? (
           <CTReportTable
             data={reportData}
             onReset={onReset}
             handleCTANavigation={handleCTANavigation}
+            fileName={fileName}
           />
         ) : roleId === ROLE_IDS.clusterhead_id ||
           roleId === ROLE_IDS.sitehead_id ? (
@@ -85,6 +90,7 @@ const ReportView = (props: any) => {
             onReset={onReset}
             handleCpDetailPress={handleCpDetailPress}
             handleCTANavigation={handleCTANavigation}
+            fileName={fileName}
           />
         ) : roleId === ROLE_IDS.businesshead_id ? (
           <BusinessHeadReportTable
@@ -92,6 +98,7 @@ const ReportView = (props: any) => {
             onReset={onReset}
             handleCpDetailPress={handleCpDetailPress}
             handleCTANavigation={handleCTANavigation}
+            fileName={fileName}
           />
         ) : null}
         {/* <ComingSoonScreen /> */}

@@ -129,14 +129,19 @@ const AllocateCPView = (props: any) => {
                     }
                     style={styles.checkBoxVw}
                   >
-                    <Image
+                    {/* <Image
                       style={styles.checksVw}
                       source={
                         getSelected?.toString()?.includes(item.user_name)
                           ? images.check
                           : null
                       }
-                    />
+                    /> */}
+                    {getSelected?.toString()?.includes(item.user_name) ? (
+                      <Image style={styles.checksVw} source={images.check} />
+                    ) : (
+                      <View style={styles.checksVw}></View>
+                    )}
                   </TouchableOpacity>
                 </View>
               );

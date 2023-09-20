@@ -37,7 +37,7 @@ import strings from "app/components/utilities/Localization";
 import ErrorMessage from "app/components/ErrorMessage";
 
 const CMReportTable = (props: any) => {
-  const { data, userData } = props;
+  const { data, userData,fileName } = props;
   const { width, height } = Dimensions.get("window"),
     vw = width / 100,
     vh = height / 100;
@@ -105,7 +105,7 @@ const CMReportTable = (props: any) => {
 
         // Create a temporary directory to store the file
         const tempDir = RNFS.DownloadDirectoryPath;
-        const filePath = `${tempDir}/ClosingManagerReport.xlsx`;
+        const filePath = `${tempDir}/ClosingManagerReport${fileName}.xlsx`;
 
         // Write the file to the temporary directory
         await RNFS.writeFile(filePath, excelFile, "base64");

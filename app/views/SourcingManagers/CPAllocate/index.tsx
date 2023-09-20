@@ -64,7 +64,7 @@ const AllocateCPScreen = ({ navigation, route }: any) => {
       );
       // const constantArry: any[] = [...response.data];
       return () => {};
-    }, [navigation, list])
+    }, [navigation])
   );
   useEffect(() => {
     if (response?.data?.length > 0) {

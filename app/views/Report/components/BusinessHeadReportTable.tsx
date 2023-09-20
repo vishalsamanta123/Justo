@@ -34,7 +34,7 @@ import RNFS from "react-native-fs";
 import ErrorMessage from "app/components/ErrorMessage";
 
 const BusinessHeadReportTable = (props: any) => {
-  const { data, handleCpDetailPress } = props;
+  const { data, handleCpDetailPress, fileName } = props;
   const { width, height } = Dimensions.get("window");
   const [refreshing, setRefreshing] = React.useState(false);
   const onRefresh = () => {
@@ -69,46 +69,117 @@ const BusinessHeadReportTable = (props: any) => {
       try {
         const workbook = XLSX.utils.book_new();
 
+        // data.forEach((property: any) => {
+        //   const { property_Name, propertyDetails } = property;
+
+        //   const worksheetData: any = [];
+
+        //   propertyDetails.map((item: any) => {
+        //     item?.details.map((itm: any) => {
+        //       const rowData = {
+        //         clusterName: item?.clusterName,
+        //         "Channel Partner": itm?.ChannelPartner,
+        //         Digital: itm?.Digital,
+        //         Direct: itm?.Direct,
+        //         Hoarding: itm?.Hoarding,
+        //         "Paper Inserts": itm?.PaperInsertd,
+        //         "Grand Total": itm?.GrandTotal,
+        //         "Total Cancelation": itm?.TotalCancelation,
+        //         "Total Registration": itm?.TotalRegistration,
+        //         "Not Interested": itm?.NotInterested,
+        //         "Total CP": itm?.TotalCP,
+        //         "Newly Added CP": itm?.AddedCP,
+        //         "Active CP": itm?.ActiveCP,
+        //         "Transaction / Booking CP": itm?.Booking,
+        //         "Inactive/Dormat CP": itm?.InactiveCP,
+        //         "Site Visit": itm?.SiteVisit,
+        //       };
+        //       worksheetData.push(rowData);
+        //     });
+        //   });
+
+        //   // smDetails.forEach((item: any) => {
+        //   //   const { header, data } = item;
+        //   //   const rowData = [header, ...data];
+        //   //   worksheetData.push(rowData);
+        //   // });
+
+        //   const worksheet = XLSX.utils.json_to_sheet(worksheetData);
+        //   XLSX.utils.book_append_sheet(workbook, worksheet, property_Name);
+        // });
+
+        // Convert workbook to a binary string
+
         data.forEach((property: any) => {
-          const { property_Name, propertyDetails } = property;
+          const { username, CHDetails } = property;
 
-          const worksheetData: any = [];
+          const worksheet = XLSX.utils.aoa_to_sheet([[]]); // Create an empty worksheet
+          let currentRow: any;
 
-          propertyDetails.map((item: any) => {
-            item?.details.map((itm: any) => {
-              const rowData = {
-                clusterName: item?.clusterName,
-                "Channel Partner": itm?.ChannelPartner,
-                Digital: itm?.Digital,
-                Direct: itm?.Direct,
-                Hoarding: itm?.Hoarding,
-                "Paper Inserts": itm?.PaperInsertd,
-                "Grand Total": itm?.GrandTotal,
-                "Total Cancelation": itm?.TotalCancelation,
-                "Total Registration": itm?.TotalRegistration,
-                "Not Interested": itm?.NotInterested,
-                "Total CP": itm?.TotalCP,
-                "Newly Added CP": itm?.AddedCP,
-                "Active CP": itm?.ActiveCP,
-                "Transaction / Booking CP": itm?.Booking,
-                "Inactive/Dormat CP": itm?.InactiveCP,
-                "Site Visit": itm?.SiteVisit,
-              };
-              worksheetData.push(rowData);
+          CHDetails?.forEach((item: any, index: any) => {
+            const handleTotalCount = (prop: any) => {
+              if (item?.leaddetail?.length > 0) {
+                return item?.leaddetail?.reduce(function (a: any, b: any) {
+                  return a + b[prop];
+                }, 0);
+              }
+            };
+            const handleTotalCountPercentage = () => {
+              if (
+                handleTotalCount("confirmBooking") !== 0 &&
+                handleTotalCount("sitevisitbysource") !== 0
+              ) {
+                return (
+                  (handleTotalCount("confirmBooking") /
+                    handleTotalCount("sitevisitbysource")) *
+                  100
+                );
+              } else {
+                return 0;
+              }
+            };
+            let rowData: any = [];
+            if (index !== 0) {
+              rowData.push([""]);
+              rowData.push([""]);
+            }
+            rowData.push(["Property Name", item?.property_title]);
+            rowData.push(["Lead Source", "Site Visit", "Booking", "Conv %"]);
+            item?.leaddetail.forEach((leadItem: any) => {
+              rowData.push([
+                leadItem?.title,
+                leadItem?.sitevisitbysource,
+                leadItem?.confirmBooking,
+                leadItem?.ConversionPercentage,
+              ]);
+            });
+
+            rowData.push([
+              "Grand Total",
+              handleTotalCount("sitevisitbysource"),
+              handleTotalCount("confirmBooking"),
+              handleTotalCountPercentage() + "%",
+            ]);
+            rowData.push(["CP Details"]);
+            rowData.push(headerData);
+
+            rowData.push([
+              item?.cpcount,
+              item?.newCpRegistered,
+              item?.activeCP,
+              item?.transacting_cp,
+              item?.inactiveCP,
+            ]);
+
+            XLSX.utils.sheet_add_aoa(worksheet, rowData, {
+              origin: `A${currentRow}`,
             });
           });
 
-          // smDetails.forEach((item: any) => {
-          //   const { header, data } = item;
-          //   const rowData = [header, ...data];
-          //   worksheetData.push(rowData);
-          // });
-
-          const worksheet = XLSX.utils.json_to_sheet(worksheetData);
-          XLSX.utils.book_append_sheet(workbook, worksheet, property_Name);
+          // Add the worksheet to the workbook
+          XLSX.utils.book_append_sheet(workbook, worksheet, username);
         });
 
-        // Convert workbook to a binary string
         const excelFile = XLSX.write(workbook, {
           bookType: "xlsx",
           type: "base64",
@@ -116,7 +187,7 @@ const BusinessHeadReportTable = (props: any) => {
 
         // Create a temporary directory to store the file
         const tempDir = RNFS.DownloadDirectoryPath;
-        const filePath = `${tempDir}/BusinessHeaderReport.xlsx`;
+        const filePath = `${tempDir}/BusinessHeadReport-${fileName}.xlsx`;
 
         // Write the file to the temporary directory
         await RNFS.writeFile(filePath, excelFile, "base64");
@@ -217,14 +288,17 @@ const BusinessHeadReportTable = (props: any) => {
                       }
                     };
                     const handleTotalCountPercentage = (prop: any) => {
-                      if (itm?.leaddetail?.length > 0) {
-                        return itm?.leaddetail?.reduce(function (
-                          a: any,
-                          b: any
-                        ) {
-                          return a + +b[prop]?.replace("%", "");
-                        },
-                        0);
+                      if (
+                        handleTotalCount("confirmBooking") !== 0 &&
+                        handleTotalCount("sitevisitbysource") !== 0
+                      ) {
+                        return (
+                          (handleTotalCount("confirmBooking") /
+                            handleTotalCount("sitevisitbysource")) *
+                          100
+                        );
+                      } else {
+                        return 0;
                       }
                     };
                     return (

@@ -18,11 +18,11 @@ const JustForOkModal = (props: any) => {
                     <View />
                     <Text style={styles.topTxt}>{props?.headertitle ? props?.headertitle : "Not Found" }</Text>
                     <View>
-                        <TouchableOpacity onPress={() => {
+                        {/* <TouchableOpacity onPress={() => {
                             props.setIsVisible(false)
                         }}>
                             <Image source={images.close} style={styles.closeIcon} />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 </View>
                 <View style={styles.borderView} />
